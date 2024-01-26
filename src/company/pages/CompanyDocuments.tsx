@@ -302,7 +302,7 @@ const CompanyDocuments = () => {
               onChange={(date: Date | null) =>
                 formik.setFieldValue("date_created", date)
               }
-              renderInput={(params) => (
+              renderInput={(params: any) => (
                 <TextField
                   {...params}
                   id="start"

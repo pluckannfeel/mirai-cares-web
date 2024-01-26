@@ -372,7 +372,7 @@ const PatientDialog = ({
                       formik.setFieldValue("birth_date", date);
                       formik.setFieldValue("age", calculateAge(date));
                     }}
-                    renderInput={(params) => (
+                    renderInput={(params: any) => (
                       <TextField
                         size="small"
                         {...params}

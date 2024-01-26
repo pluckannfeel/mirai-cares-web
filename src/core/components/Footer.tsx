@@ -1,6 +1,4 @@
-import Box from "@material-ui/core/Box";
-import Link from "@material-ui/core/Link";
-import Typography from "@material-ui/core/Typography";
+import { Box, Link, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 
 const Footer = () => {
@@ -8,12 +6,8 @@ const Footer = () => {
     <Box sx={{ p: 6 }} component="footer">
       <Typography variant="body2" color="text.secondary" align="center">
         {"© "}
-        <Link
-          color="inherit"
-          component={RouterLink}
-          to={`/${process.env.PUBLIC_URL}/`}
-        >
-          {process.env.REACT_APP_NAME}
+        <Link color="inherit" component={RouterLink} to={`/`}>
+          mirai-cares
         </Link>{" "}
         {new Date().getFullYear()}
         {"."}

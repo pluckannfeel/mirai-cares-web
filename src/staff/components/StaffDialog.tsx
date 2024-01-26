@@ -569,7 +569,7 @@ const StaffDialog = ({
                       formik.setFieldValue("birth_date", date);
                       //   formik.setFieldValue("age", calculateAge(date!));
                     }}
-                    renderInput={(params) => (
+                    renderInput={(params: any) => (
                       <TextField
                         size="small"
                         {...params}
@@ -606,7 +606,7 @@ const StaffDialog = ({
                       formik.setFieldValue("join_date", date);
                       //   formik.setFieldValue("age", calculateAge(date!));
                     }}
-                    renderInput={(params) => (
+                    renderInput={(params: any) => (
                       <TextField
                         size="small"
                         {...params}
@@ -630,7 +630,7 @@ const StaffDialog = ({
                       formik.setFieldValue("leave_date", date);
                       //   formik.setFieldValue("age", calculateAge(date!));
                     }}
-                    renderInput={(params) => (
+                    renderInput={(params: any) => (
                       <TextField
                         size="small"
                         {...params}
@@ -1360,7 +1360,7 @@ const StaffDialog = ({
                             date
                           );
                         }}
-                        renderInput={(params) => (
+                        renderInput={(params: any) => (
                           <TextField
                             size="small"
                             {...params}
@@ -1393,7 +1393,7 @@ const StaffDialog = ({
                             date
                           );
                         }}
-                        renderInput={(params) => (
+                        renderInput={(params: any) => (
                           <TextField
                             size="small"
                             {...params}
@@ -1524,7 +1524,7 @@ const StaffDialog = ({
                             date
                           );
                         }}
-                        renderInput={(params) => (
+                        renderInput={(params: any) => (
                           <TextField
                             size="small"
                             {...params}
@@ -1557,7 +1557,7 @@ const StaffDialog = ({
                             date
                           );
                         }}
-                        renderInput={(params) => (
+                        renderInput={(params: any) => (
                           <TextField
                             size="small"
                             {...params}
@@ -1656,7 +1656,7 @@ const StaffDialog = ({
                                   date
                                 );
                               }}
-                              renderInput={(params) => (
+                              renderInput={(params: any) => (
                                 <TextField
                                   size="small"
                                   {...params}

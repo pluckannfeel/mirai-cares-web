@@ -225,7 +225,7 @@ MedicalInstitutionDialogProps) => {
                       formik.setFieldValue("physician_birth_date", date);
                       formik.setFieldValue("physician_age", calculateAge(date));
                     }}
-                    renderInput={(params) => (
+                    renderInput={(params: any) => (
                       <TextField
                         size="small"
                         {...params}
@@ -447,7 +447,7 @@ MedicalInstitutionDialogProps) => {
                     onChange={(date: Date | null) => {
                       formik.setFieldValue("date_obtained", date);
                     }}
-                    renderInput={(params) => (
+                    renderInput={(params: any) => (
                       <TextField
                         size="small"
                         {...params}
