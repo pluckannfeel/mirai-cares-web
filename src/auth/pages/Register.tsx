@@ -77,7 +77,7 @@ const Register = () => {
     register(values as UserInfo)
       .then(() => {
         snackbar.success(t("auth.register.notifications.success"));
-        navigate(`/${process.env.PUBLIC_URL}/login`);
+        navigate(`/login`);
       })
       .catch(() => {
         snackbar.error(t("common.errors.unexpected.subTitle"));
