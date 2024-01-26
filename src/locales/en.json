@@ -1,0 +1,2019 @@
+{
+  "admin": {
+    "drawer": {
+      "menu": {
+        "calendar": "Calendar",
+        "dashboard": "Dashboard",
+        "help": "Help",
+        "home": "Home",
+        "projects": "Projects",
+        "settings": "Settings",
+        "userManagement": "Users",
+        "employeeManagement": "Employees",
+        "staffManagement": "Staff Information",
+        "patientManagement": "Patient DB",
+        "medicalInstitutionManagement": "Medical Institution DB",
+        "staffWorkSchedule": "Staff Work Schedule",
+        "leaveRequest": "Leave Requests",
+        "companyInformation": "Company Information",
+        "payslip": "Payroll"
+      }
+    },
+    "header": {
+      "notifications": {
+        "empty": {
+          "title": "Your notification list is empty"
+        },
+        "seeAll": "See all notifications"
+      }
+    },
+    "home": {
+      "achievement": {
+        "action": "View Profile",
+        "description": "You have completed {{progress}}% of your profile. Your current progress is great.",
+        "title": "Congratulations {{name}}"
+      },
+      "followers": {
+        "units": {
+          "likes": "Likes",
+          "love": "Love",
+          "smiles": "Smiles"
+        }
+      },
+      "meeting": {
+        "title": "Meetings"
+      },
+      "targets": {
+        "income": "Income",
+        "followers": "Followers",
+        "title": "Targets",
+        "views": "Views"
+      },
+      "views": {
+        "action": "View Dashboard",
+        "unit": "Views"
+      },
+      "welcome": {
+        "message": "This page is designed to give some important information about the application. Let's make someting together!",
+        "subTitle": "Welcome back!",
+        "title": "Hi {{name}},"
+      }
+    }
+  },
+  "auth": {
+    "forgotPassword": {
+      "form": {
+        "action": "Send Confirmation",
+        "back": "Back to login",
+        "email": {
+          "label": "E-mail Address"
+        }
+      },
+      "notifications": {
+        "success": "Email has been sent!"
+      },
+      "subTitle": "To get a validation code, enter the e-mail address associated to your account.",
+      "title": "Get validation code"
+    },
+    "forgotPasswordSubmit": {
+      "form": {
+        "action": "Reset Password",
+        "back": "Back to login",
+        "code": {
+          "label": "Code"
+        },
+        "confirmPassword": {
+          "label": "Confirm Password"
+        },
+        "newPassword": {
+          "label": "New Password"
+        }
+      },
+      "notifications": {
+        "success": "Your password has been changed!"
+      },
+      "subTitle": "Enter the code you received by mail and choose a new password.",
+      "title": "Change your password"
+    },
+    "login": {
+      "forgotPasswordLink": "Forgot password?",
+      "form": {
+        "email": {
+          "label": "E-mail Address"
+        },
+        "password": {
+          "label": "Password"
+        }
+      },
+      "newAccountLink": "Don't have an account? Sign Up!",
+      "submit": "Sign in",
+      "title": "Sign in"
+    },
+    "register": {
+      "back": "Back to login",
+      "form": {
+        "email": {
+          "label": "E-mail Address"
+        },
+        "firstName": {
+          "label": "First Name"
+        },
+        "gender": {
+          "label": "Gender",
+          "options": {
+            "f": "F",
+            "m": "M",
+            "n": "NC"
+          }
+        },
+        "role": {
+          "label": "Role",
+          "options": {
+            "admin": "Admin",
+            "user": "User",
+            "manager": "Manager",
+            "staff": "Staff"
+          }
+        },
+        "lastName": {
+          "label": "Last Name"
+        },
+        "password": {
+          "label": "Password"
+        },
+        "confirmPassword": {
+          "label": "Confirm Password"
+        }
+      },
+      "notifications": {
+        "success": "Your account has been created successfully!"
+      },
+      "submit": "Register",
+      "title": "Register"
+    }
+  },
+  "calendar": {
+    "confirmations": {
+      "delete": "Are you sure you want to delete this event?"
+    },
+    "form": {
+      "color": {
+        "label": "Color"
+      },
+      "description": {
+        "label": "Description"
+      },
+      "end": {
+        "label": "End Date"
+      },
+      "start": {
+        "label": "Start Date"
+      },
+      "title": {
+        "label": "Title"
+      }
+    },
+    "modal": {
+      "add": {
+        "action": "Add",
+        "title": "Add Event"
+      },
+      "edit": {
+        "action": "Edit",
+        "title": "Edit Event"
+      }
+    },
+    "notifications": {
+      "addSuccess": "{{event}} has been added!",
+      "deleteSuccess": "Event has been deleted!",
+      "updateSuccess": "{{event}} has been updated!"
+    },
+    "title": "Calendar",
+    "buttons": {
+      "month": "Month",
+      "week": "Week",
+      "day": "Day",
+      "list": "List"
+    }
+  },
+  "common": {
+    "close": "Close",
+    "backHome": "Back to Home",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "confirmation": "Confirmation",
+    "delete": "Delete",
+    "view": "View",
+    "edit": "Edit",
+    "download": "Download File",
+    "upload": "Upload File",
+    "import": "Import File",
+    "print": "Print",
+    "confirmImportMsg": "Do you want to import {{fileName}}?",
+    "select": "Select File",
+    "map": {
+      "direction": {
+        "label": "Map Directions"
+      }
+    },
+    "table": {
+      "pagination": {
+        "next": "Next Page",
+        "previous": "Prev Page",
+        "rowsPerPage": "Rows Per Page",
+        "displayRows": "and",
+        "page": "Page"
+      }
+    },
+    "errors": {
+      "forbidden": {
+        "subTitle": "You don't have access to view this page"
+      },
+      "notFound": {
+        "subTitle": "Sorry, we couldn’t find the page you’re looking for. Perhaps you’ve mistyped the URL? Be sure to check your spelling.",
+        "title": "Oops!"
+      },
+      "unexpected": {
+        "subTitle": "Something went wrong! If the problem persists, contact us!",
+        "title": "Oops!"
+      },
+      "underConstructions": {
+        "subTitle": "We are actively working on this page.",
+        "title": "Under constructions!"
+      },
+      "wrongCredentials": {
+        "subTitle": "The email or password you entered is incorrect.",
+        "title": "Error."
+      },
+      "fileSizeLimit": {
+        "subTitle": "The file size exceeds the limit of 5MB.",
+        "title": "Error."
+      },
+      "imageUploadLimit": {
+        "subTitle": "You can only upload 3 photos at a time.",
+        "title": "Error."
+      }
+    },
+    "reset": "Reset",
+    "retry": "Try Again",
+    "selected": "Selected",
+    "snackbar": {
+      "error": "Error",
+      "success": "Success"
+    },
+    "today": "Today",
+    "update": "Update",
+    "validations": {
+      "email": "Invalid email address",
+      "max": "Must be {{size}} characters or less",
+      "min": "Must be {{size}} characters or more",
+      "onlyNumbers": "Please input digits or numbers only",
+      "passwordMatch": "Password does not match",
+      "required": "Required"
+    },
+    "allPeople": "All"
+  },
+  "dashboard": {
+    "activity": {
+      "title": "Activity"
+    },
+    "budget": {
+      "legend": {
+        "unit": "Budget ($K)"
+      },
+      "title": "Budget"
+    },
+    "orderProgress": {
+      "title": "Orders"
+    },
+    "overview": {
+      "orders": "Orders",
+      "sales": "Sales",
+      "users": "Users",
+      "visits": "Visits"
+    },
+    "progress": {
+      "title": "Progress"
+    },
+    "salesByAge": {
+      "title": "Sales by Age"
+    },
+    "salesByCategory": {
+      "legend": {
+        "books": "Books",
+        "movies": "Movies & TV",
+        "software": "Software"
+      },
+      "title": "Sales by Category"
+    },
+    "salesHistory": {
+      "title": "Sales History",
+      "unit": "$ today"
+    },
+    "salesProgress": {
+      "title": "Sales"
+    },
+    "teams": {
+      "columns": {
+        "progress": "Progress",
+        "team": "Team",
+        "value": "Value"
+      },
+      "title": "Teams Progress"
+    },
+    "users": {
+      "title": "Recent Users"
+    },
+    "visitProgress": {
+      "title": "Visits"
+    },
+    "title": "Dashboard"
+  },
+  "faq": {
+    "noAnswerLink": "Can't find it here? Check out our Help Center.",
+    "questions": {
+      "title1": "What is React Admin?",
+      "answer1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortiseget.",
+      "title2": "How does it work?",
+      "answer2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortiseget.",
+      "title3": "What are the features available?",
+      "answer3": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortiseget.",
+      "title4": "Who is maintaining the project?",
+      "answer4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortiseget.",
+      "title5": "What is the license of the project?",
+      "answer5": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortiseget.",
+      "title6": "How can I contribute to the project?",
+      "answer6": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortiseget."
+    },
+    "title": "Frequently Asked Questions"
+  },
+  "help": {
+    "menu": {
+      "contact": "Contact",
+      "faq": "FAQ",
+      "guide": "Guide",
+      "support": "Support"
+    },
+    "title": "Help Center"
+  },
+  "landing": {
+    "cta": {
+      "main": "Sign in",
+      "mainAuth": "Continue as {{name}}",
+      "secondary": "Source code"
+    },
+    "features": {
+      "more": "More on Github",
+      "title": "Main Features"
+    },
+    "title": "Free and open-source admin application made with React and Material-UI"
+  },
+  "notifications": {
+    "newComment": "<bold>{{user}}</bold> has written a new comment on your profile",
+    "unreadMessages": "You have <bold>{{quantity}}</bold> unread messages",
+    "leaveRequest": "<bold>{{staff.japanese_name}}</bold> has requested for a leave",
+    "updateLeaveRequest": "<bold>{{user}}</bold> updated <bold>{{staff.japanese_name}}</bold>'s leave request"
+  },
+  "profile": {
+    "activity": {
+      "empty": "Logs of your activity will show up here!",
+      "logs": {
+        "eventAdded": "<bold>You</bold> added a new event: <bold>{{resource}}</bold>",
+        "eventUpdated": "<bold>You</bold> updated event: <bold>{{resource}}</bold>",
+        "userAdded": "<bold>You</bold> added a new user: <bold>{{resource}}</bold>",
+        "userDeleted": "<bold>You</bold> deleted user: <bold>{{resource}}</bold>",
+        "userUpdated": "<bold>You</bold> updated user: <bold>{{resource}}</bold>"
+      }
+    },
+    "completion": {
+      "title": "Profile Completion"
+    },
+    "info": {
+      "form": {
+        "email": {
+          "label": "Email Address"
+        },
+        "firstName": {
+          "label": "First Name"
+        },
+        "gender": {
+          "label": "Gender",
+          "options": {
+            "f": "Female",
+            "m": "Male",
+            "n": "NC"
+          }
+        },
+        "lastName": {
+          "label": "Last Name"
+        },
+        "job": {
+          "label": "Job"
+        },
+        "phone": {
+          "label": "Phone Number"
+        }
+      },
+      "title": "Update profile"
+    },
+    "menu": {
+      "activity": "Activity",
+      "info": "Information",
+      "password": "Password"
+    },
+    "notifications": {
+      "informationUpdated": "Information updated!",
+      "passwordChanged": "Password changed!"
+    },
+    "password": {
+      "form": {
+        "current": {
+          "label": "Current Password"
+        },
+        "confirm": {
+          "label": "Confirm Password"
+        },
+        "new": {
+          "label": "New Password"
+        }
+      },
+      "title": "Change your password"
+    }
+  },
+  "settings": {
+    "drawer": {
+      "direction": {
+        "label": "Direction",
+        "options": {
+          "ltr": "LTR",
+          "rtl": "RTL"
+        }
+      },
+      "language": {
+        "label": "Language",
+        "options": {
+          "en": "English",
+          "jp": "日本語",
+          "fr": "Français"
+        }
+      },
+      "mode": {
+        "label": "Mode",
+        "options": {
+          "dark": "Dark",
+          "light": "Light"
+        }
+      },
+      "sidebar": {
+        "label": "Sidebar",
+        "options": {
+          "collapsed": "Collapsed",
+          "full": "Full"
+        }
+      },
+      "fontsize": {
+        "label": "Font Size",
+        "options": {
+          "default": "Default",
+          "large": "Large"
+        }
+      },
+      "title": "Settings"
+    }
+  },
+  "userManagement": {
+    "confirmations": {
+      "delete": "Are you sure you want to delete this user?"
+    },
+    "form": {
+      "disabled": {
+        "label": "Disabled"
+      },
+      "email": {
+        "label": "Email Address"
+      },
+      "firstName": {
+        "label": "First Name"
+      },
+      "first_name": {
+        "label": "First Name"
+      },
+      "gender": {
+        "label": "Gender",
+        "options": {
+          "f": "Female",
+          "m": "Male",
+          "n": "NC"
+        }
+      },
+      "lastName": {
+        "label": "Last Name"
+      },
+      "last_name": {
+        "label": "Last Name"
+      },
+      "role": {
+        "label": "Role"
+      }
+    },
+    "modal": {
+      "add": {
+        "action": "Add",
+        "title": "Add User"
+      },
+      "edit": {
+        "action": "Edit",
+        "title": "Edit User"
+      }
+    },
+    "notifications": {
+      "addSuccess": "{{user}} has been added!",
+      "deleteSuccess": "User(s) have been deleted!",
+      "updateSuccess": "{{user}} has been updated!"
+    },
+    "table": {
+      "headers": {
+        "actions": "Actions",
+        "gender": "Gender",
+        "role": "Role",
+        "status": "Status",
+        "user": "User",
+        "job": "Job"
+      }
+    },
+    "toolbar": {
+      "title": "Users"
+    }
+  },
+  "employeeManagement": {
+    "alerts": {
+      "warning": {
+        "title": "Information",
+        "noEmployeeBasicInfoStrong": "Please enter employee's basic information first. ",
+        "noEmployeeBasicInfo": "You can do so by clicking on the 'Basic Information' tab."
+      },
+      "error": {
+        "emptyRESHistory": "Nothing to update. Please add at least one record."
+      }
+    },
+    "confirmations": {
+      "delete": "Are you sure you want to delete this employee?"
+    },
+    "menuTabs": {
+      "basicInformation": "Basic Information",
+      "immigrationDetails": "Immigration Details",
+      "relativesEmploymentSchoolHistory": "Relatives, Employment and School History",
+      "qualificationsLicenses": "Qualifications and Licenses"
+    },
+    "form": {
+      "img": {
+        "label": "Image",
+        "actions": {
+          "upload": "Upload Image",
+          "change": "Change Image",
+          "clear": "Clear Image"
+        }
+      },
+      "name_romaji": {
+        "label": "Name (Romaji)"
+      },
+      "name_kanji": {
+        "label": "Name (Kanji)"
+      },
+      "name_kana": {
+        "label": "Name (Kana)"
+      },
+      "birth_date": {
+        "label": "Birth Date"
+      },
+      "email": {
+        "label": "Email Address"
+      },
+      "gender": {
+        "label": "Gender",
+        "options": {
+          "f": "Female",
+          "m": "Male",
+          "n": "NC"
+        }
+      },
+      "age": {
+        "label": "Age"
+      },
+      "role": {
+        "label": "Role"
+      },
+      "has_spouse": {
+        "label": "Has Spouse",
+        "options": {
+          "yes": "Yes",
+          "no": "None"
+        }
+      },
+      "nationality": {
+        "label": "Nationality",
+        "options": {
+          "jp": "Japan",
+          "cn": "China",
+          "kr": "Korea",
+          "vn": "Vietnam",
+          "id": "Indonesia",
+          "th": "Thailand",
+          "ph": "Philippines",
+          "mm": "Myanmar",
+          "kh": "Cambodia",
+          "lk": "Sri Lanka",
+          "np": "Nepal",
+          "bd": "Bangladesh",
+          "pk": "Pakistan",
+          "in": "India",
+          "uz": "Uzbekistan"
+        }
+      },
+      "language": {
+        "label": "Language",
+        "options": {
+          "jp": "Japanese",
+          "cn": "Chinese",
+          "kr": "Korean",
+          "vn": "Vietnamese",
+          "id": "Indonesian",
+          "th": "Thai",
+          "ph": "Tagalog",
+          "mm": "Burmese",
+          "kh": "Khmer",
+          "lk": "Sinhala",
+          "np": "Nepali",
+          "bd": "Bengali",
+          "pk": "Urdu",
+          "in": "Hindi",
+          "uz": "Uzbek"
+        }
+      },
+      "contact_number": {
+        "label": "Contact Number"
+      },
+      "company_name": {
+        "label": "Company Name"
+      },
+      "company_address": {
+        "label": "Company Address"
+      },
+      "company_postal_code": {
+        "label": "Postal Code"
+      },
+      "work_area_section": {
+        "label": "Work Area Section",
+        "options": {
+          "0": "None",
+          "1": "Business Establishment Selection"
+        }
+      },
+      "enrollment_status": {
+        "label": "Enrollment Status",
+        "options": {
+          "0": "Transfer from self to other",
+          "1": "Transfer from other to self",
+          "2": "Provisional registration",
+          "3": "Cancel",
+          "4": "Document in progress",
+          "5": "At Work",
+          "6": "To enter the country",
+          "7": "in becoming affiliated",
+          "8": "Absence",
+          "9": "Returned Home (Retired)"
+        }
+      },
+      "work_conditions_master": {
+        "label": "Work Conditions Master",
+        "options": {
+          "0": "Nikko Kai Labor Master 20220610"
+        }
+      },
+      "work_conditions_japanese": {
+        "label": "Work conditions of Japanese",
+        "options": {
+          "0": "Nikko Kai Labor Japanese 20220610"
+        }
+      },
+      "reg_support_manager": {
+        "label": "Registered Support Manager"
+      },
+      "reg_support_staff": {
+        "label": "Registered Support Staff"
+      },
+      "affiliated_support_manager": {
+        "label": "Affiliated Support Manager"
+      },
+      "affiliated_support_staff": {
+        "label": "Affiliated Support Staff"
+      },
+      "intermediary_name": {
+        "label": "Intermediary Name"
+      },
+      "intermediary_address": {
+        "label": "Intermediary Address"
+      },
+      "intermediary_agency_name": {
+        "label": "Intermediary Agency Name"
+      },
+      "intermediary_contact_number": {
+        "label": "Intermediary Contact Number"
+      },
+      "start_date": {
+        "label": "Entry Date"
+      },
+      "return_date": {
+        "label": "Return Date"
+      },
+      "specified_skills_1": {
+        "label": "Date of Specified Skills No. 1",
+        "dates": {
+          "from": "From",
+          "to": "To"
+        }
+      },
+      "specified_skills_2": {
+        "label": "Date of Specified Skills No. 2",
+        "dates": {
+          "from": "From",
+          "to": "To"
+        }
+      },
+      "foreigner_skills_category": {
+        "label": "Foreigner Specified Skills No.",
+        "options": {
+          "0": "Special Skill No. 1",
+          "1": "Special Skill No. 2"
+        }
+      },
+      "foreigner_skills_category_status": {
+        "label": "From Specified Skills No. 1 to Specified Skills No. 2"
+      },
+      "status_of_residence": {
+        "label": "Information concerning the status of residence before the change to 'Specified Skills'"
+      },
+      "memo": {
+        "label": "Memo"
+      },
+      "home_address": {
+        "label": "Home Address"
+      },
+      "birth_place": {
+        "label": "Place of Birth"
+      },
+      "passport_number": {
+        "label": "Passport Number"
+      },
+      "passport_expiration_date": {
+        "label": "Passport Expiration Date"
+      },
+      "old_passport_number_list": {
+        "label": "Passport Number List"
+      },
+      "scheduled_departure_date": {
+        "label": "Scheduled Departure Date"
+      },
+      "scheduled_entry_date": {
+        "label": "Scheduled Entry Date"
+      },
+      "port_of_landing": {
+        "label": "Port of Landing"
+      },
+      "length_of_stay": {
+        "label": "Length of Stay"
+      },
+      "accompany": {
+        "label": "Accompany",
+        "options": {
+          "yes": "Yes",
+          "no": "None"
+        }
+      },
+      "place_of_visa_inspection": {
+        "label": "Place of Visa Inspection"
+      },
+      "past_entry": {
+        "label": "Past Immigration History",
+        "options": {
+          "yes": "Yes",
+          "no": "None"
+        }
+      },
+      "actual_entry_date": {
+        "label": "Actual Entry Date"
+      },
+      "past_entry_count": {
+        "label": "Past entry"
+      },
+      "recent_entry_date": {
+        "label": "Recent Entry Date"
+      },
+      "recent_departure_date": {
+        "label": "Recent Departure Date"
+      },
+      "commited_offense": {
+        "label": "Commited Offense",
+        "options": {
+          "yes": "Yes",
+          "no": "None"
+        }
+      },
+      "commited_offense_details": {
+        "label": "If yes, please provide details"
+      },
+      "forced_departure": {
+        "label": "Forced Departure",
+        "options": {
+          "yes": "Yes",
+          "no": "None"
+        }
+      },
+      "forced_departure_count": {
+        "label": "If yes, how many"
+      },
+      "forced_departure_date_from": {
+        "label": "From"
+      },
+      "forced_departure_date_to": {
+        "label": "To"
+      },
+      "residence_card_number": {
+        "label": "Residence Card No."
+      },
+      "receipt_document_number": {
+        "label": "Receipt Document No."
+      },
+      "present_address": {
+        "label": "Present Address"
+      },
+      "present_address_postal_code": {
+        "label": "Postal Code"
+      },
+      "times": {
+        "label": "times"
+      },
+      "has_relatives": {
+        "label": "Relatives in Japan",
+        "title": "Information on Relatives in Japan",
+        "actions": {
+          "add": "Add Relative"
+        }
+      },
+      "family_relatives": {
+        "label": "Relatives",
+        "options": {
+          "0": "Spouse",
+          "1": "Child",
+          "2": "Parent",
+          "3": "Sibling",
+          "4": "Grandparent",
+          "5": "Uncle|Aunt"
+        }
+      },
+      "r_relationship": {
+        "label": "Relationship"
+      },
+      "r_name": {
+        "label": "Name"
+      },
+      "r_birth_date": {
+        "label": "Date of Birth"
+      },
+      "r_nationality": {
+        "label": "Nationality"
+      },
+      "r_plan_to_live_together": {
+        "label": "Live together"
+      },
+      "r_work_address": {
+        "label": "Work Address"
+      },
+      "r_residence_card_number": {
+        "label": "Residence Card No."
+      },
+      "school_history": {
+        "label": "Academic Background",
+        "actions": {
+          "add": "Add Academic Background"
+        },
+        "title": "Academic Background"
+      },
+      "sh_start_month": {
+        "label": "Month"
+      },
+      "sh_start_year": {
+        "label": "Year"
+      },
+      "sh_end_month": {
+        "label": "Month"
+      },
+      "sh_end_year": {
+        "label": "Year"
+      },
+      "sh_school_name": {
+        "label": "Name of Institution"
+      },
+      "employment_history": {
+        "label": "Work History",
+        "actions": {
+          "add": "Add Work History"
+        },
+        "title": "Work History"
+      },
+      "eh_start_month": {
+        "label": "Month"
+      },
+      "eh_start_year": {
+        "label": "Year"
+      },
+      "eh_end_month": {
+        "label": "Month"
+      },
+      "eh_end_year": {
+        "label": "Year"
+      },
+      "eh_company_name": {
+        "label": "Company Name"
+      },
+      "qualifications_licenses": {
+        "label": "Qualifications and Licenses"
+      },
+      "prev_technical_work": {
+        "label": "Previous Technical Training when residing in Japan",
+        "object": {
+          "year": "Year",
+          "month": "Month",
+          "status_of_residence": "Status of Residence",
+          "affiliated_organization": "Affiliated Organization",
+          "supervisory_organization": "Supervisory Organization"
+        }
+      }
+    },
+    "modal": {
+      "add": {
+        "action": "Add",
+        "title": "Add Employee"
+      },
+      "edit": {
+        "action": "Edit",
+        "title": "View / Edit Employee"
+      }
+    },
+    "notifications": {
+      "addSuccess": "{{employee}} has been added!",
+      "deleteSuccess": "Employee(s) have been deleted!",
+      "updateSuccess": "{{employee}} has been updated!",
+      "addImmigrationDetails": "{{employee}} immigration details has been added!",
+      "updateImmigrationDetails": "{{employee}} immigration details has been updated!",
+      "addRESHistory": "{{employee}} Relatives, Employments, and History details has been added!",
+      "updateRESHistory": "{{employee}} Relatives, Employments, and History details has been updated!",
+      "addQualificationsLicenses": "{{employee}} Qualifications and Licenses details has been added!",
+      "updateQualificationsLicenses": "{{employee}} Qualifications and Licenses details has been updated!"
+    },
+    "table": {
+      "headers": {
+        "actions": "Actions",
+        "gender": "Gender",
+        "role": "Role",
+        "status": "Status",
+        "employee": "Employee",
+        "job": "Job",
+        "phone": "Phone Number",
+        "nationality": "Nationality",
+        "email": "Email Address",
+        "contact_number": "Contact Number",
+        "name": "Name",
+        "kanji_name": "Kana Name",
+        "present_address": "Present Address",
+        "company_name": "Company Name"
+      }
+    },
+    "toolbar": {
+      "title": "Employees"
+    }
+  },
+  "staffManagement": {
+    "notifications": {
+      "addSuccess": "{{staff.name}}  has been added!",
+      "deleteSuccess": "A staff has been deleted!",
+      "updateSuccess": "{{staff.name}} has been updated!"
+    },
+    "generateContract": {
+      "title": "Generate Contract"
+    },
+    "toolbar": {
+      "title": "Staff"
+    },
+    "menuTabs": {
+      "staff": "Staff",
+      "user": "User"
+    },
+    "table": {
+      "headers": {
+        "actions": "Actions",
+        "staff_img": "Image",
+        "staff_code": "Staff Code",
+        "japanese_name": "Japanese Name",
+        "english_name": "English Name",
+        "join_date": "Date Joined",
+        "contact": "Email/Phone No.",
+        "affiliation": "Affiliation",
+        "employment_status": "Employment Status",
+        "postal_code": "Postal Code",
+        "address": "Address",
+        "email": "Work Email",
+        "phone": "Phone No.",
+        "img": "Photo"
+      },
+      "info": {
+        "noStaff": "No staff yet"
+      }
+    },
+    "modal": {
+      "add": {
+        "action": "Add",
+        "title": "Add Staff"
+      },
+      "edit": {
+        "action": "Edit",
+        "title": "View / Edit Staff"
+      }
+    },
+    "form": {
+      "name_group_photo_title": {
+        "label": "Name / Staff Group /  Photo"
+      },
+      "img": {
+        "label": "Image",
+        "actions": {
+          "upload": "Upload Image",
+          "change": "Change Image",
+          "clear": "Clear Image"
+        }
+      },
+      "affiliation": {
+        "label": "Affiliation"
+      },
+      "staff_code": {
+        "label": "Staff Code"
+      },
+      "staff_group": {
+        "label": "Staff Group",
+        "options": {
+          "staff": "Staff",
+          "user": "User"
+        }
+      },
+      "japanese_name": {
+        "label": "Japanese Name"
+      },
+      "english_name": {
+        "label": "English Name"
+      },
+      "nickname": {
+        "label": "Nickname"
+      },
+      "join_date": {
+        "label": "Date Joined"
+      },
+      "leave_date": {
+        "label": "Date Left"
+      },
+      "nationality": {
+        "label": "Nationality"
+      },
+      "gender": {
+        "label": "Gender",
+        "options": {
+          "f": "Female",
+          "m": "Male",
+          "n": "Other"
+        }
+      },
+      "job_duty_type_title": {
+        "label": "Job Position ・ Type"
+      },
+      "job_position": {
+        "label": "Job Position"
+      },
+      "duty_type": {
+        "label": "Duty Type",
+        "options": {
+          "fullTime1": "Fulltime - Exclusive",
+          "fullTime2": "Fulltime - Concurrent",
+          "partTime1": "Parttime - Exclusive",
+          "partTime2": "Fulltime - Concurrent"
+        }
+      },
+      "nationality_gender_birth_title": {
+        "label": "Nationality / Gender / Birth Date"
+      },
+      "birth_date": {
+        "label": "Birth Date"
+      },
+      "join_leave_title": {
+        "label": "Date Joined / Date Left"
+      },
+      "address_title": {
+        "label": "Address"
+      },
+      "postal_code": {
+        "label": "Postal Code"
+      },
+      "prefecture": {
+        "label": "Prefecture"
+      },
+      "municipality": {
+        "label": "Municipality"
+      },
+      "town": {
+        "label": "Town"
+      },
+      "building": {
+        "label": "Building"
+      },
+      "personal_email": {
+        "label": "Personal Email"
+      },
+      "work_email": {
+        "label": "Work Email"
+      },
+      "contact_title": {
+        "label": "Nationality / Contact Information"
+      },
+      "phone_number": {
+        "label": "Phone Number"
+      },
+      "employment_status_title": {
+        "label": "Employment Status"
+      },
+      "koyou_keitai": {
+        "label": "Employment Type"
+      },
+      "zaishoku_joukyou": {
+        "label": "Employment Status"
+      },
+      "caregiving_licenses": {
+        "label": "Qualifications and Licenses"
+      },
+      "nursing_care_specialist": {
+        "label": "Nursing Care Specialist"
+      },
+      "certified_care_worker": {
+        "label": "Certified Care Worker"
+      },
+      "home_helper_level1": {
+        "label": "Home Helper Level 1"
+      },
+      "home_helper_level2": {
+        "label": "Home Helper Level 2"
+      },
+      "beginner_care_workers_training": {
+        "label": "Beginner Care Workers Training"
+      },
+      "practical_care_workers_training": {
+        "label": "Practical Care Workers Training"
+      },
+      "basic_pwd_care_workers_training": {
+        "label": "Basic Care Workers Training for Person with Disability"
+      },
+      "basic_shv_care_employees_training": {
+        "label": "Basic Care Worker Training for Severe Home Visit"
+      },
+      "basic_shv_care_employees_training_plus": {
+        "label": "Additional Basic Care Worker Training for Severe Home Visit"
+      },
+      "licenses": {
+        "label": "Licenses",
+        "actions": {
+          "add": "Add License",
+          "view": "View License",
+          "upload": "Upload File"
+        },
+        "object": {
+          "license_number": "License Number",
+          "license_name": "License Name",
+          "license_date": "License Issuance Date",
+          "license_file_url": "License File"
+        }
+      },
+      "bank_details": {
+        "label": "Bank Information"
+      },
+      "bank_jpbank_yuucho": {
+        "label": "JP Bank / Yuucho"
+      },
+      "customer_number": {
+        "label": "Customer Number"
+      },
+      "bank_name": {
+        "label": "Bank Name"
+      },
+      "branch_name": {
+        "label": "Branch Name"
+      },
+      "account_type": {
+        "label": "Account Type"
+      },
+      "account_number": {
+        "label": "Account Number",
+        "label2": "JP Bank Code Number"
+      },
+      "account_name": {
+        "label": "Account Name"
+      },
+      "card_image_front": {
+        "label": "Card Image (Front)"
+      },
+      "card_image_back": {
+        "label": "Card Image (Back)"
+      },
+      "foreigner": {
+        "label": "Foreigner"
+      },
+      "passport_details": {
+        "label": "Passport Details"
+      },
+      "passport_number": {
+        "label": "Passport No."
+      },
+      "passport_issue_date": {
+        "label": "Date Issued"
+      },
+      "passport_expiry_date": {
+        "label": "Date of Expiration"
+      },
+      "passport_image": {
+        "label": "Passport Photo"
+      },
+      "residence_card_details": {
+        "label": "Residence Card"
+      },
+      "residence_card_number": {
+        "label": "Residence Card No."
+      },
+      "residence_card_issue_date": {
+        "label": "Date Issued"
+      },
+      "residence_card_expiry_date": {
+        "label": "Date Expired"
+      }
+    }
+  },
+  "company": {
+    "title": "会社更新",
+    "toolbar": {
+      "title": "Company"
+    },
+    "notifications": {
+      "updateSuccess": "Company Information has been updated!",
+      "generateSuccess": "Document has been generated!"
+    },
+    "errors": {
+      "documentEmptyDetails": "There are missing details on the staff or patient you selected, please check. "
+    },
+    "menu": {
+      "information": "Information",
+      "documents": "Document Creation"
+    },
+    "form": {
+      "name": {
+        "label": "Company Name"
+      },
+      "organization_code": {
+        "label": "Organization Code"
+      },
+      "address": {
+        "label": "Address"
+      },
+      "postal_code": {
+        "label": "Postal Code"
+      },
+      "phone": {
+        "label": "Company Phone"
+      },
+      "email": {
+        "label": "Email Address"
+      },
+      "website": {
+        "label": "Website Link"
+      }
+    },
+    "document": {
+      "options": {
+        "sputum_training": "OJT for Sputum Analysis.pdf",
+        "mys_contract": "MYS_Contract.pdf",
+        "mys_pledge": "MYS_Pledge"
+      },
+      "document_select": {
+        "label": "Document Select"
+      },
+      "generate_document": {
+        "label": "Generate Document"
+      },
+      "form": {
+        "document_name": {
+          "label": "Document Name"
+        },
+        "staff": {
+          "label": "Select Staff"
+        },
+        "patient": {
+          "label": "Select Patient"
+        },
+        "date_entry": {
+          "label": "Date Entry"
+        }
+      },
+      "actions": {
+        "generate": "Generate Document"
+      }
+    }
+  },
+  "staffWorkSchedule": {
+    "toolbar": {
+      "title": "Staff Work Schedule"
+    },
+    "menuTabs": {
+      "shift": "Shift",
+      "reports": "Daily Reports",
+      "timelineView": "Timeline View",
+      "calendarView": "Calendar View"
+    },
+    "confirmations": {
+      "delete": "Are you sure you want to delete this work schedule?"
+    },
+    "autoCompleteField": {
+      "searchStaff": {
+        "label": "Search Staff"
+      },
+      "searchPatient": {
+        "label": "Search Patient"
+      }
+    },
+    "calendarViews": {
+      "label": "Select View",
+      "options": {
+        "patient": "Patient",
+        "staff": "Caregiver"
+      }
+    },
+    "form": {
+      "color": {
+        "label": "Color"
+      },
+      "staff": {
+        "label": "Staff"
+      },
+      "patient": {
+        "label": "Patient"
+      },
+      "service_type": {
+        "label": "Service Type"
+      },
+      "service_details": {
+        "label": "Service Details"
+      },
+      "duration": {
+        "label": "Duration"
+      },
+      "durationNote": {
+        "label": "To calculate the duration, you need to adjust both the start and end times."
+      },
+      "remarks": {
+        "label": "Remarks"
+      },
+      "date": {
+        "label": "Date"
+      },
+      "end": {
+        "label": "End Time"
+      },
+      "start": {
+        "label": "Start Time"
+      },
+      "title": {
+        "label": "Title"
+      }
+    },
+    "modal": {
+      "add": {
+        "action": "Add",
+        "title": "Add Event"
+      },
+      "edit": {
+        "action": "Edit",
+        "title": "Edit Event"
+      }
+    },
+    "print": {
+      "title": "Print Work Schedule",
+      "form": {
+        "range": "To",
+        "from": "From",
+        "to": "To"
+      },
+      "action": {
+        "print": "Print"
+      }
+    },
+    "notifications": {
+      "addSuccess": "{{staff.name}} schedule has been added!",
+      "deleteSuccess": "A schedule has been deleted!",
+      "updateSuccess": "{{staff.name}} schedule has been updated!"
+    },
+    "title": "Staff Work Schedule"
+  },
+  "patientManagement": {
+    "confirmations": {
+      "delete": "Are you sure you want to delete this patient?"
+    },
+    "notifications": {
+      "addSuccess": "{{patient.name}}  has been added!",
+      "deleteSuccess": "A patient record has been deleted!",
+      "updateSuccess": "{{patient.name}} has been updated!"
+    },
+    "toolbar": {
+      "title": "Patient Records"
+    },
+    "menuTabs": {
+      "patient": "Patient"
+    },
+    "table": {
+      "headers": {
+        "actions": "Actions",
+        "staff_img": "Image",
+        "staff_code": "Staff Code",
+        "patient_name": "Name",
+        "birth_date": "Birth Date",
+        "age": "Age",
+        "disable_support_category": "Support Category",
+        "beneficiary_number": "Beneficiary No.",
+        "join_date": "Date Joined",
+        "contact": "Email/Phone No.",
+        "affiliation": "Affiliation",
+        "patient_status": "Patient Status",
+        "postal_code": "Postal Code",
+        "address": "Address",
+        "phone": "Phone No.",
+        "tel": "Tel No."
+      },
+      "info": {
+        "noPatient": "No patient records yet"
+      }
+    },
+    "modal": {
+      "add": {
+        "action": "Add Patient Record",
+        "title": "Add Patient Record"
+      },
+      "edit": {
+        "action": "Edit Patient Record",
+        "title": "Edit Patient Record"
+      }
+    },
+    "form": {
+      "name_birthdate_gender": {
+        "label": "Name, Birth Date and Gender"
+      },
+      "name_kanji": {
+        "label": "Name (Kanji)"
+      },
+      "name_kana": {
+        "label": "Name (Kana)"
+      },
+      "birth_date": {
+        "label": "Birth Date"
+      },
+      "age": {
+        "label": "Age"
+      },
+      "gender": {
+        "label": "Gender"
+      },
+      "patient_address": {
+        "label": "Patient Address"
+      },
+      "postal_code": {
+        "label": "Postal Code"
+      },
+      "prefecture": {
+        "label": "Prefecture"
+      },
+      "municipality": {
+        "label": "Municipality"
+      },
+      "town": {
+        "label": "Town"
+      },
+      "building": {
+        "label": "Building"
+      },
+      "patient_contact": {
+        "label": "Patient Contact, Billing"
+      },
+      "telephone_number": {
+        "label": "Telephone Number"
+      },
+      "phone_number": {
+        "label": "Phone Number"
+      },
+      "billing_method": {
+        "label": "Billing Method"
+      },
+      "billing_address": {
+        "label": "Billing Address"
+      },
+      "billing_postal_code": {
+        "label": "Billing Postal Code"
+      },
+      "patient_status_remarks": {
+        "label": "Patient Status, Remarks"
+      },
+      "patient_status": {
+        "label": "Patient Status",
+        "options": {
+          "ongoing": "Ongoing",
+          "terminated": "Terminated"
+        }
+      },
+      "remarks": {
+        "label": "Remarks"
+      },
+      "disable_support_category": {
+        "label": "Disability Support Category",
+        "options": {
+          "category5": "Category 5",
+          "category6_1": "Category 6",
+          "category6_2": "Category 6 8.5% Addition",
+          "category6_3": "Category 6 Comprehensive Support 15%",
+          "category6_4": "Category 6 Comprehensive"
+        }
+      },
+      "beneficiary_number": {
+        "label": "Beneficiary No."
+      }
+    },
+    "directionDetails": {
+      "label": "Direction Details"
+    },
+    "patientPhotos": {
+      "house": {
+        "label": "House Photos"
+      },
+      "patient": {
+        "label": "Patient Photos"
+      },
+      "actions": {
+        "upload": "Upload Images",
+        "change": "Change Image",
+        "clear": "Clear Image"
+      },
+      "notifications": {
+        "addSuccess": "{{patient}} photo has been added!",
+        "deleteSuccess": "A photo has been deleted!",
+        "updateSuccess": "{{patient}} photo has been updated!"
+      }
+    },
+    "instructions": {
+      "label": "Instructions",
+      "actions": {
+        "add": "Add",
+        "upload": "Upload",
+        "save": "Save",
+        "view": "View"
+      },
+      "object": {
+        "details": {
+          "label": "Details"
+        },
+        "file": {
+          "label": "File"
+        }
+      },
+      "notifications": {
+        "emptyFields": "Please insert file and details to every instruction(s)."
+      }
+    }
+  },
+  "map": {
+    "direction": {
+      "label": "Map Directions"
+    },
+    "duration": {
+      "label": "Duration"
+    },
+    "distance": {
+      "label": "Distance"
+    },
+    "origin": {
+      "label": "Origin"
+    },
+    "destination": {
+      "label": "Destination"
+    },
+    "settings": {
+      "title": "Map Settings"
+    },
+    "form": {
+      "radio": {
+        "walk": {
+          "label": "Walk"
+        },
+        "drive": {
+          "label": "Drive"
+        },
+        "bicycle": {
+          "label": "Bicycle"
+        },
+        "transit": {
+          "label": "Transit"
+        }
+      }
+    },
+    "buttons": {
+      "makeRoute": {
+        "label": "Make Route"
+      }
+    }
+  },
+  "medicalInstitutionManagement": {
+    "toolbar": {
+      "title": "Affiliated Companies | Medical Institutions"
+    },
+    "table": {
+      "info": {
+        "noInstitution": "No Data"
+      },
+      "headers": {
+        "mi_name": "Medical Institution Name",
+        "mi_address": "Medical Institution Address",
+        "mi_physician": "Person-in-charge",
+        "mi_contact": "Medical Institution Contact",
+        "mi_license_no": "Medical Institution License No."
+      }
+    },
+    "modal": {
+      "add": {
+        "action": "Add Medical Institution",
+        "title": "Add Medical Institution"
+      },
+      "edit": {
+        "action": "Save",
+        "title": "Edit Medical Institutions"
+      }
+    },
+    "form": {
+      "headers": {
+        "physician_details": "Physician Details"
+      },
+      "physician_name_kanji": {
+        "label": "Physician Name Kanji"
+      },
+      "physician_name_kana": {
+        "label": "Physician Name Kana"
+      },
+      "physician_birth_date": {
+        "label": "Physician Birth Date"
+      },
+      "physician_age": {
+        "label": "Physician Age"
+      },
+      "physician_work": {
+        "label": "Physician Job Title"
+      },
+      "entity_name": {
+        "label": "Registered Entity Name"
+      },
+      "entity_poc": {
+        "label": "Registered Person-in-charge"
+      },
+      "mi_name": {
+        "label": "Medical Institution Name"
+      },
+      "mi_poc": {
+        "label": "Medical Institution Person-in-charge"
+      },
+      "mi_postal_code": {
+        "label": "Medical Institution Postal Code"
+      },
+      "mi_postal_address1": {
+        "label": "Medical Institution Address 1"
+      },
+      "mi_postal_address2": {
+        "label": "Medical Institution Address 2"
+      },
+      "mi_postal_phone": {
+        "label": "Medical Institution Phone"
+      },
+      "mi_licenses": {
+        "label": "Medical Institution Licenses"
+      },
+      "mi_license_no": {
+        "label": "Medical Institution License No."
+      },
+      "date_obtained": {
+        "label": "License Date Obtained"
+      },
+      "ojt_implementation": {
+        "label": "OJT Implementation Name "
+      }
+    }
+  },
+  "shiftReport": {
+    "table": {
+      "headers": {
+        "date": "Date",
+        "patient": "Patient",
+        "staff": "Staff",
+        "service_hours": "Service Hours"
+      },
+      "empty": "No Records to show"
+    },
+    "dialog": {
+      "title": "Shift Report",
+      "form": {
+        "sections": {
+          "patient": "Patient",
+          "serviceHours": "Service Hours",
+          "toilet": "Toilet Assistance",
+          "meal": "Meal Assistance",
+          "bath": "Bath Assistance",
+          "grooming": "Grooming Assistance",
+          "positioning": "Positioning Assistance",
+          "medicationMedicalCare": "Medication/Medical Assistance",
+          "dailyLiving": "Daily Living Assistance",
+          "outgoingTransportation": "Outgoing Transport Assistance"
+        },
+        "toilet_assistance": {
+          "toilet": "Toilet",
+          "diaper": "Diaper Change",
+          "linen": "Linen Change",
+          "urinal": "Urinal Flushing"
+        },
+        "meal_assistance": {
+          "feeding": "Assistance with Feeding",
+          "posture": "Assistance in Ensuring Posture"
+        },
+        "meal_frequencies": {
+          "label": "How many times",
+          "options": {
+            "alltime": "All the time",
+            "sometimes": "Sometimes"
+          }
+        },
+        "bath_assistance": {
+          "bath": "Bath",
+          "shower": "Shower",
+          "hairWash": "Hair Wash",
+          "handsArms": "Hands/Arms Wash",
+          "feetWash": "Feet Wash",
+          "bedBath": "Bed Bath"
+        },
+        "bath_type": {
+          "label": "Bath Type",
+          "options": {
+            "whole": "Whole Body",
+            "part": "Some Parts"
+          }
+        },
+        "grooming_assistance": {
+          "faceWash": "Face Wash",
+          "toothBrush": "Tooth Brush",
+          "dressing": "Dressing",
+          "hairBrush": "Hair Brush",
+          "mustacheShaving": "Mustache Shaving",
+          "nailCutting": "Nail Cutting",
+          "EarCleaning": "Ear Cleaning",
+          "noseCleaning": "Nose Cleaning",
+          "makeup": "Apply Makeup"
+        },
+        "positioning_assistance": {
+          "bodyPositioning": "Change Body Position",
+          "gettingUpAssistance": "Assistance in Getting Up",
+          "goingSleepAssistance": "Assistance in getting Patient to sleep",
+          "transferAssistance": "Assistance in Transfer",
+          "goingOutAssistance": "Assistance when Going Out",
+          "readyGoingOutAssistance": "Assistance in preparing to go out",
+          "receivingPatientAssistance": "Assistance in receiving patient home",
+          "goingHospitalAssistance": "Assistance in going to hospital",
+          "shoppingAssistance": "Assistance in shopping"
+        },
+        "medication_assistance": {
+          "medicationAssistance": "Medication Assistance ",
+          "medicationApplication": "Applying Medication ",
+          "eyedrops": "Eye Drops",
+          "phlegmSuction": "Phlegm Suctioning",
+          "enema": "Performing Enema",
+          "tubeFeeding": "Tube Feeding",
+          "watchPatient": "Looking/Watching after patient"
+        },
+        "cleaning": {
+          "cleaning": "Cleaning",
+          "garbageDisposal": "Garbage Disposal",
+          "laundry": "Laundry",
+          "cooking": "Cooking"
+        },
+        "transport_type": {
+          "label": "Transport Type",
+          "options": {
+            "walk": "Walk",
+            "bus": "Bus",
+            "train": "Train",
+            "car_taxi": "Car/Taxi",
+            "other": "Other"
+          }
+        },
+        "support_hours": {
+          "label": "Support Hours",
+          "options": {
+            "1": "0.5 Hour(s)",
+            "2": "1 Hour(s)",
+            "3": "1.5 Hour(s)",
+            "4": "2 Hour(s)",
+            "5": "2.5 Hour(s)",
+            "6": "3 Hour(s)",
+            "7": "3.5 Hour(s)",
+            "8": "4 Hour(s)"
+          }
+        },
+        "outgoing_assistance": {
+          "actions": {
+            "addRecord": "Add Record"
+          },
+          "transport_type": {
+            "label": "Transport Type"
+          },
+          "destination": {
+            "label": "Destination"
+          },
+          "support_hours": {
+            "label": "Support Hours"
+          }
+        }
+      }
+    },
+    "print": {
+      "title": "Print Staff Report",
+      "action": {
+        "print": "Print"
+      },
+      "details": {
+        "noDataToPrint": "No data to print."
+      }
+    }
+  },
+  "leaveRequest": {
+    "activity": {
+      "empty": "Logs of your activity will show up here!",
+      "logs": {
+        "leaveRequestAdded": "<bold>{{resource}}</bold> added a new event: <bold>{{resource}}</bold>"
+      }
+    },
+    "actions": {
+      "updateLeaveRequest": {
+        "label": "Update Request",
+        "field_title": "Leave Request Action"
+      }
+    },
+    "title": "Leave Requests",
+    "screen": {
+      "header": {
+        "date": "Date",
+        "type": "Type",
+        "status": "Status"
+      },
+      "row": {
+        "status": {
+          "pending": "Pending",
+          "approved": "Approved",
+          "declined": "Declined"
+        },
+        "type": {
+          "paid": "Paid",
+          "unpaid": "Unpaid"
+        },
+        "from": "From",
+        "until": "Until"
+      }
+    },
+    "form": {
+      "label": "Request Paid/Unpaid Leave",
+      "note": "You can only submit a leave request one at a time. Please wait for the approval before submitting another request.",
+      "leave_type": {
+        "label": "Leave Type",
+        "options": {
+          "paid": "Paid",
+          "unpaid": "Unpaid"
+        }
+      },
+      "staff": {
+        "name": "Name",
+        "mys_id": "社員コード"
+      },
+      "start_date": {
+        "label": "Start Date"
+      },
+      "end_date": {
+        "label": "End Date"
+      },
+      "details": {
+        "label": "Details",
+        "placeholder": "Reason etc."
+      }
+    },
+    "confirmations": {
+      "delete": "Are you sure you want to delete this Leave Request?"
+    },
+    "notifications": {
+      "addSuccessLeaveRequest": "Your Leave Request has been submitted.",
+      "updateSuccess": "Leave Request has been updated.",
+      "deleteSuccess": "Leave Request has been deleted.",
+      "errorLeaveRequest": "Leave Request was not submitted. Contact Administrator.",
+      "existingLeaveRequest": "You already have a pending leave request."
+    }
+  },
+  "payslip": {
+    "title": "Payroll",
+    "overview": {
+      "totalEmployees": "Current Employees",
+      "netSalarythisMonth": "Current Month Net Salary",
+      "totalDeduction": "Current Month Total Deduction",
+      "totalHoursWorked": "Current Total of Hours Worked"
+    },
+    "table": {
+      "headers": {
+        "payslipDate": "Payroll Date",
+        "staffName": "Staff Name",
+        "dateCreated": "Date Created/Released"
+      }
+    },
+    "modal": {
+      "add": {
+        "action": "Add",
+        "title": "Add Payslip"
+      },
+      "edit": {
+        "action": "Edit",
+        "title": "Edit Payslip"
+      }
+    },
+    "filter": {
+      "title": "Filter By",
+      "options": "Options",
+      "filterByDate": "Filter by Date",
+      "filterByStaff": "Filter by Staff",
+      "month": "Month",
+      "year": "Year"
+    },
+    "form": {
+      "dataCalculationAnalysis": {
+        "label": "For Data Calculation and Analysis"
+      },
+      "releaseDate": {
+        "label": "Release Date",
+        "required": "Release Date is required"
+      },
+      "staff": {
+        "label": "Staff",
+        "required": "Staff is required"
+      },
+      "netSalary": {
+        "label": "Net Salary"
+      },
+      "totalDeduction": {
+        "label": "Total Deduction"
+      },
+      "totalWorkingHours": {
+        "label": "Total Working Hours"
+      },
+      "file_url": {
+        "label": "File Uri",
+        "required": "File Uri is required"
+      }
+    },
+    "actions": {
+      "add": "Add Payslip",
+      "view": "View Payslip",
+      "upload": "Upload Payslip File",
+      "edit": "Edit Payslip",
+      "filter": "Filter"
+    },
+    "notifications": {
+      "addSuccess": "A payslip was Added.",
+      "deleteSuccess": "A payslip was deleted.",
+      "updateSuccess": "A payslip was updated."
+    },
+    "push_notifications": {
+      "newShiftScheduleTitle": "Work Schedule",
+      "newShiftScheduleBody": "New Work Schedule Was Added",
+      "updatedShiftScheduleTitle": "Work Schedule",
+      "updatedShiftScheduleBody": "Work Schedule was updated.",
+      "addPayslipTitle": "New Payslip Uploaded",
+      "addPayslipBody": "A Payslip was added to you.",
+      "updatePayslipTitle": "Payslip Updated",
+      "updatePayslipBody": "A Payslip was updated."
+    }
+  }
+}

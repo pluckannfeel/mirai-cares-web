@@ -1,0 +1,2042 @@
+{
+  "admin": {
+    "drawer": {
+      "menu": {
+        "calendar": "カレンダー",
+        "dashboard": "ダッシュボード",
+        "help": "お手伝い",
+        "home": "ホーム",
+        "projects": "プロジェクト",
+        "settings": "設定",
+        "userManagement": "ユーザー管理",
+        "employeeManagement": "社員管理",
+        "staffManagement": "スタッフ情報",
+        "patientManagement": "利用者DB",
+        "medicalInstitutionManagement": "関連業社・医療機関DB",
+        "staffWorkSchedule": "シフト",
+        "leaveRequest": "休暇申請",
+        "companyInformation": "会社情報",
+        "payslip": "給与管理"
+      }
+    },
+    "header": {
+      "notifications": {
+        "empty": {
+          "title": "通知リストが空です"
+        },
+        "seeAll": "すべての通知を見る"
+      }
+    },
+    "home": {
+      "achievement": {
+        "action": "プロフィールを見る",
+        "description": "プロフィールの{{progress}}％を完成させました。現在の進捗は素晴らしいです。 ",
+        "title": "おめでとう {{name}}"
+      },
+      "followers": {
+        "units": {
+          "likes": "良い",
+          "love": "好き",
+          "smiles": "笑顔"
+        }
+      },
+      "meeting": {
+        "title": "会議"
+      },
+      "targets": {
+        "income": "収入",
+        "followers": "フォロワーズ",
+        "title": "目標",
+        "views": "見解"
+      },
+      "views": {
+        "action": "ダッシュボードを見る",
+        "unit": "見解"
+      },
+      "welcome": {
+        "message": "このページはアプリケーションに関する重要な情報をお伝えするためのものです。一緒に何かを作りましょう！",
+        "subTitle": "おかえり",
+        "title": "こんにちは {{name}},"
+      }
+    }
+  },
+  "auth": {
+    "forgotPassword": {
+      "form": {
+        "action": "確認の送信",
+        "back": "ログインに戻る",
+        "email": {
+          "label": "メールアドレス"
+        }
+      },
+      "notifications": {
+        "success": "メールが送信されました！"
+      },
+      "subTitle": "バリデーションコードを取得するには、アカウントに関連付けられたEメールアドレスを入力してください。",
+      "title": "バリデーションコードを取得する"
+    },
+    "forgotPasswordSubmit": {
+      "form": {
+        "action": "パスワード再設定",
+        "back": "ログインに戻る",
+        "code": {
+          "label": "コード"
+        },
+        "confirmPassword": {
+          "label": "パスワードの確認"
+        },
+        "newPassword": {
+          "label": "新しいパスワード"
+        }
+      },
+      "notifications": {
+        "success": "パスワードが変更されました"
+      },
+      "subTitle": "郵送で受け取ったコードを入力し、新しいパスワードを選択します。",
+      "title": "パスワードを変更する"
+    },
+    "login": {
+      "forgotPasswordLink": "パスワードをお忘れですか?",
+      "form": {
+        "email": {
+          "label": "メールアドレス"
+        },
+        "password": {
+          "label": "パスワード"
+        }
+      },
+      "newAccountLink": "アカウントをお持ちでないですか？登録する",
+      "submit": "ログイン",
+      "title": "ログイン"
+    },
+    "register": {
+      "back": "ログインに戻る",
+      "form": {
+        "email": {
+          "label": "メールアドレス"
+        },
+        "firstName": {
+          "label": "名前"
+        },
+        "gender": {
+          "label": "性別",
+          "options": {
+            "f": "女性",
+            "m": "男性"
+          }
+        },
+        "role": {
+          "label": "役割",
+          "options": {
+            "admin": "アドミン",
+            "user": "ユーザー",
+            "manager": "管理者",
+            "staff": "スタッフ"
+          }
+        },
+        "lastName": {
+          "label": "氏名"
+        },
+        "password": {
+          "label": "パスワード"
+        },
+        "confirmPassword": {
+          "label": "パスワードの確認"
+        }
+      },
+      "notifications": {
+        "success": "アカウントは正常に作成されました!"
+      },
+      "submit": "登録",
+      "title": "登録"
+    }
+  },
+  "calendar": {
+    "confirmations": {
+      "delete": "このイベントを削除してもよろしいですか？"
+    },
+    "form": {
+      "color": {
+        "label": "色"
+      },
+      "description": {
+        "label": "詳細"
+      },
+      "end": {
+        "label": "終了日"
+      },
+      "start": {
+        "label": "開始日"
+      },
+      "title": {
+        "label": "題名"
+      }
+    },
+    "modal": {
+      "add": {
+        "action": "追加",
+        "title": "イベントを追加する"
+      },
+      "edit": {
+        "action": "編集",
+        "title": "イベントを編集する"
+      }
+    },
+    "notifications": {
+      "addSuccess": "{{event}} が追加されました。",
+      "deleteSuccess": "イベントは削除されました。",
+      "updateSuccess": "{{event}} が更新されました。"
+    },
+    "title": "カレンダー",
+    "buttons": {
+      "month": "月",
+      "week": "週",
+      "day": "日",
+      "list": "リスト"
+    }
+  },
+  "common": {
+    "close": "閉じる",
+    "backHome": "ホームへ戻る",
+    "cancel": "キャンセル",
+    "confirm": "確認",
+    "confirmation": "確認",
+    "delete": "削除",
+    "edit": "編集",
+    "view": "表示",
+    "download": "ダウンロード",
+    "upload": "アップロード",
+    "import": "CSVインポート",
+    "print": "印刷",
+    "confirmImportMsg": "{{fileName}} をインポートしてもよろしいですか？",
+    "select": "選択",
+    "map": {
+      "direction": {
+        "label": "地図の方向"
+      }
+    },
+    "table": {
+      "pagination": {
+        "next": "次のページ",
+        "previous": "前のページ",
+        "rowsPerPage": "ページあたりの行数",
+        "displayRows": "の",
+        "page": "ページ"
+      }
+    },
+    "errors": {
+      "forbidden": {
+        "subTitle": "このページを表示する権限がありません。"
+      },
+      "notFound": {
+        "subTitle": "お探しのページは見つかりませんでした。URLの入力間違いではありませんか？スペルを確認してください。",
+        "title": "Oops!"
+      },
+      "unexpected": {
+        "subTitle": "何かが間違っていた！問題が解決しない場合は、弊社までご連絡ください！",
+        "title": "Oops!"
+      },
+      "underConstructions": {
+        "subTitle": "このページに積極的に取り組んでいます。",
+        "title": "建築中"
+      },
+      "wrongCredentials": {
+        "subTitle": "入力したメールアドレスまたはパスワードが間違っています。",
+        "title": "エラー！"
+      },
+      "imageUploadLimit": {
+        "subTitle": "一度に 3 枚の写真しかアップロードできません。",
+        "title": "Error."
+      },
+      "fileSizeLimit": {
+        "subTitle": "写真のサイズは 5MB を超えてはなりません",
+        "title": "エラー！"
+      }
+    },
+    "reset": "リセット",
+    "retry": "再挑戦",
+    "selected": "厳選された",
+    "snackbar": {
+      "error": "エラー",
+      "success": "成功"
+    },
+    "today": "今日",
+    "update": "更新",
+    "validations": {
+      "email": "無効なメールアドレス",
+      "max": "{{size}}文字以下でなければなりません。",
+      "min": "{{size}}文字以上でなければなりません。",
+      "onlyNumbers": "数字または数字のみを入力してください。",
+      "passwordMatch": "パスワードが一致しません",
+      "required": "必須"
+    },
+    "allPeople": "全員"
+  },
+  "dashboard": {
+    "activity": {
+      "title": "活動"
+    },
+    "budget": {
+      "legend": {
+        "unit": "予算 (¥)"
+      },
+      "title": "予算"
+    },
+    "orderProgress": {
+      "title": "ご注文"
+    },
+    "overview": {
+      "orders": "ご注文",
+      "sales": "売上高",
+      "users": "ユーザー",
+      "visits": "訪問"
+    },
+    "progress": {
+      "title": "進歩"
+    },
+    "salesByAge": {
+      "title": "年齢別売上高"
+    },
+    "salesByCategory": {
+      "legend": {
+        "books": "書籍",
+        "movies": "映画＆テレビ",
+        "software": "ソフトウェア"
+      },
+      "title": "カテゴリー別売上高"
+    },
+    "salesHistory": {
+      "title": "販売履歴",
+      "unit": "¥ 今日"
+    },
+    "salesProgress": {
+      "title": "売上高"
+    },
+    "teams": {
+      "columns": {
+        "progress": "進歩",
+        "team": "チーム",
+        "value": "価値"
+      },
+      "title": "チームの進捗状況"
+    },
+    "users": {
+      "title": "最近のユーザー"
+    },
+    "visitProgress": {
+      "title": "訪問"
+    },
+    "title": "ダッシュボード"
+  },
+  "faq": {
+    "noAnswerLink": "ここで見つかりませんか？ヘルプセンターをご覧ください。",
+    "questions": {
+      "title1": "React Adminとは？",
+      "answer1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortiseget.",
+      "title2": "どのように機能するのか？",
+      "answer2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortiseget.",
+      "title3": "どのような機能がありますか？",
+      "answer3": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortiseget.",
+      "title4": "誰がこのプロジェクトを管理しているのか？",
+      "answer4": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortiseget.",
+      "title5": "プロジェクトのライセンスは何ですか？",
+      "answer5": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortiseget.",
+      "title6": "どのようにプロジェクトに貢献できますか？",
+      "answer6": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortiseget."
+    },
+    "title": "よくあるご質問"
+  },
+  "help": {
+    "menu": {
+      "contact": "連絡先",
+      "faq": "よくあるご質問",
+      "guide": "ガイド",
+      "support": "サポート"
+    },
+    "title": "ヘルプセンター"
+  },
+  "landing": {
+    "cta": {
+      "main": "ログイン",
+      "mainAuth": "{{name}} このまま続ける",
+      "secondary": "ソースコード"
+    },
+    "features": {
+      "more": "詳細はGithubで",
+      "title": "主な特徴"
+    },
+    "title": "ReactとMaterial-UIで作られたフリーでオープンソースの管理アプリケーション"
+  },
+  "notifications": {
+    "newComment": "<bold>{{user}}</bold> はあなたのプロフィールに新しいコメントを書きました。",
+    "unreadMessages": "未読メッセージが <bold>{{quantity}}</bold>件あります。",
+    "leaveRequest": "<bold>{{staff.japanese_name}}</bold> が休暇を申請しました。",
+    "updateLeaveRequest": "<bold>{{user}}</bold> が <bold>{{staff.japanese_name}}</bold> の休暇申請を更新しました。"
+  },
+  "profile": {
+    "activity": {
+      "empty": "活動のログはここに表示されます",
+      "logs": {
+        "eventAdded": "<bold>あなた</bold> 新しいイベントを追加: <bold>{{resource}}</bold>",
+        "eventUpdated": "<bold>あなた</bold> イベント更新: <bold>{{resource}}</bold>",
+        "userAdded": "<bold>あなた</bold> 新しいユーザーを追加: <bold>{{resource}}</bold>",
+        "userDeleted": "<bold>あなた</bold> 削除ユーザー: <bold>{{resource}}</bold>",
+        "userUpdated": "<bold>あなた</bold> 更新ユーザー: <bold>{{resource}}</bold>"
+      }
+    },
+    "completion": {
+      "title": "プロフィール完成"
+    },
+    "info": {
+      "form": {
+        "email": {
+          "label": "メールアドレス"
+        },
+        "firstName": {
+          "label": "名"
+        },
+        "gender": {
+          "label": "性別",
+          "options": {
+            "f": "女性",
+            "m": "男性"
+          }
+        },
+        "lastName": {
+          "label": "姓"
+        },
+        "job": {
+          "label": "職務"
+        },
+        "phone": {
+          "label": "電話番号"
+        }
+      },
+      "title": "プロフィール更新"
+    },
+    "menu": {
+      "activity": "活動",
+      "info": "情報",
+      "password": "パスワード"
+    },
+    "notifications": {
+      "informationUpdated": "情報が更新されました",
+      "passwordChanged": "パスワードが変更されました"
+    },
+    "password": {
+      "form": {
+        "current": {
+          "label": "現在のパスワード"
+        },
+        "confirm": {
+          "label": "パスワードの確認"
+        },
+        "new": {
+          "label": "新規パスワード"
+        }
+      },
+      "title": "パスワードを変更する"
+    }
+  },
+  "settings": {
+    "drawer": {
+      "direction": {
+        "label": "方向",
+        "options": {
+          "ltr": "左から右へ",
+          "rtl": "右から左へ"
+        }
+      },
+      "language": {
+        "label": "言語",
+        "options": {
+          "en": "English",
+          "jp": "日本語",
+          "fr": "Français"
+        }
+      },
+      "mode": {
+        "label": "モード",
+        "options": {
+          "dark": "暗い",
+          "light": "軽い"
+        }
+      },
+      "sidebar": {
+        "label": "サイドバー",
+        "options": {
+          "collapsed": "崩壊",
+          "full": "満杯"
+        }
+      },
+      "fontsize": {
+        "label": "フォントサイズ",
+        "options": {
+          "default": "普通",
+          "large": "大き"
+        }
+      },
+      "title": "設定"
+    }
+  },
+  "userManagement": {
+    "confirmations": {
+      "delete": "このユーザーを削除してもよろしいですか？"
+    },
+    "form": {
+      "disabled": {
+        "label": "使用不能"
+      },
+      "email": {
+        "label": "メールアドレス"
+      },
+      "firstName": {
+        "label": "氏"
+      },
+      "first_name": {
+        "label": "氏"
+      },
+      "gender": {
+        "label": "性別",
+        "options": {
+          "f": "女性",
+          "m": "男性"
+        }
+      },
+      "lastName": {
+        "label": "姓"
+      },
+      "last_name": {
+        "label": "姓"
+      },
+      "role": {
+        "label": "役割"
+      }
+    },
+    "modal": {
+      "add": {
+        "action": "追加 ",
+        "title": "ユーザを追加する"
+      },
+      "edit": {
+        "action": "編集",
+        "title": "ユーザーを編集する"
+      }
+    },
+    "notifications": {
+      "addSuccess": "{{user}} a été ajouté!",
+      "deleteSuccess": "L(es) utilisateur(s) ont été supprimés!",
+      "updateSuccess": "{{user}} a été modifié!"
+    },
+    "table": {
+      "headers": {
+        "actions": "アクション",
+        "gender": "性別",
+        "role": "役割",
+        "status": "地位",
+        "user": "ユーザー",
+        "job": "職"
+      }
+    },
+    "toolbar": {
+      "title": "ユーザー"
+    }
+  },
+  "employeeManagement": {
+    "alerts": {
+      "warning": {
+        "title": "お知らせ",
+        "noEmployeeBasicInfoStrong": "最初に従業員の基本情報を入力してください。 ",
+        "noEmployeeBasicInfo": "基本情報」タブをクリックしてください。"
+      },
+      "error": {
+        "emptyRESHistory": "更新するものはありません。少なくとも1つのレコードを追加してください。"
+      }
+    },
+    "confirmations": {
+      "delete": "この従業員を削除してもよろしいですか？"
+    },
+    "menuTabs": {
+      "basicInformation": "基本情報",
+      "immigrationDetails": "旅券番号·入国情報・出入国歷等",
+      "relativesEmploymentSchoolHistory": "在日親族の有無と職歴について",
+      "qualificationsLicenses": "資格・免許等について"
+    },
+    "form": {
+      "img": {
+        "label": "画像",
+        "actions": {
+          "upload": "画像をアップロード",
+          "change": "画像を変更",
+          "clear": "画像を消去"
+        }
+      },
+      "name_romaji": {
+        "label": "名前 (ローマ字)"
+      },
+      "name_kanji": {
+        "label": "名前 (漢字)"
+      },
+      "name_kana": {
+        "label": "名前 (カナ)"
+      },
+      "birth_date": {
+        "label": "生年月日"
+      },
+      "disabled": {
+        "label": "Disabled"
+      },
+      "email": {
+        "label": "メールアドレス"
+      },
+      "gender": {
+        "label": "性別",
+        "options": {
+          "f": "女性",
+          "m": "男性"
+        }
+      },
+      "age": {
+        "label": "年齢"
+      },
+      "has_spouse": {
+        "label": "配偶者の有無",
+        "options": {
+          "yes": "有",
+          "no": "無"
+        }
+      },
+      "nationality": {
+        "label": "国籍",
+        "options": {
+          "jp": "日本",
+          "cn": "中国",
+          "kr": "韓国",
+          "vn": "ベトナム",
+          "id": "インドネシア",
+          "th": "タイ",
+          "ph": "フィリピン",
+          "mm": "ミャンマー",
+          "kh": "カンボジア",
+          "lk": "スリランカ",
+          "np": "ネパール",
+          "bd": "バングラデシュ",
+          "pk": "パキスタン",
+          "in": "インド",
+          "uz": "ウズベキスタン"
+        }
+      },
+      "language": {
+        "label": "言語",
+        "options": {
+          "jp": "日本語",
+          "cn": "中国語",
+          "kr": "韓国語",
+          "vn": "ベトナム語",
+          "id": "インドネシア語",
+          "th": "タイ語",
+          "ph": "フィリピン語",
+          "mm": "ミャンマー語",
+          "kh": "カンボジア語",
+          "lk": "スリランカ語",
+          "np": "ネパール語",
+          "bd": "バングラデシュ語",
+          "pk": "パキスタン語",
+          "in": "インド語",
+          "uz": "ウズベク語"
+        }
+      },
+      "contact_number": {
+        "label": "携帯電話番号"
+      },
+      "role": {
+        "label": "役割"
+      },
+      "company_name": {
+        "label": "会社名"
+      },
+      "company_address": {
+        "label": "会社住所"
+      },
+      "postal_code": {
+        "label": "郵便番号"
+      },
+      "work_area_section": {
+        "label": "し直接雇用の場合の事業所",
+        "options": {
+          "0": "なし",
+          "1": "事業所選択"
+        }
+      },
+      "enrollment_status": {
+        "label": "在籍状況",
+        "options": {
+          "0": "転籍(自一他)",
+          "1": "転籍(他一自)",
+          "2": "仮登録",
+          "3": "キャンセル",
+          "4": "書類作成中",
+          "5": "就業中",
+          "6": "入国前",
+          "7": "所属中",
+          "8": "失踪",
+          "9": "帰国(退職)"
+        }
+      },
+      "work_conditions_master": {
+        "label": "労働条件マスター",
+        "options": {
+          "0": "陽光会労働マスター20220610"
+        }
+      },
+      "work_conditions_japanese": {
+        "label": "比較する日本人の労働条件",
+        "options": {
+          "0": "陽光会労働マスター20220610"
+        }
+      },
+      "reg_support_manager": {
+        "label": "支援責任者(登録支援機関)"
+      },
+      "reg_support_staff": {
+        "label": "支援担当者(登録支援機関)"
+      },
+      "affiliated_support_manager": {
+        "label": "支援責任者(特定技能所属機閱)"
+      },
+      "affiliated_support_staff": {
+        "label": "支援担当者(特定技能所属機関)"
+      },
+      "intermediary_name": {
+        "label": "取次者の氏名"
+      },
+      "intermediary_address": {
+        "label": "取次者の住所"
+      },
+      "intermediary_agency_name": {
+        "label": "取次者の所属機関等"
+      },
+      "intermediary_contact_number": {
+        "label": "取次者の電話番号"
+      },
+      "start_date": {
+        "label": "入国をした日付"
+      },
+      "return_date": {
+        "label": "帰国・失踪をした日付"
+      },
+      "specified_skills_1": {
+        "label": "特定技能1号の期間",
+        "dates": {
+          "from": "自",
+          "to": "至"
+        }
+      },
+      "specified_skills_2": {
+        "label": "特定技能2号の期間",
+        "dates": {
+          "from": "自",
+          "to": "至"
+        }
+      },
+      "foreigner_skills_category": {
+        "label": "特定技能外国人の号数",
+        "options": {
+          "0": "特定技能1号",
+          "1": "特定技能2号"
+        }
+      },
+      "foreigner_skills_category_status": {
+        "label": "特定技能外国人1号=2号移行中"
+      },
+      "status_of_residence": {
+        "label": "「特定技能」へ在留資格を変更する以前の在留資格に関する情報"
+      },
+      "memo": {
+        "label": "メモ欄"
+      },
+      "home_address": {
+        "label": "母国の住所"
+      },
+      "birth_place": {
+        "label": "出生地"
+      },
+      "passport_number": {
+        "label": "旅券番号"
+      },
+      "passport_expiration_date": {
+        "label": "有効期限"
+      },
+      "old_passport_number_list": {
+        "label": "過去の旅券番号一覧"
+      },
+      "scheduled_departure_date": {
+        "label": "出国予定日"
+      },
+      "scheduled_entry_date": {
+        "label": "入国予定日"
+      },
+      "port_of_landing": {
+        "label": "上陸予定港"
+      },
+      "length_of_stay": {
+        "label": "滞在予定期間"
+      },
+      "accompany": {
+        "label": "同伴者の有無",
+        "options": {
+          "yes": "有",
+          "no": "無"
+        }
+      },
+      "place_of_visa_inspection": {
+        "label": "查証申請予定地"
+      },
+      "past_entry": {
+        "label": "過去の出入国歴",
+        "options": {
+          "yes": "有",
+          "no": "無"
+        }
+      },
+      "actual_entry_date": {
+        "label": "入国日"
+      },
+      "past_entry_count": {
+        "label": "L有の場合、出入国回数"
+      },
+      "recent_entry_date": {
+        "label": "自"
+      },
+      "recent_departure_date": {
+        "label": "至"
+      },
+      "commited_offense": {
+        "label": "犯罪を理由とする処分",
+        "options": {
+          "yes": "有",
+          "no": "無"
+        }
+      },
+      "commited_offense_details": {
+        "label": "L有の場合、具体的な内容"
+      },
+      "forced_departure": {
+        "label": "強制出国歴の有無",
+        "options": {
+          "yes": "有",
+          "no": "無"
+        }
+      },
+      "forced_departure_count": {
+        "label": "L有の場合、出国回数"
+      },
+      "forced_departure_date_from": {
+        "label": "自"
+      },
+      "forced_departure_date_to": {
+        "label": "至"
+      },
+      "residence_card_number": {
+        "label": "在留カード番号"
+      },
+      "receipt_document_number": {
+        "label": "受理番号"
+      },
+      "present_address": {
+        "label": "住所"
+      },
+      "present_address_postal_code": {
+        "label": "郵便"
+      },
+      "times": {
+        "label": "回"
+      },
+      "has_relatives": {
+        "label": "在日親族の有無",
+        "title": "在日親族情報",
+        "actions": {
+          "add": "追加"
+        }
+      },
+      "family_relatives": {
+        "label": "Relatives",
+        "options": {
+          "0": "配偶者",
+          "1": "子供",
+          "2": "親",
+          "3": "兄弟",
+          "4": "祖父母",
+          "5": "叔父|叔母"
+        }
+      },
+      "r_relationship": {
+        "label": "続柄"
+      },
+      "r_name": {
+        "label": "氏名"
+      },
+      "r_birth_date": {
+        "label": "生年月日"
+      },
+      "r_nationality": {
+        "label": "国籍·地域"
+      },
+      "r_plan_to_live_together": {
+        "label": "同居予定"
+      },
+      "r_work_address": {
+        "label": "勤務先.通学先"
+      },
+      "r_residence_card_number": {
+        "label": "在留カード 特別永住者証明書番号"
+      },
+      "school_history": {
+        "label": "特定技能外国人の学歴・職歴",
+        "actions": {
+          "add": "追加"
+        },
+        "title": "特定技能外国人の学歴・職歴"
+      },
+      "sh_start_month": {
+        "label": "月"
+      },
+      "sh_start_year": {
+        "label": "年"
+      },
+      "sh_end_month": {
+        "label": "月"
+      },
+      "sh_end_year": {
+        "label": "年"
+      },
+      "sh_school_name": {
+        "label": "勤務歷"
+      },
+      "employment_history": {
+        "label": "特定技能外国人の職歷",
+        "actions": {
+          "add": "追加"
+        },
+        "title": "特定技能外国人の職歷"
+      },
+      "eh_start_month": {
+        "label": "月"
+      },
+      "eh_start_year": {
+        "label": "年"
+      },
+      "eh_end_month": {
+        "label": "月"
+      },
+      "eh_end_year": {
+        "label": "年"
+      },
+      "eh_company_name": {
+        "label": "勤務歷"
+      },
+      "qualifications_licenses": {
+        "label": "資格·免許"
+      },
+      "prev_technical_work": {
+        "label": "過去に技能実習生として本邦に在留場合の在留歷",
+        "object": {
+          "year": "年",
+          "month": "月",
+          "status_of_residence": "在留資格",
+          "affiliated_organization": "所属機関等",
+          "supervisory_organization": "監理団体"
+        }
+      }
+    },
+    "modal": {
+      "add": {
+        "action": "従業員を追加する",
+        "title": "従業員を追加する"
+      },
+      "edit": {
+        "action": "従業員を編集する",
+        "title": "従業員を編集する"
+      }
+    },
+    "notifications": {
+      "addSuccess": "{employee}}が追加されました！",
+      "deleteSuccess": "従業員が削除されました！",
+      "updateSuccess": "{employee}}が更新されました！",
+      "addImmigrationDetails": "{{employee}} 入国審査の詳細を追加しました！",
+      "updateImmigrationDetails": "{{employee}} 入国審査の詳細を更新しました！",
+      "addRESHistory": "employee}} 親族、雇用、履歴の詳細が追加されました！",
+      "updateRESHistory": "{{employee}} 親族、雇用、履歴の詳細を更新しました！",
+      "addQualificationsLicenses": "{{employee}} 資格、免許の詳細が追加されました！",
+      "updateQualificationsLicenses": "{{employee}} 資格、免許の詳細を更新しました！"
+    },
+    "table": {
+      "headers": {
+        "actions": "アクション",
+        "gender": "性別",
+        "role": "役割",
+        "status": "地位",
+        "employee": "従業員",
+        "job": "職",
+        "contact_number": "電話番号",
+        "nationality": "国籍",
+        "email": "メールアドレス",
+        "name": "名前",
+        "kanji_name": "漢字名",
+        "present_address": "現住所",
+        "company_name": "会社"
+      }
+    },
+    "toolbar": {
+      "title": "従業員"
+    }
+  },
+  "staffManagement": {
+    "confirmations": {
+      "delete": "この職員を削除してもよろしいですか？"
+    },
+    "notifications": {
+      "addSuccess": "{{staff.name}} 追加されました。",
+      "deleteSuccess": "職員は削除されました。",
+      "updateSuccess": "{{staff.name}} を更新しました!"
+    },
+    "generateContract": {
+      "title": "契約書作成"
+    },
+    "toolbar": {
+      "title": "スタッフ管理"
+    },
+    "menuTabs": {
+      "staff": "職員",
+      "user": "利用者"
+    },
+    "table": {
+      "headers": {
+        "actions": "アクション",
+        "staff_img": "写真",
+        "staff_code": "社員コード",
+        "japanese_name": "名前",
+        "english_name": "名前",
+        "join_date": "入社年月日",
+        "contact": "職員電話番号・E-Mail",
+        "employment_status": "在職状況",
+        "affiliation": "部署/役職",
+        "postal_code": "郵便番号",
+        "address": "現住",
+        "work_email": "職員メールアドレス",
+        "phone": "電話番号",
+        "img": "画像"
+      },
+      "info": {
+        "noStaff": "職員なし"
+      }
+    },
+    "modal": {
+      "add": {
+        "action": "職員を追加する",
+        "title": "職員を追加する"
+      },
+      "edit": {
+        "action": "保存する",
+        "title": "職員を変更する"
+      }
+    },
+    "form": {
+      "name_group_photo_title": {
+        "label": "名称 ・ 職員グループ ・  画像"
+      },
+      "img": {
+        "label": "画像",
+        "actions": {
+          "upload": "画像をアップロード",
+          "change": "画像を変更",
+          "clear": "画像を消去"
+        }
+      },
+      "affiliation": {
+        "label": "所属"
+      },
+      "staff_code": {
+        "label": "社員コード"
+      },
+      "staff_group": {
+        "label": "職員グループ",
+        "options": {
+          "staff": "職員",
+          "user": "利用者"
+        }
+      },
+      "japanese_name": {
+        "label": "名前"
+      },
+      "english_name": {
+        "label": "NAME"
+      },
+      "nickname": {
+        "label": "ニックネーム"
+      },
+      "join_date": {
+        "label": "入社年月日"
+      },
+      "leave_date": {
+        "label": "退社年月日"
+      },
+      "nationality": {
+        "label": "国籍"
+      },
+      "gender": {
+        "label": "性別",
+        "options": {
+          "f": "女性",
+          "m": "男性",
+          "n": "その他"
+        }
+      },
+      "job_duty_type_title": {
+        "label": "職務 ・ 勤務形態"
+      },
+      "job_position": {
+        "label": "役職"
+      },
+      "duty_type": {
+        "label": "勤務形態",
+        "options": {
+          "fullTime1": "常勤 - 専従",
+          "fullTime2": "常勤 - 兼務",
+          "partTime1": "非常勤 - 専従",
+          "partTime2": "非常勤 - 兼務"
+        }
+      },
+      "nationality_gender_birth_title": {
+        "label": "国籍 ・ 性別 ・ 生年月日"
+      },
+      "birth_date": {
+        "label": "生年月日"
+      },
+      "join_leave_title": {
+        "label": "入社年月日 ・ 退社年月日"
+      },
+      "address_title": {
+        "label": "住所"
+      },
+      "postal_code": {
+        "label": "郵便番号"
+      },
+      "prefecture": {
+        "label": "都道府県"
+      },
+      "municipality": {
+        "label": "市区町村"
+      },
+      "town": {
+        "label": "町名以下"
+      },
+      "building": {
+        "label": "建物名"
+      },
+      "contact_title": {
+        "label": "職員 - 電話番号 ・ メールアドレス  "
+      },
+      "personal_email": {
+        "label": "個人メールアドレス"
+      },
+      "work_email": {
+        "label": "職員メールアドレス"
+      },
+      "phone_number": {
+        "label": "電話番号"
+      },
+      "employment_status_title": {
+        "label": "雇用形態 ・ 在職状況"
+      },
+      "koyou_keitai": {
+        "label": "雇用形態"
+      },
+      "zaishoku_joukyou": {
+        "label": "在職状況"
+      },
+      "caregiving_licenses": {
+        "label": "介護 資格・免許"
+      },
+      "nursing_care_specialist": {
+        "label": "介護支援専門員"
+      },
+      "certified_care_worker": {
+        "label": "介護福祉士"
+      },
+      "home_helper_level1": {
+        "label": "ホームヘルパー1級"
+      },
+      "home_helper_level2": {
+        "label": "ホームヘルパー2級"
+      },
+      "beginner_care_workers_training": {
+        "label": "介護職員初任者研修"
+      },
+      "practical_care_workers_training": {
+        "label": "介護福祉士実務者研修"
+      },
+      "basic_pwd_care_workers_training": {
+        "label": "障害者居宅介護従業者基礎研修課程"
+      },
+      "basic_shv_care_employees_training": {
+        "label": "重度訪問介護従業者養成研修(基礎)"
+      },
+      "basic_shv_care_employees_training_plus": {
+        "label": "重度訪問介護従業者養成研修(追加)"
+      },
+      "licenses": {
+        "label": "介護免許",
+        "actions": {
+          "add": "免許追加",
+          "view": "免許を見る",
+          "upload": "免許をアップロード"
+        },
+        "object": {
+          "license_number": "免許番号",
+          "license_name": "免許名",
+          "license_date": "取得日",
+          "license_file_url": "免許証の写真"
+        }
+      },
+      "bank_details": {
+        "label": "銀行口座情報"
+      },
+      "bank_jpbank_yuucho": {
+        "label": "ゆうちょ銀行"
+      },
+      "customer_number": {
+        "label": "顧客番号"
+      },
+      "bank_name": {
+        "label": "銀行名"
+      },
+      "branch_name": {
+        "label": "支店名"
+      },
+      "account_type": {
+        "label": "口座種別"
+      },
+      "account_number": {
+        "label": "口座番号",
+        "label2": "記号番号"
+      },
+      "account_name": {
+        "label": "口座名義名カナ"
+      },
+      "card_image_front": {
+        "label": "カード画像(表)"
+      },
+      "card_image_back": {
+        "label": "カード画像(裏)"
+      },
+      "foreigner": {
+        "label": "外国人"
+      },
+      "passport_details": {
+        "label": "旅券情報"
+      },
+      "passport_number": {
+        "label": "旅券番号"
+      },
+      "passport_issue_date": {
+        "label": "発行日"
+      },
+      "passport_expiry_date": {
+        "label": "有効期限"
+      },
+      "passport_image": {
+        "label": "旅券画像"
+      },
+      "residence_card_details": {
+        "label": "在留カード情報"
+      },
+      "residence_card_number": {
+        "label": "旅券番号"
+      },
+      "residence_card_issue_date": {
+        "label": "発行日"
+      },
+      "residence_card_expiry_date": {
+        "label": "有効期限"
+      }
+    }
+  },
+  "company": {
+    "title": "会社更新",
+    "toolbar": {
+      "title": "会社"
+    },
+    "menu": {
+      "information": "情報",
+      "documents": "書類作成"
+    },
+    "notifications": {
+      "updateSuccess": "会社情報が更新されました！",
+      "generateSuccess": "書類が作成されました！"
+    },
+    "errors": {
+      "documentEmptyDetails": "選択したスタッフまたは患者に関する詳細が不足しています。確認してください。"
+    },
+    "form": {
+      "name": {
+        "label": "会社名"
+      },
+      "organization_code": {
+        "label": "組織コード"
+      },
+      "address": {
+        "label": "住所"
+      },
+      "postal_code": {
+        "label": "郵便番号"
+      },
+      "phone": {
+        "label": "会社電話番号"
+      },
+      "email": {
+        "label": "会社メールアドレス"
+      },
+      "website": {
+        "label": "ウェブサイトリンク"
+      }
+    },
+    "document": {
+      "options": {
+        "sputum_training": "喀痰吸引の実地研修OJT.pdf",
+        "mys_contract": "労働条件通知書.pdf",
+        "mys_pledge": "誓約書.pdf"
+      },
+      "document_select": {
+        "label": "書類を選択する"
+      },
+      "generate_document": {
+        "label": "書類を作成する"
+      },
+      "form": {
+        "document_name": {
+          "label": "書類名"
+        },
+        "staff": {
+          "label": "スタッフ"
+        },
+        "patient": {
+          "label": "利用者"
+        },
+        "institution": {
+          "label": "関連業社・医療機関"
+        },
+        "date_entry": {
+          "label": "日記入"
+        }
+      },
+      "actions": {
+        "generate": "作成する"
+      }
+    }
+  },
+  "staffWorkSchedule": {
+    "toolbar": {
+      "title": "スタッフ勤務表"
+    },
+    "menuTabs": {
+      "shift": "シフト",
+      "reports": "業務日誌",
+      "timelineView": "タイムライン",
+      "calendarView": "カレンダー"
+    },
+    "confirmations": {
+      "delete": "このスケジュールを削除してもよろしいですか？"
+    },
+    "autoCompleteField": {
+      "searchStaff": {
+        "label": "スタッフを検索する"
+      },
+      "searchPatient": {
+        "label": "利用者を検索する"
+      }
+    },
+    "calendarViews": {
+      "label": "ビューを選択する",
+      "options": {
+        "patient": "利用者",
+        "staff": "介護ヘルパー"
+      }
+    },
+    "form": {
+      "color": {
+        "label": "色"
+      },
+      "staff": {
+        "label": "スタッフ名"
+      },
+      "patient": {
+        "label": "利用者"
+      },
+      "service_type": {
+        "label": "業務種別"
+      },
+      "service_details": {
+        "label": "サービス内容"
+      },
+      "duration": {
+        "label": "提供時間（分）"
+      },
+      "durationNote": {
+        "label": "提供時間を計算するには、開始時間と終了時間の両方を調整する必要があります。"
+      },
+      "remarks": {
+        "label": "備考"
+      },
+      "date": {
+        "label": "日付"
+      },
+      "end": {
+        "label": "終了日時"
+      },
+      "start": {
+        "label": "開始日時"
+      },
+      "title": {
+        "label": "タイトル"
+      }
+    },
+    "modal": {
+      "add": {
+        "action": "追加",
+        "title": "勤務表を追加する"
+      },
+      "edit": {
+        "action": "保存する",
+        "title": "変更する"
+      }
+    },
+    "print": {
+      "title": "ヘルパー別シフト表（予定）を印刷する",
+      "form": {
+        "range": "~",
+        "from": "自",
+        "to": "至"
+      },
+      "action": {
+        "print": "印刷する"
+      }
+    },
+    "notifications": {
+      "addSuccess": "{{staff.name}}の勤務表を追加しました！",
+      "deleteSuccess": "勤務予定表が削除されました！",
+      "updateSuccess": "{{staff.name}}の勤務表を更新しました！"
+    },
+    "title": "スタッフ勤務表"
+  },
+  "patientManagement": {
+    "confirmations": {
+      "delete": "この利用者を削除してもよろしいですか？"
+    },
+    "notifications": {
+      "addSuccess": "{{patient.name}} 追加されました。",
+      "deleteSuccess": "利用者は削除されました。",
+      "updateSuccess": "{{patient.name}} を更新しました!"
+    },
+    "toolbar": {
+      "title": "利用者管理"
+    },
+    "menuTabs": {
+      "patient": "利用者"
+    },
+    "table": {
+      "headers": {
+        "actions": "アクション",
+        "staff_img": "写真",
+        "staff_code": "社員コード",
+        "patient_name": "名前",
+        "birth_date": "生年月日",
+        "age": "年齢",
+        "disable_support_category": "障害支援区分",
+        "beneficiary_number": "受給者番号",
+        "join_date": "入社年月日",
+        "contact": "電話番号",
+        "patient_status": "利用状態",
+        "affiliation": "所属",
+        "postal_code": "郵便番号",
+        "address": "現住所",
+        "tel": "携帯電話番号",
+        "phone": "電話番号"
+      },
+      "info": {
+        "noPatient": "利用者なし"
+      }
+    },
+    "modal": {
+      "add": {
+        "action": "利用者を追加する",
+        "title": "利用者を追加する"
+      },
+      "edit": {
+        "action": "保存する",
+        "title": "利用者を変更する"
+      }
+    },
+    "form": {
+      "name_birthdate_gender": {
+        "label": "名前 ・ 生年月日 ・ 性別"
+      },
+      "name_kanji": {
+        "label": "名前 (漢字)"
+      },
+      "name_kana": {
+        "label": "名前 (カナ)"
+      },
+      "birth_date": {
+        "label": "生年月日"
+      },
+      "age": {
+        "label": "年齢"
+      },
+      "gender": {
+        "label": "性別"
+      },
+      "patient_address": {
+        "label": "住所 ・ 障害支援区分 ・ 受給者番号"
+      },
+      "postal_code": {
+        "label": "郵便番号"
+      },
+      "prefecture": {
+        "label": "都道府県"
+      },
+      "municipality": {
+        "label": "市区町村"
+      },
+      "town": {
+        "label": "町名以下"
+      },
+      "building": {
+        "label": "建物名"
+      },
+      "patient_contact": {
+        "label": "連絡先 ・ 請求"
+      },
+      "telephone_number": {
+        "label": "電話番号"
+      },
+      "phone_number": {
+        "label": "携帯電話番号"
+      },
+      "billing_method": {
+        "label": "請求方法"
+      },
+      "billing_address": {
+        "label": "請求先住所"
+      },
+      "billing_postal_code": {
+        "label": "請求先郵便番号"
+      },
+      "patient_status": {
+        "label": "利用者状態",
+        "options": {
+          "ongoing": "利用中",
+          "terminated": "停止中"
+        }
+      },
+      "patient_status_remarks": {
+        "label": "状態 ・ 備考"
+      },
+      "remarks": {
+        "label": "備考"
+      },
+      "disable_support_category": {
+        "label": "障害支援区分",
+        "options": {
+          "category5": "区分5",
+          "category6_1": "区分6",
+          "category6_2": "区分6（8.5％加算）",
+          "category6_3": "区分6（包括支援15%加算）"
+        }
+      },
+      "beneficiary_number": {
+        "label": "受給者番号"
+      }
+    },
+    "directionDetails": {
+      "label": "方向の詳細"
+    },
+    "patientPhotos": {
+      "house": {
+        "label": "家の写真"
+      },
+      "patient": {
+        "label": "利用者の写真"
+      },
+      "actions": {
+        "add": "写真を追加する",
+        "view": "写真を見る",
+        "upload": "写真をアップロード"
+      },
+      "notifications": {
+        "addSuccess": "{{patient}}の写真を追加しました！",
+        "deleteSuccess": "写真が削除されました！",
+        "updateSuccess": "{{patient}}の写真を更新しました！"
+      }
+    },
+    "instructions": {
+      "label": "指示",
+      "actions": {
+        "add": "追加",
+        "upload": "アップロード",
+        "save": "保存",
+        "view": "見る"
+      },
+      "object": {
+        "details": {
+          "label": "詳細"
+        },
+        "file": {
+          "label": "ファイル"
+        }
+      },
+      "notifications": {
+        "emptyFields": "指示の詳細とファイルを入力してください。",
+        "addSuccess": "{{patient}}の指示を追加しました！"
+      }
+    }
+  },
+  "map": {
+    "direction": {
+      "label": "地図の方向"
+    },
+    "duration": {
+      "label": "間隔"
+    },
+    "distance": {
+      "label": "距離"
+    },
+    "origin": {
+      "label": "出発地"
+    },
+    "destination": {
+      "label": "到着地"
+    },
+    "settings": {
+      "title": "地図設定"
+    },
+    "form": {
+      "radio": {
+        "walk": {
+          "label": "徒歩"
+        },
+        "drive": {
+          "label": "車"
+        },
+        "bicycle": {
+          "label": "自転車"
+        },
+        "transit": {
+          "label": "公共交通機関"
+        }
+      }
+    },
+    "buttons": {
+      "makeRoute": {
+        "label": "ルートを作成する"
+      }
+    }
+  },
+  "medicalInstitutionManagement": {
+    "toolbar": {
+      "title": "関連業社・医療機関"
+    },
+    "notifications": {
+      "addSuccess": "{{name}} 追加されました。",
+      "deleteSuccess": "関連業社・医療機関は削除されました。",
+      "updateSuccess": "{{name}} を更新しました!"
+    },
+    "table": {
+      "info": {
+        "noInstitution": "医療機関なし"
+      },
+      "headers": {
+        "mi_name": "医療機関名",
+        "mi_address": "医療機関所在地",
+        "mi_physician": "看護師名",
+        "mi_contact": "看護師連絡先",
+        "mi_license_no": "看護師免許番号"
+      }
+    },
+    "modal": {
+      "add": {
+        "action": "医療機関を追加する",
+        "title": "医療機関を追加する"
+      },
+      "edit": {
+        "action": "保存する",
+        "title": "医療機関を変更する"
+      }
+    },
+    "form": {
+      "headers": {
+        "physician_details": "医師詳細",
+        "entity_details": "設置主体詳細",
+        "mi_details": "医療機関詳細",
+        "mi_contact": "連絡先",
+        "licenses": "保有資格",
+        "ojt_agency_name": "実地研修 ・ 実施機関名"
+      },
+      "physician_name_kanji": {
+        "label": "医師名 (漢字)"
+      },
+      "physician_name_kana": {
+        "label": "医師名 (カナ)"
+      },
+      "physician_birth_date": {
+        "label": "生年月日 "
+      },
+      "physician_age": {
+        "label": "年齢"
+      },
+      "physician_work": {
+        "label": "職名"
+      },
+      "entity_name": {
+        "label": "設置主体名"
+      },
+      "entity_poc": {
+        "label": "設置者"
+      },
+      "mi_name": {
+        "label": "医療機関名"
+      },
+      "mi_poc": {
+        "label": "医療機関者"
+      },
+      "mi_postal_code": {
+        "label": "郵便番号"
+      },
+      "mi_address1": {
+        "label": "住所1"
+      },
+      "mi_address2": {
+        "label": "住所2"
+      },
+      "mi_phone": {
+        "label": "電話番号"
+      },
+      "mi_fax": {
+        "label": "FAX"
+      },
+      "mi_email": {
+        "label": "E-mail"
+      },
+      "mi_type": {
+        "label": "事業所種別"
+      },
+      "mi_licenses": {
+        "label": "免許",
+        "options": {
+          "license1": "医師",
+          "license2": "保健師",
+          "license3": "助産師",
+          "license4": "看護師"
+        }
+      },
+      "mi_license_no": {
+        "label": "免許番号"
+      },
+      "date_obtained": {
+        "label": "取得日"
+      },
+      "ojt_implementation": {
+        "label": "実施機関名"
+      }
+    }
+  },
+  "shiftReport": {
+    "table": {
+      "headers": {
+        "date": "日付",
+        "patient": "利用者",
+        "staff": "介護ヘルパー",
+        "service_hours": "サービス提供時間"
+      },
+      "empty": "記録なし"
+    },
+    "dialog": {
+      "title": "業務日誌",
+      "form": {
+        "sections": {
+          "patient": "利用者名",
+          "serviceHours": "サービス提供時間",
+          "toilet": "【排泄介助】（はいせつかいじょ）",
+          "meal": "【食事介助】（しょくじかいじょ）",
+          "bath": "【入浴介助】（にゅうよくかいじょ）",
+          "grooming": "【身体整容】（しんたいせいよう）",
+          "positioning": "【移動の介助】（いどうのかいじょ）",
+          "medicationMedicalCare": "【服薬・医療的ケア】\n（ふくやく・いりょうてきけあ）",
+          "dailyLiving": "生活援助（せいかつえんじょ）",
+          "outgoingTransportation": "外出移動支援記録\n（がいしゅついどうしえんきろく）"
+        },
+        "toilet_assistance": {
+          "toilet": "トイレ介助（かいじょ）",
+          "diaper": "おむつ交換（こうかん）",
+          "linen": "リネン類の交換（こうかん）",
+          "urinal": "尿器（にょうき）の洗浄（せんじょう）"
+        },
+        "meal_assistance": {
+          "feeding": "摂食（せっしょく）の介助（かいじょ）",
+          "posture": "姿勢（しせい）の確保（かくほ）"
+        },
+        "meal_frequencies": {
+          "label": "何回",
+          "options": {
+            "alltime": "全部（ぜんぶ）",
+            "sometimes": "一部（いちぶ）"
+          }
+        },
+        "bath_assistance": {
+          "bath": "入浴介助（にゅうよくかいじょ）",
+          "shower": "シャワー浴介助（しゃわーよくかいじょ）",
+          "hairWash": "洗髪（せんぱつ）",
+          "handsArms": "手・腕（て・うで）",
+          "feetWash": "足（あし）",
+          "bedBath": "清拭（せいしき"
+        },
+        "bath_type": {
+          "label": "入浴種類（にゅうよくしゅるい）",
+          "options": {
+            "whole": "全身（ぜんしん）",
+            "part": "部分（ぶぶん）"
+          }
+        },
+        "grooming_assistance": {
+          "faceWash": "洗面（せんめん）",
+          "toothBrush": "口腔（こうくう）ケア",
+          "dressing": "更衣介助（こういかいじょ）",
+          "hairBrush": "髪（かみ）",
+          "mustacheShaving": "髭（ひげ）",
+          "nailCutting": "爪（つめ）",
+          "EarCleaning": "耳（みみ）",
+          "noseCleaning": "鼻（はな）",
+          "makeup": "化粧（けしょう）"
+        },
+        "positioning_assistance": {
+          "bodyPositioning": "体位変換（たいいへんかん）",
+          "gettingUpAssistance": "移乗介助（いじょうかいじょ）",
+          "goingSleepAssistance": "起床介助（きしょうかいじょ）",
+          "transferAssistance": "就寝介助（しゅうしんかいじょ）",
+          "goingOutAssistance": "外出の支援（がいしゅつのしえん）",
+          "readyGoingOutAssistance": "外出準備介助\n（がいしゅつじゅんびかいじょ）",
+          "receivingPatientAssistance": "帰宅受入介助\n（きたくうけいれかいじょ）",
+          "goingHospitalAssistance": "通院介助（つういんかいじょ）",
+          "shoppingAssistance": "買物介助（かいものかいじょ）"
+        },
+        "medication_assistance": {
+          "medicationAssistance": "服薬介助・確認\n（ふくやくかいじょ・かくにん）",
+          "medicationApplication": "薬の塗布（くすりのとふ）",
+          "eyedrops": "点眼（てんがん）",
+          "phlegmSuction": "痰の吸引（たんのきゅういん）",
+          "enema": "浣腸（かんちょう）",
+          "tubeFeeding": "経管栄養（けいかんえいよう）",
+          "watchPatient": "見守り（みまもり）"
+        },
+        "cleaning": {
+          "cleaning": "掃除（そうじ）",
+          "garbageDisposal": "ゴミ出し（ごみだし）",
+          "laundry": "洗濯（せんたく）",
+          "cooking": "調理（ちょうり）"
+        },
+        "transport_type": {
+          "label": "移動手段（いどうしゅだん）",
+          "options": {
+            "walk": "徒歩（とほ）",
+            "bus": "バス",
+            "train": "電車（でんしゃ）",
+            "car_taxi": "車（くるま）・タクシー",
+            "other": "その他）"
+          }
+        },
+        "support_hours": {
+          "label": "支援時間（しえんじかん）",
+          "options": {
+            "1": "30分",
+            "2": "1時間",
+            "3": "1時間30分",
+            "4": "2時間",
+            "5": "2時間30分",
+            "6": "3時間",
+            "7": "3時間30分",
+            "8": "4時間"
+          }
+        },
+        "outgoing_assistance": {
+          "actions": {
+            "addRecord": "記録を追加"
+          },
+          "transport_type": {
+            "label": "移動手段"
+          },
+          "destination": {
+            "label": "行き先"
+          },
+          "support_hours": {
+            "label": "支援時間"
+          }
+        }
+      }
+    },
+    "print": {
+      "title": "サービス実績を印刷する",
+      "action": {
+        "print": "印刷する"
+      },
+      "details": {
+        "noDataToPrint": "印刷するデータがありません。"
+      }
+    }
+  },
+  "leaveRequest": {
+    "actions": {
+      "updateLeaveRequest": {
+        "label": "更新する",
+        "field_title": "休暇申請 承認/拒否"
+      }
+    },
+    "title": "休暇の管理",
+    "screen": {
+      "header": {
+        "date": "日付",
+        "type": "種類",
+        "status": "状況"
+      },
+      "row": {
+        "status": {
+          "pending": "保留中",
+          "approved": "承認",
+          "declined": "拒否"
+        },
+        "type": {
+          "paid": "有給",
+          "unpaid": "無給"
+        },
+        "from": "自",
+        "until": "至"
+      }
+    },
+    "form": {
+      "label": "休暇申請",
+      "note": "休暇の申請は一度に一つだけ提出できます。別の申請をする前に、承認をお待ちください。",
+      "leave_type": {
+        "label": "休暇種類",
+        "options": {
+          "paid": "有給する",
+          "unpaid": "有給しない"
+        }
+      },
+      "staff": {
+        "name": "スタッフ名",
+        "mys_id": "スタッフコード"
+      },
+      "start_date": {
+        "label": "開始日"
+      },
+      "end_date": {
+        "label": "終了日"
+      },
+      "details": {
+        "label": "詳細",
+        "placeholder": "理由を入力してください"
+      }
+    },
+    "confirmations": {
+      "delete": "この申請を削除してもよろしいですか？"
+    },
+    "notifications": {
+      "addSuccessLeaveRequest": "休日／有給申請が提出されました",
+      "updateSuccess": "休日／有給申請が更新されました",
+      "deleteSuccess": "休日／有給申請が削除されました",
+      "errorLeaveRequest": "休日／有給申請が提出されませんでした",
+      "existingLeaveRequest": "休日／有給申請が既に存在します"
+    }
+  },
+  "payslip": {
+    "title": "給与管理",
+    "overview": {
+      "totalEmployees": "総従業員数",
+      "netSalarythisMonth": "今月の純給与",
+      "totalDeduction": "今月の控除総額",
+      "totalHoursWorked": "今月の総労働時間"
+    },
+    "table": {
+      "headers": {
+        "payslipDate": "給与明細日",
+        "staffName": "スタッフ名",
+        "dateCreated": "作成日"
+      }
+    },
+    "modal": {
+      "add": {
+        "action": "追加",
+        "title": "給料を追加する"
+      },
+      "edit": {
+        "action": "編集",
+        "title": "給料を編集する"
+      }
+    },
+    "filter": {
+      "title": "給与明細を絞り込む",
+      "options": "オプション",
+      "filterByDate": "日付で絞り込む",
+      "filterByStaff": "スタッフで絞り込む",
+      "month": "月",
+      "year": "年"
+    },
+    "form": {
+      "dataCalculationAnalysis": {
+        "label": "(任意) これらはデータのグラフと計算に必要です"
+      },
+      "releaseDate": {
+        "label": "細日",
+        "required": "日を選択してください"
+      },
+      "staff": {
+        "label": "スタッフ名",
+        "required": "スタッフ名を選択してください"
+      },
+      "netSalary": {
+        "label": "純給与"
+      },
+      "totalDeduction": {
+        "label": "控除総額"
+      },
+      "totalWorkingHours": {
+        "label": "総労働時間"
+      },
+      "file_url": {
+        "label": "給与明細のファイル",
+        "required": "給与明細のファイルをアップロードしてください"
+      }
+    },
+    "actions": {
+      "add": "追加",
+      "view": "見る",
+      "upload": "アップロード",
+      "edit": "編集する",
+      "filter": "フィルター"
+    },
+    "notifications": {
+      "addSuccess": "給与明細が追加されました。",
+      "deleteSuccess": "給与明細は削除されました。",
+      "updateSuccess": "給与明細が更新されました。"
+    },
+    "push_notifications": {
+      "newShiftScheduleTitle": "新しいシフト",
+      "newShiftScheduleBody": "新しいシフトが追加されました。",
+      "updatedShiftScheduleTitle": "シフト",
+      "updatedShiftScheduleBody": "新しいシフトが更新されました。",
+      "addPayslipTitle": "新しい給与明細がアップロードされました。",
+      "addPayslipBody": "給与明細が追加されました。",
+      "updatePayslipTitle": "給与明細が更新されました。",
+      "updatePayslipBody": "給与明細が更新されました。"
+    }
+  }
+}
