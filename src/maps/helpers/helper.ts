@@ -13,7 +13,7 @@ interface GeocodeResponse {
 }
 
 export async function geocodeAddress(address: string): Promise<{ lat: number; lng: number } | null> {
-  console.log(googleMapApiKey)
+  // console.log(googleMapApiKey)
   try {
     const apiKey = googleMapApiKey ;
     // console.log(address)

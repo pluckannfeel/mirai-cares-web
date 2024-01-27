@@ -42,29 +42,8 @@ import { usePushNotification } from "../../admin/hooks/usePushNotification";
 import { PushNotification } from "../../admin/types/notification";
 import { useDeletePayslips } from "../hooks/useDeletePayslip";
 import SelectToolbar from "../../core/components/SelectToolbar";
-
-const overviewItems = [
-  {
-    unit: "payslip.overview.totalEmployees", // total of employees
-    value: "31人",
-    backgroundColor: "#4caf50",
-  },
-  {
-    unit: "payslip.overview.netSalarythisMonth", // total net salary paid
-    value: "¥ 500万円",
-    backgroundColor: "#f44336",
-  },
-  {
-    unit: "payslip.overview.totalDeduction", // total deductions
-    value: "￥ 100万円",
-    backgroundColor: "#ff9800",
-  },
-  {
-    unit: "payslip.overview.totalHoursWorked", // total hours worked
-    value: "2345 作業時間",
-    backgroundColor: "#2196f3",
-  },
-];
+import { useRecord } from "../hooks/useRecord";
+import { OverallRecord } from "../types/record";
 
 const PayslipManagement = () => {
   const { t, i18n } = useTranslation();
@@ -87,6 +66,37 @@ const PayslipManagement = () => {
   );
   const { data: initialStaffSelect } = useStaffSelect();
 
+  //get total work hours
+  const { data: records } = useRecord();
+  const [overallRecord, setOverallRecord] = useState<OverallRecord>({
+    total_employees: initialStaffSelect ? initialStaffSelect.length : 0,
+    total_hours: 0,
+  });
+
+  // overview data
+  const overviewItems = [
+    {
+      unit: "payslip.overview.totalEmployees", // total of employees
+      value: `${overallRecord.total_employees}人`,
+      backgroundColor: "#4caf50",
+    },
+    // {
+    //   unit: "payslip.overview.netSalarythisMonth", // total net salary paid
+    //   value: "¥ 500万円",
+    //   backgroundColor: "#f44336",
+    // },
+    // {
+    //   unit: "payslip.overview.totalDeduction", // total deductions
+    //   value: "￥ 100万円",
+    //   backgroundColor: "#ff9800",
+    // },
+    {
+      unit: "payslip.overview.totalHoursWorked", // total hours worked
+      value: `${overallRecord.total_hours} 作業時間`,
+      backgroundColor: "#2196f3",
+    },
+  ];
+
   const staffSelection = initialStaffSelect
     ? initialStaffSelect.filter(
         (staff: StaffScheduleSelect) => staff.staff_code !== "mys-xxx"
@@ -107,11 +117,18 @@ const PayslipManagement = () => {
     if (initialPayslips) {
       setPayslips(initialPayslips);
     }
-  }, [initialPayslips]);
+
+    if (records) {
+      setOverallRecord({
+        ...overallRecord,
+        total_hours: records.total_hours,
+      });
+    }
+  }, [initialPayslips, records]);
 
   // update payslip
   const handleUpdatePayslip = async (payslip: Payslip) => {
-    console.log(payslip);
+    // console.log(payslip);
     // updateUser(user)
     //   .then(() => {
     //     snackbar.success(

@@ -16,15 +16,15 @@ const login = async ({
     password,
   };
   //log the url request
-  console.log("login url: " + baseUrl + "/users/login");
-  console.log(formData);
+  // console.log("login url: " + baseUrl + "/users/login");
+  // console.log(formData);
 
   const { data } = await axiosInstance.post("/users/login", formData);
 
   // data is object with token key take it instead of passing the whole object
   // because Auth Provider in admin takes the return data response directly
 
-  console.log(data);
+  // console.log(data);
 
   const token = data["token"].toString();
 
