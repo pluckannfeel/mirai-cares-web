@@ -34,6 +34,7 @@ import {
   getGenderColor,
   trimStringWithEllipsis,
 } from "../../staff/helpers/functions";
+import dayjs from "dayjs";
 
 const StyledWrapper = styled("div")(
   ({ theme }) => `
@@ -93,6 +94,8 @@ const SWSCalendar = ({
 }: CalendarProps) => {
   const theme = useTheme();
   const { i18n, t } = useTranslation();
+
+  // console.log(dayjs().format("YYYY-MM-DD HH:mm:ss"))
 
   // const initialNow = new Date();
 
@@ -253,8 +256,8 @@ const SWSCalendar = ({
           }}
           // now={initialNow.getTime()}
           locale={i18n.language}
-          // timeZone='Asia/Tokyo'
-          timeZone="UTC"
+          timeZone='Asia/Tokyo'
+          // timeZone="UTC" 
           firstDay={1}
           ref={onCalendarRefSet}
           events={scheduleSource}
