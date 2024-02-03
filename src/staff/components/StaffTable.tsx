@@ -254,6 +254,8 @@ const StaffRow = ({
         <Box>
           <Typography color="textSecondary" variant="h6">
             {/* {t('staffManagement.table.headers.affiliation') + ': '}{' '} */}
+            {staff.staff_code}
+            <br/>
             {staff.affiliation}
             {/* {t("staffManagement.table.headers.join_date") + ": "}{" "}
             {staff.join_date} */}
