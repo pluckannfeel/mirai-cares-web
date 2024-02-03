@@ -16,7 +16,36 @@
         "staffWorkSchedule": "シフト",
         "leaveRequest": "休暇申請",
         "companyInformation": "会社情報",
-        "payslip": "給与管理"
+        "payslip": "給与管理",
+        "documentCreation": "書類作成",
+        "salaryCalculation": "給与計算",
+        "nested": {
+          "shift": {
+            "label": "シフト管理",
+            "children": {
+              "dayOff": "有給管理",
+              "leaveRequests": "休暇申請管理"
+            }
+          },
+          "legalBooks": {
+            "label": "法定三帳簿",
+            "children": {
+              "employeeList": "從業員名簿",
+              "attendanceRecord": "出勤簿",
+              "wageLedger": "賃金台帳",
+              "paymentDeductionList": "支給控除一覧表"
+            }
+          },
+          "masterDatabase": {
+            "label": "マスター／Database",
+            "children": {
+              "staff": "スタッフマスター",
+              "user": "ユーザーマスター",
+              "patient": "利用者マスター",
+              "medicalInstitution": "関連業者マスター"
+            }
+          }
+        }
       }
     },
     "header": {

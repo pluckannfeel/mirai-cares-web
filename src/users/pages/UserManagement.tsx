@@ -61,6 +61,7 @@ const UserManagement = () => {
   };
 
   const handleUpdateUser = async (user: User) => {
+    // console.log("user", user);
     updateUser(user)
       .then(() => {
         snackbar.success(

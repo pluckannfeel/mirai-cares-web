@@ -17,6 +17,7 @@ import {
 import {
   BarChart as BarChartIcon,
   WorkHistory as WorkHistoryIcon,
+  Event as EventIcon,
   EventNote as EventNoteIcon,
   Home as HomeIcon,
   People as PeopleIcon,
@@ -27,6 +28,20 @@ import {
   Settings as SettingsIcon,
   AccountBalance as AccountBalanceIcon,
   LocalHospitalRounded as LocalHospitalRoundedIcon,
+  Subject as SubjectIcon,
+  Diversity1 as Diversity1Icon,
+  AutoStories as AutoStoriesIcon,
+  RecentActors as RecentActorsIcon,
+  PlaylistAddCheck as PlaylistAddCheckIcon,
+  FormatListNumbered as FormatListNumberedIcon,
+  FormatListNumberedOutlined as FormatListNumberedOutlinedIcon,
+  Storage as StorageIcon,
+  SettingsAccessibility as SettingsAccessibilityIcon,
+  Diversity2Outlined as Diversity2OutlinedIcon,
+  LocalHospital as LocalHospitalIcon,
+  AdminPanelSettings as AdminPanelSettingsIcon,
+  Source as SourceIcon,
+  Calculate as CalculateIcon,
 } from "@mui/icons-material";
 
 import { useTranslation } from "react-i18next";
@@ -35,6 +50,7 @@ import { useAuth } from "../../auth/contexts/AuthProvider";
 import Logo from "../../core/components/Logo";
 import { drawerCollapsedWidth, drawerWidth } from "../../core/config/layout";
 import React from "react";
+import MenuItemComponent from "../../core/components/MenuItemComponent";
 
 type AdminDrawerProps = {
   collapsed: boolean;
@@ -55,45 +71,127 @@ export let menuItems = [
     path: "/admin/dashboard",
   },
   {
-    icon: PeopleIcon,
-    key: "admin.drawer.menu.userManagement",
-    path: "/admin/user-management",
+    icon: EventIcon,
+    key: "admin.drawer.menu.nested.shift.label",
+    // path: "/admin/settings",
+    children: [
+      {
+        icon: AccountBalanceIcon,
+        key: "admin.drawer.menu.payslip",
+        path: "/admin/staff-payslip",
+      },
+      {
+        icon: Diversity2OutlinedIcon,
+        key: "admin.drawer.menu.nested.shift.children.dayOff",
+        path: "/admin/day-off",
+      },
+      {
+        icon: SubjectIcon,
+        key: "admin.drawer.menu.nested.shift.children.leaveRequests",
+        path: "/admin/leave-request",
+      },
+    ],
   },
+  {
+    icon: AutoStoriesIcon,
+    key: "admin.drawer.menu.nested.legalBooks.label",
+    // path: "/admin/settings",
+    children: [
+      {
+        icon: RecentActorsIcon,
+        key: "admin.drawer.menu.nested.legalBooks.children.employeeList",
+        path: "/admin/employee-list",
+      },
+      {
+        icon: PlaylistAddCheckIcon,
+        key: "admin.drawer.menu.nested.legalBooks.children.attendanceRecord",
+        path: "/admin/attendance-record",
+      },
+      {
+        icon: FormatListNumberedIcon,
+        key: "admin.drawer.menu.nested.legalBooks.children.wageLedger",
+        path: "/admin/wage-ledger",
+      },
+      {
+        icon: FormatListNumberedOutlinedIcon,
+        key: "admin.drawer.menu.nested.legalBooks.children.paymentDeductionList",
+        path: "/admin/payment-deduction",
+      },
+    ],
+  },
+  {
+    icon: StorageIcon,
+    key: "admin.drawer.menu.nested.masterDatabase.label",
+    // path: "/admin/settings",
+    children: [
+      {
+        icon: SettingsAccessibilityIcon,
+        key: "admin.drawer.menu.nested.masterDatabase.children.staff",
+        path: "/admin/staff-management",
+      },
+      {
+        icon: Diversity1Icon,
+        key: "admin.drawer.menu.nested.masterDatabase.children.patient",
+        path: "/admin/patient-management",
+      },
+      {
+        icon: LocalHospitalIcon,
+        key: "admin.drawer.menu.nested.masterDatabase.children.medicalInstitution",
+        path: "/admin/medical-institution-management",
+      },
+      {
+        icon: AdminPanelSettingsIcon,
+        key: "admin.drawer.menu.nested.masterDatabase.children.user",
+        path: "/admin/user-management",
+      },
+    ],
+  },
+  {
+    icon: SourceIcon,
+    key: "admin.drawer.menu.documentCreation",
+    path: "/admin/company-information/documents",
+  },
+  {
+    icon: CalculateIcon,
+    key: "admin.drawer.menu.salaryCalculation",
+    path: "/admin/404",
+  },
+  // {
+  //   icon: PeopleIcon,
+  //   key: "admin.drawer.menu.userManagement",
+  //   path: "/admin/user-management",
+  // },
   // {
   //   icon: BusinessIcon,
   //   key: "admin.drawer.menu.companyInformation",
   //   path: "/admin/company-information",
   // },
-  {
-    icon: GroupsIcon,
-    key: "admin.drawer.menu.staffManagement",
-    path: "/admin/staff-management",
-  },
-  {
-    icon: WorkHistoryIcon,
-    key: "admin.drawer.menu.staffWorkSchedule",
-    path: "/admin/staff-work-schedule",
-  },
-  {
-    icon: AccountBalanceIcon,
-    key: "admin.drawer.menu.payslip",
-    path: "/admin/staff-payslip",
-  },
-  {
-    icon: EventNoteIcon,
-    key: "admin.drawer.menu.leaveRequest",
-    path: "/admin/leave-request",
-  },
-  {
-    icon: GroupAddIcon,
-    key: "admin.drawer.menu.patientManagement",
-    path: "/admin/patient-management",
-  },
-  {
-    icon: LocalHospitalRoundedIcon,
-    key: "admin.drawer.menu.medicalInstitutionManagement",
-    path: "/admin/medical-institution-management",
-  },
+  // {
+  //   icon: GroupsIcon,
+  //   key: "admin.drawer.menu.staffManagement",
+  //   path: "/admin/staff-management",
+  // },
+  // {
+  //   icon: WorkHistoryIcon,
+  //   key: "admin.drawer.menu.staffWorkSchedule",
+  //   path: "/admin/staff-work-schedule",
+  // },
+
+  // {
+  //   icon: EventNoteIcon,
+  //   key: "admin.drawer.menu.leaveRequest",
+  //   path: "/admin/leave-request",
+  // },
+  // {
+  //   icon: GroupAddIcon,
+  //   key: "admin.drawer.menu.patientManagement",
+  //   path: "/admin/patient-management",
+  // },
+  // {
+  //   icon: LocalHospitalRoundedIcon,
+  //   key: "admin.drawer.menu.medicalInstitutionManagement",
+  //   path: "/admin/medical-institution-management",
+  // },
 
   // {
   //   icon: BadgeIcon,
@@ -147,7 +245,7 @@ const AdminDrawer = ({
   const drawer = (
     <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100%" }}>
       <Logo sx={{ display: "flex", p: 4 }} />
-      <List component="nav" sx={{ px: 2 }}>
+      {/* <List component="nav" sx={{ px: 2 }}>
         {menuItems.map((item) => (
           // <ListItem
           //   button
@@ -190,6 +288,11 @@ const AdminDrawer = ({
             />
           </ListItem>
         ))}
+      </List> */}
+      <List component="nav" sx={{ px: 2 }}>
+        {menuItems.map((item) => (
+          <MenuItemComponent item={item} key={item.key} />
+        ))}
       </List>
       <Box sx={{ flexGrow: 1 }} />
       <List component="nav" sx={{ p: 2 }}>
@@ -209,7 +312,7 @@ const AdminDrawer = ({
           button
           component={CustomNavLink}
           end={true}
-           sx={{ textDecoration: "none", color: "inherit" }}
+          sx={{ textDecoration: "none", color: "inherit" }}
           // activeClassName="Mui-selected"
           to={`/admin/company-information`}
         >
@@ -276,6 +379,7 @@ const AdminDrawer = ({
           {userInfo && (
             <ListItemText
               primary={`${userInfo.first_name} ${userInfo.last_name}`}
+              primaryTypographyProps={{ component: "div" }}
               sx={{
                 display: collapsed ? "none" : "block",
               }}

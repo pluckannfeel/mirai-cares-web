@@ -37,7 +37,7 @@ const CompanyInformation = () => {
   const { data, refetch } = useCompanyInfo("MYS8A3B2C1D");
   const { isUpdating, updateCompanyInfo } = useUpdateCompanyInfo();
 
-  refetch();
+  // refetch();
 
   const formik = useFormik({
     initialValues: {

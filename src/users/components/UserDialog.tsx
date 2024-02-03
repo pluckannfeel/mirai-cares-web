@@ -23,7 +23,13 @@ import { User } from "../types/user";
 //   { label: "userManagement.form.gender.options.m", value: "M" },
 //   { label: "userManagement.form.gender.options.n", value: "NC" },
 // ];
-const roles = ["Admin", "Member"];
+// const roles = ["Admin", "Member"];
+const roles = [
+  { label: "auth.register.form.role.options.admin", value: "Admin" },
+  { label: "auth.register.form.role.options.manager", value: "Manager" },
+  { label: "auth.register.form.role.options.staff", value: "Staff" },
+  { label: "auth.register.form.role.options.user", value: "User" },
+];
 
 type UserDialogProps = {
   onAdd: (user: Partial<User>) => void;
@@ -169,8 +175,8 @@ const UserDialog = ({
             helperText={formik.touched.role && formik.errors.role}
           >
             {roles.map((role) => (
-              <MenuItem key={role} value={role}>
-                {role}
+              <MenuItem key={role.value} value={role.value}>
+                {t(role.label)}
               </MenuItem>
             ))}
           </TextField>

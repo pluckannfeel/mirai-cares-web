@@ -16,7 +16,36 @@
         "staffWorkSchedule": "Staff Work Schedule",
         "leaveRequest": "Leave Requests",
         "companyInformation": "Company Information",
-        "payslip": "Payroll"
+        "payslip": "Payroll",
+        "documentCreation": "Document Creation",
+        "salaryCalculation": "Salary Calculation",
+        "nested": {
+          "shift": {
+            "label": "Shift (Work Schedule)",
+            "children": {
+              "dayOff": "Staff Day off/Paid Leave",
+              "leaveRequests": "Leave Request"
+            }
+          },
+          "legalBooks": {
+            "label": "Legal Books",
+            "children": {
+              "employeeList": "Employee list",
+              "attendanceRecord": "Attendance Record",
+              "wageLedger": "Wage Ledger",
+              "paymentDeductionList": "Payment Deduction List"
+            }
+          },
+          "masterDatabase": {
+            "label": "Master Database",
+            "children": {
+              "staff": "Staff DB",
+              "user": "User DB",
+              "patient": "Patient DB",
+              "medicalInstitution": "Medical Institution DB"
+            }
+          }
+        }
       }
     },
     "header": {

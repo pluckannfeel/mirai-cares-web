@@ -4,7 +4,19 @@ import { User } from "../types/user";
 import { axiosInstance } from "../../api/server";
 
 const updateUser = async (user: User): Promise<User> => {
-  const { data } = await axiosInstance.put("/api/users", user);
+  const formData = new FormData();
+
+  formData.append("user_json", JSON.stringify(user));
+
+  const { data } = await axiosInstance.put(
+    "/users/update_user_info",
+    formData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
   return data;
 };
 
@@ -13,9 +25,10 @@ export function useUpdateUser() {
 
   const { isLoading, mutateAsync } = useMutation(updateUser, {
     onSuccess: (user: User) => {
-      queryClient.setQueryData<User[]>(["users"], (oldUsers) =>
-        updateOne(oldUsers, user)
-      );
+      queryClient.invalidateQueries("users");
+      // queryClient.setQueryData<User[]>(["users"], (oldUsers) =>
+      //   updateOne(oldUsers, user)
+      // );
     },
   });
 

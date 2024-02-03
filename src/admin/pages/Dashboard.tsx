@@ -4,7 +4,7 @@ import {
   ShoppingBasket as ShoppingBasketIcon,
   SupervisorAccount as SupervisorAccountIcon,
 } from "@mui/icons-material";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import AdminAppBar from "../components/AdminAppBar";
 import AdminToolbar from "../components/AdminToolbar";
@@ -18,28 +18,77 @@ import SalesByCategoryWidget from "../widgets/SalesByCategoryWidget";
 import SalesHistoryWidget from "../widgets/SalesHistoryWidget";
 import TeamProgressWidget from "../widgets/TeamProgressWidget";
 import UsersWidget from "../widgets/UsersWidget";
+import { useRecord } from "../../payslip/hooks/useRecord";
+import { OverallRecord } from "../../payslip/types/record";
+import { useStaffSelect } from "../../staff/hooks/useStaffSelection";
 
-const overviewItems = [
-  {
-    unit: "dashboard.overview.visits",
-    value: "20 700",
-  },
-  {
-    unit: "dashboard.overview.sales",
-    value: "$ 1 550",
-  },
-  {
-    unit: "dashboard.overview.orders",
-    value: "149",
-  },
-  {
-    unit: "dashboard.overview.users",
-    value: "657",
-  },
-];
+// const overviewItems = [
+//   {
+//     unit: "dashboard.overview.visits",
+//     value: "20 700",
+//   },
+//   {
+//     unit: "dashboard.overview.sales",
+//     value: "$ 1 550",
+//   },
+//   {
+//     unit: "dashboard.overview.orders",
+//     value: "149",
+//   },
+//   {
+//     unit: "dashboard.overview.users",
+//     value: "657",
+//   },
+// ];
 
 const Dashboard = () => {
   const { t } = useTranslation();
+
+  //get total work hours
+  const { isLoading: isRecordLoading, data: records } = useRecord();
+  const { isLoading: isStaffSelectionLoading, data: initialStaffSelect } =
+    useStaffSelect();
+
+  const [overallRecord, setOverallRecord] = useState<OverallRecord>({
+    total_employees: initialStaffSelect ? initialStaffSelect.length : 0,
+    total_hours: 0,
+  });
+
+  // create an over all loading
+  const isLoading = isRecordLoading || isStaffSelectionLoading;
+
+  // overview data
+  const overviewItems = [
+    {
+      unit: "payslip.overview.totalEmployees", // total of employees
+      value: `${overallRecord.total_employees}人`,
+      backgroundColor: "#388E3C",
+    },
+    // {
+    //   unit: "payslip.overview.netSalarythisMonth", // total net salary paid
+    //   value: "¥ 500万円",
+    //   backgroundColor: "#f44336",
+    // },
+    // {
+    //   unit: "payslip.overview.totalDeduction", // total deductions
+    //   value: "￥ 100万円",
+    //   backgroundColor: "#ff9800",
+    // },
+    {
+      unit: "payslip.overview.totalHoursWorked", // total hours worked
+      value: `${overallRecord.total_hours} 作業時間`,
+      backgroundColor: "#1976D2",
+    },
+  ];
+
+  useEffect(() => {
+    if (records) {
+      setOverallRecord({
+        ...overallRecord,
+        total_hours: records.total_hours,
+      });
+    }
+  }, [records]);
 
   return (
     <React.Fragment>
@@ -49,7 +98,7 @@ const Dashboard = () => {
       <Grid container spacing={2}>
         {overviewItems.map((item, index) => (
           <Grid key={index} item xs={6} md={3}>
-            <OverviewWidget description={t(item.unit)} title={item.value} />
+            <OverviewWidget backgroundColor={item.backgroundColor} description={t(item.unit)} title={item.value} />
           </Grid>
         ))}
         <Grid item xs={12} md={8}>
