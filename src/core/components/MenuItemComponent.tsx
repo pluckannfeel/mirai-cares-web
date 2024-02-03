@@ -5,6 +5,7 @@ import {
   ListItemText,
   Collapse,
   List,
+  Avatar,
 } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
@@ -41,14 +42,13 @@ const MenuItemComponent: React.FC<MenuItemComponentProps> = ({
 
   return (
     <>
-      <ListItemButton
-        onClick={handleClick}
-        sx={{ pl: level * 2 }}
-      >
-        <ListItemIcon>
+      <ListItemButton onClick={handleClick}>
+        <ListItemIcon sx={{ color: "inherit", bgcolor: "transparent" }}>
+          {/* <Avatar  > */}
           <item.icon />
+          {/* </Avatar> */}
         </ListItemIcon>
-        <ListItemText primary={t(item.key)} />
+        <ListItemText sx={{ pl: 1 }} primary={t(item.key)} />
         {hasChildren ? open ? <ExpandLess /> : <ExpandMore /> : null}
       </ListItemButton>
       {hasChildren && (
