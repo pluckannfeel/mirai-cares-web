@@ -42,10 +42,10 @@ const MenuItemComponent: React.FC<MenuItemComponentProps> = ({
 
   return (
     <>
-      <ListItemButton onClick={handleClick}>
+      <ListItemButton onClick={handleClick} sx={{ pl: level * 1.5 }}>
         <ListItemIcon sx={{ color: "inherit", bgcolor: "transparent" }}>
-          {/* <Avatar  > */}
-          <item.icon />
+          {/* <Avatar> */}
+            <item.icon />
           {/* </Avatar> */}
         </ListItemIcon>
         <ListItemText sx={{ pl: 1 }} primary={t(item.key)} />
