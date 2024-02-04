@@ -76,6 +76,11 @@ export let menuItems = [
     // path: "/admin/settings",
     children: [
       {
+        icon: EventIcon,
+        key: "admin.drawer.menu.nested.shift.label",
+        path: "/admin/staff-work-schedule",
+      },
+      {
         icon: AccountBalanceIcon,
         key: "admin.drawer.menu.payslip",
         path: "/admin/staff-payslip",
