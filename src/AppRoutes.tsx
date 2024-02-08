@@ -77,6 +77,15 @@ const MedicalInsitutionManagement = lazy(
   () => import("./medical_institution/pages/MedicalInstitutionManagement")
 );
 
+//Salary Calculation
+const SalaryCalculation = lazy(() => import("./staff/pages/SalaryCalculation"));
+const TimeCalculationSheetTab = lazy(
+  () => import("./staff/pages/TimeCalculationSheetTab")
+);
+const TransportationCalculationSheetTab = lazy(
+  () => import("./staff/pages/TransportationCalculationSheetTab")
+);
+
 const AppRoutes = () => {
   return (
     <BrowserRouter basename={import.meta.env.BASE_URL}>
@@ -116,6 +125,14 @@ const AppRoutes = () => {
             path="medical-institution-management"
             element={<MedicalInsitutionManagement />}
           />
+
+          <Route path="salary-calculation" element={<SalaryCalculation />}>
+            <Route index element={<TimeCalculationSheetTab />} />
+            <Route
+              path="transportation"
+              element={<TransportationCalculationSheetTab />}
+            />
+          </Route>
 
           <Route path="company-information" element={<CompanyManagement />}>
             <Route index element={<CompanyInformation />} />

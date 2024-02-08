@@ -2067,5 +2067,36 @@
       "updatePayslipTitle": "給与明細が更新されました。",
       "updatePayslipBody": "給与明細が更新されました。"
     }
+  },
+  "salaryCalculation": {
+    "title": "給与計算",
+    "toolbar": {
+      "title": "給与計算"
+    },
+    "menuTabs": {
+      "timeSheet": "計算表テ",
+      "transportationSheet": "交通費支給表"
+    },
+    "notifications": {
+      "addSuccess": "給与計算が追加されました。",
+      "deleteSuccess": "給与計算は削除されました。",
+      "updateSuccess": "給与計算が更新されました。"
+    },
+
+    "table": {
+      "headers": {
+        "staff_code": "社員コード",
+        "staff_name": "社員名",
+        "nationality": "国籍",
+        "total_hours": "就労時間合計",
+        "total_night_hours": "夜勤時間合計",
+        "total_holiday_hours": "祝日勤務時間",
+        "group_home_hours": "Gホーム労働時間",
+        "group_home_stays": "Gホーム宿泊回数"
+      },
+      "filter": {
+        "date": "日付"
+      }
+    }
   }
 }

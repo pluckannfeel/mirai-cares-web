@@ -2044,5 +2044,36 @@
       "updatePayslipTitle": "Payslip Updated",
       "updatePayslipBody": "A Payslip was updated."
     }
+  },
+  "salaryCalculation": {
+    "title": "Salary Calculation",
+    "toolbar": {
+      "title": "Salary Calculation"
+    },
+    "menuTabs": {
+      "timeSheet": "Calculation Sheet",
+      "transportationSheet": "Transportation Sheet"
+    },
+    "notifications": {
+      "addSuccess": "Salary Calculation has been added!",
+      "deleteSuccess": "Salary Calculation has been deleted!",
+      "updateSuccess": "Salary Calculation has been updated!"
+    },
+
+    "table": {
+      "headers": {
+        "staff_code": "Staff Code",
+        "staff_name": "Staff Name",
+        "nationality": "Nationality",
+        "total_hours": "Total Hours Worked",
+        "total_night_hours": "Total Night Hours Worked",
+        "total_holiday_hours": "Total Holiday Hours Worked",
+        "group_home_hours": "Group Home Hours Worked",
+        "group_home_stays": "Group Home Stays"
+      },
+      "filter": {
+        "date": "Date"
+      }
+    }
   }
 }

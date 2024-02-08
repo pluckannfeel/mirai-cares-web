@@ -159,7 +159,7 @@ export let menuItems = [
   {
     icon: CalculateIcon,
     key: "admin.drawer.menu.salaryCalculation",
-    path: "/admin/404",
+    path: "/admin/salary-calculation",
   },
   // {
   //   icon: PeopleIcon,
