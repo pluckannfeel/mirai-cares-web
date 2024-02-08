@@ -171,7 +171,7 @@ const TimeCalculationSheetTab = () => {
             onEdit={() => {}}
             selected={[]}
             onSelectedChange={() => {}}
-            timeRecords={records}
+            timeRecords={records || []}
             processing={processing}
           />
         </Grid>
