@@ -72,6 +72,11 @@ const StyledWrapper = styled("div")(
     .fc .fc-daygrid-day.fc-day-today {
       background-color: ${alpha(theme.palette.primary.main, 0.15)};
     }
+
+    .fc-day-other {
+      /* Hide the days from adjacent months */
+      visibility: hidden;
+    }
   `
 );
 
@@ -245,7 +250,8 @@ const SWSCalendar = ({
       {/* End - Custom Header Bar */}
       <StyledWrapper>
         <FullCalendar
-          contentHeight={1020}
+          // contentHeight={800}
+          contentHeight={"auto"}
           headerToolbar={false}
           plugins={[dayGridPlugin, listPlugin]}
           initialView="dayGridMonth"
@@ -256,8 +262,8 @@ const SWSCalendar = ({
           }}
           // now={initialNow.getTime()}
           locale={i18n.language}
-          timeZone='Asia/Tokyo'
-          // timeZone="UTC" 
+          timeZone="Asia/Tokyo"
+          // timeZone="UTC"
           firstDay={1}
           ref={onCalendarRefSet}
           events={scheduleSource}
