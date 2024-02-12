@@ -31,6 +31,7 @@ import { useTranslation } from "react-i18next";
 import Empty from "../../core/components/Empty";
 import * as selectUtils from "../../core/utils/selectUtils";
 import { StaffTimeRecord } from "../types/calculations";
+import i18n from "../../core/config/i18n";
 
 interface HeadCell {
   id: string;
@@ -100,6 +101,7 @@ function EnhancedTableHead({
   timeRecords,
 }: EnhancedTableProps) {
   const { t } = useTranslation();
+  const theme = useTheme();
 
   const uniqueDynamicKeys = new Set<string>();
 
@@ -150,7 +152,9 @@ function EnhancedTableHead({
 
   return (
     <TableHead>
-      <TableRow sx={{ "& th": { border: 0 } }}>
+      <TableRow
+        sx={{ "& th": { borderRight: "1px solid rgba(224, 224, 224, 1)" } }}
+      >
         {/* <TableCell sx={{ py: 0 }}>
           <Checkbox
             color="primary"
@@ -167,9 +171,10 @@ function EnhancedTableHead({
             key={headCell.id}
             align={headCell.align}
             sx={{
-              py: 0.5, // Reduced padding for more space
-              px: 0.75, // Adjust horizontal padding as needed
-              borderRight: "1px solid rgba(224, 224, 224, 1)",
+              // Bold font weight for header titles
+              backgroundColor: theme.palette.background.paper, // A neutral grey background Dark grey color for text for better contrast
+              fontSize: "0.950rem", // Standard font size for headers
+              padding: "8px 12px", // Standard padding, can be adjusted
               whiteSpace: "nowrap", // Prevent wrapping
               overflow: "hidden", // Hide overflow
               textOverflow: "ellipsis", // Add ellipsis for overflow text
@@ -326,13 +331,12 @@ const TimeCalculationRow = ({
           fontSize: theme.typography.h6,
           paddingY: 0.2,
           borderRight: "1px solid rgba(224, 224, 224, 1)", // Add border line between columns
+          // borderRight: 1,
           ...(key === "staff_code" && {
             width: staffCodeColumnWidth, // Adjust width as needed
-            fontWeight: "bold",
           }),
           ...(key === "staff" && {
             width: staffNameColumnWidth, // Adjust width as needed
-            fontWeight: "bold",
           }),
           ...(key === "nationality" && {
             width: nationalityColumnWidth, // Adjust width as needed
@@ -366,7 +370,12 @@ const TimeCalculationRow = ({
       //   bgcolor: index % 2 ? "action.hover" : "background.default", // Alternate colors
       // }}
       sx={{
-        "& td": { bgcolor: "background.paper", border: 0 },
+        // "& th": { border: 1 },
+        "& td": {
+          bgcolor: "background.paper",
+          // border: 0,
+          fontWeight: "normal",
+        },
         bgcolor: index % 2 ? "action.hover" : "background.default", // Alternate colors
       }}
     >
@@ -408,6 +417,7 @@ const TimeCalculationTable = ({
   selected,
   timeRecords,
 }: TimeCalculationTableProps) => {
+  const theme = useTheme();
   const [page, setPage] = useState(0);
   //   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [rowsPerPage, setRowsPerPage] = useState(timeRecords.length);
@@ -445,14 +455,18 @@ const TimeCalculationTable = ({
 
   return (
     <React.Fragment>
-      <TableContainer>
+      <TableContainer
+        sx={{
+          borderRadius: "12px",
+        }}
+      >
         <Table
           size="small"
           aria-labelledby="tableTitle"
           sx={{
             minWidth: 600,
-            borderCollapse: "separate",
-            borderSpacing: "0 .2rem",
+            // borderCollapse: "separate",
+            // borderSpacing: "0 .1rem",
           }}
         >
           <EnhancedTableHead
@@ -461,6 +475,7 @@ const TimeCalculationTable = ({
             rowCount={timeRecords.length}
             timeRecords={timeRecords}
           />
+
           <TableBody>
             {timeRecords
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -478,16 +493,30 @@ const TimeCalculationTable = ({
               ))}
           </TableBody>
         </Table>
+        <TablePagination
+          rowsPerPageOptions={[5, 10, timeRecords.length]}
+          component="div"
+          lang={i18n.language === "en" ? "en" : "ja"}
+          sx={{
+            "& .MuiTablePagination-toolbar": {
+              display: "flex",
+              justifyContent: "flex-start",
+              // backgroundColor: "#f8f8f8",
+              bgcolor: theme.palette.background.paper,
+              fontWeight: "bold",
+              // justifyContent: "space-between",
+            },
+            "& .MuiTablePagination-spacer": {
+              flex: "none", // Removes the spacer's flexibility to keep the pagination controls aligned to the left
+            },
+          }}
+          count={timeRecords.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
       </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[5, 10, timeRecords.length]}
-        component="div"
-        count={timeRecords.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
     </React.Fragment>
   );
 };

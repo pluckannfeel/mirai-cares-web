@@ -8,7 +8,11 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  Fab,
+  IconButton,
+  Button,
 } from "@mui/material";
+import { FileDownload as FileDownloadIcon } from "@mui/icons-material";
 import React, { useState } from "react";
 import { FilterDate } from "../../payslip/types/payslip";
 import { useTranslation } from "react-i18next";
@@ -20,6 +24,9 @@ import {
 import { useStaffTimeCalculation } from "../hooks/useStaffTimeCalculation";
 import dayjs from "dayjs";
 import TimeCalculationTable from "../components/TimeCalculationTable";
+import AdminAppBar from "../../admin/components/AdminAppBar";
+import AdminToolbar from "../../admin/components/AdminToolbar";
+import { baseUrl } from "../../api/server";
 
 const TimeCalculationSheetTab = () => {
   const { t, i18n } = useTranslation();
@@ -44,12 +51,68 @@ const TimeCalculationSheetTab = () => {
     `${filterDate.year}-${filterDate.month}`
   );
 
+  // console.log(records);
+
   const processing = isLoading;
+
+  const downloadCalculationCsv = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("records", JSON.stringify(records)); // Sending as a JSON string
+
+      const response = await fetch(
+        `${baseUrl}/staff/download_salarycalculation`,
+        {
+          method: "POST", // or 'PUT
+          body: formData, // FormData will set the `Content-Type` to `multipart/form-data` and include the boundary
+        }
+      );
+
+      // create a formdata
+
+      const blob = await response.blob();
+
+      // log
+      // console.log(response.json);
+
+        // Create a hidden <a> element
+        const link = document.createElement("a");
+        link.style.display = "none";
+        document.body.appendChild(link);
+
+        // Set the <a> element's attributes
+        link.href = window.URL.createObjectURL(blob);
+        link.setAttribute("download", "給料計算.xlsx"); // Specify the file name
+
+        // Simulate a click on the <a> element to trigger the download
+        link.click();
+
+        // Cleanup by removing the <a> element
+        document.body.removeChild(link);
+    } catch (error) {
+      console.error("Error downloading CSV:", error);
+    }
+  };
 
   //   console.log(records);
 
   return (
     <React.Fragment>
+      <AdminAppBar>
+        <AdminToolbar title={t("salaryCalculation.toolbar.title")}>
+          <Button
+            aria-label="logout"
+            color="info"
+            variant="contained"
+            disabled={processing}
+            onClick={() => downloadCalculationCsv()}
+            size="small"
+            endIcon={<FileDownloadIcon />}
+          >
+            CSV
+          </Button>
+        </AdminToolbar>
+      </AdminAppBar>
       <Grid container spacing={2}>
         {/* Use the remaining 1/4 of the area, and revert to full width on extra-small screens */}
         <Grid item xs={12} sm={2}>

@@ -59,6 +59,7 @@ export const darkPalette = {
   divider: palette.pink[700],
   background: {
     paper: palette.pink[900],
+    grayPaper: palette.pink[700],
     default: palette.pink[800],
   },
   action: {
@@ -104,7 +105,8 @@ export const lightPalette = {
   },
   divider: palette.pink[100],
   background: {
-    paper: "#FFF",
+    // paper: "#FFF",
+    paper: "#F8F8F8",
     disabled: "#fff4e0",
     default: palette.pink[100],
   },
