@@ -86,6 +86,9 @@ const TransportationCalculationSheetTab = lazy(
   () => import("./staff/pages/TransportationCalculationSheetTab")
 );
 
+//Archive
+const Archive = lazy(() => import("./archive/pages/ArchiveManagement"));
+
 const AppRoutes = () => {
   return (
     <BrowserRouter basename={import.meta.env.BASE_URL}>
@@ -133,6 +136,8 @@ const AppRoutes = () => {
               element={<TransportationCalculationSheetTab />}
             />
           </Route>
+
+          <Route path="archive" element={<Archive />} />
 
           <Route path="company-information" element={<CompanyManagement />}>
             <Route index element={<CompanyInformation />} />

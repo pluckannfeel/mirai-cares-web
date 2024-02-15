@@ -120,3 +120,42 @@ export const createMonthObjects = (locale: string) => {
     };
   });
 };
+
+export function formatLastModified(lastModified: string, locale = "en") {
+  if (lastModified === "") return lastModified;
+
+  // Set the locale for dayjs
+  dayjs.locale(locale);
+
+  // Convert the lastModified date to UTC, then to Japan time by adding 9 hours
+  const modifiedDate = dayjs.utc(lastModified).add(9, 'hour');
+  const now = dayjs().utc().add(9, 'hour'); // Assuming 'now' is also in Japan time for comparison
+
+  const diffInDays = now.diff(modifiedDate, "day");
+  const diffInMinutes = now.diff(modifiedDate, "minute");
+
+  if (diffInMinutes < 1) {
+    return locale === "en" ? "less than a minute ago" : "1分未満";
+  }
+
+  if (diffInMinutes < 60) {
+    return dayjs().utc().add(9, 'hour').to(modifiedDate); // Use Japan time
+  }
+
+  if (diffInDays === 0) {
+    return locale === "en"
+      ? `Today at ${modifiedDate.format("HH:mm:ss")}`
+      : `今日 ${modifiedDate.format("HH:mm:ss")}`;
+  }
+
+  if (diffInDays === 1) {
+    return locale === "en" ? "Yesterday" : "昨日";
+  }
+
+  if (diffInDays <= 30) {
+    return dayjs().utc().add(9, 'hour').to(modifiedDate); // Use Japan time
+  }
+
+  // For dates older than 30 days, return the date in the format yyyy/mm/dd
+  return modifiedDate.format("YYYY/MM/DD");
+}

@@ -19,6 +19,7 @@
         "payslip": "Payroll",
         "documentCreation": "Document Creation",
         "salaryCalculation": "Salary Calculation",
+        "archive": "Archive",
         "nested": {
           "shift": {
             "label": "Shift (Work Schedule)",
@@ -2073,6 +2074,50 @@
       },
       "filter": {
         "date": "Date"
+      }
+    }
+  },
+  "archive": {
+    "title": "Archive",
+    "homeDirectory": "Home",
+    "totalFiles": "{{count}} Files",
+    "actions": {
+      "uploadFile": "Upload File",
+      "reload": "Reload",
+      "createFolder": "Create Folder"
+    },
+    "table": {
+      "headers": {
+        "fileName": "File Name",
+        "type": "Type",
+        "lastModified": "Last Modified",
+        "size": "Size"
+      },
+      "empty": "No files to show"
+    },
+    "dialog": {
+      "createFolder": {
+        "title": "Create Folder",
+        "form": {
+          "folderName": {
+            "label": "Folder Name"
+          },
+          "submit": "Create"
+        },
+        "error": {
+          "invalidFolderName": "Invalid Folder Name, Avoid special characters such as /, etc.",
+          "folderExists": "Folder already exists."
+        }
+      }
+    },
+    "notifications": {
+      "uploadSuccess": "File has been uploaded!",
+      "deleteSuccess": "File has been deleted!",
+      "createFolderSuccess": "Folder has been created!",
+      "error": {
+        "uploadError": "Error uploading file, please contact system engineer.",
+        "deleteError": "Error deleting file, please contact system engineer.",
+        "createFolderError": "Error creating folder, please contact system engineer."
       }
     }
   }

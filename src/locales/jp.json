@@ -19,6 +19,7 @@
         "payslip": "給与管理",
         "documentCreation": "書類作成",
         "salaryCalculation": "給与計算",
+        "archive": "アーカイブ/ライブライー",
         "nested": {
           "shift": {
             "label": "シフト管理",
@@ -2096,6 +2097,50 @@
       },
       "filter": {
         "date": "日付"
+      }
+    }
+  },
+  "archive": {
+    "title": "アーカイブ・ライブライー",
+    "homeDirectory": "ホーム",
+    "totalFiles": "{{count}} ファイル数",
+    "actions": {
+      "uploadFile": "追加",
+      "reload": "更新",
+      "createFolder": "フォルダを作成"
+    },
+    "table": {
+      "headers": {
+        "fileName": "名前",
+        "type": "タイプ",
+        "lastModified": "最終更新日時",
+        "size": "サイズ"
+      },
+      "empty": "ファイルがありません"
+    },
+    "dialog": {
+      "createFolder": {
+        "title": "フォルダを作成する",
+        "form": {
+          "folderName": {
+            "label": "フォルダ名"
+          },
+          "submit": "作成"
+        },
+        "error": {
+          "invalidFolderName": "無効なフォルダー名です。/ などの特殊文字は使用しないでください。",
+          "folderExists": "フォルダが既に存在します。"
+        }
+      }
+    },
+    "notifications": {
+      "uploadSuccess": "ファイルがアップロードされました。",
+      "deleteSuccess": "ファイルが削除されました。",
+      "createFolderSuccess": "フォルダが作成されました。",
+      "error": {
+        "uploadError": "ファイルがアップロードされませんでした。",
+        "deleteError": "ファイルが削除されませんでした。",
+        "createFolderError": "フォルダが作成されませんでした。"
       }
     }
   }

@@ -42,6 +42,7 @@ import {
   AdminPanelSettings as AdminPanelSettingsIcon,
   Source as SourceIcon,
   Calculate as CalculateIcon,
+  Archive as ArchiveIcon,
 } from "@mui/icons-material";
 
 import { useTranslation } from "react-i18next";
@@ -161,63 +162,11 @@ export let menuItems = [
     key: "admin.drawer.menu.salaryCalculation",
     path: "/admin/salary-calculation",
   },
-  // {
-  //   icon: PeopleIcon,
-  //   key: "admin.drawer.menu.userManagement",
-  //   path: "/admin/user-management",
-  // },
-  // {
-  //   icon: BusinessIcon,
-  //   key: "admin.drawer.menu.companyInformation",
-  //   path: "/admin/company-information",
-  // },
-  // {
-  //   icon: GroupsIcon,
-  //   key: "admin.drawer.menu.staffManagement",
-  //   path: "/admin/staff-management",
-  // },
-  // {
-  //   icon: WorkHistoryIcon,
-  //   key: "admin.drawer.menu.staffWorkSchedule",
-  //   path: "/admin/staff-work-schedule",
-  // },
-
-  // {
-  //   icon: EventNoteIcon,
-  //   key: "admin.drawer.menu.leaveRequest",
-  //   path: "/admin/leave-request",
-  // },
-  // {
-  //   icon: GroupAddIcon,
-  //   key: "admin.drawer.menu.patientManagement",
-  //   path: "/admin/patient-management",
-  // },
-  // {
-  //   icon: LocalHospitalRoundedIcon,
-  //   key: "admin.drawer.menu.medicalInstitutionManagement",
-  //   path: "/admin/medical-institution-management",
-  // },
-
-  // {
-  //   icon: BadgeIcon,
-  //   key: "admin.drawer.menu.employeeManagement",
-  //   path: "/admin/employee-management",
-  // },
-  // {
-  //   icon: EventIcon,
-  //   key: "admin.drawer.menu.calendar",
-  //   path: "/admin/calendar",
-  // },
-  // {
-  //   icon: AccountTreeIcon,
-  //   key: "admin.drawer.menu.projects",
-  //   path: "/admin/projects",
-  // },
-  // {
-  //   icon: HelpCenterIcon,
-  //   key: "admin.drawer.menu.help",
-  //   path: "/admin/help",
-  // },
+  {
+    icon: ArchiveIcon,
+    key: "admin.drawer.menu.archive",
+    path: "/admin/archive",
+  },
 ];
 
 // Custom NavLink component
