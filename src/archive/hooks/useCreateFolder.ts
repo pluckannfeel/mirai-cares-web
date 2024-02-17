@@ -1,12 +1,7 @@
 import { useMutation, useQueryClient } from "react-query";
-import { ArchiveFolder } from "../types/archive";
+import { APIRequestResponse, ArchiveFolder } from "../types/archive";
 import { axiosInstance } from "../../api/server";
 import { addOne } from "../../core/utils/crudUtils";
-
-type CreateFolderResponse = {
-  code: string;
-  message: string;
-};
 
 const createS3Folder = async ({
   folderName,
@@ -14,7 +9,7 @@ const createS3Folder = async ({
 }: {
   folderName: string;
   currentPath: string;
-}): Promise<CreateFolderResponse> => {
+}): Promise<APIRequestResponse> => {
   const formData = new FormData();
 
   formData.append("folder_name", folderName);
@@ -29,7 +24,7 @@ export const useCreateFolder = () => {
   const queryClient = useQueryClient();
 
   const { isLoading, mutateAsync } = useMutation(createS3Folder, {
-    onSuccess: (response: CreateFolderResponse) => {
+    onSuccess: (response: APIRequestResponse) => {
       // update the current directory files
       if (response.code === "success") {
         queryClient.invalidateQueries("archive-current-files");

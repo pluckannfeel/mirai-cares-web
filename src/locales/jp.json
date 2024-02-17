@@ -239,6 +239,7 @@
     "import": "CSVインポート",
     "print": "印刷",
     "confirmImportMsg": "{{fileName}} をインポートしてもよろしいですか？",
+    "confirmUploadFileMsg": "「{{fileName}}」ファイルをアップロードしてもよろしいですか？",
     "select": "選択",
     "map": {
       "direction": {
@@ -2107,7 +2108,8 @@
     "actions": {
       "uploadFile": "追加",
       "reload": "更新",
-      "createFolder": "フォルダを作成"
+      "createFolder": "フォルダを作成",
+      "replaceFile": "ファイルを置き換える"
     },
     "table": {
       "headers": {
@@ -2131,16 +2133,28 @@
           "invalidFolderName": "無効なフォルダー名です。/ などの特殊文字は使用しないでください。",
           "folderExists": "フォルダが既に存在します。"
         }
+      },
+      "replaceFile": {
+        "title": "ファイルを置き換える",
+        "description": "ファイルを置き換えてもよろしいですか？",
+        "form": {
+          "file": {
+            "label": "ファイル"
+          },
+          "submit": "置き換える"
+        }
       }
     },
     "notifications": {
       "uploadSuccess": "ファイルがアップロードされました。",
       "deleteSuccess": "ファイルが削除されました。",
       "createFolderSuccess": "フォルダが作成されました。",
+      "replaceFileSuccess": "ファイルが置き換えられました。",
       "error": {
-        "uploadError": "ファイルがアップロードされませんでした。",
-        "deleteError": "ファイルが削除されませんでした。",
-        "createFolderError": "フォルダが作成されませんでした。"
+        "uploadError": "ファイルがアップロードされませんでした。管理者に連絡してください。",
+        "deleteError": "ファイルが削除されませんでした。管理者に連絡してください。",
+        "createFolderError": "フォルダが作成されませんでした。管理者に連絡してください。",
+        "replaceFileError": "ファイルが置き換えられませんでした、管理者に連絡してください。"
       }
     }
   }

@@ -142,7 +142,7 @@ type ArchiveRowProps = {
   file: ArchiveFile;
   onCheck: (key: string) => void;
   onDelete: (keys: string[]) => void;
-  onEdit: (file: ArchiveFile) => void;
+  onEdit?: (file: ArchiveFile) => void;
   onFileClick: (fileKey: string, fileType: string) => void;
   processing: boolean;
   selected: boolean;
@@ -177,10 +177,10 @@ const ArchiveRow = ({
     onDelete([file.key]);
   };
 
-  const handleEdit = () => {
-    handleCloseActions();
-    onEdit(file);
-  };
+  //   const handleEdit = () => {
+  //     handleCloseActions();
+  //     onEdit(file);
+  //   };
 
   const renderCell = (
     key: string,
@@ -317,7 +317,7 @@ const ArchiveRow = ({
               sx={{ marginRight: "8px", width: "35px", height: "100%" }}
             />
           )}
-          <span>{truncateText(file.name, 24)}</span>
+          <span>{truncateText(file.name, 50)}</span>
         </Box>
       </TableCell>
 
@@ -348,12 +348,12 @@ const ArchiveRow = ({
             horizontal: "right",
           }}
         >
-          <MenuItem onClick={handleEdit}>
+          {/* <MenuItem onClick={handleEdit}>
             <ListItemIcon>
               <EditIcon />
             </ListItemIcon>{" "}
             {t("common.edit")}
-          </MenuItem>
+          </MenuItem> */}
           <MenuItem onClick={handleDelete}>
             <ListItemIcon>
               <DeleteIcon />
@@ -383,7 +383,7 @@ const MemoizedArchiveRow = React.memo(ArchiveRow);
 type ArchiveTableProps = {
   processing: boolean;
   onDelete: (keys: string[]) => void;
-  onEdit: (file: ArchiveFile) => void;
+  onEdit?: (file: ArchiveFile) => void;
   onSelectedChange: (selected: string[]) => void;
   onFileClick: (fileKey: string, fileType: string) => void; // Add this line
   selected: string[];

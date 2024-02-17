@@ -240,6 +240,7 @@
     "import": "Import File",
     "print": "Print",
     "confirmImportMsg": "Do you want to import {{fileName}}?",
+    "confirmUploadFileMsg": "Do you want to upload {{fileName}}?",
     "select": "Select File",
     "map": {
       "direction": {
@@ -2083,6 +2084,7 @@
     "totalFiles": "{{count}} Files",
     "actions": {
       "uploadFile": "Upload File",
+      "replaceFile": "Replace File",
       "reload": "Reload",
       "createFolder": "Create Folder"
     },
@@ -2108,16 +2110,28 @@
           "invalidFolderName": "Invalid Folder Name, Avoid special characters such as /, etc.",
           "folderExists": "Folder already exists."
         }
+      },
+      "replaceFile": {
+        "title": "Replace File",
+        "description": "Are you sure you want to replace this file?",
+        "form": {
+          "file": {
+            "label": "File"
+          },
+          "submit": "Replace"
+        }
       }
     },
     "notifications": {
       "uploadSuccess": "File has been uploaded!",
       "deleteSuccess": "File has been deleted!",
       "createFolderSuccess": "Folder has been created!",
+      "replaceFileSuccess": "File has been replaced!",
       "error": {
         "uploadError": "Error uploading file, please contact system engineer.",
         "deleteError": "Error deleting file, please contact system engineer.",
-        "createFolderError": "Error creating folder, please contact system engineer."
+        "createFolderError": "Error creating folder, please contact system engineer.",
+        "replaceFileError": "Error replacing file, please contact system engineer."
       }
     }
   }

@@ -10,10 +10,11 @@ import { LoadingButton } from "@mui/lab";
 
 import { useTranslation } from "react-i18next";
 // import { ReactComponent as ConfirmSvg } from "../assets/confirm.svg";
-import ConfirmSvg from "../core/assets/confirm.svg?react";
-import SvgContainer from "./SvgContainer";
+// import ConfirmSvg from "../../assets/confirm.svg?react";
+import ConfirmSvg from "../../core/assets/confirm.svg?react";
+import SvgContainer from "../../core/components/SvgContainer";
 
-type ConfirmDialogProps = {
+type ArchiveReplaceConfirmDialogProps = {
   description?: string;
   onClose: () => void;
   onConfirm: () => void;
@@ -22,14 +23,14 @@ type ConfirmDialogProps = {
   title: string;
 };
 
-const ConfirmDialog = ({
+const ArchiveReplaceConfirmDialog = ({
   description,
   onClose,
   onConfirm,
   open,
   pending,
   title,
-}: ConfirmDialogProps) => {
+}: ArchiveReplaceConfirmDialogProps) => {
   const { t } = useTranslation();
 
   return (
@@ -53,12 +54,15 @@ const ConfirmDialog = ({
         )}
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>{t("common.cancel")}</Button>
+        <Button onClick={onClose} color="success">
+          {t("common.cancel")}
+        </Button>
         <LoadingButton
           autoFocus
           onClick={onConfirm}
           loading={pending}
           variant="contained"
+          color="error"
         >
           {t("common.confirm")}
         </LoadingButton>
@@ -67,4 +71,4 @@ const ConfirmDialog = ({
   );
 };
 
-export default ConfirmDialog;
+export default ArchiveReplaceConfirmDialog;

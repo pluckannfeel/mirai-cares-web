@@ -21,3 +21,8 @@ export interface PathEntry {
   name: string;
   path: string;
 }
+
+export type APIRequestResponse = {
+    code: string;
+    message: string;
+  };
