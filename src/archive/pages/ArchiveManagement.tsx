@@ -25,6 +25,7 @@ import {
   NavigateNext as NavigateNextIcon,
   CreateNewFolder as CreateNewFolderIcon,
   Delete as DeleteIcon,
+  DriveFileMove as DriveFileMoveIcon,
 } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
 import AdminAppBar from "../../admin/components/AdminAppBar";
@@ -40,12 +41,16 @@ import ArchiveReplaceConfirmDialog from "../components/ArchiveReplaceConfirmDial
 import { useUploadFile } from "../hooks/useUploadFile";
 import { useReplaceFile } from "../hooks/useReplaceFile";
 import SelectToolbar from "../../core/components/SelectToolbar";
+import { useAuth } from "../../auth/contexts/AuthProvider";
+import ConfirmDialog from "../../core/components/ConfirmDialog";
 
 const ArchiveManagement = () => {
   const { t } = useTranslation();
   4;
   const snackbar = useSnackbar();
   const theme = useTheme();
+
+  const { userInfo } = useAuth();
 
   const [openConfirmDeleteFileDialog, setOpenConfirmDeleteDialog] =
     useState(false);
@@ -56,6 +61,8 @@ const ArchiveManagement = () => {
   const [openAddFolderDialog, setOpenAddFolderDialog] = useState(false);
   const [selected, setSelected] = useState<string[]>([]);
   const [filesDeleted, setFilesDeleted] = useState<string[]>([]);
+  const [filesMoved, setFilesMoved] = useState<string[]>([]);
+  const [filesDownloaded, setFilesDownloaded] = useState<string[]>([]);
   // this part here if file has been replaced, then we will update the file
   const [fileToBeReplaced, setfileToBeReplaced] = useState<File | undefined>(
     undefined
@@ -68,7 +75,7 @@ const ArchiveManagement = () => {
 
   // list current directory hook
   const {
-    data: curerentDirectoryFiles,
+    data: currentDirectoryFiles,
     isLoading,
     refetch: reload,
   } = useCurrentDirectoryFiles(currentDirectory);
@@ -105,6 +112,7 @@ const ArchiveManagement = () => {
   };
 
   const handleDeleteFiles = async () => {
+    // console.log(filesDeleted);
     // deleteFiles(filesDeleted)
     //   .then(() => {
     //     snackbar.success(t("archive.notifications.deleteSuccess"));
@@ -143,6 +151,9 @@ const ArchiveManagement = () => {
   const handleFileClick = (key: string, fileType: string) => {
     // console.log(key);
 
+    // clear all selected files
+    setSelected([]);
+
     if (fileType === "folder") {
       setCurrentDirectory(key);
       const newPath = { name: key.split("/").slice(-2, -1)[0], path: key }; // Extract folder name from key
@@ -157,7 +168,7 @@ const ArchiveManagement = () => {
 
   // add folder
   const handleOpenAddFolderDialog = () => {
-    console.log(currentDirectory);
+    // console.log(currentDirectory);
     // open add folder dialog
     setOpenAddFolderDialog(true);
   };
@@ -166,7 +177,7 @@ const ArchiveManagement = () => {
   const uploadFile = (file: File) => {
     // check if file exists then we run replace instead of upload
     if (file) {
-      const isfileExists = curerentDirectoryFiles?.files.some(
+      const isfileExists = currentDirectoryFiles?.files.some(
         (f) => f.name === file.name
       );
       // console.log(isfileExists);
@@ -191,7 +202,12 @@ const ArchiveManagement = () => {
       }
     }
 
-    return uploadFileToS3Bucket({ file, currentPath: currentDirectory });
+    // add file, current path and user
+    return uploadFileToS3Bucket({
+      file,
+      currentPath: currentDirectory,
+      userName: `${userInfo?.first_name} ${userInfo?.last_name} (${userInfo?.email})`,
+    });
   };
 
   //Replace file
@@ -200,6 +216,7 @@ const ArchiveManagement = () => {
     replaceFileOnS3Bucket({
       file: fileToBeReplaced!,
       currentPath: currentDirectory,
+      userName: `${userInfo?.first_name} ${userInfo?.last_name} (${userInfo?.email})`,
     })
       .then((response) => {
         if (response.code === "success") {
@@ -216,6 +233,18 @@ const ArchiveManagement = () => {
       .catch((error) => {
         snackbar.error(t("archive.notifications.error.replaceFileError"));
       });
+  };
+
+  //Download File (single select on menu items)
+  const handleDownloadFile = (file: ArchiveFile) => {
+    // console.log(file);
+  };
+
+  // move file (single select on menu items)
+  const handleMoveFile = (file: ArchiveFile) => {
+    setFilesMoved([file.key]);
+
+    // console.log(filesMoved);
   };
 
   // breadcrumbs
@@ -290,6 +319,7 @@ const ArchiveManagement = () => {
           size="large"
           sx={{
             color: "#000",
+            marginRight: "10px",
             // padding: "10px 20px",
             // bgcolor: "white",
           }}
@@ -297,6 +327,36 @@ const ArchiveManagement = () => {
         >
           {t("archive.actions.reload")}
         </Button>
+        <Button
+          disabled={!selected.length}
+          aria-label="delete"
+          color="error"
+          variant="outlined"
+          onClick={() => handleOpenConfirmDeleteDialog(selected)}
+          size="small"
+          sx={{
+            color: "#000",
+            marginRight: "10px",
+          }}
+          endIcon={<DeleteIcon />}
+        >
+          {t("archive.actions.delete")}
+        </Button>
+        {/* <Button
+          disabled={!selected.length}
+          aria-label="move"
+          color="info"
+          variant="outlined"
+          onClick={() => handleOpenConfirmDeleteDialog(selected)}
+          size="small"
+          sx={{
+            color: "#000",
+            marginRight: "10px",
+          }}
+          endIcon={<DriveFileMoveIcon />}
+        >
+          {t("archive.actions.move")}
+        </Button> */}
         {/* {!selected.length ? (
           <Button
             aria-label="delete"
@@ -351,12 +411,14 @@ const ArchiveManagement = () => {
 
       <ArchiveTable
         processing={processing}
+        onDownload={handleDownloadFile}
+        onMove={handleMoveFile}
         onDelete={handleOpenConfirmDeleteDialog}
         // onEdit={handleOpenFileUploadDialog}
         onSelectedChange={handleSelectedChange}
         onFileClick={handleFileClick}
         selected={selected}
-        files={curerentDirectoryFiles?.files || []}
+        files={currentDirectoryFiles?.files || []}
       />
 
       {openAddFolderDialog && (
@@ -364,7 +426,7 @@ const ArchiveManagement = () => {
           open={openAddFolderDialog}
           onClose={() => setOpenAddFolderDialog(false)}
           processing={isCreatingFolder}
-          files={curerentDirectoryFiles?.files || []}
+          files={currentDirectoryFiles?.files || []}
           onCreateFolder={handleCreateFolder}
           currentPath={currentDirectory}
         />
@@ -383,6 +445,15 @@ const ArchiveManagement = () => {
           description={t("archive.dialog.replaceFile.description")}
         />
       )}
+
+      <ConfirmDialog
+        pending={processing}
+        onClose={handleCloseConfirmDeleteDialog}
+        onConfirm={handleDeleteFiles}
+        open={openConfirmDeleteFileDialog}
+        title={t("archive.dialog.deleteFiles.title")}
+        description={t("archive.dialog.deleteFiles.description")}
+      />
     </React.Fragment>
   );
 };

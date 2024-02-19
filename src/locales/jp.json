@@ -2110,6 +2110,8 @@
       "reload": "更新",
       "createFolder": "フォルダを作成",
       "delete": "削除",
+      "move": "移動",
+      "download": "ダウンロード",
       "replaceFile": "ファイルを置き換える"
     },
     "table": {
@@ -2117,6 +2119,7 @@
         "fileName": "名前",
         "type": "タイプ",
         "lastModified": "最終更新日時",
+        "lastModifiedBy": "最終更新者",
         "size": "サイズ"
       },
       "empty": "ファイルがありません"

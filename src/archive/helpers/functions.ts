@@ -85,3 +85,11 @@ export function fileTypeConversion(type: string, locale: string = "en") {
       return "ファイル";
   }
 }
+
+export function formatLastModifiedby(lastModifiedBy: string, locale = "en") {
+  if (lastModifiedBy !== "unknown") return lastModifiedBy;
+
+  if (locale === "en") return "unknown";
+
+  if (locale === "ja") return "不明";
+}

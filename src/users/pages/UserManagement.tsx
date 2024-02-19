@@ -143,6 +143,7 @@ const UserManagement = () => {
         open={openConfirmDeleteDialog}
         title={t("common.confirmation")}
       />
+      
       {openUserDialog && (
         <UserDialog
           onAdd={handleAddUser}

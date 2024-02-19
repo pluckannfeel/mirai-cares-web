@@ -33,6 +33,8 @@ import {
   PictureAsPdf as PictureAsPdfIcon,
   Description as DescriptionIcon,
   InsertDriveFile as InsertDriveFileIcon,
+  DriveFileMove as DriveFileMoveIcon,
+  Download as DownloadIcon,
 } from "@mui/icons-material";
 
 import React, { useEffect, useState } from "react";
@@ -44,6 +46,7 @@ import i18n from "../../core/config/i18n";
 import {
   fileTypeConversion,
   formatBytes,
+  formatLastModifiedby,
   isFile,
   truncateText,
 } from "../helpers/functions";
@@ -67,6 +70,11 @@ const headCells: HeadCell[] = [
   {
     key: "lastModified",
     label: "archive.table.headers.lastModified",
+    align: "right",
+  },
+  {
+    key: "lastModifiedBy",
+    label: "archive.table.headers.lastModifiedBy",
     align: "right",
   },
 ];
@@ -143,6 +151,8 @@ type ArchiveRowProps = {
   onCheck: (key: string) => void;
   onDelete: (keys: string[]) => void;
   onEdit?: (file: ArchiveFile) => void;
+  onMove: (file: ArchiveFile) => void;
+  onDownload: (file: ArchiveFile) => void;
   onFileClick: (fileKey: string, fileType: string) => void;
   processing: boolean;
   selected: boolean;
@@ -154,6 +164,8 @@ const ArchiveRow = ({
   onCheck,
   onDelete,
   onEdit,
+  onMove,
+  onDownload,
   onFileClick,
   processing,
   selected,
@@ -175,6 +187,16 @@ const ArchiveRow = ({
   const handleDelete = () => {
     handleCloseActions();
     onDelete([file.key]);
+  };
+
+  const handleMove = () => {
+    handleCloseActions();
+    onMove(file);
+  };
+
+  const handleDownload = () => {
+    handleCloseActions();
+    onDownload(file);
   };
 
   //   const handleEdit = () => {
@@ -354,11 +376,26 @@ const ArchiveRow = ({
             </ListItemIcon>{" "}
             {t("common.edit")}
           </MenuItem> */}
+          {isFile(file.name) && (
+            <MenuItem onClick={handleDownload}>
+              <ListItemIcon>
+                <DownloadIcon />
+              </ListItemIcon>{" "}
+              {t("archive.actions.download")}
+            </MenuItem>
+          )}
+          {/* // to be added later */}
+          {/* <MenuItem onClick={handleMove}>
+            <ListItemIcon>
+              <DriveFileMoveIcon />
+            </ListItemIcon>{" "}
+            {t("archive.actions.move")}
+          </MenuItem> */}
           <MenuItem onClick={handleDelete}>
             <ListItemIcon>
               <DeleteIcon />
-            </ListItemIcon>{" "}
-            {t("common.delete")}
+            </ListItemIcon>
+            {t("common.delete")}{" "}
           </MenuItem>
         </Menu>
       </TableCell>
@@ -374,6 +411,12 @@ const ArchiveRow = ({
           i18n.language == "en" ? "en" : "ja"
         )}
       </TableCell>
+      <TableCell align="right">
+        {formatLastModifiedby(
+          file.lastModifiedBy,
+          i18n.language == "en" ? "en" : "ja"
+        )}
+      </TableCell>
     </TableRow>
   );
 };
@@ -384,6 +427,8 @@ type ArchiveTableProps = {
   processing: boolean;
   onDelete: (keys: string[]) => void;
   onEdit?: (file: ArchiveFile) => void;
+  onMove: (file: ArchiveFile) => void;
+  onDownload: (file: ArchiveFile) => void;
   onSelectedChange: (selected: string[]) => void;
   onFileClick: (fileKey: string, fileType: string) => void; // Add this line
   selected: string[];
@@ -394,6 +439,8 @@ const ArchiveTable = ({
   processing,
   onDelete,
   onEdit,
+  onMove,
+  onDownload,
   onSelectedChange,
   onFileClick,
   selected,
@@ -480,6 +527,8 @@ const ArchiveTable = ({
                     onCheck={handleClick}
                     onDelete={onDelete}
                     onEdit={onEdit}
+                    onMove={onMove}
+                    onDownload={onDownload}
                     onFileClick={onFileClick}
                     processing={processing}
                     selected={isSelected(file.key)}

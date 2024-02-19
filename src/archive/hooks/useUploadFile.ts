@@ -5,13 +5,16 @@ import { APIRequestResponse } from "../types/archive";
 const uploadFile = async ({
   file,
   currentPath,
+  userName,
 }: {
   file: File;
   currentPath: string;
+  userName?: string;
 }): Promise<APIRequestResponse> => {
   const formData = new FormData();
   formData.append("file", file);
   formData.append("current_path", currentPath);
+  formData.append("user_name", userName || "unknown");
 
   const { data } = await axiosInstance.post("/archive/upload_file", formData);
 

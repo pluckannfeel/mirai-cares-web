@@ -2087,6 +2087,9 @@
       "uploadFile": "Upload File",
       "replaceFile": "Replace File",
       "reload": "Reload",
+      "delete": "Delete",
+      "download": "Download",
+      "move": "Move",
       "createFolder": "Create Folder"
     },
     "table": {
@@ -2094,6 +2097,7 @@
         "fileName": "File Name",
         "type": "Type",
         "lastModified": "Last Modified",
+        "lastModifiedBy": "Last Modified By",
         "size": "Size"
       },
       "empty": "No files to show"
@@ -2120,6 +2124,13 @@
             "label": "File"
           },
           "submit": "Replace"
+        }
+      },
+      "deleteFiles": {
+        "title": "Delete Files",
+        "description": "Are you sure you want to delete these files?",
+        "form": {
+          "submit": "Delete"
         }
       }
     },
