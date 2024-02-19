@@ -106,7 +106,9 @@ export let menuItems = [
       {
         icon: RecentActorsIcon,
         key: "admin.drawer.menu.nested.legalBooks.children.employeeList",
-        path: "/admin/employee-list",
+        // path: "/admin/employee-list",
+        path: "https://payroll.moneyforward.com/reports/employee_rosters",
+        outsource: true,
       },
       {
         icon: PlaylistAddCheckIcon,
@@ -116,12 +118,16 @@ export let menuItems = [
       {
         icon: FormatListNumberedIcon,
         key: "admin.drawer.menu.nested.legalBooks.children.wageLedger",
-        path: "/admin/wage-ledger",
+        // path: "/admin/wage-ledger",
+        path: "https://payroll.moneyforward.com/reports/payroll_book",
+        outsource: true,
       },
       {
         icon: FormatListNumberedOutlinedIcon,
         key: "admin.drawer.menu.nested.legalBooks.children.paymentDeductionList",
-        path: "/admin/payment-deduction",
+        // path: "/admin/payment-deduction",
+        path: "https://payroll.moneyforward.com/reports/payment_deductions",
+        outsource: true,
       },
     ],
   },

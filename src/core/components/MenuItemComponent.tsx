@@ -15,6 +15,7 @@ interface MenuItem {
   icon: React.ElementType;
   key: string;
   path?: string;
+  outsource?: boolean;
   children?: MenuItem[];
 }
 
@@ -33,10 +34,15 @@ const MenuItemComponent: React.FC<MenuItemComponentProps> = ({
   const hasChildren = Boolean(item.children && item.children.length > 0);
 
   const handleClick = () => {
-    if (hasChildren) {
-      setOpen(!open);
-    } else if (item.path) {
-      navigate(item.path);
+    if (item.outsource) {
+      // open outsource link
+      window.open(item.path, "_blank");
+    } else {
+      if (hasChildren) {
+        setOpen(!open);
+      } else if (item.path) {
+        navigate(item.path);
+      }
     }
   };
 
@@ -45,7 +51,7 @@ const MenuItemComponent: React.FC<MenuItemComponentProps> = ({
       <ListItemButton onClick={handleClick} sx={{ pl: level * 1.5 }}>
         <ListItemIcon sx={{ color: "inherit", bgcolor: "transparent" }}>
           {/* <Avatar> */}
-            <item.icon />
+          <item.icon />
           {/* </Avatar> */}
         </ListItemIcon>
         <ListItemText sx={{ pl: 1 }} primary={t(item.key)} />
