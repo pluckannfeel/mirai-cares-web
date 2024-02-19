@@ -412,7 +412,7 @@ const ArchiveRow = ({
         )}
       </TableCell>
       <TableCell align="right">
-        {formatLastModifiedby(
+        {formatLastModifiedby(file.type,
           file.lastModifiedBy,
           i18n.language == "en" ? "en" : "ja"
         )}

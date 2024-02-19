@@ -6,14 +6,17 @@ import { addOne } from "../../core/utils/crudUtils";
 const createS3Folder = async ({
   folderName,
   currentPath,
+  userName,
 }: {
   folderName: string;
   currentPath: string;
+  userName?: string;
 }): Promise<APIRequestResponse> => {
   const formData = new FormData();
 
   formData.append("folder_name", folderName);
   formData.append("current_path", currentPath);
+  formData.append("user_name", userName || "unknown");
 
   const { data } = await axiosInstance.post("/archive/create_folder", formData);
 

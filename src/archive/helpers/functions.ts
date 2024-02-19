@@ -86,7 +86,16 @@ export function fileTypeConversion(type: string, locale: string = "en") {
   }
 }
 
-export function formatLastModifiedby(lastModifiedBy: string, locale = "en") {
+export function formatLastModifiedby(
+  fileType: string,
+  lastModifiedBy: string,
+  locale = "en"
+) {
+  if (fileType === "folder") {
+    if (lastModifiedBy !== "unknown") return lastModifiedBy;
+    else return "";
+  }
+
   if (lastModifiedBy !== "unknown") return lastModifiedBy;
 
   if (locale === "en") return "unknown";

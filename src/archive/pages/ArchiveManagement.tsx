@@ -106,7 +106,11 @@ const ArchiveManagement = () => {
 
   // ADD FOLDER TO S3 BUCKET CURRENT DIRECTORY
   const handleCreateFolder = (folderName: string) => {
-    createS3Folder({ folderName, currentPath: currentDirectory });
+    createS3Folder({
+      folderName,
+      currentPath: currentDirectory,
+      userName: `${userInfo?.first_name} ${userInfo?.last_name} (${userInfo?.email})`,
+    });
 
     setOpenAddFolderDialog(false);
 
