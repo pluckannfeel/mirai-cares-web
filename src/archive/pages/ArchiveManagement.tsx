@@ -43,6 +43,7 @@ import { useReplaceFile } from "../hooks/useReplaceFile";
 import SelectToolbar from "../../core/components/SelectToolbar";
 import { useAuth } from "../../auth/contexts/AuthProvider";
 import ConfirmDialog from "../../core/components/ConfirmDialog";
+import { useDeleteFiles } from "../../admin/hooks/useDeleteFiles";
 
 const ArchiveManagement = () => {
   const { t } = useTranslation();
@@ -91,6 +92,10 @@ const ArchiveManagement = () => {
   // replace file hook
   const { replaceFile: replaceFileOnS3Bucket, isReplacing } = useReplaceFile();
 
+  // delete file(s) hook
+  const { isDeleting: isDeletingFiles, deleteFiles: deleteFilesOnS3Bucket } =
+    useDeleteFiles();
+
   const processing = isLoading;
 
   // useEffect(() => {
@@ -112,17 +117,23 @@ const ArchiveManagement = () => {
   };
 
   const handleDeleteFiles = async () => {
-    // console.log(filesDeleted);
-    // deleteFiles(filesDeleted)
-    //   .then(() => {
-    //     snackbar.success(t("archive.notifications.deleteSuccess"));
-    //     setSelected([]);
-    //     setFilesDeleted([]);
-    //     setOpenConfirmDeleteDialog(false);
-    //   })
-    //   .catch(() => {
-    //     snackbar.error(t("common.errors.unexpected.subTitle"));
-    //   });
+    console.log(filesDeleted);
+
+    deleteFilesOnS3Bucket(filesDeleted)
+      .then((response) => {
+        if (response.code === "success") {
+          snackbar.success(t("archive.notifications.deleteSuccess"));
+        } else if (response.code === "error") {
+          snackbar.error(t("archive.notifications.error.deleteError"));
+        }
+
+        setSelected([]);
+        setFilesDeleted([]);
+        setOpenConfirmDeleteDialog(false);
+      })
+      .catch(() => {
+        snackbar.error(t("archive.notifications.error.deleteError"));
+      });
   };
 
   const handleCancelSelected = () => {
@@ -446,8 +457,9 @@ const ArchiveManagement = () => {
         />
       )}
 
+      {/* // Delete Files */}
       <ConfirmDialog
-        pending={processing}
+        pending={isDeletingFiles}
         onClose={handleCloseConfirmDeleteDialog}
         onConfirm={handleDeleteFiles}
         open={openConfirmDeleteFileDialog}

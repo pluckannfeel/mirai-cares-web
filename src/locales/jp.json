@@ -2147,6 +2147,13 @@
           },
           "submit": "置き換える"
         }
+      },
+      "deleteFiles": {
+        "title": "ファイルを削除する",
+        "description": "ファイルを削除してもよろしいですか？",
+        "form": {
+          "submit": "削除"
+        }
       }
     },
     "notifications": {
