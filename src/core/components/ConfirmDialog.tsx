@@ -10,7 +10,7 @@ import { LoadingButton } from "@mui/lab";
 
 import { useTranslation } from "react-i18next";
 // import { ReactComponent as ConfirmSvg } from "../assets/confirm.svg";
-import ConfirmSvg from "../core/assets/confirm.svg?react";
+import ConfirmSvg from "../assets/confirm.svg?react";
 import SvgContainer from "./SvgContainer";
 
 type ConfirmDialogProps = {

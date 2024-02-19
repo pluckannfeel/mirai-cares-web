@@ -24,6 +24,7 @@ import {
   Refresh as RefreshIcon,
   NavigateNext as NavigateNextIcon,
   CreateNewFolder as CreateNewFolderIcon,
+  Delete as DeleteIcon,
 } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
 import AdminAppBar from "../../admin/components/AdminAppBar";
@@ -38,6 +39,7 @@ import ArchiveUploadFileButton from "../components/ArchiveUploadFileButton";
 import ArchiveReplaceConfirmDialog from "../components/ArchiveReplaceConfirmDialog";
 import { useUploadFile } from "../hooks/useUploadFile";
 import { useReplaceFile } from "../hooks/useReplaceFile";
+import SelectToolbar from "../../core/components/SelectToolbar";
 
 const ArchiveManagement = () => {
   const { t } = useTranslation();
@@ -295,6 +297,27 @@ const ArchiveManagement = () => {
         >
           {t("archive.actions.reload")}
         </Button>
+        {/* {!selected.length ? (
+          <Button
+            aria-label="delete"
+            variant="outlined"
+            onClick={() => {}}
+            size="medium"
+            sx={{
+              color: "#000",
+            }}
+            endIcon={<DeleteIcon />}
+          >
+            {t("archive.actions.delete")}
+          </Button>
+        ) : (
+          <SelectToolbar
+            processing={processing}
+            onCancel={handleCancelSelected}
+            onDelete={handleOpenConfirmDeleteDialog}
+            selected={selected}
+          />
+        )} */}
       </div>
 
       <Breadcrumbs

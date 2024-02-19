@@ -2109,6 +2109,7 @@
       "uploadFile": "追加",
       "reload": "更新",
       "createFolder": "フォルダを作成",
+      "delete": "削除",
       "replaceFile": "ファイルを置き換える"
     },
     "table": {
