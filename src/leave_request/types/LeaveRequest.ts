@@ -4,7 +4,8 @@ export interface LeaveRequest {
   staff?: LRStaffDetails; // object
   start_date: Date;
   end_date: Date;
-  type: string;
+  number_of_days?: number;
+  leave_type: string;
   status?: string;
   details: string;
   created_at: Date;

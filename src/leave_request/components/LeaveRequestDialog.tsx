@@ -85,28 +85,53 @@ const LeaveRequestDialog: React.FC<LeaveRequestDialogProps> = ({
             //   helperText={formik.touched.staff_code && formik.errors.staff_code}
           />
 
-          <TextField
-            size="small"
-            margin="dense"
-            fullWidth
-            id="leave_type"
-            label={t("leaveRequest.form.leave_type.label")}
-            InputProps={{
-              readOnly: true,
-            }}
-            name="leave_type"
-            autoComplete="leave_type"
-            // autofocus
-            disabled={processing}
-            value={
-              request.type === "paid"
-                ? t("leaveRequest.screen.row.type.paid")
-                : t("leaveRequest.screen.row.type.unpaid")
-            }
-            //   onChange={formik.handleChange}
-            //   error={formik.touched.staff_code && Boolean(formik.errors.staff_code)}
-            //   helperText={formik.touched.staff_code && formik.errors.staff_code}
-          />
+          <Grid container spacing={1}>
+            <Grid item xs={6}>
+              <TextField
+                size="small"
+                margin="dense"
+                fullWidth
+                id="leave_type"
+                label={t("leaveRequest.form.leave_type.label")}
+                InputProps={{
+                  readOnly: true,
+                }}
+                name="leave_type"
+                autoComplete="leave_type"
+                // autofocus
+                disabled={processing}
+                value={
+                  request.leave_type === "paid"
+                    ? t("leaveRequest.screen.row.type.paid")
+                    : t("leaveRequest.screen.row.type.unpaid")
+                }
+                //   onChange={formik.handleChange}
+                //   error={formik.touched.staff_code && Boolean(formik.errors.staff_code)}
+                //   helperText={formik.touched.staff_code && formik.errors.staff_code}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                size="small"
+                margin="dense"
+                fullWidth
+                type="number"
+                id="number_of_days"
+                label={t("leaveRequest.form.number_of_days.label")}
+                InputProps={{
+                  readOnly: true,
+                }}
+                name="number_of_days"
+                autoComplete="number_of_days"
+                // autofocus
+                disabled={processing}
+                value={request.number_of_days ? request.number_of_days : 0}
+                //   onChange={formik.handleChange}
+                //   error={formik.touched.staff_code && Boolean(formik.errors.staff_code)}
+                //   helperText={formik.touched.staff_code && formik.errors.staff_code}
+              />
+            </Grid>
+          </Grid>
 
           <Grid container spacing={1}>
             <Grid item xs={6}>

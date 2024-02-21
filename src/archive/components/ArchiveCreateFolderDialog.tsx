@@ -67,7 +67,10 @@ const ArchiveCreateFolderDialog = ({
     }
 
     // Avoid characters not generally allowed by S3
-    const invalidCharsRegex = /[&$@=;:+ ,?\\{^}%`\]\[~<>\|#"]/;
+    // const invalidCharsRegex = /[&$@=;:+ ,?\\{^}%`\]\[~<>\|#"]/;
+    // dont allow only / and \
+    const invalidCharsRegex = /[\\\/]/;
+
     if (invalidCharsRegex.test(folderName)) {
       return false;
     }

@@ -293,6 +293,7 @@
       "success": "Success"
     },
     "today": "Today",
+    "thisMonth": "This Month",
     "update": "Update",
     "validations": {
       "email": "Invalid email address",
@@ -1939,6 +1940,10 @@
           "unpaid": "Unpaid"
         }
       },
+      "number_of_days": {
+        "label": "Number of Days"
+      },
+
       "staff": {
         "name": "Name",
         "mys_id": "社員コード"

@@ -19,7 +19,7 @@
         "payslip": "給与管理",
         "documentCreation": "書類作成",
         "salaryCalculation": "給与計算",
-        "archive": "アーカイブ/ライブライー",
+        "archive": "アーカイブ/ライブラリー",
         "nested": {
           "shift": {
             "label": "シフト管理",
@@ -292,6 +292,7 @@
       "success": "成功"
     },
     "today": "今日",
+    "thisMonth": "今月",
     "update": "更新",
     "validations": {
       "email": "無効なメールアドレス",
@@ -1283,7 +1284,7 @@
         "label": "在留カード情報"
       },
       "residence_card_number": {
-        "label": "旅券番号"
+        "label": "在留カード番号"
       },
       "residence_card_issue_date": {
         "label": "発行日"
@@ -1962,6 +1963,9 @@
           "unpaid": "有給しない"
         }
       },
+      "number_of_days": {
+        "label": "日数（有給）"
+      },
       "staff": {
         "name": "スタッフ名",
         "mys_id": "スタッフコード"
@@ -2102,7 +2106,7 @@
     }
   },
   "archive": {
-    "title": "アーカイブ・ライブライー",
+    "title": "アーカイブ・ライブラリー",
     "homeDirectory": "ホーム",
     "totalFiles": "{{count}} ファイル数",
     "actions": {

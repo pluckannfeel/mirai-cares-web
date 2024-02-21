@@ -194,7 +194,7 @@ const AdminDrawer = ({
   // modified == don't show if role is not admin
   if (userInfo?.role !== "Admin") {
     // remove user management
-    console.log(userInfo?.role);
+    // console.log(userInfo?.role);
     menuItems = menuItems.filter(
       (item) => item.key !== "admin.drawer.menu.userManagement"
     );

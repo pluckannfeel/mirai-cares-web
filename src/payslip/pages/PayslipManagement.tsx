@@ -173,7 +173,7 @@ const PayslipManagement = () => {
 
   // delete pyslip
   const handleDeletePayslips = async () => {
-    console.log(payslipsDeleted);
+    // console.log(payslipsDeleted);
     if (payslipsDeleted.length > 0) {
       deletePayslips(payslipsDeleted)
         .then((payslips) => {
@@ -267,7 +267,7 @@ const PayslipManagement = () => {
       </AdminAppBar>
 
       <Grid container spacing={2}>
-        {overviewItems.map((item, index) => (
+        {/* {overviewItems.map((item, index) => (
           <Grid key={index} item xs={6} md={3}>
             <OverviewWidget
               backgroundColor={item.backgroundColor}
@@ -275,7 +275,7 @@ const PayslipManagement = () => {
               title={item.value}
             />
           </Grid>
-        ))}
+        ))} */}
 
         {/* table */}
         <Grid item xs={12} container md={9}>
@@ -299,7 +299,8 @@ const PayslipManagement = () => {
         <Grid item xs={12} md={3}>
           <Card
             sx={{
-              marginBottom: 2,
+              marginTop: 9,
+              // marginBottom: 2,
             }}
           >
             <CardHeader title={t("payslip.filter.title")} />
@@ -526,11 +527,11 @@ const PayslipManagement = () => {
             </CardContent>
           </Card>
 
-          <CircleProgressWidget
+          {/* <CircleProgressWidget
             height={204}
             title={t("dashboard.progress.title")}
             value={40}
-          />
+          /> */}
         </Grid>
       </Grid>
 

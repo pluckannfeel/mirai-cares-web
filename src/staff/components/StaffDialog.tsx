@@ -1326,7 +1326,9 @@ const StaffDialog = ({
                         margin="dense"
                         fullWidth
                         id="residence_card_details_number"
-                        label={t("staffManagement.form.passport_number.label")}
+                        label={t(
+                          "staffManagement.form.residence_card_number.label"
+                        )}
                         name={`residence_card_details.number`}
                         autoComplete="license_name"
                         // // autofocus

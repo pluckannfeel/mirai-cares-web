@@ -121,7 +121,7 @@ const ArchiveManagement = () => {
   };
 
   const handleDeleteFiles = async () => {
-    console.log(filesDeleted);
+    // console.log(filesDeleted);
 
     deleteFilesOnS3Bucket(filesDeleted)
       .then((response) => {
