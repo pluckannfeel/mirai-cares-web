@@ -18,6 +18,8 @@ import {
   Breadcrumbs,
   Link,
   useTheme,
+  Backdrop,
+  CircularProgress,
 } from "@mui/material";
 import {
   FileUpload as FileUploadIcon,
@@ -26,6 +28,7 @@ import {
   CreateNewFolder as CreateNewFolderIcon,
   Delete as DeleteIcon,
   DriveFileMove as DriveFileMoveIcon,
+  Download as DownloadIcon,
 } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
 import AdminAppBar from "../../admin/components/AdminAppBar";
@@ -43,11 +46,11 @@ import { useReplaceFile } from "../hooks/useReplaceFile";
 import SelectToolbar from "../../core/components/SelectToolbar";
 import { useAuth } from "../../auth/contexts/AuthProvider";
 import ConfirmDialog from "../../core/components/ConfirmDialog";
-import { useDeleteFiles } from "../../admin/hooks/useDeleteFiles";
+import { useDeleteFiles } from "../hooks/useDeleteFiles";
+import { useDownloadFiles } from "../hooks/useDownloadFiles";
 
 const ArchiveManagement = () => {
   const { t } = useTranslation();
-  4;
   const snackbar = useSnackbar();
   const theme = useTheme();
 
@@ -95,6 +98,9 @@ const ArchiveManagement = () => {
   // delete file(s) hook
   const { isDeleting: isDeletingFiles, deleteFiles: deleteFilesOnS3Bucket } =
     useDeleteFiles();
+
+  // download files hook
+  const { isDownloading, downloadFiles: downloadS3Files } = useDownloadFiles();
 
   const processing = isLoading;
 
@@ -253,6 +259,32 @@ const ArchiveManagement = () => {
   //Download File (single select on menu items)
   const handleDownloadFile = (file: ArchiveFile) => {
     // console.log(file);
+
+    downloadS3Files([file.key]).then((response) => {
+      // response is a link string
+      // download file without opening tab
+      const link = document.createElement("a");
+
+      link.href = response;
+      link.setAttribute("download", file.name);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+  };
+
+  const handleDownloadMultipleSelectedFiles = () => {
+    downloadS3Files(selected).then((response) => {
+      // response is a link string
+      // download file without opening tab
+      const link = document.createElement("a");
+
+      link.href = response;
+      link.setAttribute("download", "download.zip");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
   };
 
   // move file (single select on menu items)
@@ -273,6 +305,15 @@ const ArchiveManagement = () => {
   return (
     <React.Fragment>
       <AdminToolbar title={t("archive.title")}></AdminToolbar>
+
+      {isDownloading && (
+        <Backdrop
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={isDownloading}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+      )}
 
       <div
         style={{
@@ -356,6 +397,21 @@ const ArchiveManagement = () => {
           endIcon={<DeleteIcon />}
         >
           {t("archive.actions.delete")}
+        </Button>
+        <Button
+          disabled={!selected.length}
+          aria-label="delete"
+          color="warning"
+          variant="outlined"
+          onClick={handleDownloadMultipleSelectedFiles}
+          size="small"
+          sx={{
+            color: "#000",
+            marginRight: "10px",
+          }}
+          endIcon={<DownloadIcon />}
+        >
+          {t("archive.actions.download")}
         </Button>
         {/* <Button
           disabled={!selected.length}

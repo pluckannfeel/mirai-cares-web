@@ -58,6 +58,11 @@
       }
     },
     "home": {
+      "birthdays": {
+        "title": "Birthdays",
+        "description": "Today is the birthday of <bold>{{name}}</bold>",
+        "empty": "No birthdays today"
+      },
       "achievement": {
         "action": "View Profile",
         "description": "You have completed {{progress}}% of your profile. Your current progress is great.",

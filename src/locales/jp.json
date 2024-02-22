@@ -58,6 +58,11 @@
       }
     },
     "home": {
+      "birthdays": {
+        "title": "今日の誕生日",
+        "description": "今日は誕生日のスタッフがいます。お祝いしましょう！",
+        "empty": "今日は誕生日のスタッフはいません。"
+      },
       "achievement": {
         "action": "プロフィールを見る",
         "description": "プロフィールの{{progress}}％を完成させました。現在の進捗は素晴らしいです。 ",

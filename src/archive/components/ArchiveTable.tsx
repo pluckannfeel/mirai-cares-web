@@ -376,14 +376,14 @@ const ArchiveRow = ({
             </ListItemIcon>{" "}
             {t("common.edit")}
           </MenuItem> */}
-          {isFile(file.name) && (
+          {/* {isFile(file.name) && ( */}
             <MenuItem onClick={handleDownload}>
               <ListItemIcon>
                 <DownloadIcon />
               </ListItemIcon>{" "}
               {t("archive.actions.download")}
             </MenuItem>
-          )}
+          {/* )} */}
           {/* // to be added later */}
           {/* <MenuItem onClick={handleMove}>
             <ListItemIcon>

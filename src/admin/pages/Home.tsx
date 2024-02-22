@@ -9,6 +9,8 @@ import MeetingWidgets from "../widgets/MeetingWidgets";
 import PersonalTargetsWidget from "../widgets/PersonalTargetsWidget";
 import ViewsWidget from "../widgets/ViewsWidget";
 import WelcomeWidget from "../widgets/WelcomeWidget";
+import OverallRecordsWidget from "../widgets/OverallRecordsWidget";
+import BirthdayWidget from "../widgets/BirthdayWidget";
 
 const Home = () => {
   return (
@@ -21,14 +23,16 @@ const Home = () => {
       <Grid container spacing={2}>
         <Grid item xs={12} md={6} lg={4}>
           <WelcomeWidget />
-          <AchievementWidget />
+          {/* <AchievementWidget /> */}
         </Grid>
-        <Grid item xs={12} md={6} lg={4}>
-          <FollowersWidget />
+        <Grid item xs={12} md={5} lg={3}>
+          {/* <FollowersWidget /> */}
+          <OverallRecordsWidget />
           <ViewsWidget />
         </Grid>
-        <Grid item xs={12} md={6} lg={4}>
-          <PersonalTargetsWidget />
+        <Grid item xs={12} md={7} lg={5}>
+          {/* <PersonalTargetsWidget /> */}
+          <BirthdayWidget />
           <MeetingWidgets />
         </Grid>
       </Grid>
