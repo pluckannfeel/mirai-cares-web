@@ -78,7 +78,7 @@ const MedicalInsitutionManagement = lazy(
 );
 
 //Salary Calculation
-const SalaryCalculation = lazy(() => import("./staff/pages/SalaryCalculation"));
+const SalaryManagement = lazy(() => import("./staff/pages/SalaryCalculation"));
 const TimeCalculationSheetTab = lazy(
   () => import("./staff/pages/TimeCalculationSheetTab")
 );
@@ -118,8 +118,6 @@ const AppRoutes = () => {
 
           <Route path="staff-work-schedule" element={<StaffWorkSchedule />} />
 
-          <Route path="staff-payslip" element={<PayslipManagement />} />
-
           <Route path="leave-request" element={<LeaveRequestManagement />} />
 
           <Route path="patient-management" element={<PatientManagement />} />
@@ -129,8 +127,10 @@ const AppRoutes = () => {
             element={<MedicalInsitutionManagement />}
           />
 
-          <Route path="salary-calculation" element={<SalaryCalculation />}>
+          <Route path="salary-management" element={<SalaryManagement />}>
             <Route index element={<TimeCalculationSheetTab />} />
+            <Route path="staff-payslip" element={<PayslipManagement />} />
+            {/* <Route path="staff-payslip" element={<PayslipManagement />} /> */}
             <Route
               path="transportation"
               element={<TransportationCalculationSheetTab />}

@@ -45,6 +45,7 @@ import { ShiftReport } from "../types/shiftReport";
 import ShiftReportDialog from "../components/ShiftReportDialog";
 import PrintDialog from "../components/PrintDialog";
 import { PrintStaffReport, PrintStaffShift } from "../types/PrintInformation";
+import { useAuth } from "../../auth/contexts/AuthProvider";
 
 const Shift = () => {
   const snackbar = useSnackbar();
@@ -57,6 +58,9 @@ const Shift = () => {
 
   // detects if all staff is selected
   const [isAllStaffSelected, setIsAllStaffSelected] = useState(false);
+
+  // userinfo
+  const { userInfo } = useAuth();
 
   // ================ shift (work schedule) ================
   const { data: initialWorkSchedule, refetch: refetchWorkSchedule } =
@@ -358,21 +362,25 @@ const Shift = () => {
             // startIcon={<DownloadOutlinedIcon />}
           >
           </Button> */}
-          <FileButton
-            submitHandler={importCSV}
-            loading={isImporting}
-            buttonProps={{
-              sx: {
-                marginRight: 1,
-                padding: 1.2,
-              },
-              variant: "contained",
-              color: "primary",
-              disabled: processing,
-              size: "medium",
-              title: t("common.import"),
-            }}
-          />
+          {userInfo?.role === "admin" ||
+            (userInfo?.role === "manager" && (
+              <FileButton
+                submitHandler={importCSV}
+                loading={isImporting}
+                buttonProps={{
+                  sx: {
+                    marginRight: 1,
+                    padding: 1.2,
+                  },
+                  variant: "contained",
+                  color: "primary",
+                  disabled: processing,
+                  size: "medium",
+                  title: t("common.import"),
+                }}
+              />
+            ))}
+
           {/* <Fab
             aria-label="add work schedule"
             color="primary"

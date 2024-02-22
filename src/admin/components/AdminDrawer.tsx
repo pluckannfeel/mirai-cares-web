@@ -50,7 +50,7 @@ import { NavLink, NavLinkProps } from "react-router-dom";
 import { useAuth } from "../../auth/contexts/AuthProvider";
 import Logo from "../../core/components/Logo";
 import { drawerCollapsedWidth, drawerWidth } from "../../core/config/layout";
-import React from "react";
+import React, { useMemo } from "react";
 import MenuItemComponent from "../../core/components/MenuItemComponent";
 
 type AdminDrawerProps = {
@@ -81,11 +81,11 @@ export let menuItems = [
         key: "admin.drawer.menu.nested.shift.label",
         path: "/admin/staff-work-schedule",
       },
-      {
-        icon: AccountBalanceIcon,
-        key: "admin.drawer.menu.payslip",
-        path: "/admin/staff-payslip",
-      },
+      // {
+      //   icon: AccountBalanceIcon,
+      //   key: "admin.drawer.menu.payslip",
+      //   path: "/admin/staff-payslip",
+      // },
       {
         icon: Diversity2OutlinedIcon,
         key: "admin.drawer.menu.nested.shift.children.dayOff",
@@ -164,9 +164,11 @@ export let menuItems = [
     path: "/admin/company-information/documents",
   },
   {
-    icon: CalculateIcon,
-    key: "admin.drawer.menu.salaryCalculation",
-    path: "/admin/salary-calculation",
+    // icon: CalculateIcon,
+    icon: AccountBalanceIcon,
+    key: "admin.drawer.menu.salaryManagement",
+    // path: "/admin/salary-calculation",
+    path: "/admin/salary-management/staff-payslip",
   },
   {
     icon: ArchiveIcon,
@@ -191,83 +193,48 @@ const AdminDrawer = ({
   const { userInfo } = useAuth();
   const { t } = useTranslation();
 
-  // modified == don't show if role is not admin
-  if (userInfo?.role !== "Admin") {
-    // remove user management
-    // console.log(userInfo?.role);
-    menuItems = menuItems.filter(
-      (item) => item.key !== "admin.drawer.menu.userManagement"
-    );
-  }
+  const filteredMenuItems = useMemo(() => {
+    let items = [...menuItems]; // Create a shallow copy to avoid mutating the original array
+
+    // If role is not Admin, modify the items to remove specific nested items
+    if (userInfo?.role !== "Admin") {
+      items = items.map((item) => {
+        // Check if this item has children and needs filtering
+        if (item.children) {
+          // Filter out the user management item from the children
+          const filteredChildren = item.children.filter(
+            (child) =>
+              child.key !==
+              "admin.drawer.menu.nested.masterDatabase.children.user"
+          );
+          return { ...item, children: filteredChildren };
+        }
+        return item;
+      });
+    }
+
+    // If role is User or Staff, remove payslip
+    if (userInfo?.role === "User" || userInfo?.role === "Staff") {
+      items = items.filter(
+        (item) => item.key !== "admin.drawer.menu.salaryManagement"
+      );
+    }
+
+    return items;
+  }, [userInfo?.role]); // Recompute when the user's role changes
 
   const width = collapsed ? drawerCollapsedWidth : drawerWidth;
 
   const drawer = (
     <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100%" }}>
       <Logo sx={{ display: "flex", p: 4 }} />
-      {/* <List component="nav" sx={{ px: 2 }}>
-        {menuItems.map((item) => (
-          // <ListItem
-          //   button
-          //   component={NavLink}
-          //   key={item.path}
-          //   activeClassName="Mui-selected"
-          //   end={true}
-          //   to={`/${process.env.PUBLIC_URL}${item.path}`}4
-          // >
-          //   <ListItemAvatar>
-          //     <Avatar sx={{ color: "inherit", bgcolor: "transparent" }}>
-          //       <item.icon />
-          //     </Avatar>
-          //   </ListItemAvatar>
-          //   <ListItemText
-          //     primary={t(item.key)}
-          //     sx={{
-          //       display: collapsed ? "none" : "block",
-          //     }}
-          //   />
-          // </ListItem>
-
-          <ListItem
-            button
-            key={item.path}
-            component={CustomNavLink}
-            to={item.path}
-            sx={{ textDecoration: "none", color: "inherit" }}
-          >
-            <ListItemAvatar>
-              <Avatar sx={{ color: "inherit", bgcolor: "transparent" }}>
-                <item.icon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText
-              primary={t(item.key)}
-              sx={{
-                display: collapsed ? "none" : "block",
-              }}
-            />
-          </ListItem>
-        ))}
-      </List> */}
       <List component="nav" sx={{ px: 2 }}>
-        {menuItems.map((item) => (
+        {filteredMenuItems.map((item) => (
           <MenuItemComponent item={item} key={item.key} />
         ))}
       </List>
       <Box sx={{ flexGrow: 1 }} />
       <List component="nav" sx={{ p: 2 }}>
-        {/* Company Information */}
-
-        {/* <ListItemButton
-          component={(props) => (
-            <NavLink
-              {...props}
-              end={true}
-              activeClassName="Mui-selected"
-              to={`/admin/company-information`}
-            />
-          )}
-        > */}
         <ListItem
           button
           component={CustomNavLink}
@@ -290,39 +257,7 @@ const AdminDrawer = ({
             />
           )}
         </ListItem>
-        {/* <ListItem
-          button
-          component={NavLink}
-          to={`/${process.env.PUBLIC_URL}/admin/company-information`}
-        >
-          <ListItemAvatar>
-            <Avatar>
-              <BusinessIcon />
-            </Avatar>
-          </ListItemAvatar>
-          {userInfo && (
-            <ListItemText
-              primary={t("admin.drawer.menu.companyInformation")}
-              sx={{
-                display: collapsed ? "none" : "block",
-              }}
-            />
-          )}
-        </ListItem> */}
 
-        {/* <ListItemButton
-          activeClassName="Mui-selected"
-          to={`/admin/profile`}
-          end={true}
-          component={(props) => (
-            <NavLink
-              {...props}
-              end={true}
-              activeClassName="Mui-selected"
-              to={`/admin/profile`}
-            />
-          )}
-        > */}
         <ListItem
           button
           component={CustomNavLink}

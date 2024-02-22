@@ -16,9 +16,10 @@
         "staffWorkSchedule": "シフト",
         "leaveRequest": "休暇申請",
         "companyInformation": "会社情報",
-        "payslip": "給与管理",
+        "payslip": "給与明細",
         "documentCreation": "書類作成",
         "salaryCalculation": "給与計算",
+        "salaryManagement": "給与明細・給与計算",
         "archive": "アーカイブ/ライブラリー",
         "nested": {
           "shift": {
@@ -1998,7 +1999,7 @@
     }
   },
   "payslip": {
-    "title": "給与管理",
+    "title": "給料明細",
     "overview": {
       "totalEmployees": "総従業員数",
       "netSalarythisMonth": "今月の純給与",
@@ -2077,6 +2078,16 @@
       "addPayslipBody": "給与明細が追加されました。",
       "updatePayslipTitle": "給与明細が更新されました。",
       "updatePayslipBody": "給与明細が更新されました。"
+    }
+  },
+  "salaryManagement": {
+    "toolbar": {
+      "title": "給与明細・給与計算"
+    },
+    "menuTabs": {
+      "payslip": "給与明細",
+      "timeSheet": "計算表テ",
+      "transportationSheet": "交通費支給表"
     }
   },
   "salaryCalculation": {

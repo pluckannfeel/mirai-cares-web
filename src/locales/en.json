@@ -19,6 +19,7 @@
         "payslip": "Payroll",
         "documentCreation": "Document Creation",
         "salaryCalculation": "Salary Calculation",
+        "salaryManagement": "Salary Calculation・Payslip",
         "archive": "Archive",
         "nested": {
           "shift": {
@@ -2056,6 +2057,16 @@
       "addPayslipBody": "A Payslip was added to you.",
       "updatePayslipTitle": "Payslip Updated",
       "updatePayslipBody": "A Payslip was updated."
+    }
+  },
+  "salaryManagement": {
+    "toolbar": {
+      "title": "Payslip・Salary Calculation"
+    },
+    "menuTabs": {
+      "payslip": "Payslip",
+      "timeSheet": "Calculation Sheet",
+      "transportationSheet": "Transportation Sheet"
     }
   },
   "salaryCalculation": {

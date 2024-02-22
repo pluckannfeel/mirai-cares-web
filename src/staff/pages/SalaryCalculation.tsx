@@ -7,28 +7,20 @@ import { Outlet } from "react-router";
 import { NavLink } from "react-router-dom";
 import QueryWrapper from "../../core/components/QueryWrapper";
 
-
 const menuItems = [
   {
-    key: "salaryCalculation.menuTabs.timeSheet",
-    path: "./",
+    key: "salaryManagement.menuTabs.payslip",
+    // path: "./staff-payslip",
+    path: "./staff-payslip",
   },
   {
-    key: "salaryCalculation.menuTabs.transportationSheet",
+    key: "salaryManagement.menuTabs.timeSheet",
+    path: "",
+  },
+  {
+    key: "salaryManagement.menuTabs.transportationSheet",
     path: "./transportation",
   },
-  // {
-  //   key: "staffManagement.menuTabs.user",
-  //   path: "./user",
-  // },
-  // {
-  //   key: 'employeeManagement.menuTabs.relativesEmploymentSchoolHistory',
-  //   path: './res-history',
-  // },
-  // {
-  //   key: 'employeeManagement.menuTabs.qualificationsLicenses',
-  //   path: './qualifications-licenses',
-  // },
 ];
 
 const SalaryCalculation = () => {
