@@ -362,24 +362,23 @@ const Shift = () => {
             // startIcon={<DownloadOutlinedIcon />}
           >
           </Button> */}
-          {userInfo?.role === "admin" ||
-            (userInfo?.role === "manager" && (
-              <FileButton
-                submitHandler={importCSV}
-                loading={isImporting}
-                buttonProps={{
-                  sx: {
-                    marginRight: 1,
-                    padding: 1.2,
-                  },
-                  variant: "contained",
-                  color: "primary",
-                  disabled: processing,
-                  size: "medium",
-                  title: t("common.import"),
-                }}
-              />
-            ))}
+          {(userInfo?.role === "Admin" || userInfo?.role === "Manager") && (
+            <FileButton
+              submitHandler={importCSV}
+              loading={isImporting}
+              buttonProps={{
+                sx: {
+                  marginRight: 1,
+                  padding: 1.2,
+                },
+                variant: "contained",
+                color: "primary",
+                disabled: processing,
+                size: "medium",
+                title: t("common.import"),
+              }}
+            />
+          )}
 
           {/* <Fab
             aria-label="add work schedule"
