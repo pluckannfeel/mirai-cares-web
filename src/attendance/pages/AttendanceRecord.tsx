@@ -110,6 +110,10 @@ const AttendanceRecord = () => {
         const totalWorkHours = initialRecords.reduce((acc, record) => {
           return acc + record.duration;
         }, 0);
+
+        // convert minutes to hours
+        // const totalWorkHours = totalWorkMinutes / 60;
+        // console.log(totalWorkHours);
         const totalWorkDays = new Set(
           initialRecords.map((record) => record.date)
         ).size;
@@ -121,20 +125,24 @@ const AttendanceRecord = () => {
         });
 
         // console.log(attendanceRecords);
-      } else {
-        const totalWorkHours = initialRecords.reduce((acc, record) => {
-          return acc + record.duration;
-        }, 0);
-        const totalWorkDays = new Set(
-          initialRecords.map((record) => record.date)
-        ).size;
-
-        setAttendanceRecords({
-          records: initialRecords,
-          totalWorkHours,
-          totalWorkDays,
-        });
       }
+      // } else {
+      //   const totalWorkMinutes = initialRecords.reduce((acc, record) => {
+      //     return acc + record.duration;
+      //   }, 0);
+
+      //   // convert minutes to hours
+      //   const totalWorkHours = Math.round((totalWorkMinutes / 60));
+      //   const totalWorkDays = new Set(
+      //     initialRecords.map((record) => record.date)
+      //   ).size;
+
+      //   setAttendanceRecords({
+      //     records: initialRecords,
+      //     totalWorkHours,
+      //     totalWorkDays,
+      //   });
+      // }
     }
   }, [initialRecords]);
 
@@ -150,12 +158,16 @@ const AttendanceRecord = () => {
 
     // if selected records has length, then set the records to print
     if (selectedRecords && selectedRecords.length > 0) {
+      const totalWorkHours = selectedRecords.reduce((acc, record) => {
+        return acc + record.duration;
+      }, 0);
+
+      // const totalWorkHours = totalWorkMinutes / 60;
+
       setRecordsToPrint({
         staff: staffSelect,
         records: selectedRecords,
-        totalWorkHours: selectedRecords.reduce((acc, record) => {
-          return acc + record.duration;
-        }, 0),
+        totalWorkHours: totalWorkHours,
         totalWorkDays: new Set(selectedRecords.map((record) => record.date))
           .size,
       });
@@ -255,6 +267,13 @@ const AttendanceRecord = () => {
                             year: e.target.value,
                           };
                         });
+
+                        // remove selected staff
+                        setStaffSelect({
+                          id: "all",
+                          english_name: "All",
+                          japanese_name: "全員",
+                        } as StaffScheduleSelect);
                       }}
                     >
                       {years.map((option) => (
@@ -298,6 +317,13 @@ const AttendanceRecord = () => {
                             month: e.target.value,
                           };
                         });
+
+                        // remove selected staff
+                        setStaffSelect({
+                          id: "all",
+                          english_name: "All",
+                          japanese_name: "全員",
+                        } as StaffScheduleSelect);
                       }}
                     >
                       {i18n.language === "en"
@@ -381,6 +407,7 @@ const AttendanceRecord = () => {
                         },
                         0
                       );
+
                       const totalWorkDays = new Set(
                         initialRecords.map((record) => record.date)
                       ).size;
@@ -407,19 +434,24 @@ const AttendanceRecord = () => {
                       (record) => record.staff_code === val.staff_code
                     );
 
-                    const totalWorkHours = filteredRecords.reduce(
+                    const totalWorkMinutes = filteredRecords.reduce(
                       (acc, record) => {
                         return acc + record.duration;
                       },
                       0
                     );
+
+                    // console.log(totalWorkMinutes);
+
+                    // const totalWorkHours = totalWorkMinutes / 60;
+
                     const totalWorkDays = new Set(
                       filteredRecords.map((record) => record.date)
                     ).size;
 
                     setAttendanceRecords({
                       records: filteredRecords,
-                      totalWorkHours,
+                      totalWorkHours: totalWorkMinutes,
                       totalWorkDays,
                     });
                   } else {

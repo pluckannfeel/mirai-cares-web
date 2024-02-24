@@ -47,14 +47,14 @@ const PrintAttendanceRecordDocument = (
     <Page size="A4" style={styles.page}>
       {/* Title */}
       <Text style={[styles.title, styles.boldText]}>
-        {`${toJapaneseCalendar(UTCfilteredDate)}ヘルパー別シフト表（予定）`}
+        {`${toJapaneseCalendar(UTCfilteredDate)}出勤簿`}
       </Text>
 
       {/* Issued Date */}
-      <Text style={styles.issueDate}>
+      {/* <Text style={styles.issueDate}>
         <Text style={styles.boldText}>発行日：</Text>
         {date.utc().format("YYYY年MM月DD日")}
-      </Text>
+      </Text> */}
 
       {/* Static Text */}
       <Text style={styles.subtitle}>
@@ -115,7 +115,7 @@ const PrintAttendanceRecordDocument = (
             {item.duration}
           </Text>
           <Text style={[styles.tableCell, styles.tableCell1Flex]}>
-            {item.patient_name}
+            {item.patient_name === "nan" ? "" : item.patient_name}
           </Text>
           <Text style={[styles.tableCell, styles.tableCell1Flex]}>
             {item.service_type}
