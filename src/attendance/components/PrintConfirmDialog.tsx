@@ -91,7 +91,7 @@ const PrintAttendanceRecordDocument = (
         <View style={[styles.headerCell, styles.tableCell1Flex]}>
           <Text style={styles.tableHeaderText}>ご利用者名</Text>
         </View>
-        <View style={[styles.headerCell, styles.tableCell1Flex]}>
+        <View style={[styles.headerCell, styles.tableCell15Flex]}>
           <Text style={styles.tableHeaderText}>サービス内容</Text>
         </View>
         <View style={[styles.lastHeaderCell]}>
@@ -117,10 +117,10 @@ const PrintAttendanceRecordDocument = (
           <Text style={[styles.tableCell, styles.tableCell1Flex]}>
             {item.patient_name === "nan" ? "" : item.patient_name}
           </Text>
-          <Text style={[styles.tableCell, styles.tableCell1Flex]}>
+          <Text style={[styles.tableCell, styles.tableCell15Flex]}>
             {item.service_type}
           </Text>
-          <Text style={[styles.tableCell, styles.tableCell3Flex]}>
+          <Text style={[styles.tableCell, styles.tableCell25Flex]}>
             {item.remarks}
           </Text>
         </View>
@@ -339,7 +339,7 @@ const styles = StyleSheet.create({
     padding: 3,
   },
   lastHeaderCell: {
-    flex: 3, // this assumes the last header cell should be three times wider
+    flex: 2.5, // this assumes the last header cell should be three times wider
     borderWidth: 0.5,
     borderColor: "black",
     backgroundColor: "#F0F0F0",
@@ -351,8 +351,18 @@ const styles = StyleSheet.create({
   tableCell1Flex: {
     flex: 1,
   },
+  tableCell15Flex: {
+    flex: 1.5,
+  },
   tableCellHalfFlex: {
     flex: 0.5,
+  },
+
+  tableCell2Flex: {
+    flex: 2,
+  },
+  tableCell25Flex: {
+    flex: 2.5,
   },
   tableCell3Flex: {
     flex: 3,
