@@ -127,7 +127,7 @@ const PrintAttendanceRecordDocument = (
       ))}
 
       <Text style={styles.subtitle}>
-        <Text style={styles.boldText}>就労働時間: </Text>
+        <Text style={styles.boldText}>就労時間: </Text>
         {attendance.totalWorkHours} {"     "}
         <Text style={styles.boldText}>出勤日数: </Text>
         {attendance.totalWorkDays}
