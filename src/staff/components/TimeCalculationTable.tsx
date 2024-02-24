@@ -450,7 +450,7 @@ const TimeCalculationTable = ({
   const isSelected = (id: string) => selected.indexOf(id) !== -1;
 
   if (timeRecords.length === 0) {
-    return <Empty title="No user yet" />;
+    return <Empty title="No time sheet yet" />;
   }
 
   return (

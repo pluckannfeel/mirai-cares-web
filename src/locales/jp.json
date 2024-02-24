@@ -2188,5 +2188,37 @@
         "replaceFileError": "ファイルが置き換えられませんでした、管理者に連絡してください。"
       }
     }
+  },
+  "attendanceRecord": {
+    "title": "出勤簿",
+    "actions": {
+      "filter": "フィルター",
+      "print": {
+        "description": "出勤簿を印刷してもよろしいですか？",
+        "label": "印刷",
+        "title": "出勤簿を印刷する"
+      }
+    },
+    "filter": {
+      "staff": "スタッフ名",
+      "date": "フィルター (日付)",
+      "month": "月",
+      "year": "年"
+    },
+    "table": {
+      "headers": {
+        "staff_code": "スタッフコード",
+        "staff_name": "スタッフ名",
+        "date": "日付",
+        "service_hours": "サービス提供時間",
+        "duration": "時間",
+        "patient_name": "利用者名",
+        "service_type": "サービス内容",
+        "remarks": "備考"
+      },
+      "empty": "記録なし",
+      "totalWorkHours": "就労働時間",
+      "totalWorkDays": "出勤日数"
+    }
   }
 }

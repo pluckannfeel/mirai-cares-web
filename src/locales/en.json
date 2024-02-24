@@ -2167,5 +2167,37 @@
         "replaceFileError": "Error replacing file, please contact system engineer."
       }
     }
+  },
+  "attendanceRecord": {
+    "title": "Attendance Record",
+    "actions": {
+      "filter": "Filter",
+      "print": {
+        "description": "Please Confirm to Print",
+        "label": "Print",
+        "title": "Print Attendance Record"
+      }
+    },
+    "filter": {
+      "staff": "Staff Name",
+      "date": "Date Filter",
+      "month": "Month",
+      "year": "Year"
+    },
+    "table": {
+      "headers": {
+        "staff_code": "Staff Code",
+        "staff_name": "Staff Name",
+        "date": "Date",
+        "service_hours": "Service Hours",
+        "duration": "Duration",
+        "patient_name": "Patient Name",
+        "service_type": "Service Type",
+        "remarks": "Remarks"
+      },
+      "empty": "No records to show",
+      "totalWorkHours": "Total Hours",
+      "totalWorkDays": "Total Days"
+    }
   }
 }

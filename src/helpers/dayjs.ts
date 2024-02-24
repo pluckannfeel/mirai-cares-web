@@ -54,20 +54,24 @@ export const serviceHours = (start: Date | number, end: Date | number) => {
 };
 
 export const toJapaneseCalendar = (d: Date) => {
-  const date = dayjs(d).utc().locale("ja");
+  // Initialize dayjs with the input date, without converting to UTC
+  const date = dayjs(d).locale("ja");
+
+  // Use the local year for calculations, not the UTC year
   const gregorianYear = date.year();
   let japaneseYear = gregorianYear - 2018; // Subtract the start year of Reiwa era (2019) minus 1
   let era = "令和";
 
-  // Add conditions here if you need to support dates before 2019 (e.g., Heisei era)
+  // Adjust for dates before the Reiwa era
   if (gregorianYear < 2019) {
-    japaneseYear = gregorianYear - 1988; // Example for Heisei (starts from 1989)
+    japaneseYear = gregorianYear - 1988; // Example for Heisei, starting from 1989
     era = "平成";
   }
 
-  // return `${era}${japaneseYear}年${date.format("MM月DD日")}`;
+  // Format the date using the local time, not UTC
   return `${era}${japaneseYear}年${date.format("M月")}`;
 };
+
 
 export function formatDateToJapanese(date: Date | number) {
   // Define a mapping for Japanese day names
