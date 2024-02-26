@@ -32,7 +32,7 @@
           "legalBooks": {
             "label": "法定三帳簿",
             "children": {
-              "employeeList": "從業員名簿",
+              "employeeList": "労働者名簿",
               "attendanceRecord": "出勤簿",
               "wageLedger": "賃金台帳",
               "paymentDeductionList": "支給控除一覧表"
@@ -2132,7 +2132,8 @@
       "delete": "削除",
       "move": "移動",
       "download": "ダウンロード",
-      "replaceFile": "ファイルを置き換える"
+      "replaceFile": "ファイルを置き換える",
+      "rename": "名前を変更する"
     },
     "table": {
       "headers": {
@@ -2149,7 +2150,7 @@
         "title": "フォルダを作成する",
         "form": {
           "folderName": {
-            "label": "フォルダ名"
+            "label": "新フォルダ名"
           },
           "submit": "作成"
         },
@@ -2174,51 +2175,66 @@
         "form": {
           "submit": "削除"
         }
-      }
-    },
-    "notifications": {
-      "uploadSuccess": "ファイルがアップロードされました。",
-      "deleteSuccess": "ファイルが削除されました。",
-      "createFolderSuccess": "フォルダが作成されました。",
-      "replaceFileSuccess": "ファイルが置き換えられました。",
-      "error": {
-        "uploadError": "ファイルがアップロードされませんでした。管理者に連絡してください。",
-        "deleteError": "ファイルが削除されませんでした。管理者に連絡してください。",
-        "createFolderError": "フォルダが作成されませんでした。管理者に連絡してください。",
-        "replaceFileError": "ファイルが置き換えられませんでした、管理者に連絡してください。"
-      }
-    }
-  },
-  "attendanceRecord": {
-    "title": "出勤簿",
-    "actions": {
-      "filter": "フィルター",
-      "print": {
-        "description": "出勤簿を印刷してもよろしいですか？",
-        "label": "印刷",
-        "title": "出勤簿を印刷する"
-      }
-    },
-    "filter": {
-      "staff": "スタッフ名",
-      "date": "フィルター (日付)",
-      "month": "月",
-      "year": "年"
-    },
-    "table": {
-      "headers": {
-        "staff_code": "スタッフコード",
-        "staff_name": "スタッフ名",
-        "date": "日付",
-        "service_hours": "サービス提供時間",
-        "duration": "時間",
-        "patient_name": "利用者名",
-        "service_type": "サービス内容",
-        "remarks": "備考"
       },
-      "empty": "記録なし",
-      "totalWorkHours": "就労働時間",
-      "totalWorkDays": "出勤日数"
+      "renameFolder": {
+        "title": "フォルダ名を変更する",
+        "form": {
+          "folderName": {
+            "label": "フォルダ名"
+          },
+          "submit": "変更"
+        },
+        "error": {
+          "invalidFolderName": "無効なフォルダー名です。/ などの特殊文字は使用しないでください。",
+          "folderExists": "フォルダが既に存在します。"
+        }
+      },
+      "notifications": {
+        "uploadSuccess": "ファイルがアップロードされました。",
+        "deleteSuccess": "ファイルが削除されました。",
+        "createFolderSuccess": "フォルダが作成されました。",
+        "replaceFileSuccess": "ファイルが置き換えられました。",
+        "renameFolderSuccess": "フォルダが名前変更されました。",
+        "error": {
+          "uploadError": "ファイルがアップロードされませんでした。管理者に連絡してください。",
+          "deleteError": "ファイルが削除されませんでした。管理者に連絡してください。",
+          "createFolderError": "フォルダが作成されませんでした。管理者に連絡してください。",
+          "renameFolderError": "フォルダが名前変更されませんでした。管理者に連絡してください。",
+          "replaceFileError": "ファイルが置き換えられませんでした、管理者に連絡してください。"
+        }
+      }
+    },
+    "attendanceRecord": {
+      "title": "出勤簿",
+      "actions": {
+        "filter": "フィルター",
+        "print": {
+          "description": "出勤簿を印刷してもよろしいですか？",
+          "label": "印刷",
+          "title": "出勤簿を印刷する"
+        }
+      },
+      "filter": {
+        "staff": "スタッフ名",
+        "date": "フィルター (日付)",
+        "month": "月",
+        "year": "年"
+      },
+      "table": {
+        "headers": {
+          "staff_code": "スタッフコード",
+          "staff_name": "スタッフ名",
+          "date": "日付",
+          "service_hours": "サービス提供時間",
+          "duration": "時間",
+          "patient_name": "利用者名",
+          "service_type": "サービス内容",
+          "remarks": "備考"
+        },
+        "empty": "記録なし",
+        "totalWorkHours": "就労働時間",
+        "totalWorkDays": "出勤日数"
+      }
     }
   }
 }

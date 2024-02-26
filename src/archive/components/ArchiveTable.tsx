@@ -35,6 +35,7 @@ import {
   InsertDriveFile as InsertDriveFileIcon,
   DriveFileMove as DriveFileMoveIcon,
   Download as DownloadIcon,
+  DriveFileRenameOutline as DriveFileRenameOutlineIcon,
 } from "@mui/icons-material";
 
 import React, { useEffect, useState } from "react";
@@ -151,6 +152,7 @@ type ArchiveRowProps = {
   onCheck: (key: string) => void;
   onDelete: (keys: string[]) => void;
   onEdit?: (file: ArchiveFile) => void;
+  onRenameFolder: (fileKey: string, fileType: string) => void;
   onMove: (file: ArchiveFile) => void;
   onDownload: (file: ArchiveFile) => void;
   onFileClick: (fileKey: string, fileType: string) => void;
@@ -166,6 +168,7 @@ const ArchiveRow = ({
   onEdit,
   onMove,
   onDownload,
+  onRenameFolder,
   onFileClick,
   processing,
   selected,
@@ -197,6 +200,11 @@ const ArchiveRow = ({
   const handleDownload = () => {
     handleCloseActions();
     onDownload(file);
+  };
+
+  const handleRename = () => {
+    handleCloseActions();
+    onRenameFolder(file.key, file.type);
   };
 
   //   const handleEdit = () => {
@@ -377,12 +385,20 @@ const ArchiveRow = ({
             {t("common.edit")}
           </MenuItem> */}
           {/* {isFile(file.name) && ( */}
-            <MenuItem onClick={handleDownload}>
+          <MenuItem onClick={handleDownload}>
+            <ListItemIcon>
+              <DownloadIcon />
+            </ListItemIcon>{" "}
+            {t("archive.actions.download")}
+          </MenuItem>
+          {file.type === "folder" && (
+            <MenuItem onClick={handleRename}>
               <ListItemIcon>
-                <DownloadIcon />
+                <DriveFileRenameOutlineIcon />
               </ListItemIcon>{" "}
-              {t("archive.actions.download")}
+              {t("archive.actions.rename")}
             </MenuItem>
+          )}
           {/* )} */}
           {/* // to be added later */}
           {/* <MenuItem onClick={handleMove}>
@@ -412,7 +428,8 @@ const ArchiveRow = ({
         )}
       </TableCell>
       <TableCell align="right">
-        {formatLastModifiedby(file.type,
+        {formatLastModifiedby(
+          file.type,
           file.lastModifiedBy,
           i18n.language == "en" ? "en" : "ja"
         )}
@@ -429,6 +446,7 @@ type ArchiveTableProps = {
   onEdit?: (file: ArchiveFile) => void;
   onMove: (file: ArchiveFile) => void;
   onDownload: (file: ArchiveFile) => void;
+  onRenameFolder: (fileKey: string, fileType: string) => void;
   onSelectedChange: (selected: string[]) => void;
   onFileClick: (fileKey: string, fileType: string) => void; // Add this line
   selected: string[];
@@ -441,6 +459,7 @@ const ArchiveTable = ({
   onEdit,
   onMove,
   onDownload,
+  onRenameFolder,
   onSelectedChange,
   onFileClick,
   selected,
@@ -529,6 +548,7 @@ const ArchiveTable = ({
                     onEdit={onEdit}
                     onMove={onMove}
                     onDownload={onDownload}
+                    onRenameFolder={onRenameFolder}
                     onFileClick={onFileClick}
                     processing={processing}
                     selected={isSelected(file.key)}

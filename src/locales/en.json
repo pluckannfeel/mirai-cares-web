@@ -2111,7 +2111,8 @@
       "delete": "Delete",
       "download": "Download",
       "move": "Move",
-      "createFolder": "Create Folder"
+      "createFolder": "Create Folder",
+      "rename": "Rename"
     },
     "table": {
       "headers": {
@@ -2153,6 +2154,19 @@
         "form": {
           "submit": "Delete"
         }
+      },
+      "renameFolder": {
+        "title": "Rename Folder",
+        "form": {
+          "folderName": {
+            "label": "Folder Name"
+          },
+          "submit": "Rename"
+        },
+        "error": {
+          "invalidFolderName": "Invalid Folder Name, Avoid special characters such as /, etc.",
+          "folderExists": "Folder already exists."
+        }
       }
     },
     "notifications": {
@@ -2160,10 +2174,12 @@
       "deleteSuccess": "File has been deleted!",
       "createFolderSuccess": "Folder has been created!",
       "replaceFileSuccess": "File has been replaced!",
+      "renameFolderSuccess": "Folder has been renamed!",
       "error": {
         "uploadError": "Error uploading file, please contact system engineer.",
         "deleteError": "Error deleting file, please contact system engineer.",
         "createFolderError": "Error creating folder, please contact system engineer.",
+        "renameFolderError": "Error renaming folder, please contact system engineer.",
         "replaceFileError": "Error replacing file, please contact system engineer."
       }
     }

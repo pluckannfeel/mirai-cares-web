@@ -48,6 +48,8 @@ import { useAuth } from "../../auth/contexts/AuthProvider";
 import ConfirmDialog from "../../core/components/ConfirmDialog";
 import { useDeleteFiles } from "../hooks/useDeleteFiles";
 import { useDownloadFiles } from "../hooks/useDownloadFiles";
+import ArchiveRenameFolderDialog from "../components/ArchiveRenameFolderDialog";
+import { useRenameFolder } from "../hooks/useRenameFolder";
 
 const ArchiveManagement = () => {
   const { t } = useTranslation();
@@ -63,6 +65,9 @@ const ArchiveManagement = () => {
   const [openConfirmReplaceFileDialog, setOpenConfirmReplaceFileDialog] =
     useState(false);
   const [openAddFolderDialog, setOpenAddFolderDialog] = useState(false);
+
+  const [openRenameFolderDialog, setOpenRenameFolderDialog] = useState(false);
+  const [selectedRenameFolder, setSelectedRenameFolder] = useState<string>("");
   const [selected, setSelected] = useState<string[]>([]);
   const [filesDeleted, setFilesDeleted] = useState<string[]>([]);
   const [filesMoved, setFilesMoved] = useState<string[]>([]);
@@ -84,9 +89,12 @@ const ArchiveManagement = () => {
     refetch: reload,
   } = useCurrentDirectoryFiles(currentDirectory);
 
-  // add folder hook
+  // create folder hook
   const { createFolder: createS3Folder, isCreating: isCreatingFolder } =
     useCreateFolder();
+
+  // rename folder hook
+  const { renameFolder, isRenaming: isRenamingFolder } = useRenameFolder();
 
   // upload file hook
   const { uploadFile: uploadFileToS3Bucket, isUploading: isFileUploading } =
@@ -104,12 +112,6 @@ const ArchiveManagement = () => {
 
   const processing = isLoading;
 
-  // useEffect(() => {
-  //   if (uploadFileError) {
-  //     console.log(uploadFileError);
-  //   }
-  // }, [uploadFileError]);
-
   // ADD FOLDER TO S3 BUCKET CURRENT DIRECTORY
   const handleCreateFolder = (folderName: string) => {
     createS3Folder({
@@ -124,6 +126,14 @@ const ArchiveManagement = () => {
     // reload();
 
     snackbar.success(t("archive.notifications.createFolderSuccess"));
+  };
+
+  // RENAME FOLDER (this is from table click file event)
+  const handleRenameFolderEvent = (oldPath: string) => {
+    // set the rename folder selected state
+    setSelectedRenameFolder(oldPath);
+
+    handleOpenRenameFolderDialog();
   };
 
   const handleDeleteFiles = async () => {
@@ -192,6 +202,13 @@ const ArchiveManagement = () => {
     // console.log(currentDirectory);
     // open add folder dialog
     setOpenAddFolderDialog(true);
+  };
+
+  // rename folder
+  const handleOpenRenameFolderDialog = () => {
+    // console.log(currentDirectory);
+    // open add folder dialog
+    setOpenRenameFolderDialog(true);
   };
 
   // upload file
@@ -271,6 +288,25 @@ const ArchiveManagement = () => {
       link.click();
       document.body.removeChild(link);
     });
+  };
+
+  // rename folder hook
+  const handleRenameFolder = (oldPathKey: string, newPathKey: string) => {
+    // console.log(newPathKey);
+    renameFolder({
+      oldPath: oldPathKey,
+      newPath: newPathKey,
+      userName: `${userInfo?.first_name} ${userInfo?.last_name} (${userInfo?.email})`,
+    })
+      .then((response) => {
+        snackbar.success(t("archive.notifications.renameFolderSuccess"));
+      })
+      .catch((error) => {
+        snackbar.error(t("archive.notifications.error.renameFolderError"));
+      });
+    setOpenRenameFolderDialog(false);
+    // if success, reload
+    // reload();
   };
 
   const handleDownloadMultipleSelectedFiles = () => {
@@ -483,6 +519,7 @@ const ArchiveManagement = () => {
       <ArchiveTable
         processing={processing}
         onDownload={handleDownloadFile}
+        onRenameFolder={handleRenameFolderEvent}
         onMove={handleMoveFile}
         onDelete={handleOpenConfirmDeleteDialog}
         // onEdit={handleOpenFileUploadDialog}
@@ -500,6 +537,18 @@ const ArchiveManagement = () => {
           files={currentDirectoryFiles?.files || []}
           onCreateFolder={handleCreateFolder}
           currentPath={currentDirectory}
+        />
+      )}
+
+      {openRenameFolderDialog && (
+        <ArchiveRenameFolderDialog
+          open={openRenameFolderDialog}
+          onClose={() => setOpenRenameFolderDialog(false)}
+          processing={isRenamingFolder}
+          files={currentDirectoryFiles?.files || []}
+          onRenameFolder={handleRenameFolder}
+          currentPath={currentDirectory}
+          oldFolderPath={selectedRenameFolder}
         />
       )}
 
