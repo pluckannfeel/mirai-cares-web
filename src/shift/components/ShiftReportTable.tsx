@@ -24,7 +24,7 @@ import Empty from "../../core/components/Empty";
 import * as selectUtils from "../../core/utils/selectUtils";
 import { ShiftReport } from "../../shift/types/shiftReport";
 // import { format } from "date-fns-tz";
-import { enUS, ja } from "date-fns/locale";
+// import { enUS, ja } from "date-fns/locale";
 import { formatDateWithDayjs } from "../../helpers/dayjs";
 
 interface HeadCell {
