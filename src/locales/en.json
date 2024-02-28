@@ -409,8 +409,8 @@
   "notifications": {
     "newComment": "<bold>{{user}}</bold> has written a new comment on your profile",
     "unreadMessages": "You have <bold>{{quantity}}</bold> unread messages",
-    "leaveRequest": "<bold>{{staff.japanese_name}}</bold> has requested for a leave",
-    "updateLeaveRequest": "<bold>{{user}}</bold> updated <bold>{{staff.japanese_name}}</bold>'s leave request"
+    "leaveRequest": "<bold>{{staff}}</bold> has requested for a leave",
+    "updateLeaveRequest": "<bold>{{user}}</bold> updated <bold>{{staff}}</bold>'s leave request"
   },
   "profile": {
     "activity": {
@@ -1033,9 +1033,9 @@
   },
   "staffManagement": {
     "notifications": {
-      "addSuccess": "{{staff.name}}  has been added!",
+      "addSuccess": "{{staff}}  has been added!",
       "deleteSuccess": "A staff has been deleted!",
-      "updateSuccess": "{{staff.name}} has been updated!"
+      "updateSuccess": "{{staff}} has been updated!"
     },
     "generateContract": {
       "title": "Generate Contract"

@@ -130,7 +130,7 @@ const StaffTab = () => {
       .then((staff: Staff) => {
         snackbar.success(
           t("staffManagement.notifications.addSuccess", {
-            employee: `${staff?.japanese_name}`,
+            staff: `${staff?.japanese_name}`,
           })
         );
         // setOpenEmpDialog(false);

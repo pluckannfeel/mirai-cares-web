@@ -4,6 +4,10 @@ import { useTranslation } from "react-i18next";
 import * as Yup from "yup";
 import { MedicalInstitution } from "../types/MedicalInstitution";
 
+import dayjs, { Dayjs } from "dayjs";
+import utc from "dayjs/plugin/utc";
+dayjs.extend(utc);
+
 // import { useSnackbar } from "../../core/contexts/SnackbarProvider";
 import {
   Grid,
@@ -21,7 +25,8 @@ import {
   InputLabel,
   Select,
 } from "@mui/material";
-import { DatePicker, LoadingButton } from "@mui/lab";
+import { LoadingButton } from "@mui/lab";
+import { DatePicker } from "@mui/x-date-pickers";
 import { calculateAge } from "../../patients/helpers/functions";
 import { mi_licenses } from "../helpers/helper";
 
@@ -215,27 +220,21 @@ MedicalInstitutionDialogProps) => {
                     label={t(
                       "medicalInstitutionManagement.form.physician_birth_date.label"
                     )}
-                    inputFormat="yyyy/MM/dd"
-                    value={
-                      formik.values.physician_birth_date
-                        ? new Date(formik.values.physician_birth_date)
-                        : null
-                    }
-                    onChange={(date: Date | null) => {
-                      formik.setFieldValue("physician_birth_date", date);
-                      formik.setFieldValue("physician_age", calculateAge(date));
+                    slotProps={{
+                      textField: {
+                        margin: "dense",
+                        size: "small",
+                      },
                     }}
-                    renderInput={(params: any) => (
-                      <TextField
-                        size="small"
-                        {...params}
-                        id="physician_birth_date"
-                        disabled={processing}
-                        fullWidth
-                        margin="dense"
-                        name="physician_birth_date"
-                      />
-                    )}
+                    format="YYYY/MM/DD"
+                    value={dayjs.utc(formik.values.physician_birth_date)}
+                    onChange={(date: Dayjs | null) => {
+                      formik.setFieldValue("physician_birth_date", date);
+                      formik.setFieldValue(
+                        "physician_age",
+                        calculateAge(dayjs.utc(date).toDate())
+                      );
+                    }}
                   />
                 </Grid>
                 <Grid item xs={2}>
@@ -438,26 +437,17 @@ MedicalInstitutionDialogProps) => {
                     label={t(
                       "medicalInstitutionManagement.form.date_obtained.label"
                     )}
-                    inputFormat="yyyy/MM/dd"
-                    value={
-                      formik.values.date_obtained
-                        ? new Date(formik.values.date_obtained)
-                        : null
-                    }
-                    onChange={(date: Date | null) => {
+                    value={dayjs.utc(formik.values.date_obtained)}
+                    onChange={(date: Dayjs | null) => {
                       formik.setFieldValue("date_obtained", date);
                     }}
-                    renderInput={(params: any) => (
-                      <TextField
-                        size="small"
-                        {...params}
-                        id="physician_birth_date"
-                        disabled={processing}
-                        fullWidth
-                        margin="dense"
-                        name="physician_birth_date"
-                      />
-                    )}
+                    slotProps={{
+                      textField: {
+                        margin: "dense",
+                        size: "small",
+                      },
+                    }}
+                    format="YYYY/MM/DD"
                   />
                 </Grid>
               </Grid>

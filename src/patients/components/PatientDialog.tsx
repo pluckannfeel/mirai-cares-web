@@ -21,7 +21,11 @@ import { useTranslation } from "react-i18next";
 import * as Yup from "yup";
 import { Instructions, Patient } from "../types/patient";
 
-import { DatePicker } from "@mui/lab";
+import dayjs, { Dayjs } from "dayjs";
+import utc from "dayjs/plugin/utc";
+dayjs.extend(utc);
+
+import { DatePicker } from "@mui/x-date-pickers";
 import {
   disable_support_categories,
   genders,
@@ -90,10 +94,15 @@ const PatientDialog = ({
   const { data: postalCodes } = usePostalCodes();
 
   const handleSubmit = (values: Partial<Patient>) => {
+    const finalValues = {
+      ...values,
+      birth_date: dayjs.utc(values.birth_date).toDate(),
+    } as Partial<Patient>;
+
     if (patient && patient.id) {
-      onUpdate({ ...values, id: patient.id } as Patient, patient.id);
+      onUpdate({ ...finalValues, id: patient.id } as Patient, patient.id);
     } else {
-      onAdd(values);
+      onAdd({ ...finalValues });
     }
   };
 
@@ -101,7 +110,7 @@ const PatientDialog = ({
     initialValues: {
       name_kanji: patient ? patient.name_kanji : "",
       name_kana: patient ? patient.name_kana : "",
-      birth_date: patient ? patient.birth_date : null,
+      birth_date: patient ? patient.birth_date : dayjs().toDate(),
       age: patient ? patient.age : "",
       gender: patient ? patient.gender : "",
       disable_support_category: patient ? patient.disable_support_category : "",
@@ -366,23 +375,21 @@ const PatientDialog = ({
                 <Grid item xs={4}>
                   <DatePicker
                     label={t("patientManagement.form.birth_date.label")}
-                    inputFormat="yyyy/MM/dd"
-                    value={formik.values.birth_date}
-                    onChange={(date: Date | null) => {
+                    value={dayjs.utc(formik.values.birth_date)}
+                    onChange={(date: Dayjs | null) => {
                       formik.setFieldValue("birth_date", date);
-                      formik.setFieldValue("age", calculateAge(date));
+                      formik.setFieldValue(
+                        "age",
+                        calculateAge(dayjs.utc(date).toDate())
+                      );
                     }}
-                    renderInput={(params: any) => (
-                      <TextField
-                        size="small"
-                        {...params}
-                        id="birth_date"
-                        disabled={processing}
-                        fullWidth
-                        margin="dense"
-                        name="birth_date"
-                      />
-                    )}
+                    slotProps={{
+                      textField: {
+                        margin: "dense",
+                        size: "small",
+                      },
+                    }}
+                    format="YYYY/MM/DD"
                   />
                 </Grid>
 

@@ -35,6 +35,7 @@ import {
   trimStringWithEllipsis,
 } from "../../staff/helpers/functions";
 import dayjs from "dayjs";
+import ShiftTimelineView from "./StaffShiftTimelineView";
 
 const StyledWrapper = styled("div")(
   ({ theme }) => `
@@ -121,10 +122,6 @@ const SWSCalendar = ({
   };
 
   const handleNext = () => {
-    // if (calendarRef) {
-    //   calendarRef.getApi().next();
-    //   setViewTitle(calendarRef.getApi().getCurrentData().viewTitle);
-    // }
     if (calendarRef) {
       calendarRef.getApi().next();
       setViewTitle(calendarRef.getApi().view.title);
@@ -145,32 +142,30 @@ const SWSCalendar = ({
     }
   };
 
-  const handleMonthView = () => {
-    if (calendarRef) {
-      calendarRef.getApi().changeView("dayGridMonth");
-      setViewTitle(calendarRef.getApi().view.title);
-    }
-  };
-
-  const handleWeekView = () => {
-    if (calendarRef) {
-      calendarRef.getApi().changeView("dayGridWeek");
-      setViewTitle(calendarRef.getApi().view.title);
-    }
-  };
-
-  const handleDayView = () => {
-    if (calendarRef) {
-      calendarRef.getApi().changeView("listWeek");
-      setViewTitle(calendarRef.getApi().view.title);
-    }
-  };
-
   useEffect(() => {
     if (calendarRef) {
       setViewTitle(calendarRef.getApi().view.title);
+
+      // timeline view
     }
-  }, [calendarRef]);
+  }, [calendarRef, schedule]);
+
+  const handleViewChange = (viewType: string) => {
+    // Generic handler for changing views
+    // if (viewType === "day") {
+    //   // setCustomTimelineView(true);
+    // } else {
+    // }
+    if (calendarRef) {
+      calendarRef.getApi().changeView(viewType);
+      setViewTitle(calendarRef.getApi().view.title);
+    }
+  };
+
+  const handleMonthView = () => handleViewChange("dayGridMonth");
+  const handleWeekView = () => handleViewChange("dayGridWeek");
+  const handleListView = () => handleViewChange("listMonth"); // Adjust to your specific day view
+
 
   const scheduleSource = useMemo(() => {
     return schedule.map((schedule: StaffWorkSchedule) => {
@@ -238,16 +233,21 @@ const SWSCalendar = ({
             <Button onClick={handleMonthView}>
               {t("calendar.buttons.month")}
             </Button>
+
             <Button onClick={handleWeekView}>
               {t("calendar.buttons.week")}
             </Button>
-            <Button onClick={handleDayView}>
+            <Button onClick={handleListView}>
               {t("calendar.buttons.list")}
             </Button>
+            {/* <Button onClick={handleListView}>
+              {t("calendar.buttons.day")}
+            </Button> */}
           </ButtonGroup>
         </Box>
       </Box>
       {/* End - Custom Header Bar */}
+
       <StyledWrapper>
         <FullCalendar
           // contentHeight={800}

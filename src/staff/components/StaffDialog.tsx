@@ -21,8 +21,8 @@ import {
 import ClickableAvatar from "../../core/components/ClickableAvatar";
 import { useState } from "react";
 import { duty_types, genders } from "../helpers/helper";
-import { DatePicker, LoadingButton } from "@mui/lab";
-// import { DesktopTimePicker } from "@mui/x-date-pickers";
+import { LoadingButton } from "@mui/lab";
+import { DatePicker } from "@mui/x-date-pickers";
 import SelectAddField from "../../core/components/SelectAddField";
 import {
   filterMunicipalitiesByPrefecture,
@@ -38,6 +38,9 @@ import { useMunicipalities } from "../hooks/useAddressMunicipalities";
 import { usePostalCodes } from "../hooks/useAddressPostalCode";
 import { PostalCode } from "../types/address";
 import ImageFileMenu from "../../core/components/ImageFileMenu";
+import dayjs, { Dayjs } from "dayjs";
+import utc from "dayjs/plugin/utc";
+dayjs.extend(utc);
 
 type StaffDialogProps = {
   onAdd: (
@@ -183,10 +186,38 @@ const StaffDialog = ({
       ),
     }),
     onSubmit: (values: Partial<Staff>) => {
+      const finalValues = {
+        ...values,
+        birth_date: dayjs.utc(values.birth_date).toDate(),
+        join_date: dayjs.utc(values.join_date).toDate(),
+        leave_date: dayjs.utc(values.leave_date).toDate(),
+        residence_card_details: {
+          ...values.residence_card_details,
+          issue_date: dayjs
+            .utc(values.residence_card_details?.issue_date)
+            .toDate(),
+          expiry_date: dayjs
+            .utc(values.residence_card_details?.expiry_date)
+            .toDate(),
+        },
+        passport_details: {
+          ...values.passport_details,
+          issue_date: dayjs.utc(values.passport_details?.issue_date).toDate(),
+          expiry_date: dayjs.utc(values.passport_details?.expiry_date).toDate(),
+        },
+      } as Partial<Staff>;
+
+      // console.log(finalValues);
+
       if (staff_id) {
-        onUpdate(values, imageFile, staff_id, values.licenses as Licenses[]);
+        onUpdate(
+          finalValues,
+          imageFile,
+          staff_id,
+          values.licenses as Licenses[]
+        );
       } else {
-        onAdd(values, imageFile, values.licenses as Licenses[]);
+        onAdd(finalValues, imageFile, values.licenses as Licenses[]);
       }
     },
   });
@@ -560,26 +591,19 @@ const StaffDialog = ({
                 </Grid>
                 <Grid item xs={4}>
                   <DatePicker
+                    slotProps={{
+                      textField: {
+                        margin: "dense",
+                        size: "small",
+                      },
+                    }}
+                    format="YYYY/MM/DD"
                     label={t("staffManagement.form.birth_date.label")}
-                    inputFormat="yyyy/MM/dd"
-                    value={
-                      formik.values.birth_date ? formik.values.birth_date : null
-                    }
-                    onChange={(date: Date | null) => {
+                    value={dayjs.utc(formik.values.birth_date)}
+                    onChange={(date: Dayjs | null) => {
                       formik.setFieldValue("birth_date", date);
                       //   formik.setFieldValue("age", calculateAge(date!));
                     }}
-                    renderInput={(params: any) => (
-                      <TextField
-                        size="small"
-                        {...params}
-                        id="birth_date"
-                        disabled={processing}
-                        fullWidth
-                        margin="dense"
-                        name="birth_date"
-                      />
-                    )}
                   />
                 </Grid>
               </Grid>
@@ -598,49 +622,33 @@ const StaffDialog = ({
                 <Grid item xs={6}>
                   <DatePicker
                     label={t("staffManagement.form.join_date.label")}
-                    inputFormat="yyyy/MM/dd"
-                    value={
-                      formik.values.join_date ? formik.values.join_date : null
-                    }
-                    onChange={(date: Date | null) => {
-                      formik.setFieldValue("join_date", date);
-                      //   formik.setFieldValue("age", calculateAge(date!));
+                    slotProps={{
+                      textField: {
+                        margin: "dense",
+                        size: "small",
+                      },
                     }}
-                    renderInput={(params: any) => (
-                      <TextField
-                        size="small"
-                        {...params}
-                        id="join_date"
-                        disabled={processing}
-                        fullWidth
-                        margin="dense"
-                        name="join_date"
-                      />
-                    )}
+                    format="YYYY/MM/DD"
+                    value={dayjs.utc(formik.values.join_date)}
+                    onChange={(date: Dayjs | null) => {
+                      formik.setFieldValue("join_date", date);
+                    }}
                   />
                 </Grid>
                 <Grid item xs={6}>
                   <DatePicker
                     label={t("staffManagement.form.leave_date.label")}
-                    inputFormat="yyyy/MM/dd"
-                    value={
-                      formik.values.leave_date ? formik.values.leave_date : null
-                    }
-                    onChange={(date: Date | null) => {
-                      formik.setFieldValue("leave_date", date);
-                      //   formik.setFieldValue("age", calculateAge(date!));
+                    slotProps={{
+                      textField: {
+                        margin: "dense",
+                        size: "small",
+                      },
                     }}
-                    renderInput={(params: any) => (
-                      <TextField
-                        size="small"
-                        {...params}
-                        id="leave_date"
-                        disabled={processing}
-                        fullWidth
-                        margin="dense"
-                        name="leave_date"
-                      />
-                    )}
+                    format="YYYY/MM/DD"
+                    value={dayjs.utc(formik.values.leave_date)}
+                    onChange={(date: Dayjs | null) => {
+                      formik.setFieldValue("leave_date", date);
+                    }}
                   />
                 </Grid>
               </Grid>
@@ -1347,32 +1355,23 @@ const StaffDialog = ({
                         label={t(
                           "staffManagement.form.passport_issue_date.label"
                         )}
-                        inputFormat="yyyy/MM/dd"
-                        value={
+                        slotProps={{
+                          textField: {
+                            margin: "dense",
+                            size: "small",
+                          },
+                        }}
+                        format="YYYY/MM/DD"
+                        value={dayjs.utc(
                           formik.values.residence_card_details?.issue_date
-                            ? new Date(
-                                formik.values.residence_card_details?.issue_date
-                              )
-                            : null
-                        }
-                        onChange={(date: Date | null) => {
+                        )}
+                        onChange={(date: Dayjs | null) => {
                           // set residence_card_details issue_date
                           formik.setFieldValue(
                             `residence_card_details.issue_date`,
                             date
                           );
                         }}
-                        renderInput={(params: any) => (
-                          <TextField
-                            size="small"
-                            {...params}
-                            id="residence_card_details_issue_date"
-                            disabled={processing}
-                            fullWidth
-                            margin="dense"
-                            name={`residence_card_details.issue_date`}
-                          />
-                        )}
                       />
                     </Grid>
                     <Grid item xs={4}>
@@ -1380,32 +1379,23 @@ const StaffDialog = ({
                         label={t(
                           "staffManagement.form.passport_expiry_date.label"
                         )}
-                        inputFormat="yyyy/MM/dd"
-                        value={
+                        slotProps={{
+                          textField: {
+                            margin: "dense",
+                            size: "small",
+                          },
+                        }}
+                        format="YYYY/MM/DD"
+                        value={dayjs.utc(
                           formik.values.residence_card_details?.expiry_date
-                            ? new Date(
-                                formik.values.residence_card_details?.expiry_date
-                              )
-                            : null
-                        }
-                        onChange={(date: Date | null) => {
+                        )}
+                        onChange={(date: Dayjs | null) => {
                           // set residence_card_details expiry_date
                           formik.setFieldValue(
                             `residence_card_details.expiry_date`,
                             date
                           );
                         }}
-                        renderInput={(params: any) => (
-                          <TextField
-                            size="small"
-                            {...params}
-                            id="residence_card_details_expiry_date"
-                            disabled={processing}
-                            fullWidth
-                            margin="dense"
-                            name={`residence_card_details.expiry_date`}
-                          />
-                        )}
                       />
                     </Grid>
                   </Grid>
@@ -1511,32 +1501,23 @@ const StaffDialog = ({
                         label={t(
                           "staffManagement.form.passport_issue_date.label"
                         )}
-                        inputFormat="yyyy/MM/dd"
-                        value={
+                        slotProps={{
+                          textField: {
+                            margin: "dense",
+                            size: "small",
+                          },
+                        }}
+                        format="YYYY/MM/DD"
+                        value={dayjs.utc(
                           formik.values.passport_details?.issue_date
-                            ? new Date(
-                                formik.values.passport_details?.issue_date
-                              )
-                            : null
-                        }
-                        onChange={(date: Date | null) => {
+                        )}
+                        onChange={(date: Dayjs | null) => {
                           // set passport_details issue_date
                           formik.setFieldValue(
                             `passport_details.issue_date`,
                             date
                           );
                         }}
-                        renderInput={(params: any) => (
-                          <TextField
-                            size="small"
-                            {...params}
-                            id="passport_details_issue_date"
-                            disabled={processing}
-                            fullWidth
-                            margin="dense"
-                            name={`passport_details.issue_date`}
-                          />
-                        )}
                       />
                     </Grid>
                     <Grid item xs={6}>
@@ -1544,32 +1525,23 @@ const StaffDialog = ({
                         label={t(
                           "staffManagement.form.passport_expiry_date.label"
                         )}
-                        inputFormat="yyyy/MM/dd"
-                        value={
+                        slotProps={{
+                          textField: {
+                            margin: "dense",
+                            size: "small",
+                          },
+                        }}
+                        format="YYYY/MM/DD"
+                        value={dayjs.utc(
                           formik.values.passport_details?.expiry_date
-                            ? new Date(
-                                formik.values.passport_details?.expiry_date
-                              )
-                            : null
-                        }
-                        onChange={(date: Date | null) => {
+                        )}
+                        onChange={(date: Dayjs | null) => {
                           // set passport_details expiry_date
                           formik.setFieldValue(
                             `passport_details.expiry_date`,
                             date
                           );
                         }}
-                        renderInput={(params: any) => (
-                          <TextField
-                            size="small"
-                            {...params}
-                            id="passport_details_expiry_date"
-                            disabled={processing}
-                            fullWidth
-                            margin="dense"
-                            name={`passport_details.expiry_date`}
-                          />
-                        )}
                       />
                     </Grid>
                   </Grid>
@@ -1650,34 +1622,40 @@ const StaffDialog = ({
                               label={t(
                                 "staffManagement.form.licenses.object.license_date"
                               )}
-                              inputFormat="yyyy/MM/dd"
-                              value={license.date}
-                              onChange={(date: string | null) => {
+                              value={dayjs.utc(license.date)}
+                              onChange={(date: Dayjs | string | null) => {
                                 formik.setFieldValue(
                                   `licenses[${index}].date`,
-                                  date
+                                  dayjs.utc(date)
                                 );
                               }}
-                              renderInput={(params: any) => (
-                                <TextField
-                                  size="small"
-                                  {...params}
-                                  id="license_date"
-                                  disabled={processing}
-                                  fullWidth
-                                  margin="dense"
-                                  // type="date"
-                                  name={`licenses[${index}].date`}
-                                  error={
-                                    formik.touched.licenses &&
-                                    Boolean(formik.errors.licenses)
-                                  }
-                                  helperText={
-                                    formik.touched.licenses &&
-                                    formik.errors.licenses
-                                  }
-                                />
-                              )}
+                              slotProps={{
+                                textField: {
+                                  margin: "dense",
+                                  size: "small",
+                                },
+                              }}
+                              format="YYYY/MM/DD"
+                              // renderInput={(params: any) => (
+                              //   <TextField
+                              //     size="small"
+                              //     {...params}
+                              //     id="license_date"
+                              //     disabled={processing}
+                              //     fullWidth
+                              //     margin="dense"
+                              //     // type="date"
+                              //     name={`licenses[${index}].date`}
+                              //     error={
+                              //       formik.touched.licenses &&
+                              //       Boolean(formik.errors.licenses)
+                              //     }
+                              //     helperText={
+                              //       formik.touched.licenses &&
+                              //       formik.errors.licenses
+                              //     }
+                              //   />
+                              // )}
                             />
                           </Grid>
 

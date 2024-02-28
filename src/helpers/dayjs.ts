@@ -6,17 +6,7 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import relativeTime from "dayjs/plugin/relativeTime";
-import "dayjs/locale/es"; // Import Spanish locale
 import "dayjs/locale/ja";
-
-export const formatDateWithDayjs = (
-  date: Date,
-  format: string,
-  locale: string
-) => {
-  dayjs.locale(locale); // Set the locale
-  return dayjs(date).format(format);
-};
 
 // Extend Day.js with the plugins
 dayjs.extend(utc);
@@ -26,6 +16,17 @@ dayjs.extend(localizedFormat);
 dayjs.extend(isSameOrAfter);
 dayjs.extend(isSameOrBefore);
 dayjs.extend(relativeTime);
+
+export const DayJS = dayjs;
+
+export const formatDateWithDayjs = (
+  date: Date,
+  format: string,
+  locale: string
+) => {
+  dayjs.locale(locale); // Set the locale
+  return dayjs(date).format(format);
+};
 
 // Function to convert a date to a specific timezone
 export function toZonedTime(
@@ -71,7 +72,6 @@ export const toJapaneseCalendar = (d: Date) => {
   // Format the date using the local time, not UTC
   return `${era}${japaneseYear}年${date.format("M月")}`;
 };
-
 
 export function formatDateToJapanese(date: Date | number) {
   // Define a mapping for Japanese day names
@@ -132,8 +132,8 @@ export function formatLastModified(lastModified: string, locale = "en") {
   dayjs.locale(locale);
 
   // Convert the lastModified date to UTC, then to Japan time by adding 9 hours
-  const modifiedDate = dayjs.utc(lastModified).add(9, 'hour');
-  const now = dayjs().utc().add(9, 'hour'); // Assuming 'now' is also in Japan time for comparison
+  const modifiedDate = dayjs.utc(lastModified).add(9, "hour");
+  const now = dayjs().utc().add(9, "hour"); // Assuming 'now' is also in Japan time for comparison
 
   const diffInDays = now.diff(modifiedDate, "day");
   const diffInMinutes = now.diff(modifiedDate, "minute");
@@ -143,7 +143,7 @@ export function formatLastModified(lastModified: string, locale = "en") {
   }
 
   if (diffInMinutes < 60) {
-    return dayjs().utc().add(9, 'hour').to(modifiedDate); // Use Japan time
+    return dayjs().utc().add(9, "hour").to(modifiedDate); // Use Japan time
   }
 
   if (diffInDays === 0) {
@@ -157,7 +157,7 @@ export function formatLastModified(lastModified: string, locale = "en") {
   }
 
   if (diffInDays <= 30) {
-    return dayjs().utc().add(9, 'hour').to(modifiedDate); // Use Japan time
+    return dayjs().utc().add(9, "hour").to(modifiedDate); // Use Japan time
   }
 
   // For dates older than 30 days, return the date in the format yyyy/mm/dd

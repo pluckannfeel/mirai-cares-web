@@ -46,6 +46,7 @@ import ShiftReportDialog from "../components/ShiftReportDialog";
 import PrintDialog from "../components/PrintDialog";
 import { PrintStaffReport, PrintStaffShift } from "../types/PrintInformation";
 import { useAuth } from "../../auth/contexts/AuthProvider";
+import ShiftTimeline from "../components/StaffShiftTimelineView";
 
 const Shift = () => {
   const snackbar = useSnackbar();
@@ -401,10 +402,14 @@ const Shift = () => {
         <ToggleButton value="workSchedule">
           {t("staffWorkSchedule.menuTabs.shift")}
         </ToggleButton>
+        <ToggleButton value="timeline">
+          {t("staffWorkSchedule.menuTabs.timelineView")}
+        </ToggleButton>
         <ToggleButton value="report">
           {t("staffWorkSchedule.menuTabs.reports")}
         </ToggleButton>
       </ToggleButtonGroup>
+
       <Card
         sx={{
           marginTop: 2,
@@ -412,324 +417,327 @@ const Shift = () => {
       >
         {/* we use Ref here to load all staff to select which staff schedule to load */}
         {/* <Box
-          sx={{
-            marginTop: 1,
-            padding: 2,
-            paddingBottom: 1,
-            width: 420,
-          }}
-        > */}
-
-        <Grid
-          container
-          // margin={2.5}
-          padding={2.5}
-          marginBottom={0}
-          spacing={0}
-          paddingBottom={0}
-        >
-          <Grid item xs={12} sm={5} md={3} xl={2}>
-            <FormControl component="fieldset" margin="normal">
-              <FormLabel
-                component="legend"
-                sx={{
-                  fontSize: 18,
-                  fontWeight: 600,
-                }}
-              >
-                {t("staffWorkSchedule.calendarViews.label")}
-              </FormLabel>
-              <RadioGroup
-                row
-                aria-label="calendar_view"
-                name="calendar_view"
-                value={viewType}
-                onChange={(e) => {
-                  setWorkSchedules([]);
-                  setShiftReports([]);
-
-                  setViewType(e.target.value as "patient" | "staff");
-
-                  setPatientSelect("");
-                  setStaffSelect("");
-                  // clear the patient and staff select
-                }}
-              >
-                {calendarViews.map((option) => (
-                  <FormControlLabel
-                    control={<Radio />}
-                    key={option.value}
-                    label={t(option.label)}
-                    value={option.value}
-                  />
-                ))}
-              </RadioGroup>
-            </FormControl>
-          </Grid>
-
-          <Grid
-            item
-            xs={12}
-            sm={3}
-            md={3}
-            xl={2}
-            sx={{ marginTop: { xs: 1, sm: 2.5 } }}
-          >
-            {/* Your existing Autocomplete component */}
-            {viewType === "staff" ? (
-              <Autocomplete
-                // fullWidth
-                freeSolo
-                id="staff-select"
-                options={[
-                  {
-                    id: "all",
-                    english_name: "All",
-                    japanese_name: "全員",
-                  },
-                  ...(Array.isArray(staffSelection) ? staffSelection : []),
-                ]}
-                // getOptionLabel={(option: StaffScheduleSelect) => {
-                //   const name =
-                //     i18n.language === "en"
-                //       ? option.english_name
-                //       : option.japanese_name;
-                //   return name;
-                // }}
-                getOptionLabel={(option: string | StaffScheduleSelect) => {
-                  // Check if the option is a string
-                  if (typeof option === "string") {
-                    return option;
-                  }
-
-                  // If option is a StaffScheduleSelect, process it
-                  const name =
-                    i18n.language === "en"
-                      ? option.english_name
-                      : option.japanese_name;
-                  return name;
-                }}
-                value={staffSelect}
-                onChange={(_, newValue) => {
-                  setStaffSelect(newValue as StaffScheduleSelect);
-
-                  const val = newValue as StaffScheduleSelect;
-
-                  if (view === "workSchedule") {
-                    setIsAllStaffSelected(val?.id === "all");
-                  } else {
-                    setIsAllStaffSelected(false);
-                  }
-
-                  if (
-                    initialWorkSchedule &&
-                    newValue &&
-                    view === "workSchedule"
-                  ) {
-                    if (val.id === "all") {
-                      setWorkSchedules(initialWorkSchedule);
-                      return;
-                    }
-
-                    const filteredWorkSchedule = initialWorkSchedule.filter(
-                      (schedule) => {
-                        // Remove standard and Japanese spaces from schedule.staff
-                        const normalizedStaffName = schedule.staff
-                          .replace(/[\s\u3000]+/g, "")
-                          .toLowerCase();
-
-                        // Remove standard and Japanese spaces from staffSelect.japanese_name
-                        const normalizedSelectedName = val.japanese_name
-                          .replace(/[\s\u3000]+/g, "")
-                          .toLowerCase();
-
-                        if (
-                          normalizedStaffName.includes(normalizedSelectedName)
-                        ) {
-                          // Add gender property to the schedule object directly from staffSelect
-                          schedule.gender = val.gender;
-                          return true;
-                        }
-
-                        return false;
-                      }
-                    );
-                    setWorkSchedules(filteredWorkSchedule);
-                  } else {
-                    setWorkSchedules([]);
-                  }
-
-                  // Shift report
-                  if (initialShiftReports && newValue && view === "report") {
-                    if (val.id === "all") {
-                      setShiftReports(initialShiftReports);
-                      return;
-                    }
-
-                    const filteredShiftReports = initialShiftReports.filter(
-                      (report) => {
-                        // Remove standard and Japanese spaces from schedule.staff
-                        const normalizedStaffName = report.shift.staff
-                          .replace(/[\s\u3000]+/g, "")
-                          .toLowerCase();
-
-                        // Remove standard and Japanese spaces from staffSelect.japanese_name
-                        const normalizedSelectedName = val.japanese_name
-                          .replace(/[\s\u3000]+/g, "")
-                          .toLowerCase();
-
-                        return normalizedStaffName.includes(
-                          normalizedSelectedName
-                        );
-                      }
-                    );
-
-                    setShiftReports(filteredShiftReports);
-                  } else {
-                    setShiftReports([]);
-                  }
-                }}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label={t(
-                      "staffWorkSchedule.autoCompleteField.searchStaff.label"
-                    )}
-                  />
-                )}
-              />
-            ) : (
-              <Autocomplete
-                // fullWidth
-                freeSolo
-                id="patient-select"
-                options={patientSelection || []}
-                // getOptionLabel={(option: PatientSelect) => {
-                //   const name =
-                //     i18n.language === "en"
-                //       ? option.name_kana
-                //       : option.name_kanji;
-                //   return name;
-                // }}
-                getOptionLabel={(option: string | PatientSelect) => {
-                  if (typeof option === "string") {
-                    return option;
-                  }
-
-                  const name =
-                    i18n.language === "en"
-                      ? option.name_kana
-                      : option.name_kanji;
-
-                  return name;
-                }}
-                value={patientSelect}
-                onChange={(_, newValue) => {
-                  setPatientSelect(newValue as PatientSelect);
-
-                  const val = newValue as PatientSelect;
-
-                  if (
-                    initialWorkSchedule &&
-                    newValue &&
-                    view === "workSchedule"
-                  ) {
-                    const normalizeString = (str: string) =>
-                      str && str.normalize("NFKC").replace(/\s/g, "");
-
-                    const filteredWorkSchedule = initialWorkSchedule.filter(
-                      (schedule) => {
-                        const schedulePatientName = normalizeString(
-                          schedule.patient
-                        );
-                        const selectedPatientName = normalizeString(
-                          val.name_kanji
-                        );
-                        return schedulePatientName === selectedPatientName;
-                      }
-                    );
-
-                    setWorkSchedules(filteredWorkSchedule);
-                  } else {
-                    setWorkSchedules([]);
-                  }
-
-                  if (initialShiftReports && newValue && view === "report") {
-                    const normalizeString = (str: string) =>
-                      str && str.normalize("NFKC").replace(/\s/g, "");
-
-                    const filteredShiftReports = initialShiftReports.filter(
-                      (report) => {
-                        const reportPatientName = normalizeString(
-                          report.patient
-                        );
-                        const selectedPatientName = normalizeString(
-                          val.name_kanji
-                        );
-                        return reportPatientName === selectedPatientName;
-                      }
-                    );
-
-                    setShiftReports(filteredShiftReports);
-                  } else {
-                    setShiftReports([]);
-                  }
-                }}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label={t(
-                      "staffWorkSchedule.autoCompleteField.searchPatient.label"
-                    )}
-                  />
-                )}
-              />
-            )}
-          </Grid>
-          <Grid item xs={6} sm={1} md={4} xl={7} />
-
-          {/* Print Button */}
-          {/* New Grid item for the button */}
-          <Grid
-            item
-            xs={6}
-            sm={2}
-            md={2}
-            xl={1}
             sx={{
-              display: "flex",
-              justifyContent: "flex-end",
-              // justifyContent: "space-evenly",
-              // textAlign: "center",
-              alignItems: "center",
-              marginTop: { xs: 1, sm: 2.5 },
-              marginBottom: { xs: 1, sm: 2.5 },
-              // paddingBottom: { }
+              marginTop: 1,
+              padding: 2,
+              paddingBottom: 1,
+              width: 420,
             }}
+          > */}
+        {view !== "timeline" && (
+          <Grid
+            container
+            // margin={2.5}
+            padding={2.5}
+            marginBottom={0}
+            spacing={0}
+            paddingBottom={0}
           >
-            {viewType === "staff" && (
-              <Button
-                disabled={
-                  isAllStaffSelected || (!staffSelect && !patientSelect)
-                  // &&
-                  // staffSelect === "" &&
-                  // patientSelect === ""
-                }
-                onClick={() => setOpenPrintDialog(true)}
-                variant="contained"
-                color="primary"
-              >
-                {t("staffWorkSchedule.print.action.print")}
-              </Button>
-            )}
+            <Grid item xs={12} sm={5} md={3} xl={2}>
+              <FormControl component="fieldset" margin="normal">
+                <FormLabel
+                  component="legend"
+                  sx={{
+                    fontSize: 18,
+                    fontWeight: 600,
+                  }}
+                >
+                  {t("staffWorkSchedule.calendarViews.label")}
+                </FormLabel>
+                <RadioGroup
+                  row
+                  aria-label="calendar_view"
+                  name="calendar_view"
+                  value={viewType}
+                  onChange={(e) => {
+                    setWorkSchedules([]);
+                    setShiftReports([]);
+
+                    setViewType(e.target.value as "patient" | "staff");
+
+                    setPatientSelect("");
+                    setStaffSelect("");
+                    // clear the patient and staff select
+                  }}
+                >
+                  {calendarViews.map((option) => (
+                    <FormControlLabel
+                      control={<Radio />}
+                      key={option.value}
+                      label={t(option.label)}
+                      value={option.value}
+                    />
+                  ))}
+                </RadioGroup>
+              </FormControl>
+            </Grid>
+
+            <Grid
+              item
+              xs={12}
+              sm={3}
+              md={3}
+              xl={2}
+              sx={{ marginTop: { xs: 1, sm: 2.5 } }}
+            >
+              {/* Your existing Autocomplete component */}
+              {viewType === "staff" ? (
+                <Autocomplete
+                  // fullWidth
+                  freeSolo
+                  id="staff-select"
+                  options={[
+                    {
+                      id: "all",
+                      english_name: "All",
+                      japanese_name: "全員",
+                    },
+                    ...(Array.isArray(staffSelection) ? staffSelection : []),
+                  ]}
+                  // getOptionLabel={(option: StaffScheduleSelect) => {
+                  //   const name =
+                  //     i18n.language === "en"
+                  //       ? option.english_name
+                  //       : option.japanese_name;
+                  //   return name;
+                  // }}
+                  getOptionLabel={(option: string | StaffScheduleSelect) => {
+                    // Check if the option is a string
+                    if (typeof option === "string") {
+                      return option;
+                    }
+
+                    // If option is a StaffScheduleSelect, process it
+                    const name =
+                      i18n.language === "en"
+                        ? option.english_name
+                        : option.japanese_name;
+                    return name;
+                  }}
+                  value={staffSelect}
+                  onChange={(_, newValue) => {
+                    setStaffSelect(newValue as StaffScheduleSelect);
+
+                    const val = newValue as StaffScheduleSelect;
+
+                    if (view === "workSchedule") {
+                      setIsAllStaffSelected(val?.id === "all");
+                    } else {
+                      setIsAllStaffSelected(false);
+                    }
+
+                    if (
+                      initialWorkSchedule &&
+                      newValue &&
+                      view === "workSchedule"
+                    ) {
+                      if (val.id === "all") {
+                        setWorkSchedules(initialWorkSchedule);
+                        return;
+                      }
+
+                      const filteredWorkSchedule = initialWorkSchedule.filter(
+                        (schedule) => {
+                          // Remove standard and Japanese spaces from schedule.staff
+                          const normalizedStaffName = schedule.staff
+                            .replace(/[\s\u3000]+/g, "")
+                            .toLowerCase();
+
+                          // Remove standard and Japanese spaces from staffSelect.japanese_name
+                          const normalizedSelectedName = val.japanese_name
+                            .replace(/[\s\u3000]+/g, "")
+                            .toLowerCase();
+
+                          if (
+                            normalizedStaffName.includes(normalizedSelectedName)
+                          ) {
+                            // Add gender property to the schedule object directly from staffSelect
+                            schedule.gender = val.gender;
+                            return true;
+                          }
+
+                          return false;
+                        }
+                      );
+                      setWorkSchedules(filteredWorkSchedule);
+                    } else {
+                      setWorkSchedules([]);
+                    }
+
+                    // Shift report
+                    if (initialShiftReports && newValue && view === "report") {
+                      if (val.id === "all") {
+                        setShiftReports(initialShiftReports);
+                        return;
+                      }
+
+                      const filteredShiftReports = initialShiftReports.filter(
+                        (report) => {
+                          // Remove standard and Japanese spaces from schedule.staff
+                          const normalizedStaffName = report.shift.staff
+                            .replace(/[\s\u3000]+/g, "")
+                            .toLowerCase();
+
+                          // Remove standard and Japanese spaces from staffSelect.japanese_name
+                          const normalizedSelectedName = val.japanese_name
+                            .replace(/[\s\u3000]+/g, "")
+                            .toLowerCase();
+
+                          return normalizedStaffName.includes(
+                            normalizedSelectedName
+                          );
+                        }
+                      );
+
+                      setShiftReports(filteredShiftReports);
+                    } else {
+                      setShiftReports([]);
+                    }
+                  }}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label={t(
+                        "staffWorkSchedule.autoCompleteField.searchStaff.label"
+                      )}
+                    />
+                  )}
+                />
+              ) : (
+                <Autocomplete
+                  // fullWidth
+                  freeSolo
+                  id="patient-select"
+                  options={patientSelection || []}
+                  // getOptionLabel={(option: PatientSelect) => {
+                  //   const name =
+                  //     i18n.language === "en"
+                  //       ? option.name_kana
+                  //       : option.name_kanji;
+                  //   return name;
+                  // }}
+                  getOptionLabel={(option: string | PatientSelect) => {
+                    if (typeof option === "string") {
+                      return option;
+                    }
+
+                    const name =
+                      i18n.language === "en"
+                        ? option.name_kana
+                        : option.name_kanji;
+
+                    return name;
+                  }}
+                  value={patientSelect}
+                  onChange={(_, newValue) => {
+                    setPatientSelect(newValue as PatientSelect);
+
+                    const val = newValue as PatientSelect;
+
+                    if (
+                      initialWorkSchedule &&
+                      newValue &&
+                      view === "workSchedule"
+                    ) {
+                      const normalizeString = (str: string) =>
+                        str && str.normalize("NFKC").replace(/\s/g, "");
+
+                      const filteredWorkSchedule = initialWorkSchedule.filter(
+                        (schedule) => {
+                          const schedulePatientName = normalizeString(
+                            schedule.patient
+                          );
+                          const selectedPatientName = normalizeString(
+                            val.name_kanji
+                          );
+                          return schedulePatientName === selectedPatientName;
+                        }
+                      );
+
+                      setWorkSchedules(filteredWorkSchedule);
+                    } else {
+                      setWorkSchedules([]);
+                    }
+
+                    if (initialShiftReports && newValue && view === "report") {
+                      const normalizeString = (str: string) =>
+                        str && str.normalize("NFKC").replace(/\s/g, "");
+
+                      const filteredShiftReports = initialShiftReports.filter(
+                        (report) => {
+                          const reportPatientName = normalizeString(
+                            report.patient
+                          );
+                          const selectedPatientName = normalizeString(
+                            val.name_kanji
+                          );
+                          return reportPatientName === selectedPatientName;
+                        }
+                      );
+
+                      setShiftReports(filteredShiftReports);
+                    } else {
+                      setShiftReports([]);
+                    }
+                  }}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label={t(
+                        "staffWorkSchedule.autoCompleteField.searchPatient.label"
+                      )}
+                    />
+                  )}
+                />
+              )}
+            </Grid>
+            <Grid item xs={6} sm={1} md={4} xl={7} />
+
+            {/* Print Button */}
+            {/* New Grid item for the button */}
+            <Grid
+              item
+              xs={6}
+              sm={2}
+              md={2}
+              xl={1}
+              sx={{
+                display: "flex",
+                justifyContent: "flex-end",
+                // justifyContent: "space-evenly",
+                // textAlign: "center",
+                alignItems: "center",
+                marginTop: { xs: 1, sm: 2.5 },
+                marginBottom: { xs: 1, sm: 2.5 },
+                // paddingBottom: { }
+              }}
+            >
+              {viewType === "staff" && (
+                <Button
+                  disabled={
+                    isAllStaffSelected || (!staffSelect && !patientSelect)
+                    // &&
+                    // staffSelect === "" &&
+                    // patientSelect === ""
+                  }
+                  onClick={() => setOpenPrintDialog(true)}
+                  variant="contained"
+                  color="primary"
+                >
+                  {t("staffWorkSchedule.print.action.print")}
+                </Button>
+              )}
+            </Grid>
           </Grid>
-        </Grid>
+        )}
 
         {view === "workSchedule" ? (
           <SWSCalendar
             schedule={workSchedules}
             onEventClick={handleOpenSwsDialog}
           />
+        ) : view === "timeline" ? (
+          <ShiftTimeline shifts={[]} />
         ) : (
           <ShiftReportTable
             processing={shiftReportProcessing}
@@ -740,11 +748,6 @@ const Shift = () => {
             onView={handleOpenShiftReportDialog}
           />
         )}
-        {/* <Calendar
-          contentHeight={720}
-          events={data || []}
-          onEventClick={handleOpenSwsDialog}
-        />  */}
       </Card>
 
       <ConfirmDialog

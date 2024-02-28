@@ -35,7 +35,11 @@ import {
   months,
   years,
 } from "../helpers/helper";
-import { parseISO, getYear, getMonth } from "date-fns";
+
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+dayjs.extend(utc);
+
 import { useAddPayslip } from "../hooks/useAddPayslip";
 import { useSnackbar } from "../../core/contexts/SnackbarProvider";
 import { usePushNotification } from "../../admin/hooks/usePushNotification";
@@ -231,10 +235,10 @@ const PayslipManagement = () => {
     if (initialPayslips) {
       if (filterDate.year && filterDate.month) {
         const filteredPayslips = initialPayslips.filter((payslip) => {
-          const releaseDate = parseISO(payslip.release_date.toString());
+          const releaseDate = dayjs.utc(payslip.release_date.toString());
           return (
-            getYear(releaseDate) === parseInt(filterDate.year as string) &&
-            getMonth(releaseDate) === parseInt(filterDate.month as string) - 1 // getMonth returns 0-11, so subtract 1 from filter month
+            releaseDate.year() === parseInt(filterDate.year as string) &&
+            releaseDate.month() === parseInt(filterDate.month as string) - 1 // dayjs month is 0-indexed, similar to date-fns
           );
         });
         setPayslips(filteredPayslips);

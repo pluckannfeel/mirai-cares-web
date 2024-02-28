@@ -62,7 +62,7 @@ const Dashboard = () => {
     {
       unit: "payslip.overview.totalEmployees", // total of employees
       value: `${overallRecord.total_employees}人`,
-      backgroundColor: "#",
+      backgroundColor: "#ff9800",
     },
     // {
     //   unit: "payslip.overview.netSalarythisMonth", // total net salary paid

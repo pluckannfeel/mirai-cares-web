@@ -1,8 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Theme } from "@mui/material";
 
-import {CheckCircle, RadioButtonUnchecked, RemoveCircle} from "@mui/icons-material"
-
+import {
+  CheckCircle,
+  RadioButtonUnchecked,
+  RemoveCircle,
+} from "@mui/icons-material";
 
 export const createThemeComponents = (theme: Theme) => ({
   MuiAccordion: {
@@ -325,18 +328,19 @@ export const createThemeComponents = (theme: Theme) => ({
   // MuiTextField: {
   //   styleOverrides: {
   //     root: {
-  //       '& input[type="datetime-local"]::-webkit-datetime-edit-fields-wrapper': {
-  //         /* Add your custom styles here */
-  //         // For example:
-  //         // fontSize: '16px',
-  //         // border: '1px solid #ccc',
-  //         // borderRadius: '4px',
-  //         // padding: '8px',
-  //         color: theme.palette.text.primary,
-  //         padding: theme.spacing(1), // Adjust padding as needed
-  //         borderRadius: theme.shape.borderRadius,
-  //         backgroundColor: theme.palette.background.default,
-  //       },
+  //       '& input[type="datetime-local"]::-webkit-datetime-edit-fields-wrapper':
+  //         {
+  //           /* Add your custom styles here */
+  //           // For example:
+  //           // fontSize: '16px',
+  //           // border: '1px solid #ccc',
+  //           // borderRadius: '4px',
+  //           // padding: '8px',
+  //           color: theme.palette.text.primary,
+  //           padding: theme.spacing(1), // Adjust padding as needed
+  //           borderRadius: theme.shape.borderRadius,
+  //           backgroundColor: theme.palette.background.default,
+  //         },
   //     },
   //   },
   // },
@@ -364,4 +368,22 @@ export const createThemeComponents = (theme: Theme) => ({
       },
     },
   },
+  // Overrides for the TextField used by DatePicker
+  // MuiTextField: {
+  //   styleOverrides: {
+  //     root: {
+  //       '& input[type="date"]':
+  //         {
+  //           // Customize the text field appearance here
+  //           // For example, adjust the padding around the input
+  //           "& .MuiInputBase-input": {
+  //             padding: theme.spacing(1), // Adjust padding as needed
+  //           },
+  //           "& .MuiInputBase-root": {
+  //             padding: theme.spacing(1), // Adjust padding for the whole TextField, including adornments
+  //           },
+  //         },
+  //     },
+  //   },
+  // },
 });

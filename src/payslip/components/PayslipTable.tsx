@@ -19,13 +19,13 @@ import {
   Delete as DeleteIcon,
 } from "@mui/icons-material";
 import { Payslip } from "../types/payslip";
-import { format } from "date-fns";
+
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { enUS, ja } from "date-fns/locale";
 import * as selectUtils from "../../core/utils/selectUtils";
 import Empty from "../../core/components/Empty";
 import { Staff } from "../../staff/types/staff";
+import { formatDateWithDayjs } from "../../helpers/dayjs";
 
 interface HeadCell {
   id: string;
@@ -118,7 +118,7 @@ const PayslipRow = ({
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { t, i18n } = useTranslation();
 
-  const locale = i18n.language === "en" ? enUS : ja;
+  const locale = i18n.language === "en" ? "en" : "ja";
 
   const labelId = `enhanced-table-checkbox-${index}`;
   const openActions = Boolean(anchorEl);
@@ -175,17 +175,21 @@ const PayslipRow = ({
                 {user.email}
               </Typography>
             </Box> */}
-          {format(new Date(payslip.release_date as Date), "yyyy MMMM  ", {
-            locale: locale,
-          })}
+          {formatDateWithDayjs(
+            payslip.release_date as Date,
+            "YYYY MMMM",
+            locale
+          )}
         </Box>
       </TableCell>
       {/* <TableCell align="center">{user.gender}</TableCell> */}
       <TableCell align="center">{payslip.staff?.japanese_name}</TableCell>
       <TableCell align="center">
-        {format(new Date(payslip.created_at), "yyyy MMMM dd ", {
-          locale: locale,
-        })}
+        {formatDateWithDayjs(
+          payslip.created_at as Date,
+          "YYYY MMMM DD",
+          locale
+        )}
       </TableCell>
       {/* <TableCell align="center">{payslip.service_hours}</TableCell> */}
       {/* <TableCell align="center">Ï

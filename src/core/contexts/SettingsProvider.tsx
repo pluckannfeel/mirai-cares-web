@@ -1,14 +1,14 @@
-import { ThemeProvider as MuiThemeProvider, CssBaseline } from "@mui/material";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-// import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-// import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
-
-// import { ja } from "date-fns/locale";
-
 import React, { createContext, useContext, useMemo, useState } from "react";
+
+import { ThemeProvider as MuiThemeProvider, CssBaseline } from "@mui/material";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { createTheme } from "../theme";
+import { useTranslation } from "react-i18next";
+import i18n from "../config/i18n";
+
 
 interface SettingsContextInterface {
   collapsed: boolean;
@@ -31,6 +31,7 @@ type SettingsProviderProps = {
 };
 
 const SettingsProvider = ({ children }: SettingsProviderProps) => {
+  // const { i18n } = useTranslation();
   const [collapsed, setCollapsed] = useLocalStorage("sidebarcollapsed", false);
   // const [direction, setDirection] = useLocalStorage("direction", "ltr");
   const [mode, setMode] = useLocalStorage("mode", "light");
@@ -103,7 +104,7 @@ const SettingsProvider = ({ children }: SettingsProviderProps) => {
       <MuiThemeProvider theme={theme}>
         <LocalizationProvider
           dateAdapter={AdapterDayjs}
-          // adapterLocale={ja}
+          adapterLocale={"ja"}
         >
           <CssBaseline />
           {children}

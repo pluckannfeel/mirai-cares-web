@@ -16,22 +16,23 @@ import {
   Person as PersonIcon,
 } from "@mui/icons-material";
 
-import { formatDistanceToNow } from "date-fns/formatDistanceToNow";
 import { useEffect, useMemo, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import Empty from "../../core/components/Empty";
 import Loader from "../../core/components/Loader";
 import Result from "../../core/components/Result";
-import { useDateLocale } from "../../core/hooks/useDateLocale";
+// import { useDateLocale } from "../../core/hooks/useDateLocale";
 import { notificationKeys } from "../config/notification";
 import { useNotifications } from "../hooks/useNotifications";
 // import { useWebSocket } from "../contexts/WebSocketProvider";
 import { useAuth } from "../../auth/contexts/AuthProvider";
 import { getNotificationLink } from "../helpers/notification";
+import { distanceToNow } from "../../helpers/dayjs";
+import { Notification } from "../types/notification";
 
 const RecentNotifications = () => {
-  const locale = useDateLocale();
+  // const locale = useDateLocale();
   const { t, i18n } = useTranslation();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -112,47 +113,53 @@ const RecentNotifications = () => {
               aria-label="notifications popover"
               sx={{ px: 2 }}
             >
-              {data.map((notification) => (
-                // <ListItem
-                //   button
-                //   component={NavLink}
-                //   key={notification.id}
-                //   to={getNotificationLink(notification.code)}
-                // >
-                <ListItemButton
-                  component={NavLink}
-                  key={notification.id}
-                  to={getNotificationLink(notification.code)}
-                >
-                  <ListItemAvatar>
-                    <Avatar>
-                      <PersonIcon />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={
-                      <Trans
-                        components={{ bold: <strong /> }}
-                        // defaults="<bold>{{ user }}</bold> did someting <bold>{{ quantity }}</bold> times"
-                        defaults={
-                          i18n.language === "en"
-                            ? "<bold>{{ staff.english_name }}</bold> did something"
-                            : "<bold>{{ staff.japanese_name }}</bold> did something"
-                        }
-                        i18nKey={notificationKeys[notification.code]}
-                        values={{
-                          ...notification.params,
-                          user: `${userInfo?.first_name} ${userInfo?.last_name}`,
-                        }}
-                      />
-                    }
-                    secondary={formatDistanceToNow(
-                      new Date(notification.created_at),
-                      { addSuffix: true, locale }
-                    )}
-                  />
-                </ListItemButton>
-              ))}
+              {data.map((notification) => {
+                return (
+                  // <ListItem
+                  //   button
+                  //   component={NavLink}
+                  //   key={notification.id}
+                  //   to={getNotificationLink(notification.code)}
+                  // >
+                  <ListItemButton
+                    component={NavLink}
+                    key={notification.id}
+                    to={getNotificationLink(notification.code)}
+                  >
+                    <ListItemAvatar>
+                      <Avatar>
+                        <PersonIcon />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={
+                        <Trans
+                          components={{ bold: <strong /> }}
+                          // defaults="<bold>{{ user }}</bold> did someting <bold>{{ quantity }}</bold> times"
+                          defaults={
+                            i18n.language === "en"
+                              ? "<bold>{{staff}}</bold> did something"
+                              : "<bold>{{staff}}</bold> did something"
+                          }
+                          i18nKey={notificationKeys[notification.code]}
+                          values={{
+                            ...notification.params,
+                            user: `${userInfo?.first_name} ${userInfo?.last_name}`,
+                            staff: `${
+                              notification.params.staff?.japanese_name
+                                ? notification.params.staff?.japanese_name
+                                : ""
+                            }`,
+                          }}
+                        />
+                      }
+                      secondary={distanceToNow(
+                        notification.created_at.valueOf()
+                      )}
+                    />
+                  </ListItemButton>
+                );
+              })}
             </List>
           )}
           {!isLoading && !isError && (!data || data.length === 0) && (
