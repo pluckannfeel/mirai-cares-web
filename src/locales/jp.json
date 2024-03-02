@@ -1317,27 +1317,32 @@
       "documentEmptyDetails": "選択したスタッフまたは患者に関する詳細が不足しています。確認してください。"
     },
     "form": {
-      "name": {
-        "label": "会社名"
-      },
-      "organization_code": {
-        "label": "組織コード"
-      },
-      "address": {
-        "label": "住所"
-      },
-      "postal_code": {
-        "label": "郵便番号"
-      },
-      "phone": {
-        "label": "会社電話番号"
-      },
-      "email": {
-        "label": "会社メールアドレス"
-      },
-      "website": {
-        "label": "ウェブサイトリンク"
-      }
+      "organization_code": "組織コード",
+      "name": "会社名",
+      "headoffice_address": "本社所在地",
+      "headoffice_postalcode": "本社郵便番号",
+      "establishment_date": "設立年月日",
+      "representative_name": "代表者名",
+      "capital": "資本金",
+      "num_of_employees": "従業員数",
+      "business_details": "事業内容",
+      "main_client": "主要取引先",
+      "telephone_number": "電話番号",
+      "fax_number": "ファックス番号",
+      "email": "メールアドレス",
+      "website": "ウェブサイト",
+      "corporate_number": "法人番号",
+      "office_number": "事業所番号",
+      "trading_account": "取引口座",
+      "registration_number": "登録番号",
+      "registration_date": "登録年月日",
+      "validity_period": "有効期間",
+      "online_application_id": "オンライン申請ID",
+      "online_application_pass": "オンライン申請パス",
+      "application_agent_certificate": "申請等取次者証明書",
+      "service_type": "サービスの種類",
+      "plan_start_date": "事業開始予定年月日",
+      "specified_validity_period": "指定の有効期間"
     },
     "document": {
       "options": {
@@ -1392,6 +1397,11 @@
       },
       "searchPatient": {
         "label": "利用者を検索する"
+      }
+    },
+    "timelineView": {
+      "headers": {
+        "staffName": "スタッフ名"
       }
     },
     "calendarViews": {

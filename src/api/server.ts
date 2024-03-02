@@ -7,13 +7,13 @@ const determineBaseUrl = () => {
   if (import.meta.env.MODE === "production") {
     // return "https://api.mirai-cares.com/";
     // return "https://miraicares.ap-northeast-1.elasticbeanstalk.com/";
-    return "https://fkuy7wira5n3shbvxt3xy3wfqm0jhvzq.lambda-url.ap-northeast-1.on.aws/";
+    return "https://fkuy7wira5n3shbvxt3xy3wfqm0jhvzq.lambda-url.ap-northeast-1.on.aws";
   } else if (import.meta.env.MODE === "development") {
     // Development URL; adjust as needed test-api
     return "http://localhost:8000";
   }
 
-  return "https://fkuy7wira5n3shbvxt3xy3wfqm0jhvzq.lambda-url.ap-northeast-1.on.aws/";
+  return "https://fkuy7wira5n3shbvxt3xy3wfqm0jhvzq.lambda-url.ap-northeast-1.on.aws";
   // return "http://localhost:8000/";
 };
 

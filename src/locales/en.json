@@ -1316,27 +1316,32 @@
       "documents": "Document Creation"
     },
     "form": {
-      "name": {
-        "label": "Company Name"
-      },
-      "organization_code": {
-        "label": "Organization Code"
-      },
-      "address": {
-        "label": "Address"
-      },
-      "postal_code": {
-        "label": "Postal Code"
-      },
-      "phone": {
-        "label": "Company Phone"
-      },
-      "email": {
-        "label": "Email Address"
-      },
-      "website": {
-        "label": "Website Link"
-      }
+      "organization_code": "Org Code",
+      "name": "Company Name",
+      "headoffice_address": "Head Office Address",
+      "headoffice_postalcode": "Head Office Postal Code",
+      "establishment_date": "Establishment Date",
+      "representative_name": "Representative Name",
+      "capital": "Capital",
+      "num_of_employees": "Number of Employees",
+      "business_details": "Business Details",
+      "main_client": "Main Client",
+      "telephone_number": "Telephone Number",
+      "fax_number": "Fax Number",
+      "email": "Email",
+      "website": "Website",
+      "corporate_number": "Corporate Number",
+      "office_number": "Office Number",
+      "trading_account": "Trading Accounts",
+      "registration_number": "Registration Number",
+      "registration_date": "Registration Date",
+      "validity_period": "Validity Period",
+      "online_application_id": "Online Application ID",
+      "online_application_pass": "Online Application Pass",
+      "application_agent_certificate": "Application Agent Certificate",
+      "service_type": "Service Type",
+      "plan_start_date": "Plan Start Date",
+      "specified_validity_period": "Specified Validity Period"
     },
     "document": {
       "options": {
@@ -1395,6 +1400,11 @@
       "options": {
         "patient": "Patient",
         "staff": "Caregiver"
+      }
+    },
+    "timelineView": {
+      "headers": {
+        "staffName": "Staff Name"
       }
     },
     "form": {

@@ -365,8 +365,10 @@ const Shift = () => {
           </Button> */}
           {(userInfo?.role === "Admin" || userInfo?.role === "Manager") && (
             <FileButton
+             
               submitHandler={importCSV}
               loading={isImporting}
+              // disabled={view === "workSchedule"}
               buttonProps={{
                 sx: {
                   marginRight: 1,
@@ -374,7 +376,7 @@ const Shift = () => {
                 },
                 variant: "contained",
                 color: "primary",
-                disabled: processing,
+                disabled: view !== "workSchedule",
                 size: "medium",
                 title: t("common.import"),
               }}
@@ -737,7 +739,7 @@ const Shift = () => {
             onEventClick={handleOpenSwsDialog}
           />
         ) : view === "timeline" ? (
-          <ShiftTimeline shifts={[]} />
+          <ShiftTimeline />
         ) : (
           <ShiftReportTable
             processing={shiftReportProcessing}

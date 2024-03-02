@@ -8,7 +8,7 @@ import {
   KeyboardArrowRight as KeyboardArrowRightIcon,
   KeyboardArrowLeft as KeyboardArrowLeftIcon,
 } from "@mui/icons-material";
-import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import { CalendarMonth as CalendarMonthIcon } from "@mui/icons-material";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import "dayjs/locale/en"; // English
@@ -55,14 +55,17 @@ const SelectDateButtons: React.FC<DateButtonGroupProps> = ({
     <>
       <ButtonGroup
         size="small"
-        variant="contained"
+        variant="outlined"
+        color="primary"
         aria-label="date navigation buttons"
         sx={{
         //   marginLeft: "2rem",
         //   marginY: "0.5rem",
           "& .MuiButton-root": {
-            borderColor: "transparent", // Remove border color
+            // borderColor: "transparent", // Remove border color
             // Target the buttons within the ButtonGroup
+            // borderColor: "#ddd",
+            color: "#333",
             padding: "8px 20px", // Adjust padding to your preference
             // Other styles here if needed
           },
@@ -82,7 +85,7 @@ const SelectDateButtons: React.FC<DateButtonGroupProps> = ({
           )}
         </Button>
         <Button aria-label="calendar" onClick={handleClick}>
-          <CalendarTodayIcon />
+          <CalendarMonthIcon />
         </Button>
         <Button onClick={handleNextDay}>
           <KeyboardDoubleArrowRightIcon />

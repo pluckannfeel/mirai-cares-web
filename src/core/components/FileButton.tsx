@@ -18,12 +18,14 @@ type FileButtonProps = {
   submitHandler: (file: File) => Promise<StaffWorkSchedule>;
   buttonProps?: React.ComponentProps<typeof Button>;
   loading: boolean;
+  // disabled: boolean;
 };
 
 const FileButton: React.FC<FileButtonProps> = ({
   submitHandler,
   buttonProps,
   loading,
+  // disabled
 }) => {
   const { t } = useTranslation();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -77,7 +79,7 @@ const FileButton: React.FC<FileButtonProps> = ({
         style={{ display: "none" }}
         accept=".csv"
       />
-      <Button onClick={handleClick} {...buttonProps}>
+      <Button  onClick={handleClick} {...buttonProps}>
         {buttonProps?.title}
       </Button>
       <Dialog open={selectedFile != null} onClose={handleClose}>
