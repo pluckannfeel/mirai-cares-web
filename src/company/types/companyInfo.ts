@@ -2,9 +2,9 @@ export interface CompanyInfo {
   id: string;
   organization_code: string;
   name: string;
-  headoffice_address: string;
-  headoffice_postalcode: string;
   establishment_date: string;
+  headoffice_postalcode: string;
+  headoffice_address: string;
   representative_name: string;
   capital: string;
   num_of_employees: string;

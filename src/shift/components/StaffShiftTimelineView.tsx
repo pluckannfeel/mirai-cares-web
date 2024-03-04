@@ -121,6 +121,8 @@ const ShiftTimeline: React.FC<ShiftTimelineProps> = (props) => {
                     position: "sticky",
                     border: "1px solid #ccc",
                     top: 0,
+                    textAlign: "left",
+                    paddingLeft: "10px",
                     backgroundColor: "white",
                     zIndex: 1,
                   }}

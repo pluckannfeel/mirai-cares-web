@@ -320,8 +320,8 @@ export const createThemeComponents = (theme: Theme) => ({
   MuiToggleButtonGroup: {
     styleOverrides: {
       root: {
-        backgroundColor: theme.palette.background.default,
-        padding: 5,
+        // backgroundColor: theme.palette.background.default,
+        // padding: 5,
       },
     },
   },

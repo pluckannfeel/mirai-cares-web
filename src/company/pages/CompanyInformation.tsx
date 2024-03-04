@@ -16,6 +16,7 @@ import {
   Typography,
   ToggleButton,
   ToggleButtonGroup,
+  Input,
 } from "@mui/material";
 
 import React, { useEffect } from "react";
@@ -149,21 +150,66 @@ const CompanyInformation = () => {
             <ToggleButtonGroup
               color="info"
               size="small"
-              sx={{
-                marginBottom: 2,
-              }}
               value={currentCompany}
               exclusive
               onChange={handleCurrentCompanyChange}
-              aria-label="Platform"
+              aria-label="companies"
             >
-              <ToggleButton sx={{ paddingX: 2 }} disableRipple value="MYS">
+              <ToggleButton
+                sx={{
+                  paddingX: 2,
+                  marginX: 0.4,
+                  "&.Mui-selected": {
+                    backgroundColor: "primary.main",
+                    color: "white",
+                  },
+                  //hover
+                  "&:hover": {
+                    backgroundColor: "primary.main",
+                    color: "white",
+                  },
+                }}
+                disableRipple
+                value="MYS"
+              >
                 MYS
               </ToggleButton>
-              <ToggleButton sx={{ paddingX: 2 }} disableRipple value="FJL">
+              <ToggleButton
+                sx={{
+                  paddingX: 2,
+                  marginX: 0.4,
+                  "&.Mui-selected": {
+                    backgroundColor: "#324554",
+                    color: "white",
+                  },
+                  //hover
+                  "&:hover": {
+                    backgroundColor: "#324554",
+                    color: "white",
+                  },
+                }}
+                disableRipple
+                value="FJL"
+              >
                 FJL
               </ToggleButton>
-              <ToggleButton sx={{ paddingX: 2 }} disableRipple value="ACS">
+              <ToggleButton
+                sx={{
+                  paddingX: 2,
+                  marginX: 0.4,
+                  "&.Mui-selected": {
+                    backgroundColor: "#664450",
+                    color: "white",
+                  },
+                  //hover
+                  "&:hover": {
+                    backgroundColor: "#664450",
+                    color: "white",
+                  },
+                }}
+                disableRipple
+                value="ACS"
+              >
                 ACS
               </ToggleButton>
             </ToggleButtonGroup>
@@ -190,7 +236,399 @@ const CompanyInformation = () => {
             /> */}
 
             <Grid container spacing={1}>
-              <Grid item xs={12} sm={8}>
+              <Grid item xs={2}>
+                {currentCompany === "MYS" && (
+                  <>
+                    <Typography
+                      sx={{ marginTop: 2.1, textAlign: "left" }}
+                      variant="h5"
+                    >
+                      {t("company.form.name")}
+                    </Typography>
+                    <Typography
+                      sx={{ marginTop: 2.1, textAlign: "left" }}
+                      variant="h5"
+                    >
+                      {t("company.form.establishment_date")}
+                    </Typography>
+                    <Typography
+                      sx={{ marginTop: 2.1, textAlign: "left" }}
+                      variant="h5"
+                    >
+                      {t("company.form.headoffice_postalcode")}
+                    </Typography>
+                    <Typography
+                      sx={{ marginTop: 2.1, textAlign: "left" }}
+                      variant="h5"
+                    >
+                      {t("company.form.headoffice_address")}
+                    </Typography>
+                    <Typography
+                      sx={{ marginTop: 2.1, textAlign: "left" }}
+                      variant="h5"
+                    >
+                      {t("company.form.representative_name")}
+                    </Typography>
+                    <Typography
+                      sx={{ marginTop: 2.1, textAlign: "left" }}
+                      variant="h5"
+                    >
+                      {t("company.form.capital")}
+                    </Typography>
+                    <Typography
+                      sx={{ marginTop: 2.1, textAlign: "left" }}
+                      variant="h5"
+                    >
+                      {t("company.form.num_of_employees")}
+                    </Typography>
+                    <Typography
+                      sx={{ marginTop: 2.1, textAlign: "left" }}
+                      variant="h5"
+                    >
+                      {t("company.form.business_details")}
+                    </Typography>
+                    <Typography
+                      sx={{ marginTop: 2.1, textAlign: "left" }}
+                      variant="h5"
+                    >
+                      {t("company.form.main_client")}
+                    </Typography>
+                    <Typography
+                      sx={{ marginTop: 2.1, textAlign: "left" }}
+                      variant="h5"
+                    >
+                      {t("company.form.telephone_number")}
+                    </Typography>
+                    <Typography
+                      sx={{ marginTop: 2.1, textAlign: "left" }}
+                      variant="h5"
+                    >
+                      {t("company.form.fax_number")}
+                    </Typography>
+                    <Typography
+                      sx={{ marginTop: 2.1, textAlign: "left" }}
+                      variant="h5"
+                    >
+                      {t("company.form.email")}
+                    </Typography>
+                    <Typography
+                      sx={{ marginTop: 2.1, textAlign: "left" }}
+                      variant="h5"
+                    >
+                      {t("company.form.website")}
+                    </Typography>
+                    <Typography
+                      sx={{ marginTop: 2.1, textAlign: "left" }}
+                      variant="h5"
+                    >
+                      {t("company.form.corporate_number")}
+                    </Typography>
+                    <Typography
+                      sx={{ marginTop: 2.1, textAlign: "left" }}
+                      variant="h5"
+                    >
+                      {t("company.form.office_number")}
+                    </Typography>
+                    <Typography
+                      sx={{ marginTop: 2.1, textAlign: "left" }}
+                      variant="h5"
+                    >
+                      {t("company.form.trading_account")}
+                    </Typography>
+                  </>
+                )}
+                {currentCompany === "FJL" && (
+                  <>
+                    <Typography
+                      color="#324554"
+                      sx={{ marginTop: 2.1, textAlign: "left" }}
+                      variant="h5"
+                    >
+                      {t("company.form.name")}
+                    </Typography>
+                    <Typography
+                      color="#324554"
+                      sx={{ marginTop: 2.1, textAlign: "left" }}
+                      variant="h5"
+                    >
+                      {t("company.form.registration_number")}
+                    </Typography>
+                    <Typography
+                      color="#324554"
+                      sx={{ marginTop: 2.1, textAlign: "left" }}
+                      variant="h5"
+                    >
+                      {t("company.form.registration_date")}
+                    </Typography>
+                    <Typography
+                      color="#324554"
+                      sx={{ marginTop: 2.1, textAlign: "left" }}
+                      variant="h5"
+                    >
+                      {t("company.form.validity_period")}
+                    </Typography>
+                    <Typography
+                      color="#324554"
+                      sx={{ marginTop: 2.1, textAlign: "left" }}
+                      variant="h5"
+                    >
+                      {t("company.form.online_application_id")}
+                    </Typography>
+                    <Typography
+                      color="#324554"
+                      sx={{ marginTop: 2.1, textAlign: "left" }}
+                      variant="h5"
+                    >
+                      {t("company.form.online_application_pass")}
+                    </Typography>
+                    <Typography
+                      color="#324554"
+                      sx={{ marginTop: 2.1, textAlign: "left" }}
+                      variant="h5"
+                    >
+                      {t("company.form.application_agent_certificate")}
+                    </Typography>
+                  </>
+                )}
+
+                {currentCompany === "ACS" && (
+                  <>
+                    <Typography
+                      color="#664450"
+                      sx={{ marginTop: 2.1, textAlign: "left" }}
+                      variant="h5"
+                    >
+                      {t("company.form.name")}
+                    </Typography>
+                    <Typography
+                      color="#664450"
+                      sx={{ marginTop: 2.1, textAlign: "left" }}
+                      variant="h5"
+                    >
+                      {t("company.form.registration_number")}
+                    </Typography>
+                    <Typography
+                      color="#664450"
+                      sx={{ marginTop: 2.1, textAlign: "left" }}
+                      variant="h5"
+                    >
+                      {t("company.form.service_type")}
+                    </Typography>
+                    <Typography
+                      color="#664450"
+                      sx={{ marginTop: 2.1, textAlign: "left" }}
+                      variant="h5"
+                    >
+                      {t("company.form.plan_start_date")}
+                    </Typography>
+                    <Typography
+                      color="#664450"
+                      sx={{ marginTop: 2.1, textAlign: "left" }}
+                      variant="h5"
+                    >
+                      {t("company.form.specified_validity_period")}
+                    </Typography>
+                  </>
+                )}
+              </Grid>
+              <Grid item xs={10}>
+                {currentCompany === "MYS" && (
+                  <>
+                    <Input
+                      sx={{ marginTop: 1.2 }}
+                      fullWidth
+                      value={formik.values.name}
+                    />
+                    <Input
+                      sx={{ marginTop: 1.2 }}
+                      fullWidth
+                      value={formik.values.establishment_date}
+                    />
+                    <Input
+                      sx={{ marginTop: 1.2 }}
+                      fullWidth
+                      value={formik.values.headoffice_postalcode}
+                    />
+                    <Input
+                      sx={{ marginTop: 1.2 }}
+                      fullWidth
+                      value={formik.values.headoffice_address}
+                    />
+                    <Input
+                      sx={{ marginTop: 1.2 }}
+                      fullWidth
+                      value={formik.values.representative_name}
+                    />
+                    <Input
+                      sx={{ marginTop: 1.2 }}
+                      fullWidth
+                      value={formik.values.capital}
+                    />
+                    <Input
+                      sx={{ marginTop: 1.2 }}
+                      fullWidth
+                      value={formik.values.num_of_employees}
+                    />
+                    <Input
+                      sx={{ marginTop: 1.2 }}
+                      fullWidth
+                      value={formik.values.business_details}
+                    />
+                    <Input
+                      sx={{ marginTop: 1.2 }}
+                      fullWidth
+                      value={formik.values.main_client}
+                    />
+                    <Input
+                      sx={{ marginTop: 1.2 }}
+                      fullWidth
+                      value={formik.values.telephone_number}
+                    />
+                    <Input
+                      sx={{ marginTop: 1.2 }}
+                      fullWidth
+                      value={formik.values.fax_number}
+                    />
+                    <Input
+                      sx={{ marginTop: 1.2 }}
+                      fullWidth
+                      value={formik.values.email}
+                    />
+                    <Input
+                      sx={{ marginTop: 1.2 }}
+                      fullWidth
+                      value={formik.values.website}
+                    />
+                    <Input
+                      sx={{ marginTop: 1.2 }}
+                      fullWidth
+                      value={formik.values.corporate_number}
+                    />
+                    <Input
+                      sx={{ marginTop: 1.2 }}
+                      fullWidth
+                      value={formik.values.office_number}
+                    />
+                    <Input
+                      sx={{ marginTop: 1.2 }}
+                      fullWidth
+                      multiline
+                      maxRows={3}
+                      value={formik.values.trading_account}
+                    />
+                  </>
+                )}
+
+                {currentCompany === "FJL" && (
+                  <>
+                    <Input
+                      color="info"
+                      sx={{ color: "#324554", marginTop: 1.2 }}
+                      fullWidth
+                      multiline
+                      maxRows={3}
+                      value={formik.values.name}
+                    />
+                    <Input
+                      color="info"
+                      sx={{ color: "#324554", marginTop: 1.2 }}
+                      fullWidth
+                      multiline
+                      maxRows={3}
+                      value={formik.values.registration_number}
+                    />
+                    <Input
+                      color="info"
+                      sx={{ color: "#324554", marginTop: 1.2 }}
+                      fullWidth
+                      multiline
+                      maxRows={3}
+                      value={formik.values.registration_date}
+                    />
+                    <Input
+                      color="info"
+                      sx={{ color: "#324554", marginTop: 1.2 }}
+                      fullWidth
+                      multiline
+                      maxRows={3}
+                      value={formik.values.validity_period}
+                    />
+                    <Input
+                      color="info"
+                      sx={{ color: "#324554", marginTop: 1.2 }}
+                      fullWidth
+                      multiline
+                      maxRows={3}
+                      value={formik.values.online_application_id}
+                    />
+                    <Input
+                      color="info"
+                      sx={{ color: "#324554", marginTop: 1.2 }}
+                      fullWidth
+                      multiline
+                      maxRows={3}
+                      value={formik.values.online_application_pass}
+                    />
+                    <Input
+                      color="info"
+                      sx={{ color: "#324554", marginTop: 1.2 }}
+                      fullWidth
+                      multiline
+                      maxRows={3}
+                      value={formik.values.application_agent_certificate}
+                    />
+                  </>
+                )}
+
+                {currentCompany === "ACS" && (
+                  <>
+                    <Input
+                      color="info"
+                      sx={{ color: "#664450", marginTop: 1.2 }}
+                      fullWidth
+                      multiline
+                      maxRows={3}
+                      value={formik.values.name}
+                    />
+                    <Input
+                      color="info"
+                      sx={{ color: "#664450", marginTop: 1.2 }}
+                      fullWidth
+                      multiline
+                      maxRows={3}
+                      value={formik.values.registration_number}
+                    />
+                    <Input
+                      color="info"
+                      sx={{ color: "#664450", marginTop: 1.2 }}
+                      fullWidth
+                      multiline
+                      maxRows={3}
+                      value={formik.values.service_type}
+                    />
+                    <Input
+                      color="info"
+                      sx={{ color: "#664450", marginTop: 1.2 }}
+                      fullWidth
+                      multiline
+                      maxRows={3}
+                      value={formik.values.plan_start_date}
+                    />
+                    <Input
+                      color="info"
+                      sx={{ color: "#664450", marginTop: 1.2 }}
+                      fullWidth
+                      multiline
+                      maxRows={3}
+                      value={formik.values.specified_validity_period}
+                    />
+                  </>
+                )}
+              </Grid>
+            </Grid>
+
+            <Grid container spacing={1}>
+              {/* <Grid item xs={12} sm={8}>
                 <TextField
                   margin="normal"
                   required
@@ -206,9 +644,9 @@ const CompanyInformation = () => {
                   error={formik.touched.name && Boolean(formik.errors.name)}
                   helperText={formik.touched.name && formik.errors.name}
                 />
-              </Grid>
+              </Grid> */}
 
-              {currentCompany === "MYS" && (
+              {/* {currentCompany === "MYS" && (
                 <>
                   <Grid item xs={12} sm={4}>
                     <TextField
@@ -560,9 +998,9 @@ const CompanyInformation = () => {
                     }
                   />
                 </>
-              )}
+              )} */}
 
-              {currentCompany === "FJL" && (
+              {/* {currentCompany === "FJL" && (
                 <>
                   <Grid item xs={12} sm={3}>
                     <TextField
@@ -702,9 +1140,9 @@ const CompanyInformation = () => {
                     />
                   </Grid>
                 </>
-              )}
+              )} */}
 
-              {currentCompany === "ACS" && (
+              {/* {currentCompany === "ACS" && (
                 <>
                   <Grid item xs={12} sm={4}>
                     <TextField
@@ -798,17 +1236,35 @@ const CompanyInformation = () => {
                     />
                   </Grid>
                 </>
-              )}
+              )} */}
             </Grid>
           </CardContent>
           <CardActions>
-            <Button onClick={() => formik.resetForm()}>
+            <Button
+              sx={{
+                color:
+                  currentCompany === "FJL"
+                    ? "#324554"
+                    : currentCompany === "ACS"
+                    ? "#664450"
+                    : "primary.main",
+              }}
+              onClick={() => formik.resetForm()}
+            >
               {t("common.reset")}
             </Button>
             <LoadingButton
               disabled={!formik.dirty && !formik.isSubmitting}
               loading={isUpdating}
               type="submit"
+              sx={{
+                backgroundColor:
+                  currentCompany === "FJL"
+                    ? "#324554"
+                    : currentCompany === "ACS"
+                    ? "#664450"
+                    : "primary.main",
+              }}
               variant="contained"
             >
               {t("common.edit")}

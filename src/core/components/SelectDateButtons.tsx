@@ -59,8 +59,8 @@ const SelectDateButtons: React.FC<DateButtonGroupProps> = ({
         color="primary"
         aria-label="date navigation buttons"
         sx={{
-        //   marginLeft: "2rem",
-        //   marginY: "0.5rem",
+          //   marginLeft: "2rem",
+          //   marginY: "0.5rem",
           "& .MuiButton-root": {
             // borderColor: "transparent", // Remove border color
             // Target the buttons within the ButtonGroup
@@ -88,10 +88,10 @@ const SelectDateButtons: React.FC<DateButtonGroupProps> = ({
           <CalendarMonthIcon />
         </Button>
         <Button onClick={handleNextDay}>
-          <KeyboardDoubleArrowRightIcon />
+          <KeyboardArrowRightIcon />
         </Button>
         <Button onClick={handleNextMonth}>
-          <KeyboardArrowRightIcon />
+          <KeyboardDoubleArrowRightIcon />
         </Button>
       </ButtonGroup>
 
