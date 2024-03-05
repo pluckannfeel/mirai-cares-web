@@ -89,7 +89,7 @@ export function formatDateToJapanese(date: Date | number) {
   const day = dayjs(date);
 
   // Get the day of the week and map it to the Japanese day name
-  const dayOfWeek = day.utc().day().toString();
+  const dayOfWeek = day.day().toString();
   const dayName = japaneseDayNames[dayOfWeek];
 
   // Construct the formatted date string
