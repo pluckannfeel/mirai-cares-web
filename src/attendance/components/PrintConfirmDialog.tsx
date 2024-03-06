@@ -55,10 +55,13 @@ const PrintAttendanceRecordDocument = (
         <Text style={styles.boldText}>発行日：</Text>
         {date.utc().format("YYYY年MM月DD日")}
       </Text> */}
+      <Text style={[styles.subtitle, { margin: -3 }]}>
+        <Text style={styles.boldText}>株式会社 Make You Smile</Text>
+      </Text>
 
       {/* Static Text */}
-      <Text style={styles.subtitle}>
-        <Text style={styles.boldText}>事業所名：</Text>エンジェルケアサービス
+      <Text style={[styles.subtitle, { margin: -3 }]}>
+        <Text style={styles.boldText}>事業所名：エンジェルケアサービス</Text>
       </Text>
 
       {/* Dynamic Staff Name */}
@@ -78,15 +81,16 @@ const PrintAttendanceRecordDocument = (
       {/* Table Headers */}
       <View style={styles.tableHeader}>
         <View
-          style={[styles.headerCell, styles.tableCell1Flex, { fontSize: 10 }]}
+          style={[styles.headerCell, styles.tableCell12Flex, { fontSize: 10 }]}
         >
           <Text style={styles.tableHeaderText}>日付</Text>
         </View>
-        <View style={[styles.headerCell, styles.tableCell1Flex]}>
+        <View style={[styles.headerCell, styles.tableCell15Flex]}>
           <Text style={styles.tableHeaderText}>サービス提供時間</Text>
         </View>
-        <View style={[styles.headerCell, styles.tableCell1Flex]}>
-          <Text style={styles.tableHeaderText}>就労時間</Text>
+        <View style={[styles.headerCell, styles.tableCellHalfFlex]}>
+          {/* <Text style={styles.tableHeaderText}>就労時間</Text> */}
+          <Text style={styles.tableHeaderText}>時間</Text>
         </View>
         <View style={[styles.headerCell, styles.tableCell1Flex]}>
           <Text style={styles.tableHeaderText}>ご利用者名</Text>
@@ -102,16 +106,16 @@ const PrintAttendanceRecordDocument = (
       {/* Table Rows */}
       {attendance.records.map((item: AttendanceRecord, index: number) => (
         <View key={index} style={styles.tableRow}>
-          <Text style={[styles.tableCell, styles.tableCell1Flex]}>
+          <Text style={[styles.tableCell, styles.tableCell12Flex]}>
             {/* {formatDateToJapanese(item.start)}
              */}
             {formatDateToJapanese(item.date)}
           </Text>
-          <Text style={[styles.tableCell, styles.tableCell1Flex]}>
+          <Text style={[styles.tableCell, styles.tableCell15Flex]}>
             {/* {serviceHours(item.start, item.end)} */}
             {item.service_hours}
           </Text>
-          <Text style={[styles.tableCell, styles.tableCell1Flex]}>
+          <Text style={[styles.tableCell, styles.tableCellHalfFlex]}>
             {item.duration}
           </Text>
           <Text style={[styles.tableCell, styles.tableCell1Flex]}>
@@ -247,7 +251,7 @@ const styles = StyleSheet.create({
     paddingTop: 35,
     paddingBottom: 65,
     paddingHorizontal: 35,
-    fontSize: 10,
+    fontSize: 12,
     fontFamily: "YuMincho",
   },
   title: {
@@ -259,8 +263,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   subtitle: {
-    fontSize: 14,
-    margin: 8,
+    fontSize: 16,
+    margin: 4,
   },
   issueDate: {
     // justifyContent: "flex-end",
@@ -309,7 +313,7 @@ const styles = StyleSheet.create({
     paddingVertical: 3, // Vertical padding within cells
     justifyContent: "center", // Center content vertically
     alignItems: "center", // Center content horizontally
-    fontSize: 10,
+    fontSize: 11,
   },
   // Style for the last cell on the right to prevent double borders
   lastTableCell: {
@@ -350,6 +354,9 @@ const styles = StyleSheet.create({
   // Specific flex styles for each type of cell
   tableCell1Flex: {
     flex: 1,
+  },
+  tableCell12Flex: {
+    flex: 1.2,
   },
   tableCell15Flex: {
     flex: 1.5,
