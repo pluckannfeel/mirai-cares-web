@@ -288,7 +288,7 @@ const Shift = () => {
     setOpenSwsDialog(true);
   };
 
-  const importCSV = (file: File) => {
+  const importShiftCSV = async (file: File) => {
     // Return the promise from the importStaffShift function
     setWorkSchedules([]);
     setShiftReports([]);
@@ -297,7 +297,7 @@ const Shift = () => {
     refetchWorkSchedule();
     // refetchShiftReports();
 
-    return importStaffShift(file);
+    return await importStaffShift(file);
   };
 
   const handleViewChange = (
@@ -358,15 +358,14 @@ const Shift = () => {
             variant="contained"
             color="primary"
             disabled={processing}
-            onClick={() => importCSV()}
+            onClick={() => importShiftCSV()}
             size="medium"
             // startIcon={<DownloadOutlinedIcon />}
           >
           </Button> */}
           {(userInfo?.role === "Admin" || userInfo?.role === "Manager") && (
             <FileButton
-             
-              submitHandler={importCSV}
+              submitHandler={importShiftCSV}
               loading={isImporting}
               // disabled={view === "workSchedule"}
               buttonProps={{

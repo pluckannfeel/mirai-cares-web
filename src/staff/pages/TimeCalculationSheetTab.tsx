@@ -11,12 +11,14 @@ import {
   Fab,
   IconButton,
   Button,
+  Autocomplete,
+  TextField,
 } from "@mui/material";
 import {
   FileDownload as FileDownloadIcon,
   FileUpload as FileUploadIcon,
 } from "@mui/icons-material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FilterDate } from "../../payslip/types/payslip";
 import { useTranslation } from "react-i18next";
 import {
@@ -33,13 +35,20 @@ import { baseUrl } from "../../api/server";
 import { useAuth } from "../../auth/contexts/AuthProvider";
 import FileButton from "../../core/components/FileButton";
 import { useImportStaffShift } from "../../shift/hooks/useImportStaffShift";
-import { StaffWorkSchedule } from "../../shift/types/StaffWorkSchedule";
+import {
+  StaffScheduleSelect,
+  StaffWorkSchedule,
+} from "../../shift/types/StaffWorkSchedule";
 import { useSnackbar } from "../../core/contexts/SnackbarProvider";
+import { useStaffSelect } from "../hooks/useStaffSelection";
+import { StaffTimeOverallRecord } from "../types/calculations";
 
 const TimeCalculationSheetTab = () => {
   const { t, i18n } = useTranslation();
   const snackbar = useSnackbar();
   const { userInfo } = useAuth();
+
+  const { data: staffSelection } = useStaffSelect();
 
   const { isImporting, importStaffShift } = useImportStaffShift();
 
@@ -57,10 +66,22 @@ const TimeCalculationSheetTab = () => {
     month: month.toString(),
   });
 
+  const [staffSelect, setStaffSelect] = useState<StaffScheduleSelect>({
+    id: "all",
+    english_name: "All",
+    japanese_name: "全員",
+  } as StaffScheduleSelect);
+
+  const [staffTimeRecords, setStaffTimeRecords] =
+    useState<StaffTimeOverallRecord>({
+      records: [],
+      totalWorkHours: 0,
+    });
+
   // get the current date year and date month by dayjs and format it to string to e.g "2024-02"
 
   const {
-    data: records,
+    data: initialRecords,
     isLoading,
     refetch: reloadRecords,
   } = useStaffTimeCalculation(`${filterDate.year}-${filterDate.month}`);
@@ -72,10 +93,10 @@ const TimeCalculationSheetTab = () => {
   const downloadCalculationCsv = async () => {
     try {
       const formData = new FormData();
-      formData.append("records", JSON.stringify(records)); // Sending as a JSON string
+      formData.append("records", JSON.stringify(staffTimeRecords.records)); // Sending as a JSON string
 
       const response = await fetch(
-        `${baseUrl}/staff/download_salarycalculation`,
+        `${baseUrl}/shift/download_salarycalculation`,
         {
           method: "POST", // or 'PUT
           body: formData, // FormData will set the `Content-Type` to `multipart/form-data` and include the boundary
@@ -118,6 +139,27 @@ const TimeCalculationSheetTab = () => {
 
     return await importStaffShift(file);
   };
+
+  useEffect(() => {
+    if (!initialRecords) {
+      setStaffTimeRecords({
+        records: [],
+
+        totalWorkHours: 0,
+      });
+    } else {
+      if (staffSelect) {
+        const totalWorkHours = initialRecords.reduce((acc, record) => {
+          return acc + record.total_work_hours;
+        }, 0);
+
+        setStaffTimeRecords({
+          records: initialRecords,
+          totalWorkHours,
+        });
+      }
+    }
+  }, [initialRecords]);
 
   return (
     <React.Fragment>
@@ -201,6 +243,13 @@ const TimeCalculationSheetTab = () => {
                             year: e.target.value,
                           };
                         });
+
+                        // remove selected staff
+                        setStaffSelect({
+                          id: "all",
+                          english_name: "All",
+                          japanese_name: "全員",
+                        } as StaffScheduleSelect);
                       }}
                     >
                       {years.map((option) => (
@@ -244,6 +293,12 @@ const TimeCalculationSheetTab = () => {
                             month: e.target.value,
                           };
                         });
+
+                        setStaffSelect({
+                          id: "all",
+                          english_name: "All",
+                          japanese_name: "全員",
+                        } as StaffScheduleSelect);
                       }}
                     >
                       {i18n.language === "en"
@@ -265,6 +320,125 @@ const TimeCalculationSheetTab = () => {
           </Card>
         </Grid>
 
+        <Grid item xs={12} sm={3}>
+          <Card>
+            <CardHeader
+              sx={{ textAlign: "center" }}
+              title={t("salaryCalculation.table.filter.staff")}
+            />
+            <CardContent>
+              <Autocomplete
+                freeSolo
+                id="staff-select"
+                size="small"
+                options={[
+                  {
+                    id: "all",
+                    english_name: "All",
+                    japanese_name: "全員",
+                  },
+                  ...(Array.isArray(staffSelection) ? staffSelection : []),
+                ]}
+                getOptionLabel={(option: string | StaffScheduleSelect) => {
+                  // Check if the option is a string
+                  if (typeof option === "string") {
+                    return option;
+                  }
+
+                  // If option is a StaffScheduleSelect, process it
+                  const name =
+                    i18n.language === "en"
+                      ? option.english_name
+                      : option.japanese_name;
+                  return name;
+                }}
+                value={staffSelect}
+                onChange={(event, newValue) => {
+                  // always clear selected when staff is changed
+                  // setSelected([]);
+
+                  setStaffSelect(newValue as StaffScheduleSelect);
+
+                  if (!newValue) {
+                    setStaffTimeRecords({
+                      records: [],
+                      totalWorkHours: 0,
+                    });
+                    return;
+                  }
+
+                  const val = newValue as StaffScheduleSelect;
+
+                  if (val.id === "all") {
+                    if (initialRecords) {
+                      const totalWorkHours = initialRecords.reduce(
+                        (acc, record) => {
+                          return acc + record.duration;
+                        },
+                        0
+                      );
+
+                      setStaffTimeRecords({
+                        records: initialRecords,
+                        totalWorkHours,
+                      });
+                    } else {
+                      setStaffTimeRecords({
+                        records: [],
+                        totalWorkHours: 0,
+                      });
+                    }
+
+                    return;
+                  }
+
+                  // filter by staff_code and set the state
+                  if (initialRecords) {
+                    const filteredRecords = initialRecords.filter(
+                      (record) => record.staff_code === val.staff_code
+                    );
+
+                    // console.log(filteredRecords);
+
+                    const totalWorkMinutes = filteredRecords.reduce(
+                      (acc, record) => {
+                        return acc + record.duration;
+                      },
+                      0
+                    );
+
+                    // console.log(totalWorkMinutes);
+
+                    // const totalWorkHours = totalWorkMinutes / 60;
+
+                    const totalWorkDays = new Set(
+                      filteredRecords.map((record) => record.date)
+                    ).size;
+
+                    setStaffTimeRecords({
+                      records: filteredRecords,
+                      totalWorkHours: totalWorkMinutes,
+                    });
+                  } else {
+                    setStaffTimeRecords({
+                      records: [],
+                      totalWorkHours: 0,
+                    });
+                  }
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label={t(
+                      "staffWorkSchedule.autoCompleteField.searchStaff.label"
+                    )}
+                  />
+                )}
+              />
+            </CardContent>
+          </Card>
+        </Grid>
+
         {/* Offset 3/4 of the area */}
         <Grid item xs={12} sm={10}></Grid>
 
@@ -275,7 +449,7 @@ const TimeCalculationSheetTab = () => {
             onEdit={() => {}}
             selected={[]}
             onSelectedChange={() => {}}
-            timeRecords={records || []}
+            timeRecords={staffTimeRecords.records}
             processing={processing}
           />
         </Grid>

@@ -18,7 +18,7 @@ const addStaffWorkSchedule = async (
   );
 
   const { data } = await axiosInstance.post(
-    "/staff/add_shift",
+    "/shift/add_shift",
     formData
   );
 

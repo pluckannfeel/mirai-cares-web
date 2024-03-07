@@ -291,9 +291,6 @@ const AttendanceRecord = () => {
                     size="small"
                     // component="fieldset"
                     margin="none"
-                    // sx={{
-                    //   marginBottom: 2,
-                    // }}
                   >
                     <InputLabel id="month">
                       {t("payslip.filter.month")}
@@ -346,11 +343,7 @@ const AttendanceRecord = () => {
         </Grid>
 
         <Grid item xs={12} sm={3}>
-          <Card
-          // sx={{
-          //   marginBottom: 2,
-          // }}
-          >
+          <Card>
             <CardHeader
               sx={{ textAlign: "center" }}
               title={t("attendanceRecord.filter.staff")}

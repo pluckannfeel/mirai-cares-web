@@ -26,7 +26,7 @@ import {
   Person as PersonIcon,
 } from "@mui/icons-material";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Empty from "../../core/components/Empty";
 import * as selectUtils from "../../core/utils/selectUtils";
@@ -58,6 +58,11 @@ const headCells: HeadCell[] = [
     id: "nationality",
     align: "left",
     label: "salaryCalculation.table.headers.nationality",
+  },
+  {
+    id: "total_days",
+    align: "right",
+    label: "salaryCalculation.table.headers.total_days",
   },
   {
     id: "total_hours",
@@ -114,6 +119,7 @@ function EnhancedTableHead({
           "staff",
           "staff_code",
           "nationality",
+          "total_work_days",
           "total_work_hours",
           "night_work_hours",
           "holiday_work_hours",
@@ -265,6 +271,10 @@ const TimeCalculationRow = ({
     nationality: {
       label: timeRecord.nationality,
       align: "left",
+    },
+    total_work_days: {
+      label: timeRecord.total_work_days,
+      align: "right",
     },
     total_work_hours: {
       label: timeRecord.total_work_hours,
@@ -425,7 +435,8 @@ const TimeCalculationTable = ({
   timeRecords,
 }: TimeCalculationTableProps) => {
   const theme = useTheme();
-  const [page, setPage] = useState(0);
+  const { t } = useTranslation();
+  const [page, setPage] = useState(timeRecords.length);
   //   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [rowsPerPage, setRowsPerPage] = useState(timeRecords.length);
 
@@ -447,6 +458,16 @@ const TimeCalculationTable = ({
     setPage(newPage);
   };
 
+  useEffect(() => {
+    // Adjust rowsPerPage based on files length
+    setRowsPerPage(timeRecords.length || 10);
+    setPage(0); // Optionally reset page to the first if files array changes
+
+    // You can also add any logic here that should run when `files` or `selected` changes
+    // For example, logging the change, or performing validation, etc.
+    // console.log("Files or selected state changed");
+  }, [timeRecords]); // Dependency array, effect runs when `files` or `selected` changes
+
   const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -457,7 +478,7 @@ const TimeCalculationTable = ({
   const isSelected = (id: string) => selected.indexOf(id) !== -1;
 
   if (timeRecords.length === 0) {
-    return <Empty title="No time sheet yet" />;
+    return <Empty title={t("salaryCalculation.table.empty")} />;
   }
 
   return (
@@ -501,7 +522,7 @@ const TimeCalculationTable = ({
           </TableBody>
         </Table>
         <TablePagination
-          rowsPerPageOptions={[5, 10, timeRecords.length]}
+          rowsPerPageOptions={[1, 5, 10, 20, rowsPerPage]}
           component="div"
           lang={i18n.language === "en" ? "en" : "ja"}
           sx={{

@@ -2123,14 +2123,17 @@
         "staff_name": "社員名",
         "nationality": "国籍",
         "total_hours": "就労時間合計",
+        "total_days": "出勤日数",
         "total_night_hours": "夜勤時間合計",
         "total_holiday_hours": "祝日勤務時間",
         "group_home_hours": "Gホーム労働時間",
         "group_home_stays": "Gホーム宿泊回数"
       },
       "filter": {
-        "date": "日付"
-      }
+        "date": "日付",
+        "staff": "スタッフ名"
+      },
+      "empty": "記録なし"
     }
   },
   "archive": {

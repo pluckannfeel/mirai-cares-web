@@ -3,6 +3,7 @@ interface StaffTimeBaseRecord {
   staff: string;
   staff_code: string;
   nationality: string;
+  total_work_days: number;
   total_work_hours: number;
   night_work_hours: number;
   holiday_work_hours: number;
@@ -17,3 +18,9 @@ interface DynamicPatientHours {
 
 // Combining the interfaces for use
 export type StaffTimeRecord = StaffTimeBaseRecord & DynamicPatientHours;
+
+export type StaffTimeOverallRecord = {
+  records: StaffTimeRecord[];
+  totalWorkHours: number;
+  // totalWorkDays: number;
+};

@@ -431,7 +431,7 @@ const AttendanceRecordTable = ({
         </Table>
 
         <TablePagination
-          rowsPerPageOptions={[5, 10, 15, 20, 25, attendanceRecords.length]}
+          rowsPerPageOptions={[0,5, 10, 15, 20, 25, attendanceRecords.length]}
           component="div"
           lang={i18n.language === "en" ? "en" : "ja"}
           sx={{

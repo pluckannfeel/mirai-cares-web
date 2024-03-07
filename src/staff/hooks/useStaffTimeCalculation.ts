@@ -10,7 +10,7 @@ const fetchStaffTimeCalculation = async (
   formData.append("selected_date", selectedDate);
 
   const { data } = await axiosInstance.post(
-    "/staff/all_staff_time_calculation",
+    "/shift/all_staff_time_calculation",
     formData,
     {
       headers: {

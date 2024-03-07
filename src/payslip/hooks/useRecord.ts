@@ -4,7 +4,7 @@ import { AxiosInstance } from "axios";
 import { axiosInstance } from "../../api/server";
 
 const fetchRecord = async (): Promise<OverallRecord> => {
-  const { data } = await axiosInstance("/staff/total_work_hours");
+  const { data } = await axiosInstance("/shift/total_work_hours");
 
   return data;
 };

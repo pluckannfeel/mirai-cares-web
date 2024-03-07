@@ -2102,14 +2102,17 @@
         "staff_name": "Staff Name",
         "nationality": "Nationality",
         "total_hours": "Total Hours Worked",
+        "todal_days": "Total Days Worked",
         "total_night_hours": "Total Night Hours Worked",
         "total_holiday_hours": "Total Holiday Hours Worked",
         "group_home_hours": "Group Home Hours Worked",
         "group_home_stays": "Group Home Stays"
       },
       "filter": {
-        "date": "Date"
-      }
+        "date": "Date",
+        "staff": "Staff"
+      },
+      "empty": "No records to show"
     }
   },
   "archive": {

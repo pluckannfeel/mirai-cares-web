@@ -16,7 +16,7 @@ const updateStaffWorkSchedule = async (
 
   formData.append("staff_shift_json", JSON.stringify(shift));
 
-  const { data } = await axiosInstance.put("/staff/update_shift", formData, {
+  const { data } = await axiosInstance.put("/shift/update_shift", formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
