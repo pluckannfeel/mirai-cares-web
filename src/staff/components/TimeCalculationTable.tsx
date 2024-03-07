@@ -305,14 +305,21 @@ const TimeCalculationRow = ({
     //   );
     // }
     if (typeof cellValue === "number") {
-      if (Number.isInteger(cellValue)) {
-        content = cellValue.toString(); // No decimal part, display as an integer
-      } else {
-        content = cellValue.toFixed(2); // Has a decimal part, format to one decimal place
-      }
-
       if (cellValue === 0) {
         content = "-";
+      } else if (Number.isInteger(cellValue)) {
+        content = cellValue.toString(); // No decimal part, display as an integer
+      } else {
+        // Convert to string to analyze decimal part
+        const stringRepresentation = cellValue.toString();
+        const decimalPart = stringRepresentation.split(".")[1]; // Get the part after the decimal
+        const decimalPlaces = decimalPart ? decimalPart.length : 0; // Determine the length of the decimal part
+
+        if (decimalPlaces > 1) {
+          content = cellValue.toFixed(2); // More than one decimal, format to two decimal places
+        } else {
+          content = cellValue.toFixed(1); // One decimal, format to one decimal place
+        }
       }
     } else if (
       cellValue === undefined ||

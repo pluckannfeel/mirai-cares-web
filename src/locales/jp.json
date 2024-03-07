@@ -1473,7 +1473,9 @@
     "notifications": {
       "addSuccess": "{{staff.name}}の勤務表を追加しました！",
       "deleteSuccess": "勤務予定表が削除されました！",
-      "updateSuccess": "{{staff.name}}の勤務表を更新しました！"
+      "updateSuccess": "{{staff.name}}の勤務表を更新しました！",
+      "updateRecordSuccess": "記録「DB」が更新されました！",
+      "updateRecordFailed": "記録「DB」の更新に失敗しました！"
     },
     "title": "スタッフ勤務表"
   },

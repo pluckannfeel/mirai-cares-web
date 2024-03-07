@@ -13,6 +13,7 @@ import { useTranslation } from "react-i18next";
 import { StaffWorkSchedule } from "../../shift/types/StaffWorkSchedule";
 import { usePushNotification } from "../../admin/hooks/usePushNotification";
 import { PushNotification } from "../../admin/types/notification";
+import { useSnackbar } from "../contexts/SnackbarProvider";
 
 type FileButtonProps = {
   submitHandler: (file: File) => Promise<StaffWorkSchedule>;
@@ -28,6 +29,7 @@ const FileButton: React.FC<FileButtonProps> = ({
   // disabled
 }) => {
   const { t } = useTranslation();
+  const snackbar = useSnackbar();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const hiddenFileInput = useRef<HTMLInputElement>(null);
 
@@ -55,12 +57,23 @@ const FileButton: React.FC<FileButtonProps> = ({
 
     submitHandler(selectedFile)
       .then(() => {
+        snackbar.success(
+          t("staffWorkSchedule.notifications.updateRecordSuccess")
+        );
+
         // send notifications to all staff which has tokens
         pushNotification({
           staff_code: "all",
           title: t("payslip.push_notifications.newShiftScheduleTitle"),
           body: t("payslip.push_notifications.newShiftScheduleBody"),
         } as PushNotification);
+      })
+      .catch((error) => {
+        snackbar.error(
+          `${t(
+            "staffWorkSchedule.notifications.updateRecordFailed"
+          )} : ${error}`
+        );
       })
       .finally(() => {
         if (hiddenFileInput.current) {
@@ -79,7 +92,7 @@ const FileButton: React.FC<FileButtonProps> = ({
         style={{ display: "none" }}
         accept=".csv"
       />
-      <Button  onClick={handleClick} {...buttonProps}>
+      <Button onClick={handleClick} {...buttonProps}>
         {buttonProps?.title}
       </Button>
       <Dialog open={selectedFile != null} onClose={handleClose}>

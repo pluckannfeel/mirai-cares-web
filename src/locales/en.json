@@ -1469,7 +1469,9 @@
     "notifications": {
       "addSuccess": "{{staff.name}} schedule has been added!",
       "deleteSuccess": "A schedule has been deleted!",
-      "updateSuccess": "{{staff.name}} schedule has been updated!"
+      "updateSuccess": "{{staff.name}} schedule has been updated!",
+      "updateRecordSuccess": "Database has been updated!",
+      "updateRecordFailed": "Database has not been updated!"
     },
     "title": "Staff Work Schedule"
   },

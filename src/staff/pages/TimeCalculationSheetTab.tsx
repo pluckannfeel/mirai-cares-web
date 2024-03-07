@@ -33,9 +33,12 @@ import { baseUrl } from "../../api/server";
 import { useAuth } from "../../auth/contexts/AuthProvider";
 import FileButton from "../../core/components/FileButton";
 import { useImportStaffShift } from "../../shift/hooks/useImportStaffShift";
+import { StaffWorkSchedule } from "../../shift/types/StaffWorkSchedule";
+import { useSnackbar } from "../../core/contexts/SnackbarProvider";
 
 const TimeCalculationSheetTab = () => {
   const { t, i18n } = useTranslation();
+  const snackbar = useSnackbar();
   const { userInfo } = useAuth();
 
   const { isImporting, importStaffShift } = useImportStaffShift();
@@ -56,9 +59,11 @@ const TimeCalculationSheetTab = () => {
 
   // get the current date year and date month by dayjs and format it to string to e.g "2024-02"
 
-  const { data: records, isLoading } = useStaffTimeCalculation(
-    `${filterDate.year}-${filterDate.month}`
-  );
+  const {
+    data: records,
+    isLoading,
+    refetch: reloadRecords,
+  } = useStaffTimeCalculation(`${filterDate.year}-${filterDate.month}`);
 
   // console.log(records);
 
@@ -104,10 +109,15 @@ const TimeCalculationSheetTab = () => {
   };
 
   const importShiftCSV = async (file: File) => {
+    setFilterDate({
+      year: year.toString(),
+      month: month.toString(),
+    });
+
+    reloadRecords();
+
     return await importStaffShift(file);
   };
-
-  //   console.log(records);
 
   return (
     <React.Fragment>
