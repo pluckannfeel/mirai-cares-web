@@ -308,7 +308,7 @@ const TimeCalculationRow = ({
       if (Number.isInteger(cellValue)) {
         content = cellValue.toString(); // No decimal part, display as an integer
       } else {
-        content = cellValue.toFixed(1); // Has a decimal part, format to one decimal place
+        content = cellValue.toFixed(2); // Has a decimal part, format to one decimal place
       }
 
       if (cellValue === 0) {
