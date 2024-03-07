@@ -12,7 +12,10 @@ import {
   IconButton,
   Button,
 } from "@mui/material";
-import { FileDownload as FileDownloadIcon } from "@mui/icons-material";
+import {
+  FileDownload as FileDownloadIcon,
+  FileUpload as FileUploadIcon,
+} from "@mui/icons-material";
 import React, { useState } from "react";
 import { FilterDate } from "../../payslip/types/payslip";
 import { useTranslation } from "react-i18next";
@@ -27,9 +30,15 @@ import TimeCalculationTable from "../components/TimeCalculationTable";
 import AdminAppBar from "../../admin/components/AdminAppBar";
 import AdminToolbar from "../../admin/components/AdminToolbar";
 import { baseUrl } from "../../api/server";
+import { useAuth } from "../../auth/contexts/AuthProvider";
+import FileButton from "../../core/components/FileButton";
+import { useImportStaffShift } from "../../shift/hooks/useImportStaffShift";
 
 const TimeCalculationSheetTab = () => {
   const { t, i18n } = useTranslation();
+  const { userInfo } = useAuth();
+
+  const { isImporting, importStaffShift } = useImportStaffShift();
 
   // Get the current date
   const currentDate = dayjs();
@@ -75,23 +84,27 @@ const TimeCalculationSheetTab = () => {
       // log
       // console.log(response.json);
 
-        // Create a hidden <a> element
-        const link = document.createElement("a");
-        link.style.display = "none";
-        document.body.appendChild(link);
+      // Create a hidden <a> element
+      const link = document.createElement("a");
+      link.style.display = "none";
+      document.body.appendChild(link);
 
-        // Set the <a> element's attributes
-        link.href = window.URL.createObjectURL(blob);
-        link.setAttribute("download", "給料計算.xlsx"); // Specify the file name
+      // Set the <a> element's attributes
+      link.href = window.URL.createObjectURL(blob);
+      link.setAttribute("download", "給料計算.xlsx"); // Specify the file name
 
-        // Simulate a click on the <a> element to trigger the download
-        link.click();
+      // Simulate a click on the <a> element to trigger the download
+      link.click();
 
-        // Cleanup by removing the <a> element
-        document.body.removeChild(link);
+      // Cleanup by removing the <a> element
+      document.body.removeChild(link);
     } catch (error) {
       console.error("Error downloading CSV:", error);
     }
+  };
+
+  const importShiftCSV = async (file: File) => {
+    return await importStaffShift(file);
   };
 
   //   console.log(records);
@@ -100,16 +113,34 @@ const TimeCalculationSheetTab = () => {
     <React.Fragment>
       <AdminAppBar>
         <AdminToolbar title={t("salaryCalculation.toolbar.title")}>
+          {(userInfo?.role === "Admin" || userInfo?.role === "Manager") && (
+            <FileButton
+              submitHandler={importShiftCSV}
+              loading={isImporting}
+              buttonProps={{
+                sx: {
+                  marginRight: 2,
+                  // padding: 1.2,
+                },
+                variant: "contained",
+                color: "warning",
+                // disabled: view !== "workSchedule",
+                size: "large",
+                title: t("common.import"),
+                endIcon: <FileUploadIcon />,
+              }}
+            />
+          )}
           <Button
             aria-label="logout"
             color="info"
             variant="contained"
             disabled={processing}
             onClick={() => downloadCalculationCsv()}
-            size="small"
+            size="large"
             endIcon={<FileDownloadIcon />}
           >
-            CSV
+            CSV {t("common.download")}
           </Button>
         </AdminToolbar>
       </AdminAppBar>
