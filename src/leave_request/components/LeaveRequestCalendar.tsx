@@ -233,7 +233,7 @@ const LeaveRequestCalendar = ({
           >
             <ArrowLeftIcon />
           </IconButton>
-          <Button onClick={handleToday}>{t("common.today")}</Button>
+          <Button onClick={handleToday}>{t("common.thisMonth")}</Button>
           <IconButton
             aria-label="next"
             component="span"
