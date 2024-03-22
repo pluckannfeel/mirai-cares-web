@@ -102,3 +102,14 @@ export function formatLastModifiedby(
 
   if (locale === "ja") return "不明";
 }
+
+export const archiveLists = [
+  {
+    label: "archive.list.archiveLibrary",
+    value: "archive/",
+  },
+  {
+    label: "archive.list.staffDocuments",
+    value: "uploads/staff/",
+  },
+];

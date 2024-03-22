@@ -22,6 +22,7 @@ type ArchiveUploadFileProps = {
   // submitHandler: (file: File) => void;
   buttonProps?: ButtonProps;
   loading: boolean;
+
   // currentPath: string;
 };
 
@@ -29,6 +30,7 @@ const ArchiveUploadFileButton: React.FC<ArchiveUploadFileProps> = ({
   submitHandler,
   buttonProps,
   loading,
+
   // currentPath,
 }) => {
   const { t } = useTranslation();

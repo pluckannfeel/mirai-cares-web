@@ -20,6 +20,7 @@ import {
   useTheme,
   Backdrop,
   CircularProgress,
+  SelectChangeEvent,
 } from "@mui/material";
 import {
   FileUpload as FileUploadIcon,
@@ -50,6 +51,7 @@ import { useDeleteFiles } from "../hooks/useDeleteFiles";
 import { useDownloadFiles } from "../hooks/useDownloadFiles";
 import ArchiveRenameFolderDialog from "../components/ArchiveRenameFolderDialog";
 import { useRenameFolder } from "../hooks/useRenameFolder";
+import { archiveLists } from "../helpers/functions";
 
 const ArchiveManagement = () => {
   const { t } = useTranslation();
@@ -76,11 +78,14 @@ const ArchiveManagement = () => {
   const [fileToBeReplaced, setfileToBeReplaced] = useState<File | undefined>(
     undefined
   );
-
+  // uploads/staff
   const [currentDirectory, setCurrentDirectory] = useState("archive/");
   const [pathHistory, setPathHistory] = useState<PathEntry[]>([
     { name: "archive.homeDirectory", path: "archive/" },
   ]);
+
+  //disable state for the action buttons if the current directory is uploads/staff/
+  const isStaffDirectory = currentDirectory.includes("staff");
 
   // list current directory hook
   const {
@@ -340,8 +345,9 @@ const ArchiveManagement = () => {
 
   return (
     <React.Fragment>
-      <AdminToolbar title={t("archive.title")}></AdminToolbar>
-
+      <AdminAppBar>
+        <AdminToolbar title={t("archive.title")}></AdminToolbar>
+      </AdminAppBar>
       {isDownloading && (
         <Backdrop
           sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
@@ -353,6 +359,78 @@ const ArchiveManagement = () => {
 
       <div
         style={{
+          width: "20vw",
+          paddingTop: "6px",
+          padding: "12px",
+          marginBottom: "20px",
+          borderRadius: "12px",
+          backgroundColor: theme.palette.background.paper,
+        }}
+      >
+        <FormControl
+          // sx={{ m: 1, minWidth: 120 }}
+          fullWidth
+          size="small"
+          // component="fieldset"
+          margin="dense"
+          variant="standard"
+        >
+          <InputLabel
+            sx={{
+              fontSize: theme.typography.h4.fontSize,
+            }}
+            id="gender"
+          >
+            {t("archive.list.label")}
+          </InputLabel>
+          <Select
+            // fullWidth
+            autoComplete="archiveList"
+            // // autofocus
+            size="medium"
+            // name="archiveList"
+            // margin='dense'
+            id="archiveList"
+            label={t("archive.list.label")}
+            labelId="archiveList"
+            disabled={processing}
+            value={currentDirectory}
+            sx={{
+              ".MuiSelect-select": {
+                paddingY: "0.75rem", // Adjust padding as needed
+              },
+              ".MuiOutlinedInput-notchedOutline": {
+                borderColor: "transparent", // Optionally remove the border
+              },
+            }}
+            onChange={(event: SelectChangeEvent) => {
+              const value = event.target.value as string;
+              setCurrentDirectory(value);
+
+              // set path history
+              if (value.includes("staff")) {
+                console.log(pathHistory);
+                setPathHistory([
+                  { name: "archive.staffDocuments", path: "uploads/staff/" },
+                ]);
+              } else {
+                setPathHistory([
+                  { name: "archive.homeDirectory", path: "archive/" },
+                ]);
+              }
+            }}
+          >
+            {archiveLists.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {t(option.label)}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </div>
+
+      <div
+        style={{
           margin: "10px 0",
         }}
       >
@@ -361,7 +439,7 @@ const ArchiveManagement = () => {
           buttonProps={{
             title: t("archive.actions.uploadFile"),
             variant: "contained",
-            disabled: isFileUploading,
+            disabled: isFileUploading || isStaffDirectory,
             color: "warning",
             size: "medium",
             endIcon: <FileUploadIcon />,
@@ -389,6 +467,7 @@ const ArchiveManagement = () => {
           color="primary"
           variant="text"
           // disabled={processing}
+          disabled={isStaffDirectory}
           onClick={() => handleOpenAddFolderDialog()}
           size="large"
           sx={{
@@ -420,7 +499,7 @@ const ArchiveManagement = () => {
           {t("archive.actions.reload")}
         </Button>
         <Button
-          disabled={!selected.length}
+          disabled={!selected.length || isStaffDirectory}
           aria-label="delete"
           color="error"
           variant="outlined"
@@ -509,7 +588,8 @@ const ArchiveManagement = () => {
             }}
             underline="hover"
           >
-            {entry.name === "archive.homeDirectory"
+            {entry.name === "archive.homeDirectory" ||
+            entry.name === "archive.staffDocuments"
               ? t(entry.name)
               : entry.name}
           </Link>

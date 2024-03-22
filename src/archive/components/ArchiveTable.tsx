@@ -391,7 +391,7 @@ const ArchiveRow = ({
             </ListItemIcon>{" "}
             {t("archive.actions.download")}
           </MenuItem>
-          {file.type === "folder" && (
+          {!file.key.includes("uploads/staff/") && file.type === "folder" && (
             <MenuItem onClick={handleRename}>
               <ListItemIcon>
                 <DriveFileRenameOutlineIcon />
@@ -407,12 +407,14 @@ const ArchiveRow = ({
             </ListItemIcon>{" "}
             {t("archive.actions.move")}
           </MenuItem> */}
-          <MenuItem onClick={handleDelete}>
-            <ListItemIcon>
-              <DeleteIcon />
-            </ListItemIcon>
-            {t("common.delete")}{" "}
-          </MenuItem>
+          {!file.key.includes("uploads/staff/") && (
+            <MenuItem onClick={handleDelete}>
+              <ListItemIcon>
+                <DeleteIcon />
+              </ListItemIcon>
+              {t("common.delete")}{" "}
+            </MenuItem>
+          )}
         </Menu>
       </TableCell>
       <TableCell align="right">

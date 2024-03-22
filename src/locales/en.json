@@ -2117,8 +2117,14 @@
   },
   "archive": {
     "title": "Archive",
-    "homeDirectory": "Home",
+    "homeDirectory": "Archive Home",
+    "staffDocuments": "Staff Documents",
     "totalFiles": "{{count}} Files",
+    "list": {
+      "label": "Select List",
+      "staffDocuments": "Staff Documents",
+      "archiveLibrary": "Archive/Library"
+    },
     "actions": {
       "uploadFile": "Upload File",
       "replaceFile": "Replace File",

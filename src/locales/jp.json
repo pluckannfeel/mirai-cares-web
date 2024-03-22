@@ -2138,8 +2138,14 @@
   },
   "archive": {
     "title": "アーカイブ・ライブラリー",
-    "homeDirectory": "ホーム",
+    "homeDirectory": "アーカイブ ホーム",
+    "staffDocuments": "スタッフ書類",
     "totalFiles": "{{count}} ファイル数",
+    "list": {
+      "label": "リストを選択",
+      "staffDocuments": "スタッフ書類",
+      "archiveLibrary": "アーカイブ・ライブラリー"
+    },
     "actions": {
       "uploadFile": "追加",
       "reload": "更新",
