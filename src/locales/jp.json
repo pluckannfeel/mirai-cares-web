@@ -1307,6 +1307,7 @@
     },
     "menu": {
       "information": "情報",
+      "staffCodeList": "スタッフコード",
       "documents": "書類作成"
     },
     "notifications": {
@@ -1375,6 +1376,15 @@
       },
       "actions": {
         "generate": "作成する"
+      }
+    },
+    "staffCodeList": {
+      "title": "スタッフコードリスト",
+      "table": {
+        "headers": {
+          "staff_code": "スタッフコード",
+          "staff_name": "スタッフ名"
+        }
       }
     }
   },

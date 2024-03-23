@@ -1313,6 +1313,7 @@
     },
     "menu": {
       "information": "Information",
+      "staffCodeList": "Staff Code List",
       "documents": "Document Creation"
     },
     "form": {
@@ -1371,6 +1372,15 @@
       },
       "actions": {
         "generate": "Generate Document"
+      }
+    },
+    "staffCodeList": {
+      "title": "Staff Code List",
+      "table": {
+        "headers": {
+          "staff_code": "Staff Code",
+          "staff_name": "Staff Name"
+        }
       }
     }
   },

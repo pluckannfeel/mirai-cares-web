@@ -70,6 +70,8 @@ const CompanyInformation = lazy(
   () => import("./company/pages/CompanyInformation")
 );
 
+const CompanyStaffCode = lazy(() => import("./company/pages/CompanyStaffCode"));
+
 const CompanyDocuments = lazy(() => import("./company/pages/CompanyDocuments"));
 
 //Medical Institution
@@ -148,6 +150,7 @@ const AppRoutes = () => {
 
           <Route path="company-information" element={<CompanyManagement />}>
             <Route index element={<CompanyInformation />} />
+            <Route path="staff-code-list" element={<CompanyStaffCode />} />
             <Route path="documents" element={<CompanyDocuments />} />
           </Route>
 

@@ -13,6 +13,10 @@ const companyMenuItems = [
     path: "",
   },
   {
+    key: "company.menu.staffCodeList",
+    path: "./staff-code-list",
+  },
+  {
     key: "company.menu.documents",
     path: "./documents",
   },
