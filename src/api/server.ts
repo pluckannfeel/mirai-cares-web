@@ -2,12 +2,9 @@ import axios, { AxiosError, AxiosInstance } from "axios";
 
 // Function to determine the base URL based on the environment
 const determineBaseUrl = () => {
-  // Use environment variables or hardcoded URLs based on the deployment stage
-  // console.log("process.env.NODE_ENV: " + process.env.NODE_ENV);
   if (import.meta.env.MODE === "production") {
-    // return "https://api.mirai-cares.com/";
-    // return "https://miraicares.ap-northeast-1.elasticbeanstalk.com/";
-    return "https://fkuy7wira5n3shbvxt3xy3wfqm0jhvzq.lambda-url.ap-northeast-1.on.aws";
+    return "https://api.mirai-cares.com/";
+    // return "https://fkuy7wira5n3shbvxt3xy3wfqm0jhvzq.lambda-url.ap-northeast-1.on.aws";
   } else if (import.meta.env.MODE === "development") {
     // Development URL; adjust as needed test-api
     return "http://localhost:8000";
@@ -28,9 +25,9 @@ export const googleMapApiKey = import.meta.env.VITE_GOOGLE_MAP_API_KEY;
 const instance: AxiosInstance = axios.create({
   baseURL: baseUrl,
   // ... other settings (like headers, timeout, etc.)
-  headers: {
-    "Access-Control-Allow-Origin": "*",
-  },
+  // headers: {
+  //   "Access-Control-Allow-Origin": "*",
+  // },
 });
 
 // Interceptor to enforce HTTPS
