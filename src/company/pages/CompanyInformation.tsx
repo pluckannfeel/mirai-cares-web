@@ -438,76 +438,106 @@ const CompanyInformation = () => {
                       sx={{ marginTop: 1.2 }}
                       fullWidth
                       value={formik.values.name}
+                      name="name"
+                      onChange={formik.handleChange}
                     />
                     <Input
                       sx={{ marginTop: 1.2 }}
                       fullWidth
                       value={formik.values.establishment_date}
+                      name="establishment_date"
+                      onChange={formik.handleChange}
                     />
                     <Input
                       sx={{ marginTop: 1.2 }}
                       fullWidth
                       value={formik.values.headoffice_postalcode}
+                      name="headoffice_postalcode"
+                      onChange={formik.handleChange}
                     />
                     <Input
                       sx={{ marginTop: 1.2 }}
                       fullWidth
                       value={formik.values.headoffice_address}
+                      name="headoffice_address"
+                      onChange={formik.handleChange}
                     />
                     <Input
                       sx={{ marginTop: 1.2 }}
                       fullWidth
                       value={formik.values.representative_name}
+                      name="representative_name"
+                      onChange={formik.handleChange}
                     />
                     <Input
                       sx={{ marginTop: 1.2 }}
                       fullWidth
                       value={formik.values.capital}
+                      name="capital"
+                      onChange={formik.handleChange}
                     />
                     <Input
                       sx={{ marginTop: 1.2 }}
                       fullWidth
                       value={formik.values.num_of_employees}
+                      name="num_of_employees"
+                      onChange={formik.handleChange}
                     />
                     <Input
                       sx={{ marginTop: 1.2 }}
                       fullWidth
                       value={formik.values.business_details}
+                      name="business_details"
+                      onChange={formik.handleChange}
                     />
                     <Input
                       sx={{ marginTop: 1.2 }}
                       fullWidth
                       value={formik.values.main_client}
+                      name="main_client"
+                      onChange={formik.handleChange}
                     />
                     <Input
                       sx={{ marginTop: 1.2 }}
                       fullWidth
                       value={formik.values.telephone_number}
+                      name="telephone_number"
+                      onChange={formik.handleChange}
                     />
                     <Input
                       sx={{ marginTop: 1.2 }}
                       fullWidth
                       value={formik.values.fax_number}
+                      name="fax_number"
+                      onChange={formik.handleChange}
                     />
                     <Input
                       sx={{ marginTop: 1.2 }}
                       fullWidth
                       value={formik.values.email}
+                      name="email"
+                      onChange={formik.handleChange}
                     />
                     <Input
                       sx={{ marginTop: 1.2 }}
                       fullWidth
                       value={formik.values.website}
+                      name="website"
+                      onChange={formik.handleChange}
                     />
                     <Input
                       sx={{ marginTop: 1.2 }}
                       fullWidth
                       value={formik.values.corporate_number}
+                      name="corporate_number"
+                      onChange={formik.handleChange}
                     />
                     <Input
                       sx={{ marginTop: 1.2 }}
                       fullWidth
                       value={formik.values.office_number}
+                      name="office_number"
+                      onChange={formik.handleChange}
                     />
                     <Input
                       sx={{ marginTop: 1.2 }}
@@ -515,6 +545,8 @@ const CompanyInformation = () => {
                       multiline
                       maxRows={3}
                       value={formik.values.trading_account}
+                      name="trading_account"
+                      onChange={formik.handleChange}
                     />
                   </>
                 )}
@@ -528,6 +560,8 @@ const CompanyInformation = () => {
                       multiline
                       maxRows={3}
                       value={formik.values.name}
+                      name="name"
+                      onChange={formik.handleChange}
                     />
                     <Input
                       color="info"
@@ -536,6 +570,8 @@ const CompanyInformation = () => {
                       multiline
                       maxRows={3}
                       value={formik.values.registration_number}
+                      name="registration_number"
+                      onChange={formik.handleChange}
                     />
                     <Input
                       color="info"
@@ -544,6 +580,8 @@ const CompanyInformation = () => {
                       multiline
                       maxRows={3}
                       value={formik.values.registration_date}
+                      name="registration_date"
+                      onChange={formik.handleChange}
                     />
                     <Input
                       color="info"
@@ -552,6 +590,8 @@ const CompanyInformation = () => {
                       multiline
                       maxRows={3}
                       value={formik.values.validity_period}
+                      name="validity_period"
+                      onChange={formik.handleChange}
                     />
                     <Input
                       color="info"
@@ -560,6 +600,8 @@ const CompanyInformation = () => {
                       multiline
                       maxRows={3}
                       value={formik.values.online_application_id}
+                      name="online_application_id"
+                      onChange={formik.handleChange}
                     />
                     <Input
                       color="info"
@@ -568,6 +610,8 @@ const CompanyInformation = () => {
                       multiline
                       maxRows={3}
                       value={formik.values.online_application_pass}
+                      name="online_application_pass"
+                      onChange={formik.handleChange}
                     />
                     <Input
                       color="info"
@@ -576,6 +620,8 @@ const CompanyInformation = () => {
                       multiline
                       maxRows={3}
                       value={formik.values.application_agent_certificate}
+                      name="application_agent_certificate"
+                      onChange={formik.handleChange}
                     />
                   </>
                 )}
@@ -589,6 +635,8 @@ const CompanyInformation = () => {
                       multiline
                       maxRows={3}
                       value={formik.values.name}
+                      name="name"
+                      onChange={formik.handleChange}
                     />
                     <Input
                       color="info"
@@ -597,6 +645,8 @@ const CompanyInformation = () => {
                       multiline
                       maxRows={3}
                       value={formik.values.registration_number}
+                      name="registration_number"
+                      onChange={formik.handleChange}
                     />
                     <Input
                       color="info"
@@ -605,6 +655,8 @@ const CompanyInformation = () => {
                       multiline
                       maxRows={3}
                       value={formik.values.service_type}
+                      name="service_type"
+                      onChange={formik.handleChange}
                     />
                     <Input
                       color="info"
@@ -613,6 +665,8 @@ const CompanyInformation = () => {
                       multiline
                       maxRows={3}
                       value={formik.values.plan_start_date}
+                      name="plan_start_date"
+                      onChange={formik.handleChange}
                     />
                     <Input
                       color="info"
@@ -621,6 +675,8 @@ const CompanyInformation = () => {
                       multiline
                       maxRows={3}
                       value={formik.values.specified_validity_period}
+                      name="specified_validity_period"
+                      onChange={formik.handleChange}
                     />
                   </>
                 )}
