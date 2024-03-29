@@ -3,8 +3,8 @@ import axios, { AxiosError, AxiosInstance } from "axios";
 // Function to determine the base URL based on the environment
 const determineBaseUrl = () => {
   if (import.meta.env.MODE === "production") {
-    return "https://api.mirai-cares.com/";
-    // return "https://fkuy7wira5n3shbvxt3xy3wfqm0jhvzq.lambda-url.ap-northeast-1.on.aws";
+    // return "https://api.mirai-cares.com/";
+    return "https://fkuy7wira5n3shbvxt3xy3wfqm0jhvzq.lambda-url.ap-northeast-1.on.aws";
   } else if (import.meta.env.MODE === "development") {
     // Development URL; adjust as needed test-api
     return "http://localhost:8000";
