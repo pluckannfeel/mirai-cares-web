@@ -14,6 +14,7 @@ import {
   Radio,
   Button,
   Typography,
+  Fab,
 } from "@mui/material";
 import { useSnackbar } from "../../core/contexts/SnackbarProvider";
 import {
@@ -47,6 +48,8 @@ import PrintDialog from "../components/PrintDialog";
 import { PrintStaffReport, PrintStaffShift } from "../types/PrintInformation";
 import { useAuth } from "../../auth/contexts/AuthProvider";
 import ShiftTimeline from "../components/StaffShiftTimelineView";
+import { useAddStaffWorkSchedule } from "../hooks/useAddStaffWorkSchedule";
+import { Add as AddIcon } from "@mui/icons-material";
 
 const Shift = () => {
   const snackbar = useSnackbar();
@@ -78,13 +81,15 @@ const Shift = () => {
     undefined
   );
 
+  const { isAdding: isShiftAdding, addStaffWorkSchedule } =
+    useAddStaffWorkSchedule();
   const { isUpdating: isShiftUpdating, updateStaffWorkSchedule } =
     useUpdateStaffWorkSchedule();
   const { isDeleting: isShiftDeleting, deleteStaffWorkSchedule } =
     useDeleteStaffWorkSchedule();
   const { isImporting, importStaffShift } = useImportStaffShift();
 
-  const processing = isShiftUpdating || isShiftDeleting;
+  const processing = isShiftAdding || isShiftUpdating || isShiftDeleting;
 
   // ================ shift reports ================
   const [
@@ -194,19 +199,19 @@ const Shift = () => {
     ]
   );
 
-  // const handleAddEvent = async (sws: Partial<StaffWorkSchedule>) => {
-  //   // get only staff id from staff sws['staff]
-  //   // addStaffWorkSchedule(sws as StaffWorkSchedule)
-  //   //   .then(() => {
-  //   //     snackbar.success(
-  //   //       t("calendar.notifications.addSuccess", { sws: sws.staff })
-  //   //     );
-  //   //     setOpenSwsDialog(false);
-  //   //   })
-  //   //   .catch(() => {
-  //   //     snackbar.error(t("common.errors.unexpected.subTitle"));
-  //   //   });
-  // };
+  const handleAddEvent = async (sws: Partial<StaffWorkSchedule>) => {
+    // get only staff id from staff sws['staff]
+    addStaffWorkSchedule(sws as StaffWorkSchedule)
+      .then(() => {
+        snackbar.success(
+          t("calendar.notifications.addSuccess", { sws: sws.staff })
+        );
+        setOpenSwsDialog(false);
+      })
+      .catch(() => {
+        snackbar.error(t("common.errors.unexpected.subTitle"));
+      });
+  };
 
   const handleDeleteStaffWorkSchedule = async () => {
     // console.log(swsDeleted)
@@ -382,14 +387,14 @@ const Shift = () => {
             />
           )}
 
-          {/* <Fab
+          <Fab
             aria-label="add work schedule"
             color="primary"
             onClick={() => handleOpenSwsDialog()}
             size="small"
           >
             <AddIcon />
-          </Fab> */}
+          </Fab>
         </AdminToolbar>
       </AdminAppBar>
 
@@ -429,7 +434,7 @@ const Shift = () => {
           <Grid
             container
             // margin={2.5}
-            padding={2.5}
+            paddingX={2.5}
             marginBottom={0}
             spacing={0}
             paddingBottom={0}
@@ -486,6 +491,7 @@ const Shift = () => {
                 <Autocomplete
                   // fullWidth
                   freeSolo
+                  size="small"
                   id="staff-select"
                   options={[
                     {
@@ -608,6 +614,7 @@ const Shift = () => {
                 <Autocomplete
                   // fullWidth
                   freeSolo
+                  size="small"
                   id="patient-select"
                   options={patientSelection || []}
                   // getOptionLabel={(option: PatientSelect) => {
@@ -763,8 +770,8 @@ const Shift = () => {
       {/* // Shift  Dialog */}
       {openSwsDialog && (
         <StaffWorkScheduleDialog
-          // onAdd={handleAddEvent}
-          onAdd={() => {}}
+          onAdd={handleAddEvent}
+          // onAdd={() => {}}
           onClose={handleCloseEventDialog}
           onDelete={handleOpenConfirmDeleteDialog}
           onUpdate={handleUpdateStaffWorkSchedule}

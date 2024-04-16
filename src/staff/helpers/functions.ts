@@ -12,12 +12,13 @@ export const getGenderColor = <T extends Record<string, any>>(
 ) => {
   switch (gender) {
     case "female":
-      return "#FFF9C4"; // Yellow for Female
+      return "#FA5252"; // Yellow for Female
     case "male":
-      return "#7FBCD2"; // Blue for Male
+      // return "#7FBCD2"; // Blue for Male
+      return "#15AABF";
     case "other":
       // baby pink for other
-      return "#FFC0CB";
+      return "#C0D1B0";
     // return ; // Red for Other
     default:
       return arg.event.backgroundColor;

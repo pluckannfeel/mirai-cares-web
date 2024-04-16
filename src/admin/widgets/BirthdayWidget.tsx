@@ -311,8 +311,8 @@ const BirthdayWidget = ({ onEventClick, ...calendarProps }: CalendarProps) => {
             showNonCurrentDates={false}
             // now={initialNow.getTime()}
             locale={i18n.language}
-            // timeZone='Asia/Tokyo'
-            timeZone="UTC"
+            timeZone='Asia/Tokyo'
+            // timeZone="UTC"
             firstDay={1}
             ref={onCalendarRefSet}
             events={birthdayEvents}

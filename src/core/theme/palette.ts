@@ -25,6 +25,18 @@ const palette = {
     "800": "#C25775",
     "900": "#BC4566",
   },
+  choco: {
+    "900": "#511912",
+    "800": "#622f29",
+    "700": "#734641",
+    "600": "#855e59",
+    "500": "#967570",
+    "400": "#a88c88",
+    "300": "#b9a3a0",
+    "200": "#cabab7",
+    "100": "#dcd1cf",
+    "50": "#ede8e7",
+  },
 };
 
 export const darkPalette = {
@@ -39,7 +51,8 @@ export const darkPalette = {
   },
   primary: {
     // main: "#64B5F6",
-    main: "#FCC8D1",
+    // main: "#FCC8D1",
+    main : "#F8ECEF",
     contrastText: palette.pink[900],
   },
   secondary: {
@@ -81,6 +94,8 @@ export const lightPalette = {
   primary: {
     // main: "#2962FF",
     main: "#E59999",
+    // main: "#511912",
+
     contrastText: "#FFF",
   },
   secondary: {
@@ -99,7 +114,7 @@ export const lightPalette = {
   //   main: "#ff3d00",
   // },
   text: {
-    primary: palette.pink[700],
+    primary: palette.pink[900],
     secondary: palette.pink[500],
     disabled: palette.pink[300],
   },

@@ -46,7 +46,7 @@ const StyledWrapper = styled("div")(
     .fc th {
       border-right: none;
       border-left: none;
-      padding: 8px 0;
+      // padding: 8px 0;
     }
   
     .fc-theme-standard .fc-scrollgrid {
@@ -67,7 +67,7 @@ const StyledWrapper = styled("div")(
       color: ${theme.palette.text.secondary};
       font-size: auto;
       font-weight: ${theme.typography.fontWeightMedium};
-      padding: 12px;
+      // padding: 12px;
     }
   
     .fc .fc-daygrid-day.fc-day-today {
@@ -166,7 +166,6 @@ const SWSCalendar = ({
   const handleWeekView = () => handleViewChange("dayGridWeek");
   const handleListView = () => handleViewChange("listMonth"); // Adjust to your specific day view
 
-
   const scheduleSource = useMemo(() => {
     return schedule.map((schedule: StaffWorkSchedule) => {
       if (schedule.color && staffColors.includes(schedule.color)) {
@@ -225,7 +224,7 @@ const SWSCalendar = ({
               "& .MuiButton-root": {
                 borderColor: "transparent", // Remove border color
                 // Target the buttons within the ButtonGroup
-                padding: "8px 20px", // Adjust padding to your preference
+                padding: "8px 20px", 
                 // Other styles here if needed
               },
             }}
@@ -260,7 +259,8 @@ const SWSCalendar = ({
             day: "numeric",
             weekday: "long",
           }}
-          // now={initialNow.getTime()}
+          // height={"100vh"}
+          height={"auto"}
           locale={i18n.language}
           timeZone="Asia/Tokyo"
           // timeZone="UTC"
@@ -292,10 +292,12 @@ const SWSCalendar = ({
             const eventStyle = {
               backgroundColor: eventColor, // Set the background color based on event properties
               color: "#000", // Set the text color based on event properties
-              padding: "5px 10px",
-              margin: "0 5px",
+              // padding: "5px 10px",
+              padding: "2px",
+              // margin: "0 5px",
+              width: "100%",
               borderRadius: "5px",
-              fontSize: "17px",
+              fontSize: "0.8rem",
               // textAlign: "justify" as "justify",
             };
 
@@ -306,24 +308,22 @@ const SWSCalendar = ({
 
             return (
               <Box sx={eventStyle}>
-                <div style={{ fontWeight: "bold" }}>
-                  {/* check if the current view is not month, dont trim arg.event.extendedProps.staff  */}
-                  {arg.view.type !== "listWeek"
-                    ? trimStringWithEllipsis(arg.event.extendedProps.staff, 10)
-                    : arg.event.extendedProps.staff}
-                </div>
-                <div>
-                  {/* {`${formatTime24Hours(
-                  arg.event.start as Date
-                )} - ${formatTime24Hours(arg.event.end  as Date)}`} */}
+                <div style={{fontSize: "0.7rem",}}>
                   {`${convertToTimeString(
                     arg.event.start as Date
                   )} - ${convertToTimeString(arg.event.end as Date)}`}
                 </div>
-                <div>
+                <div style={{ fontWeight: "bold" }}>
+                  {/* check if the current view is not month, dont trim arg.event.extendedProps.staff  */}
+                  {arg.view.type !== "listWeek"
+                    ? trimStringWithEllipsis(arg.event.extendedProps.staff, 12)
+                    : arg.event.extendedProps.staff}
+                </div>
+
+                {/* <div>
                   {patient_or_service_details} -{" "}
                   {arg.event.extendedProps.service_type}
-                </div>
+                </div> */}
                 {/* <div>{arg.event.extendedProps.service_details}</div> */}
               </Box>
             );
