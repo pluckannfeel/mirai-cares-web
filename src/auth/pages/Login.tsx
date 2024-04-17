@@ -15,6 +15,7 @@ import * as Yup from "yup";
 import BoxedLayout from "../../core/components/BoxedLayout";
 import { useSnackbar } from "../../core/contexts/SnackbarProvider";
 import { useAuth } from "../contexts/AuthProvider";
+import Carousel from "../../core/components/Carousel";
 
 const Login = () => {
   const { isLoggingIn, login } = useAuth();
@@ -48,21 +49,26 @@ const Login = () => {
     onSubmit: (values) => handleLogin(values.email, values.password),
   });
 
+  const carouselImages = ["/img/mys.jpg", "/img/mys2.jpg", "/img/image-2.jpg"];
+
   return (
     <Grid container sx={{ height: "100vh" }}>
-      <Grid
+      {/* <Grid
         item
         xs={false}
         sm={4}
         md={7}
         sx={{
-          backgroundImage: "url(/img/image-2.jpg)", // If inside the public folder, the path should start with a slash
+          backgroundImage: "url(/img/mys.jpg)", // If inside the public folder, the path should start with a slash
           backgroundRepeat: "no-repeat",
           backgroundColor: "background.default",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
-      />
+      /> */}
+      <Grid item xs={false} sm={4} md={7}>
+        <Carousel images={carouselImages} />
+      </Grid>
       <Grid item xs={12} sm={8} md={5} component={Paper} square>
         <BoxedLayout>
           <Typography component="h1" variant="h5">

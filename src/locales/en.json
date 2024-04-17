@@ -1329,6 +1329,7 @@
       "main_client": "Main Client",
       "telephone_number": "Telephone Number",
       "fax_number": "Fax Number",
+      "fax_web": "Fax (WEB)",
       "email": "Email",
       "website": "Website",
       "corporate_number": "Corporate Number",

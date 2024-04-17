@@ -1330,6 +1330,7 @@
       "main_client": "主要取引先",
       "telephone_number": "電話番号",
       "fax_number": "ファックス番号",
+      "fax_web": "ファックス(WEB)",
       "email": "メールアドレス",
       "website": "ウェブサイト",
       "corporate_number": "法人番号",

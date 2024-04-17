@@ -31,6 +31,7 @@ import { CompanyInfo } from "../types/companyInfo";
 // import { mysOrgCode } from "../../api/server";
 import { useCompanyInfo } from "../hooks/useCompanyInfo";
 import { useUpdateCompanyInfo } from "../hooks/useUpdateCompanyInfo";
+import { Link } from "react-router-dom";
 
 const CompanyInformation = () => {
   const snackbar = useSnackbar();
@@ -236,7 +237,7 @@ const CompanyInformation = () => {
             /> */}
 
             <Grid container spacing={1}>
-              <Grid item xs={2}>
+              <Grid item xs={3}>
                 {currentCompany === "MYS" && (
                   <>
                     <Typography
@@ -304,6 +305,12 @@ const CompanyInformation = () => {
                       variant="h5"
                     >
                       {t("company.form.fax_number")}
+                    </Typography>
+                    <Typography
+                      sx={{ marginTop: 2.1, textAlign: "left" }}
+                      variant="h5"
+                    >
+                      {t("company.form.fax_web")}
                     </Typography>
                     <Typography
                       sx={{ marginTop: 2.1, textAlign: "left" }}
@@ -431,7 +438,7 @@ const CompanyInformation = () => {
                   </>
                 )}
               </Grid>
-              <Grid item xs={10}>
+              <Grid item xs={9}>
                 {currentCompany === "MYS" && (
                   <>
                     <Input
@@ -511,6 +518,34 @@ const CompanyInformation = () => {
                       name="fax_number"
                       onChange={formik.handleChange}
                     />
+
+                    {/* <Input
+                      sx={{ marginTop: 1.2 }}
+                      fullWidth
+                      // value={formik.values.fax_number}
+                      value={""}
+                      name="fax_number"
+                      onChange={formik.handleChange}
+                    /> */}
+                    <Button
+                      sx={{
+                        marginTop: 1.2,
+                        padding: 0,
+                        color: "#BC4566",
+                        fontSize: "1rem",
+                        fontWeight: "normal",
+                      }}
+                      variant="text"
+                      // color="primary"
+                      onClick={() =>
+                        window.open(
+                          "https://flservice.covia.jp/fleafax/fleafax_send.php"
+                        )
+                      }
+                    >
+                      https://flservice.covia.jp/fleafax/fleafax_send.php
+                    </Button>
+
                     <Input
                       sx={{ marginTop: 1.2 }}
                       fullWidth
