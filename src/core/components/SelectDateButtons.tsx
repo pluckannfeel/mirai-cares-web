@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import dayjs, { locale } from "dayjs";
+// import utc from "dayjs/plugin/utc";
+
 import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
 import { Button, ButtonGroup, IconButton, Popover } from "@mui/material";
 import {
   KeyboardDoubleArrowLeft as KeyboardDoubleArrowLeftIcon,
@@ -16,7 +19,11 @@ import "dayjs/locale/ja"; // Japanese
 import { formatDateWithDayjs } from "../../helpers/dayjs";
 import { useTranslation } from "react-i18next";
 
+// dayjs.extend(utc);
+
 dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.tz.setDefault("Asia/Tokyo");
 
 interface DateButtonGroupProps {
   selectedDate: dayjs.Dayjs;
@@ -44,10 +51,17 @@ const SelectDateButtons: React.FC<DateButtonGroupProps> = ({
   };
   const open = Boolean(anchorEl);
 
+  // const handleDateChange = (date: dayjs.Dayjs | null) => {
+  //   if (date) {
+  //     setSelectedDate(date);
+  //     handleClose(); // Close the popover after selecting a date
+  //   }
+  // };
+
   const handleDateChange = (date: dayjs.Dayjs | null) => {
     if (date) {
-      setSelectedDate(date);
-      handleClose(); // Close the popover after selecting a date
+      setSelectedDate(dayjs.tz(date, "Asia/Tokyo"));
+      handleClose();
     }
   };
 
@@ -104,11 +118,23 @@ const SelectDateButtons: React.FC<DateButtonGroupProps> = ({
           horizontal: "left",
         }}
       >
-        <DateCalendar
-          value={dayjs.utc(selectedDate)}
+        {/* <DateCalendar
+          // value={dayjs.utc(selectedDate)}
+          value={dayjs(selectedDate)}
           onChange={(newValue) =>
             handleDateChange(newValue ? dayjs.utc(newValue) : null)
           }
+        /> */}
+        <DateCalendar
+          value={selectedDate}
+          onChange={(newValue) => handleDateChange(newValue)}
+          // value={dayjs.tz(selectedDate, "Asia/Tokyo")}
+          // onChange={(newValue) => {
+          //   // When a new date is selected, convert it to Tokyo time zone before setting it
+          //   handleDateChange(
+          //     newValue ? dayjs.tz(newValue, "Asia/Tokyo") : null
+          //   );
+          // }}
         />
       </Popover>
     </>

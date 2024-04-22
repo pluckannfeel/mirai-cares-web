@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { StaffWorkSchedule } from "../types/StaffWorkSchedule";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
 import { useScheduleByDate } from "../hooks/useScheduleByDate";
 import { Box, Container, Grid, Paper, useTheme } from "@mui/material";
 import SelectDateButtons from "../../core/components/SelectDateButtons";
@@ -10,6 +11,8 @@ import { timelineShiftType } from "../helpers/timelineView";
 import { trimStringWithEllipsis } from "../../staff/helpers/functions";
 import { useTranslation } from "react-i18next";
 dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.tz.setDefault("Asia/Tokyo");
 
 type ShiftsByStaff = {
   [key: string]: StaffWorkSchedule[];
@@ -31,14 +34,37 @@ const ShiftTimeline: React.FC<ShiftTimelineProps> = (props) => {
 
   useEffect(() => {
     if (initialShifts) {
+      // console.log(initialShifts);
       setShifts(initialShifts);
     }
   }, [initialShifts]);
 
   const [shifts, setShifts] = useState<StaffWorkSchedule[]>([]);
 
+  // const calculateLeftOffset = (start: string) => {
+  //   // const startTime = dayjs(start)
+  //   const startTime = dayjs(start).tz("Asia/Tokyo");
+  //   const startHour = startTime.hour();
+  //   const startMinute = startTime.minute();
+  //   return startHour * hourWidth + (startMinute * hourWidth) / 60;
+  // };
+
+  // const calculateWidth = (start: string, end: string) => {
+  //   const startTime = dayjs(start).tz("Asia/Tokyo");
+  //   const endTime = dayjs(end).tz("Asia/Tokyo");
+
+  //   let durationHours = endTime.diff(startTime, "hour", true);
+
+  //   // If the end time is at the top of the hour, reduce the duration slightly so the bar doesn't extend into the next hour.
+  //   if (endTime.minute() === 0 && durationHours % 1 === 0) {
+  //     durationHours -= 0.01; // Slight reduction to bring the bar end inside the correct hour mark
+  //   }
+
+  //   return durationHours * hourWidth;
+  // };
+
   const calculateLeftOffset = (start: string) => {
-    const startTime = dayjs(start).utc();
+    const startTime = dayjs(start).utc(); // Parse as UTC then convert to Tokyo time
     const startHour = startTime.hour();
     const startMinute = startTime.minute();
     return startHour * hourWidth + (startMinute * hourWidth) / 60;
@@ -50,7 +76,6 @@ const ShiftTimeline: React.FC<ShiftTimelineProps> = (props) => {
 
     let durationHours = endTime.diff(startTime, "hour", true);
 
-    // If the end time is at the top of the hour, reduce the duration slightly so the bar doesn't extend into the next hour.
     if (endTime.minute() === 0 && durationHours % 1 === 0) {
       durationHours -= 0.01; // Slight reduction to bring the bar end inside the correct hour mark
     }
