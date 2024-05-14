@@ -1334,7 +1334,7 @@
       "email": "メールアドレス",
       "website": "ウェブサイト",
       "corporate_number": "法人番号",
-      "office_number": "事業所番号",
+      "office_number": "雇用保険適用業所号",
       "trading_account": "取引口座",
       "registration_number": "登録番号",
       "registration_date": "登録年月日",
