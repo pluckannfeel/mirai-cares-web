@@ -5,7 +5,6 @@ import {
   ListItemText,
   Collapse,
   List,
-  Avatar,
 } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";

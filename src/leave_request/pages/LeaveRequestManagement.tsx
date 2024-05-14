@@ -49,7 +49,7 @@ const LeaveRequestManagement = () => {
   const handleDeleteLeaveRequest = async () => {
     if (requestDeleted) {
       deleteLeaveRequest(requestDeleted)
-        .then((shift) => {
+        .then(() => {
           snackbar.success(t("leaveRequest.notifications.deleteSuccess"));
           setOpenConfirmDeleteDialog(false);
         })

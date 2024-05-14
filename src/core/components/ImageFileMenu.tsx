@@ -13,7 +13,6 @@ interface ImageFileMenuProps {
 
 const ImageFileMenu: React.FC<ImageFileMenuProps> = ({
   label,
-  value,
   initialFileUrl,
   onFileUpload,
 }) => {

@@ -1,4 +1,4 @@
-import { Box, BoxProps, CircularProgress } from "@mui/material";
+import { Box, BoxProps } from "@mui/material";
 // import logoUrl from "../assets/logo.svg";
 import LogoSvg from "../assets/logo.svg?react";
 

@@ -6,19 +6,6 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { createTheme } from "../theme";
-import { useTranslation } from "react-i18next";
-import i18n from "../config/i18n";
-import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
-import timezone from "dayjs/plugin/timezone";
-// dayjs.extend(utc);
-// dayjs.extend(timezone);
-
-// // Set default timezone
-// dayjs.tz.setDefault("Asia/Tokyo");
-
-// // Set locale globally if you want all your date operations to be in Japanese
-// dayjs.locale("ja");
 
 interface SettingsContextInterface {
   collapsed: boolean;
