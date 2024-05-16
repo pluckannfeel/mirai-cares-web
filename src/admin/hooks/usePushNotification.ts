@@ -22,7 +22,7 @@ export function usePushNotification() {
   const queryClient = useQueryClient();
 
   const { isLoading, mutateAsync } = useMutation(pushNotification, {
-    onSuccess: (notification: Notification) => {
+    onSuccess: () => {
       queryClient.invalidateQueries("notifications");
     },
   });

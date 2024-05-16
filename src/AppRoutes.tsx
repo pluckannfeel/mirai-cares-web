@@ -53,6 +53,10 @@ const PayslipManagement = lazy(
   () => import("./payslip/pages/PayslipManagement")
 );
 
+const TaxCertificateManagement = lazy(
+  () => import("./taxcertificate/pages/TaxCertificateManagement")
+);
+
 const LeaveRequestManagement = lazy(
   () => import("./leave_request/pages/LeaveRequestManagement")
 );
@@ -137,7 +141,10 @@ const AppRoutes = () => {
           <Route path="salary-management" element={<SalaryManagement />}>
             <Route index element={<TimeCalculationSheetTab />} />
             <Route path="staff-payslip" element={<PayslipManagement />} />
-            {/* <Route path="staff-payslip" element={<PayslipManagement />} /> */}
+            <Route
+              path="staff-taxcertificate"
+              element={<TaxCertificateManagement />}
+            />
             <Route
               path="transportation"
               element={<TransportationCalculationSheetTab />}

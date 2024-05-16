@@ -26,7 +26,7 @@ export const useAddPayslip = () => {
   const queryClient = useQueryClient();
 
   const { isLoading, mutateAsync } = useMutation(addPayslip, {
-    onSuccess: (data: Payslip) => {
+    onSuccess: () => {
         queryClient.invalidateQueries("payslips");
       // queryClient.setQueryData<Payslip[]>(["payslips"], (oldPayslip) => {
       //   return addOne(oldPayslip, data);

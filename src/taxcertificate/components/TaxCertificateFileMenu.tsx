@@ -3,16 +3,15 @@ import { Button, MenuItem, Menu, ListItemIcon, Divider } from "@mui/material";
 import { AttachFile, Visibility, KeyboardArrowDown } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
 
-interface PayslipFileMenuProps {
+interface TaxCertificateFileMenuProps {
   label: string;
   value: string | File;
   initialFileUrl?: string;
   onFileUpload: (file: File) => void;
 }
 
-const PayslipFileMenu: React.FC<PayslipFileMenuProps> = ({
+const TaxCertificateFileMenu: React.FC<TaxCertificateFileMenuProps> = ({
   label,
-  // value,
   initialFileUrl,
   onFileUpload,
 }) => {
@@ -94,7 +93,7 @@ const PayslipFileMenu: React.FC<PayslipFileMenuProps> = ({
           <ListItemIcon>
             <Visibility />
           </ListItemIcon>{" "}
-          {t("payslip.actions.view")}
+          {t("taxcertificate.actions.view")}
         </MenuItem>
         <Divider sx={{ my: 0.5 }} />
         <MenuItem
@@ -117,7 +116,7 @@ const PayslipFileMenu: React.FC<PayslipFileMenuProps> = ({
             onClick={handleFileButtonClick}
             startIcon={<AttachFile />}
           >
-            {t("payslip.actions.upload")}
+            {t("taxcertificate.actions.upload")}
           </Button>
         </MenuItem>
       </Menu>
@@ -125,4 +124,4 @@ const PayslipFileMenu: React.FC<PayslipFileMenuProps> = ({
   );
 };
 
-export default PayslipFileMenu;
+export default TaxCertificateFileMenu;

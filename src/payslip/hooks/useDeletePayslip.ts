@@ -24,7 +24,7 @@ export function useDeletePayslips() {
   const queryClient = useQueryClient();
 
   const { isLoading, mutateAsync } = useMutation(deletePayslip, {
-    onSuccess: (payslipIds: string[]) => {
+    onSuccess: () => {
       // queryClient.setQueryData<Payslip[]>(
       //     ["payslips"],
       //     (oldPayslips) =>

@@ -2,7 +2,7 @@ import React from "react";
 import AdminAppBar from "../../admin/components/AdminAppBar";
 import AdminToolbar from "../../admin/components/AdminToolbar";
 import { useTranslation } from "react-i18next";
-import { Box, Fab, Grid, Tab, Tabs, useTheme } from "@mui/material";
+import { Box, Grid, Tab, Tabs, useTheme } from "@mui/material";
 import { Outlet } from "react-router";
 import { NavLink } from "react-router-dom";
 import QueryWrapper from "../../core/components/QueryWrapper";
@@ -18,9 +18,13 @@ const menuItems = [
     path: "",
   },
   {
-    key: "salaryManagement.menuTabs.transportationSheet",
-    path: "./transportation",
+    key: "salaryManagement.menuTabs.taxcertificate",
+    path: "./staff-taxcertificate",
   },
+  // {
+  //   key: "salaryManagement.menuTabs.transportationSheet",
+  //   path: "./transportation",
+  // },
 ];
 
 const SalaryCalculation = () => {

@@ -2066,6 +2066,9 @@
       "delete": "Delete Payslip",
       "filter": "Filter"
     },
+    "confirmations": {
+      "delete": "Are you sure you want to delete this payslip?"
+    },
     "notifications": {
       "addSuccess": "A payslip was Added.",
       "deleteSuccess": "A payslip was deleted.",
@@ -2082,6 +2085,66 @@
       "updatePayslipBody": "A Payslip was updated."
     }
   },
+  "taxcertificate": {
+    "title": "Withholding Tax Slip",
+    "table": {
+      "headers": {
+        "taxCertificateDate": "Withholding Tax Slip Release Date",
+        "staffName": "Staff Name",
+        "dateCreated": "Date Created"
+      }
+    },
+    "modal": {
+      "add": {
+        "action": "Add",
+        "title": "Add Withholding Tax Slip"
+      },
+      "edit": {
+        "action": "Edit",
+        "title": "Edit Withholding Tax Slip"
+      }
+    },
+    "filter": {
+      "title": "Filter",
+      "options": "Option",
+      "filterByDate": "By Year",
+      "filterByStaff": "By Staff",
+      "year": "Year"
+    },
+    "form": {
+      "releaseDate": {
+        "label": "Release Date",
+        "required": "Please select date"
+      },
+      "staff": {
+        "label": "Staff Name",
+        "required": "Please select staff"
+      },
+      "file_url": {
+        "label": "Withholding Tax Slip File",
+        "required": "Please Upload file"
+      }
+    },
+    "actions": {
+      "add": "Add",
+      "view": "Show",
+      "upload": "Upload",
+      "edit": "Edit",
+      "filter": "Filter"
+    },
+    "confirmations": {
+      "delete": "Are you sure you want to delete this withholding tax slip?"
+    },
+    "notifications": {
+      "addSuccess": "A Withholding Tax Slip was added",
+      "deleteSuccess": "A Withholding Tax Slip was deleted",
+      "updateSuccess": "Withholding Tax Slip was updated"
+    },
+    "push_notifications": {
+      "addTaxcertificateTitle": "新しい源泉徴収票がアップロードされました。",
+      "addTaxcertificateBody": "スタッフの源泉徴収票が追加されました。"
+    }
+  },
   "salaryManagement": {
     "toolbar": {
       "title": "Payslip・Salary Calculation"
@@ -2089,6 +2152,7 @@
     "menuTabs": {
       "payslip": "Payslip",
       "timeSheet": "Calculation Sheet",
+      "taxcertificate": "Withholding Tax Slip",
       "transportationSheet": "Transportation Sheet"
     }
   },
@@ -2098,6 +2162,8 @@
       "title": "Salary Calculation"
     },
     "menuTabs": {
+      "payslip": "Payslip",
+      "taxcertificate": "Withholding Tax Slip",
       "timeSheet": "Calculation Sheet",
       "transportationSheet": "Transportation Sheet"
     },

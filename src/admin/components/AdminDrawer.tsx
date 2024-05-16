@@ -16,18 +16,18 @@ import {
 
 import {
   BarChart as BarChartIcon,
-  WorkHistory as WorkHistoryIcon,
+  // WorkHistory as WorkHistoryIcon,
   Event as EventIcon,
-  EventNote as EventNoteIcon,
+  // EventNote as EventNoteIcon,
   Home as HomeIcon,
-  People as PeopleIcon,
-  Groups as GroupsIcon,
-  GroupAdd as GroupAddIcon,
+  // People as PeopleIcon,
+  // Groups as GroupsIcon,
+  // GroupAdd as GroupAddIcon,
   Person as PersonIcon,
   Business as BusinessIcon,
   Settings as SettingsIcon,
   AccountBalance as AccountBalanceIcon,
-  LocalHospitalRounded as LocalHospitalRoundedIcon,
+  // LocalHospitalRounded as LocalHospitalRoundedIcon,
   Subject as SubjectIcon,
   Diversity1 as Diversity1Icon,
   AutoStories as AutoStoriesIcon,
@@ -41,7 +41,7 @@ import {
   LocalHospital as LocalHospitalIcon,
   AdminPanelSettings as AdminPanelSettingsIcon,
   Source as SourceIcon,
-  Calculate as CalculateIcon,
+  // Calculate as CalculateIcon,
   Archive as ArchiveIcon,
 } from "@mui/icons-material";
 
@@ -60,7 +60,7 @@ type AdminDrawerProps = {
   onSettingsToggle: () => void;
 };
 
-export let menuItems = [
+export const menuItems = [
   {
     icon: HomeIcon,
     key: "admin.drawer.menu.home",

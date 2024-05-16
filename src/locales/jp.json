@@ -19,7 +19,7 @@
         "payslip": "給与明細",
         "documentCreation": "書類作成",
         "salaryCalculation": "給与計算",
-        "salaryManagement": "給与明細・給与計算",
+        "salaryManagement": "給与明細・計算・源泉徴収票",
         "archive": "アーカイブ/ライブラリー",
         "nested": {
           "shift": {
@@ -2087,6 +2087,9 @@
       "edit": "編集する",
       "filter": "フィルター"
     },
+    "confirmations": {
+      "delete": "この給与明細を削除してもよろしいですか？"
+    },
     "notifications": {
       "addSuccess": "給与明細が追加されました。",
       "deleteSuccess": "給与明細は削除されました。",
@@ -2103,13 +2106,74 @@
       "updatePayslipBody": "給与明細が更新されました。"
     }
   },
+  "taxcertificate": {
+    "title": "源泉徴収票",
+    "table": {
+      "headers": {
+        "taxCertificateDate": "源泉徴収票細日",
+        "staffName": "スタッフ名",
+        "dateCreated": "作成日"
+      }
+    },
+    "modal": {
+      "add": {
+        "action": "追加",
+        "title": "源泉徴収票を追加する"
+      },
+      "edit": {
+        "action": "編集",
+        "title": "源泉徴収票を編集する"
+      }
+    },
+    "filter": {
+      "title": "源泉徴収票を絞り込む",
+      "options": "オプション",
+      "filterByDate": "日付で絞り込む",
+      "filterByStaff": "スタッフで絞り込む",
+      "year": "年"
+    },
+    "form": {
+      "releaseDate": {
+        "label": "細日",
+        "required": "日を選択してください"
+      },
+      "staff": {
+        "label": "スタッフ名",
+        "required": "スタッフ名を選択してください"
+      },
+      "file_url": {
+        "label": "ファイル",
+        "required": "源泉徴収票のファイルをアップロードしてください"
+      }
+    },
+    "actions": {
+      "add": "追加",
+      "view": "見る",
+      "upload": "アップロード",
+      "edit": "編集する",
+      "filter": "フィルター"
+    },
+    "confirmations": {
+      "delete": "この源泉徴収票を削除してもよろしいですか？"
+    },
+    "notifications": {
+      "addSuccess": "源泉徴収票が追加されました。",
+      "deleteSuccess": "源泉徴収票は削除されました。",
+      "updateSuccess": "源泉徴収票が更新されました。"
+    },
+    "push_notifications": {
+      "addTaxcertificateTitle": "新しい源泉徴収票がアップロードされました。",
+      "addTaxcertificateBody": "スタッフの源泉徴収票が追加されました。"
+    }
+  },
   "salaryManagement": {
     "toolbar": {
-      "title": "給与明細・給与計算"
+      "title": "給与明細・源泉徴収票・給与計算"
     },
     "menuTabs": {
       "payslip": "給与明細",
       "timeSheet": "計算表テ",
+      "taxcertificate": "源泉徴収票",
       "transportationSheet": "交通費支給表"
     }
   },

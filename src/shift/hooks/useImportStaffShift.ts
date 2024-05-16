@@ -24,7 +24,7 @@ export function useImportStaffShift() {
   const queryClient = useQueryClient();
 
   const { isLoading, mutateAsync } = useMutation(importStaffShift, {
-    onSuccess: (shifts) => {
+    onSuccess: () => {
       queryClient.invalidateQueries("shifts");
       // queryClient.setQueryData<StaffWorkSchedule[]>(["shifts"], (oldStaff) =>
       //   addOne(oldStaff, shifts)

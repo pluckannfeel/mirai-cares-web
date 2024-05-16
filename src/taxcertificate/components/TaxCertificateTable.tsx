@@ -18,7 +18,7 @@ import {
   Visibility as ViewIcon,
   Delete as DeleteIcon,
 } from "@mui/icons-material";
-import { Payslip } from "../types/payslip";
+import { TaxCertificate } from "../types/taxcertificate";
 
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -35,19 +35,19 @@ interface HeadCell {
 
 const headCells: HeadCell[] = [
   {
-    id: "payslip_date",
+    id: "taxcertificate_date",
     align: "left",
-    label: "payslip.table.headers.payslipDate",
+    label: "taxcertificate.table.headers.taxCertificateDate",
   },
   {
     id: "staff_name",
     align: "center",
-    label: "payslip.table.headers.staffName",
+    label: "taxcertificate.table.headers.staffName",
   },
   {
     id: "date_created",
     align: "center",
-    label: "payslip.table.headers.dateCreated",
+    label: "taxcertificate.table.headers.dateCreated",
   },
   //   {
   //     id: "service_hours",
@@ -79,7 +79,7 @@ function EnhancedTableHead({
             checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}
             inputProps={{
-              "aria-label": "select all reports",
+              "aria-label": "select all tax certificates",
             }}
           />
         </TableCell>
@@ -96,25 +96,25 @@ function EnhancedTableHead({
   );
 }
 
-type PayslipRowProps = {
+type TaxCertificateRowProps = {
   index: number;
   onCheck: (id: string) => void;
-  onDelete: (payslipIds: string[]) => void;
-  onEdit: (payslip: Payslip) => void;
+  onDelete: (taxcertificateIds: string[]) => void;
+  onEdit: (taxcertificate: TaxCertificate) => void;
   processing: boolean;
   selected: boolean;
-  payslip: Payslip;
+  taxcertificate: TaxCertificate;
 };
 
-const PayslipRow = ({
+const TaxCertificateRow = ({
   index,
   onCheck,
   onDelete,
   onEdit,
   processing,
   selected,
-  payslip,
-}: PayslipRowProps) => {
+  taxcertificate,
+}: TaxCertificateRowProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { t, i18n } = useTranslation();
 
@@ -133,19 +133,19 @@ const PayslipRow = ({
 
   const handleDelete = () => {
     handleCloseActions();
-    onDelete([payslip.id]);
+    onDelete([taxcertificate.id]);
   };
 
   const handleEdit = () => {
     handleCloseActions();
-    onEdit(payslip);
+    onEdit(taxcertificate);
   };
 
   return (
     <TableRow
       aria-checked={selected}
       tabIndex={-1}
-      key={payslip.id}
+      key={taxcertificate.id}
       selected={selected}
       sx={{ "& td": { bgcolor: "background.paper", border: 0 } }}
     >
@@ -159,7 +159,7 @@ const PayslipRow = ({
           inputProps={{
             "aria-labelledby": labelId,
           }}
-          onClick={() => onCheck(payslip.id)}
+          onClick={() => onCheck(taxcertificate.id)}
         />
       </TableCell>
       <TableCell>
@@ -176,22 +176,24 @@ const PayslipRow = ({
               </Typography>
             </Box> */}
           {formatDateWithDayjs(
-            payslip.release_date as Date,
+            taxcertificate.release_date as Date,
             "YYYY MMMM",
             locale
           )}
         </Box>
       </TableCell>
       {/* <TableCell align="center">{user.gender}</TableCell> */}
-      <TableCell align="center">{payslip.staff?.japanese_name}</TableCell>
+      <TableCell align="center">
+        {taxcertificate.staff?.japanese_name}
+      </TableCell>
       <TableCell align="center">
         {formatDateWithDayjs(
-          payslip.created_at as Date,
+          taxcertificate.created_at as Date,
           "YYYY MMMM DD",
           locale
         )}
       </TableCell>
-      {/* <TableCell align="center">{payslip.service_hours}</TableCell> */}
+      {/* <TableCell align="center">{taxcertificate.service_hours}</TableCell> */}
       {/* <TableCell align="center">Ï
           {user.disabled ? (
             <Chip label="Disabled" />
@@ -247,31 +249,31 @@ const PayslipRow = ({
   );
 };
 
-type PayslipTableProps = {
+type TaxCertificateTableProps = {
   processing: boolean;
-  onDelete: (payslipIds: string[]) => void;
-  onEdit: (payslip: Payslip) => void;
-  //   onView: (payslip: Payslip) => void;
+  onDelete: (taxcertificateIds: string[]) => void;
+  onEdit: (taxcertificate: TaxCertificate) => void;
+  //   onView: (taxcertificate: TaxCertificate) => void;
   onSelectedChange: (selected: string[]) => void;
   selected: string[];
-  payslips?: Payslip[];
+  taxcertificates?: TaxCertificate[];
   staffList: Staff[]; // Assuming Staff is a type you have defined
-  onDateFilterChange: (month: number, year: number) => void;
-  onStaffFilterChange: (staffId: string) => void;
+  // onDateFilterChange: (month: number, year: number) => void;
+  // onStaffFilterChange: (staffId: string) => void;
 };
 
-const PayslipTable = ({
+const TaxCertificateTable = ({
   onDelete,
   onEdit,
   //   onView,
   onSelectedChange,
   processing,
   selected,
-  payslips = [],
+  taxcertificates = [],
 }: // staffList,
 // onDateFilterChange,
 // onStaffFilterChange,
-PayslipTableProps) => {
+TaxCertificateTableProps) => {
   const { t } = useTranslation();
 
   const [page, setPage] = useState(0);
@@ -287,7 +289,7 @@ PayslipTableProps) => {
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelecteds = selectUtils.selectAll(payslips);
+      const newSelecteds = selectUtils.selectAll(taxcertificates);
       onSelectedChange(newSelecteds);
       return;
     }
@@ -312,7 +314,7 @@ PayslipTableProps) => {
 
   const isSelected = (id: string) => selected.indexOf(id) !== -1;
 
-  if (payslips.length === 0) {
+  if (taxcertificates.length === 0) {
     return <Empty title={t("shiftReport.table.empty")} />;
   }
 
@@ -330,21 +332,21 @@ PayslipTableProps) => {
           <EnhancedTableHead
             numSelected={selected.length}
             onSelectAllClick={handleSelectAllClick}
-            rowCount={payslips.length}
+            rowCount={taxcertificates.length}
           />
           <TableBody>
-            {payslips
+            {taxcertificates
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((payslip, index) => (
-                <PayslipRow
+              .map((taxcertificate, index) => (
+                <TaxCertificateRow
                   index={index}
-                  key={payslip.id}
+                  key={taxcertificate.id}
                   onCheck={handleClick}
                   onDelete={onDelete}
                   onEdit={onEdit}
                   processing={processing}
-                  selected={isSelected(payslip.id)}
-                  payslip={payslip}
+                  selected={isSelected(taxcertificate.id)}
+                  taxcertificate={taxcertificate}
                 />
               ))}
           </TableBody>
@@ -353,7 +355,7 @@ PayslipTableProps) => {
       <TablePagination
         rowsPerPageOptions={[5, 10, 25]}
         component="div"
-        count={payslips.length}
+        count={taxcertificates.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}
@@ -363,4 +365,4 @@ PayslipTableProps) => {
   );
 };
 
-export default PayslipTable;
+export default TaxCertificateTable;

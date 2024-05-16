@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import AdminAppBar from "../../admin/components/AdminAppBar";
 import AdminToolbar from "../../admin/components/AdminToolbar";
-import CircleProgressWidget from "../../admin/widgets/CircleProgressWidget";
-import OverviewWidget from "../../admin/widgets/OverviewWidget";
+
 import { Add as AddIcon } from "@mui/icons-material";
 import {
   Autocomplete,
@@ -46,8 +45,6 @@ import { usePushNotification } from "../../admin/hooks/usePushNotification";
 import { PushNotification } from "../../admin/types/notification";
 import { useDeletePayslips } from "../hooks/useDeletePayslip";
 import SelectToolbar from "../../core/components/SelectToolbar";
-import { useRecord } from "../hooks/useRecord";
-import { OverallRecord } from "../types/record";
 
 const PayslipManagement = () => {
   const { t, i18n } = useTranslation();
@@ -71,35 +68,35 @@ const PayslipManagement = () => {
   const { data: initialStaffSelect } = useStaffSelect();
 
   //get total work hours
-  const { data: records } = useRecord();
-  const [overallRecord, setOverallRecord] = useState<OverallRecord>({
-    total_employees: initialStaffSelect ? initialStaffSelect.length : 0,
-    total_hours: 0,
-  });
+  // const { data: records } = useRecord();
+  // const [overallRecord, setOverallRecord] = useState<OverallRecord>({
+  //   total_employees: initialStaffSelect ? initialStaffSelect.length : 0,
+  //   total_hours: 0,
+  // });
 
   // overview data
-  const overviewItems = [
-    {
-      unit: "payslip.overview.totalEmployees", // total of employees
-      value: `${overallRecord.total_employees}人`,
-      backgroundColor: "#4caf50",
-    },
-    // {
-    //   unit: "payslip.overview.netSalarythisMonth", // total net salary paid
-    //   value: "¥ 500万円",
-    //   backgroundColor: "#f44336",
-    // },
-    // {
-    //   unit: "payslip.overview.totalDeduction", // total deductions
-    //   value: "￥ 100万円",
-    //   backgroundColor: "#ff9800",
-    // },
-    {
-      unit: "payslip.overview.totalHoursWorked", // total hours worked
-      value: `${overallRecord.total_hours} 作業時間`,
-      backgroundColor: "#2196f3",
-    },
-  ];
+  // const overviewItems = [
+  //   {
+  //     unit: "payslip.overview.totalEmployees", // total of employees
+  //     value: `${overallRecord.total_employees}人`,
+  //     backgroundColor: "#4caf50",
+  //   },
+  //   // {
+  //   //   unit: "payslip.overview.netSalarythisMonth", // total net salary paid
+  //   //   value: "¥ 500万円",
+  //   //   backgroundColor: "#f44336",
+  //   // },
+  //   // {
+  //   //   unit: "payslip.overview.totalDeduction", // total deductions
+  //   //   value: "￥ 100万円",
+  //   //   backgroundColor: "#ff9800",
+  //   // },
+  //   {
+  //     unit: "payslip.overview.totalHoursWorked", // total hours worked
+  //     value: `${overallRecord.total_hours} 作業時間`,
+  //     backgroundColor: "#2196f3",
+  //   },
+  // ];
 
   const staffSelection = initialStaffSelect
     ? initialStaffSelect.filter(
@@ -122,30 +119,32 @@ const PayslipManagement = () => {
       setPayslips(initialPayslips);
     }
 
-    if (records) {
-      setOverallRecord({
-        ...overallRecord,
-        total_hours: records.total_hours,
-      });
-    }
-  }, [initialPayslips, records]);
+    // if (records) {
+    //   setOverallRecord({
+    //     ...overallRecord,
+    //     total_hours: records.total_hours,
+    //   });
+    // }
+  }, [initialPayslips]);
 
   // update payslip
-  const handleUpdatePayslip = async (payslip: Payslip) => {
-    // console.log(payslip);
-    // updateUser(user)
-    //   .then(() => {
-    //     snackbar.success(
-    //       t("userManagement.notifications.updateSuccess", {
-    //         user: `${user.first_name} ${user.last_name}`,
-    //       })
-    //     );
-    //     setOpenUserDialog(false);
-    //   })
-    //   .catch(() => {
-    //     snackbar.error(t("common.errors.unexpected.subTitle"));
-    //   });
-  };
+  const handleUpdatePayslip = async () =>
+    // payslip: Payslip
+    {
+      // console.log(payslip);
+      // updateUser(user)
+      //   .then(() => {
+      //     snackbar.success(
+      //       t("userManagement.notifications.updateSuccess", {
+      //         user: `${user.first_name} ${user.last_name}`,
+      //       })
+      //     );
+      //     setOpenUserDialog(false);
+      //   })
+      //   .catch(() => {
+      //     snackbar.error(t("common.errors.unexpected.subTitle"));
+      //   });
+    };
 
   // add payslip
   const handleAddPayslip = async (payslip: Partial<Payslip>) => {
@@ -180,7 +179,7 @@ const PayslipManagement = () => {
     // console.log(payslipsDeleted);
     if (payslipsDeleted.length > 0) {
       deletePayslips(payslipsDeleted)
-        .then((payslips) => {
+        .then(() => {
           snackbar.success(t("payslip.notifications.deleteSuccess"));
           setOpenConfirmDeleteDialog(false);
         })
@@ -194,13 +193,17 @@ const PayslipManagement = () => {
     setSelectedPayslips(newSelected);
   };
 
-  const handleDateFilterChange = (month: number, year: number) => {
-    // Filter logic based on month and year
-  };
+  const handleDateFilterChange = () =>
+    // month: number, year: number
+    {
+      // Filter logic based on month and year
+    };
 
-  const handleStaffFilterChange = (staffId: string) => {
-    // Filter logic based on staff ID
-  };
+  const handleStaffFilterChange = () =>
+    // staffId: string
+    {
+      // Filter logic based on staff ID
+    };
 
   const handleOpenPayslipDialog = (payslip?: Payslip) => {
     // console.log("true")
@@ -252,7 +255,7 @@ const PayslipManagement = () => {
         {!selectedPayslips.length ? (
           <AdminToolbar title={t("payslip.title")}>
             <Fab
-              aria-label="add work schedule"
+              aria-label="add payslip"
               color="primary"
               onClick={() => handleOpenPayslipDialog()}
               size="small"
@@ -540,7 +543,7 @@ const PayslipManagement = () => {
       </Grid>
 
       <ConfirmDialog
-        description={t("leaveRequest.confirmations.delete")}
+        description={t("payslip.confirmations.delete")}
         pending={processing}
         onClose={handleCloseConfirmDeleteDialog}
         onConfirm={handleDeletePayslips}
