@@ -2019,6 +2019,10 @@
       "deleteSuccess": "休日／有給申請が削除されました",
       "errorLeaveRequest": "休日／有給申請が提出されませんでした",
       "existingLeaveRequest": "休日／有給申請が既に存在します"
+    },
+    "push_notifications": {
+      "updatedLeaveRequestTitle": "休暇申請が更新されました",
+      "updatedLeaveRequestBody": "休暇申請画面をご覧ください"
     }
   },
   "payslip": {
@@ -2100,7 +2104,7 @@
       "newShiftScheduleBody": "新しいシフトが追加されました。",
       "updatedShiftScheduleTitle": "シフト",
       "updatedShiftScheduleBody": "新しいシフトが更新されました。",
-      "addPayslipTitle": "新しい給与明細がアップロードされました。",
+      "addPayslipTitle": "新しい給与明細がアッ2025プロードされました。",
       "addPayslipBody": "給与明細が追加されました。",
       "updatePayslipTitle": "給与明細が更新されました。",
       "updatePayslipBody": "給与明細が更新されました。"

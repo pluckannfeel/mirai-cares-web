@@ -1997,6 +1997,10 @@
       "deleteSuccess": "Leave Request has been deleted.",
       "errorLeaveRequest": "Leave Request was not submitted. Contact Administrator.",
       "existingLeaveRequest": "You already have a pending leave request."
+    },
+    "push_notifications": {
+      "updatedLeaveRequestTitle": "Leave Request Notification",
+      "updatedLeaveRequestBody": "Your Request has been updated."
     }
   },
   "payslip": {

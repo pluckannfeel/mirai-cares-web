@@ -10,6 +10,8 @@ import { useStaffLeaveRequests } from "../hooks/useLeaveRequests";
 import LeaveRequestDialog from "../components/LeaveRequestDialog";
 import { useUpdateLeaveRequest } from "../hooks/useUpdateLeaveRequest";
 import { useDeleteLeaveRequest } from "../hooks/useDeleteLeaveRequest";
+import { usePushNotification } from "../../admin/hooks/usePushNotification";
+import { PushNotification } from "../../admin/types/notification";
 
 const LeaveRequestManagement = () => {
   const snackbar = useSnackbar();
@@ -30,16 +32,29 @@ const LeaveRequestManagement = () => {
   const { isUpdating, updateLeaveRequest } = useUpdateLeaveRequest();
   const { isDeleting, deleteLeaveRequest } = useDeleteLeaveRequest();
 
+  const { pushNotification } = usePushNotification();
+
   // const processing = isLoading;
   const processing = isLoading || isUpdating || isDeleting;
 
   const handleUpdateLeaveRequest = async (request: LeaveRequest) => {
     updateLeaveRequest(request)
-      .then((shift) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .then((leaveRequest: any) => {
         snackbar.success(
-          t("leaveRequest.notifications.updateSuccess", { event: shift.staff })
+          t("leaveRequest.notifications.updateSuccess", {
+            event: leaveRequest.staff,
+          })
         );
         setOpenLeaveRequestDialog(false);
+
+        if (leaveRequest) {
+          pushNotification({
+            staff_code: leaveRequest["staff"]?.staff_code as string,
+            title: t("leaveRequest.push_notifications.updatedLeaveRequestTitle"),
+            body: t("leaveRequest.push_notifications.updatedLeaveRequestBody"),
+          } as PushNotification);
+        }
       })
       .catch(() => {
         snackbar.error(t("common.errors.unexpected.subTitle"));
