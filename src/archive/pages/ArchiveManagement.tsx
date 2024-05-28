@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React, { useCallback, useEffect, useState } from "react";
 import {
   Typography,
   Grid,
@@ -52,6 +53,8 @@ import { useDownloadFiles } from "../hooks/useDownloadFiles";
 import ArchiveRenameFolderDialog from "../components/ArchiveRenameFolderDialog";
 import { useRenameFolder } from "../hooks/useRenameFolder";
 import { archiveLists } from "../helpers/functions";
+import { useDropzone } from "react-dropzone";
+import ArchiveConfirmDropFileUploadDialog from "../components/ArchiveConfirmDropFileUploadDialog";
 
 const ArchiveManagement = () => {
   const { t } = useTranslation();
@@ -78,6 +81,9 @@ const ArchiveManagement = () => {
   const [fileToBeReplaced, setfileToBeReplaced] = useState<File | undefined>(
     undefined
   );
+
+  const [droppedFile, setDroppedFile] = useState<File | null>(null);
+
   // uploads/staff
   const [currentDirectory, setCurrentDirectory] = useState("archive/");
   const [pathHistory, setPathHistory] = useState<PathEntry[]>([
@@ -104,6 +110,37 @@ const ArchiveManagement = () => {
   // upload file hook
   const { uploadFile: uploadFileToS3Bucket, isUploading: isFileUploading } =
     useUploadFile();
+
+  const onDrop = useCallback(
+    (acceptedFiles: File[]) => {
+      if (acceptedFiles.length > 1) {
+        alert(t("archive.actions.dropRestriction"));
+        // snackbar.error(t("archive.actions.dropRestriction"));
+        return;
+      }
+
+      if (acceptedFiles.length > 0) {
+        const file = acceptedFiles[0];
+        const isFileExists = currentDirectoryFiles?.files.some(
+          (f) => f.name === file.name
+        );
+
+        if (isFileExists) {
+          setfileToBeReplaced(file);
+          setOpenConfirmReplaceFileDialog(true);
+        } else {
+          setDroppedFile(file);
+        }
+      }
+    },
+    [currentDirectoryFiles]
+  );
+
+  const {
+    getRootProps: getDropRootProps,
+    getInputProps: getDropInputProps,
+    isDragActive: isDropZoneDragActive,
+  } = useDropzone({ onDrop, noClick: true, noKeyboard: true });
 
   // replace file hook
   const { replaceFile: replaceFileOnS3Bucket, isReplacing } = useReplaceFile();
@@ -216,6 +253,14 @@ const ArchiveManagement = () => {
     setOpenRenameFolderDialog(true);
   };
 
+  //drop file confirm upload
+  const handleDropFileConfirmUpload = async () => {
+    if (droppedFile) {
+      await uploadFile(droppedFile);
+      setDroppedFile(null);
+    }
+  };
+
   // upload file
   const uploadFile = (file: File) => {
     // check if file exists then we run replace instead of upload
@@ -255,7 +300,6 @@ const ArchiveManagement = () => {
 
   //Replace file
   const replaceFile = () => {
-    // console.log(fileToBeReplaced);
     replaceFileOnS3Bucket({
       file: fileToBeReplaced!,
       currentPath: currentDirectory,
@@ -265,11 +309,9 @@ const ArchiveManagement = () => {
         if (response.code === "success") {
           snackbar.success(t("archive.notifications.replaceFileSuccess"));
         }
-
         if (response.code === "error") {
           snackbar.error(t("archive.notifications.error.replaceFileError"));
         }
-
         setfileToBeReplaced(undefined);
         setOpenConfirmReplaceFileDialog(false);
       })
@@ -358,96 +400,130 @@ const ArchiveManagement = () => {
       )}
 
       <div
-        style={{
-          width: "20vw",
-          paddingTop: "6px",
-          padding: "12px",
-          marginBottom: "20px",
-          borderRadius: "12px",
-          backgroundColor: theme.palette.background.paper,
-        }}
+        {...getDropRootProps()}
+        // style={{
+        //   border: isDropZoneDragActive ? "2px dashed white" : "none",
+        //   padding: isDropZoneDragActive ? "10px" : "0",
+        //   borderRadius: "10px",
+        //   textAlign: "center",
+        //   marginBottom: "20px",
+        // }}
       >
-        <FormControl
-          // sx={{ m: 1, minWidth: 120 }}
-          fullWidth
-          size="small"
-          // component="fieldset"
-          margin="dense"
-          variant="standard"
-        >
-          <InputLabel
-            sx={{
-              fontSize: theme.typography.h4.fontSize,
-            }}
-            id="gender"
-          >
-            {t("archive.list.label")}
-          </InputLabel>
-          <Select
-            // fullWidth
-            autoComplete="archiveList"
-            // // autofocus
-            size="medium"
-            // name="archiveList"
-            // margin='dense'
-            id="archiveList"
-            label={t("archive.list.label")}
-            labelId="archiveList"
-            disabled={processing}
-            value={currentDirectory}
-            sx={{
-              ".MuiSelect-select": {
-                paddingY: "0.75rem", // Adjust padding as needed
-              },
-              ".MuiOutlinedInput-notchedOutline": {
-                borderColor: "transparent", // Optionally remove the border
-              },
-            }}
-            onChange={(event: SelectChangeEvent) => {
-              const value = event.target.value as string;
-              setCurrentDirectory(value);
+        <input {...getDropInputProps()} />
 
-              // set path history
-              if (value.includes("staff")) {
-                console.log(pathHistory);
-                setPathHistory([
-                  { name: "archive.staffDocuments", path: "uploads/staff/" },
-                ]);
-              } else {
-                setPathHistory([
-                  { name: "archive.homeDirectory", path: "archive/" },
-                ]);
-              }
+        {isDropZoneDragActive ? (
+          <div
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              backgroundColor: "rgba(255, 255, 255, 0.9)",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              zIndex: 9999,
             }}
           >
-            {archiveLists.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {t(option.label)}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </div>
+            <Typography variant="h6">{t("archive.actions.onDrop")}</Typography>
+          </div>
+        ) : (
+          <>
+            <div
+              style={{
+                width: "20vw",
+                paddingTop: "6px",
+                padding: "12px",
+                marginBottom: "20px",
+                borderRadius: "12px",
+                backgroundColor: theme.palette.background.paper,
+              }}
+            >
+              <FormControl
+                // sx={{ m: 1, minWidth: 120 }}
+                fullWidth
+                size="small"
+                // component="fieldset"
+                margin="dense"
+                variant="standard"
+              >
+                <InputLabel
+                  sx={{
+                    fontSize: theme.typography.h4.fontSize,
+                  }}
+                  id="gender"
+                >
+                  {t("archive.list.label")}
+                </InputLabel>
+                <Select
+                  // fullWidth
+                  autoComplete="archiveList"
+                  // // autofocus
+                  size="medium"
+                  // name="archiveList"
+                  // margin='dense'
+                  id="archiveList"
+                  label={t("archive.list.label")}
+                  labelId="archiveList"
+                  disabled={processing}
+                  value={currentDirectory}
+                  sx={{
+                    ".MuiSelect-select": {
+                      paddingY: "0.75rem", // Adjust padding as needed
+                    },
+                    ".MuiOutlinedInput-notchedOutline": {
+                      borderColor: "transparent", // Optionally remove the border
+                    },
+                  }}
+                  onChange={(event: SelectChangeEvent) => {
+                    const value = event.target.value as string;
+                    setCurrentDirectory(value);
 
-      <div
-        style={{
-          margin: "10px 0",
-        }}
-      >
-        <ArchiveUploadFileButton
-          submitHandler={uploadFile}
-          buttonProps={{
-            title: t("archive.actions.uploadFile"),
-            variant: "contained",
-            disabled: isFileUploading || isStaffDirectory,
-            color: "warning",
-            size: "medium",
-            endIcon: <FileUploadIcon />,
-          }}
-          loading={isFileUploading}
-        />
+                    // set path history
+                    if (value.includes("staff")) {
+                      console.log(pathHistory);
+                      setPathHistory([
+                        {
+                          name: "archive.staffDocuments",
+                          path: "uploads/staff/",
+                        },
+                      ]);
+                    } else {
+                      setPathHistory([
+                        { name: "archive.homeDirectory", path: "archive/" },
+                      ]);
+                    }
+                  }}
+                >
+                  {archiveLists.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {t(option.label)}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </div>
 
-        {/* <Button
+            <div
+              style={{
+                margin: "10px 0",
+              }}
+            >
+              <ArchiveUploadFileButton
+                submitHandler={uploadFile}
+                buttonProps={{
+                  title: t("archive.actions.uploadFile"),
+                  variant: "contained",
+                  disabled: isFileUploading || isStaffDirectory,
+                  color: "warning",
+                  size: "medium",
+                  endIcon: <FileUploadIcon />,
+                }}
+                loading={isFileUploading}
+              />
+
+              {/* <Button
           aria-label="logout"
           color="warning"
           variant="contained"
@@ -462,73 +538,73 @@ const ArchiveManagement = () => {
         >
           {t("archive.actions.uploadFile")}
         </Button> */}
-        <Button
-          aria-label="logout"
-          color="primary"
-          variant="text"
-          // disabled={processing}
-          disabled={isStaffDirectory}
-          onClick={() => handleOpenAddFolderDialog()}
-          size="large"
-          sx={{
-            color: "#000",
-            // backgroundColor: "#f3f3f3",
-            marginRight: "10px",
-            padding: "10px 20px",
-            // bgcolor: "white",
-          }}
-          endIcon={<CreateNewFolderIcon />}
-        >
-          {t("archive.actions.createFolder")}
-        </Button>
-        <Button
-          aria-label="logout"
-          // color="info"
-          variant="text"
-          // disabled={processing}
-          onClick={() => reload()}
-          size="large"
-          sx={{
-            color: "#000",
-            marginRight: "10px",
-            // padding: "10px 20px",
-            // bgcolor: "white",
-          }}
-          endIcon={<RefreshIcon />}
-        >
-          {t("archive.actions.reload")}
-        </Button>
-        <Button
-          disabled={!selected.length || isStaffDirectory}
-          aria-label="delete"
-          color="error"
-          variant="outlined"
-          onClick={() => handleOpenConfirmDeleteDialog(selected)}
-          size="small"
-          sx={{
-            color: "#000",
-            marginRight: "10px",
-          }}
-          endIcon={<DeleteIcon />}
-        >
-          {t("archive.actions.delete")}
-        </Button>
-        <Button
-          disabled={!selected.length}
-          aria-label="delete"
-          color="warning"
-          variant="outlined"
-          onClick={handleDownloadMultipleSelectedFiles}
-          size="small"
-          sx={{
-            color: "#000",
-            marginRight: "10px",
-          }}
-          endIcon={<DownloadIcon />}
-        >
-          {t("archive.actions.download")}
-        </Button>
-        {/* <Button
+              <Button
+                aria-label="logout"
+                color="primary"
+                variant="text"
+                // disabled={processing}
+                disabled={isStaffDirectory}
+                onClick={() => handleOpenAddFolderDialog()}
+                size="large"
+                sx={{
+                  color: "#000",
+                  // backgroundColor: "#f3f3f3",
+                  marginRight: "10px",
+                  padding: "10px 20px",
+                  // bgcolor: "white",
+                }}
+                endIcon={<CreateNewFolderIcon />}
+              >
+                {t("archive.actions.createFolder")}
+              </Button>
+              <Button
+                aria-label="logout"
+                // color="info"
+                variant="text"
+                // disabled={processing}
+                onClick={() => reload()}
+                size="large"
+                sx={{
+                  color: "#000",
+                  marginRight: "10px",
+                  // padding: "10px 20px",
+                  // bgcolor: "white",
+                }}
+                endIcon={<RefreshIcon />}
+              >
+                {t("archive.actions.reload")}
+              </Button>
+              <Button
+                disabled={!selected.length || isStaffDirectory}
+                aria-label="delete"
+                color="error"
+                variant="outlined"
+                onClick={() => handleOpenConfirmDeleteDialog(selected)}
+                size="small"
+                sx={{
+                  color: "#000",
+                  marginRight: "10px",
+                }}
+                endIcon={<DeleteIcon />}
+              >
+                {t("archive.actions.delete")}
+              </Button>
+              <Button
+                disabled={!selected.length}
+                aria-label="delete"
+                color="warning"
+                variant="outlined"
+                onClick={handleDownloadMultipleSelectedFiles}
+                size="small"
+                sx={{
+                  color: "#000",
+                  marginRight: "10px",
+                }}
+                endIcon={<DownloadIcon />}
+              >
+                {t("archive.actions.download")}
+              </Button>
+              {/* <Button
           disabled={!selected.length}
           aria-label="move"
           color="info"
@@ -543,7 +619,7 @@ const ArchiveManagement = () => {
         >
           {t("archive.actions.move")}
         </Button> */}
-        {/* {!selected.length ? (
+              {/* {!selected.length ? (
           <Button
             aria-label="delete"
             variant="outlined"
@@ -564,49 +640,61 @@ const ArchiveManagement = () => {
             selected={selected}
           />
         )} */}
+            </div>
+          </>
+        )}
+
+        <Breadcrumbs
+          sx={{
+            padding: 2,
+            marginY: 2,
+            borderRadius: "12px",
+            bgcolor: theme.palette.background.paper,
+          }}
+          separator={<NavigateNextIcon fontSize="small" />}
+          aria-label="breadcrumb"
+        >
+          {pathHistory.map((entry, index) => (
+            <Link
+              key={index}
+              color="inherit"
+              href="#"
+              onClick={() => navigateTo(index)}
+              sx={{
+                fontSize: theme.typography.h5,
+                color: "grey.800",
+              }}
+              underline="hover"
+            >
+              {entry.name === "archive.homeDirectory" ||
+              entry.name === "archive.staffDocuments"
+                ? t(entry.name)
+                : entry.name}
+            </Link>
+          ))}
+        </Breadcrumbs>
+
+        <ArchiveTable
+          processing={processing}
+          onDownload={handleDownloadFile}
+          onRenameFolder={handleRenameFolderEvent}
+          onMove={handleMoveFile}
+          onDelete={handleOpenConfirmDeleteDialog}
+          // onEdit={handleOpenFileUploadDialog}
+          onSelectedChange={handleSelectedChange}
+          onFileClick={handleFileClick}
+          selected={selected}
+          files={currentDirectoryFiles?.files || []}
+        />
       </div>
 
-      <Breadcrumbs
-        sx={{
-          padding: 2,
-          marginY: 2,
-          borderRadius: "12px",
-          bgcolor: theme.palette.background.paper,
-        }}
-        separator={<NavigateNextIcon fontSize="small" />}
-        aria-label="breadcrumb"
-      >
-        {pathHistory.map((entry, index) => (
-          <Link
-            key={index}
-            color="inherit"
-            href="#"
-            onClick={() => navigateTo(index)}
-            sx={{
-              fontSize: theme.typography.h5,
-              color: "grey.800",
-            }}
-            underline="hover"
-          >
-            {entry.name === "archive.homeDirectory" ||
-            entry.name === "archive.staffDocuments"
-              ? t(entry.name)
-              : entry.name}
-          </Link>
-        ))}
-      </Breadcrumbs>
-
-      <ArchiveTable
-        processing={processing}
-        onDownload={handleDownloadFile}
-        onRenameFolder={handleRenameFolderEvent}
-        onMove={handleMoveFile}
-        onDelete={handleOpenConfirmDeleteDialog}
-        // onEdit={handleOpenFileUploadDialog}
-        onSelectedChange={handleSelectedChange}
-        onFileClick={handleFileClick}
-        selected={selected}
-        files={currentDirectoryFiles?.files || []}
+      {/* drop zone */}
+      <ArchiveConfirmDropFileUploadDialog
+        open={droppedFile != null}
+        onClose={() => setDroppedFile(null)}
+        onConfirm={handleDropFileConfirmUpload}
+        file={droppedFile}
+        loading={isFileUploading}
       />
 
       {openAddFolderDialog && (

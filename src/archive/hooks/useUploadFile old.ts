@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useMutation, useQueryClient } from "react-query";
 import { axiosInstance } from "../../api/server";
 import { APIRequestResponse } from "../types/archive";

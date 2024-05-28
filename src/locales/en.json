@@ -2207,6 +2207,8 @@
       "archiveLibrary": "Archive/Library"
     },
     "actions": {
+      "onDrop": "Drop a file here",
+      "dropRestriction": "you can only upload one file at a time.",
       "uploadFile": "Upload File",
       "replaceFile": "Replace File",
       "reload": "Reload",

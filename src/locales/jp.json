@@ -2226,6 +2226,8 @@
       "archiveLibrary": "アーカイブ・ライブラリー"
     },
     "actions": {
+      "onDrop": "この行のどこかにドロップしてください",
+      "dropRestriction": "一度に 1 つのファイルのみをドロップしてください。",
       "uploadFile": "追加",
       "reload": "更新",
       "createFolder": "フォルダを作成",
