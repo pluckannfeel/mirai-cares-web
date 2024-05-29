@@ -2259,11 +2259,11 @@
           "submit": "Delete"
         }
       },
-      "renameFolder": {
-        "title": "Rename Folder",
+      "renameObject": {
+        "title": "Rename File",
         "form": {
-          "folderName": {
-            "label": "Folder Name"
+          "objectName": {
+            "label": "File Name"
           },
           "submit": "Rename"
         },

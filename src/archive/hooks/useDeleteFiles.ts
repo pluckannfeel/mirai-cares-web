@@ -14,7 +14,7 @@ export const useDeleteFiles = () => {
   const queryClient = useQueryClient();
 
   const { isLoading, mutateAsync } = useMutation(deleteFiles, {
-    onSuccess: (APIRequestResponse) => {
+    onSuccess: () => {
       queryClient.invalidateQueries("archive-current-files");
     },
   });

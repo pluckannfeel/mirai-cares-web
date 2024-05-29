@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   MenuItem,
   Button,
@@ -69,7 +70,7 @@ const ArchiveCreateFolderDialog = ({
     // Avoid characters not generally allowed by S3
     // const invalidCharsRegex = /[&$@=;:+ ,?\\{^}%`\]\[~<>\|#"]/;
     // dont allow only / and \
-    const invalidCharsRegex = /[\\\/]/;
+    const invalidCharsRegex = /[\\/]/;
 
     if (invalidCharsRegex.test(folderName)) {
       return false;

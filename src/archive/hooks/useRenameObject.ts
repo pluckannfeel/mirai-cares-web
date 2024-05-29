@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { axiosInstance } from "../../api/server";
 import { APIRequestResponse } from "../types/archive";
 
-const renameFolder = async ({
+const renameObject = async ({
   oldPath,
   newPath,
   userName,
@@ -11,21 +11,28 @@ const renameFolder = async ({
   newPath: string;
   userName?: string;
 }): Promise<APIRequestResponse> => {
-  const formData = new FormData();
+  const payload = {
+    old_key: oldPath,
+    new_key: newPath,
+    user_name: userName || "unknown",
+  };
 
-  formData.append("old_path", oldPath);
-  formData.append("new_path", newPath);
-  formData.append("user_name", userName || "unknown");
+  const { data } = await axiosInstance.put("/archive/rename_object", payload, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
-  const { data } = await axiosInstance.post("/archive/rename_folder", formData);
+  // set delay 1 second
+  await new Promise((resolve) => setTimeout(resolve, 1000));
 
   return data;
 };
 
-export const useRenameFolder = () => {
+export const useRenameObject = () => {
   const queryClient = useQueryClient();
 
-  const { isLoading, mutateAsync } = useMutation(renameFolder, {
+  const { isLoading, mutateAsync } = useMutation(renameObject, {
     onSuccess: (response: APIRequestResponse) => {
       if (response.code === "success") {
         queryClient.invalidateQueries("archive-current-files");
@@ -37,5 +44,5 @@ export const useRenameFolder = () => {
     },
   });
 
-  return { isRenaming: isLoading, renameFolder: mutateAsync };
+  return { isRenaming: isLoading, renameObject: mutateAsync };
 };
