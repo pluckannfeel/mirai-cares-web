@@ -2278,11 +2278,11 @@
           "submit": "削除"
         }
       },
-      "renameFolder": {
-        "title": "フォルダ名を変更する",
+      "renameObject": {
+        "title": "ファイル名を変更する",
         "form": {
-          "folderName": {
-            "label": "フォルダ名"
+          "objectName": {
+            "label": "ファイル名"
           },
           "submit": "変更"
         },

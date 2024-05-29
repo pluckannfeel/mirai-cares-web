@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // Archive Table (S3 Current Connected Table)
 import {
   Box,
@@ -152,7 +153,7 @@ type ArchiveRowProps = {
   onCheck: (key: string) => void;
   onDelete: (keys: string[]) => void;
   onEdit?: (file: ArchiveFile) => void;
-  onRenameFolder: (fileKey: string, fileType: string) => void;
+  onRenameObject: (fileKey: string, fileType: string) => void;
   onMove: (file: ArchiveFile) => void;
   onDownload: (file: ArchiveFile) => void;
   onFileClick: (fileKey: string, fileType: string) => void;
@@ -168,7 +169,7 @@ const ArchiveRow = ({
   onEdit,
   onMove,
   onDownload,
-  onRenameFolder,
+  onRenameObject,
   onFileClick,
   processing,
   selected,
@@ -204,7 +205,7 @@ const ArchiveRow = ({
 
   const handleRename = () => {
     handleCloseActions();
-    onRenameFolder(file.key, file.type);
+    onRenameObject(file.key, file.type);
   };
 
   //   const handleEdit = () => {
@@ -391,7 +392,7 @@ const ArchiveRow = ({
             </ListItemIcon>{" "}
             {t("archive.actions.download")}
           </MenuItem>
-          {!file.key.includes("uploads/staff/") && file.type === "folder" && (
+          {!file.key.includes("uploads/staff/") && (
             <MenuItem onClick={handleRename}>
               <ListItemIcon>
                 <DriveFileRenameOutlineIcon />
@@ -448,7 +449,7 @@ type ArchiveTableProps = {
   onEdit?: (file: ArchiveFile) => void;
   onMove: (file: ArchiveFile) => void;
   onDownload: (file: ArchiveFile) => void;
-  onRenameFolder: (fileKey: string, fileType: string) => void;
+  onRenameObject: (fileKey: string, fileType: string) => void;
   onSelectedChange: (selected: string[]) => void;
   onFileClick: (fileKey: string, fileType: string) => void; // Add this line
   selected: string[];
@@ -461,7 +462,7 @@ const ArchiveTable = ({
   onEdit,
   onMove,
   onDownload,
-  onRenameFolder,
+  onRenameObject,
   onSelectedChange,
   onFileClick,
   selected,
@@ -550,7 +551,7 @@ const ArchiveTable = ({
                     onEdit={onEdit}
                     onMove={onMove}
                     onDownload={onDownload}
-                    onRenameFolder={onRenameFolder}
+                    onRenameObject={onRenameObject}
                     onFileClick={onFileClick}
                     processing={processing}
                     selected={isSelected(file.key)}
