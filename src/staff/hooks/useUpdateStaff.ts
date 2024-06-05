@@ -1,7 +1,8 @@
 import { useMutation, useQueryClient } from "react-query";
-import { updateOne } from "../../core/utils/crudUtils";
 import { Staff } from "../types/staff";
 import { axiosInstance } from "../../api/server";
+import { renameFile, staffUploadFile } from "../helpers/functions";
+import { updateOne } from "../../core/utils/crudUtils";
 
 const updateStaff = async (staff: Staff): Promise<Staff> => {
   const staffImg = staff.img_url;
@@ -10,16 +11,37 @@ const updateStaff = async (staff: Staff): Promise<Staff> => {
     ...staff,
   };
 
-  // delete staff_data_form['id'];
-  // delete staff_data_form["img_url"];
-  delete staff_data_form.img_url;
-
   const formData = new FormData();
 
-  formData.append("staff_json", JSON.stringify(staff_data_form));
+  // check if the staff image is a file, it its not then dont do upload of the img_url
+  if (staffImg && staffImg instanceof File) {
+    // rename file first
+    const renamedFile: File = renameFile(
+      staff.english_name as string,
+      staffImg as File
+    );
 
-  // append staff image
-  if (staffImg) formData.append("staff_image", staffImg);
+    const uploadImageObject = {
+      file: renamedFile,
+      key: `uploads/staff/img/${renamedFile.name}`,
+      user: staff["english_name"],
+    };
+
+    // func to upload image
+    const uploadImageData = await staffUploadFile(uploadImageObject);
+
+    // delete staff_data_form.img_url;
+
+    console.log(uploadImageData);
+
+    // // append staff image
+    if (uploadImageData.data?.url)
+      // formData.append("img_url", uploadImageData.data.url);
+      staff_data_form.img_url = uploadImageData.data.url;
+  }
+
+  formData.append("staff_json", JSON.stringify(staff_data_form));
+  // else do nothing, dont append the img_url to the formData
 
   //bank card images
   if (staff.bank_card_images) {
