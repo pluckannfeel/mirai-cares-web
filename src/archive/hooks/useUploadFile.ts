@@ -4,6 +4,34 @@ import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { APIRequestResponse } from "../types/archive";
 
+
+// Function to handle the complete process
+const requestPresignedUrlAndUploadFile = async ({
+  file,
+  currentPath,
+  userName,
+}: {
+  file: File;
+  currentPath: string;
+  userName?: string;
+}): Promise<APIRequestResponse> => {
+  // Step  1: Generate a presigned URL
+  const url = await generatePresignedPutUrl({ file, currentPath, userName });
+
+  if (url) {
+    // Step 2: Upload the file using the presigned URL
+    const success = await uploadFileUsingPresignedUrl(url, file);
+    if (success) {
+      return { code: "success", message: "File uploaded successfully" };
+    } else {
+      return { code: "error", message: "File upload failed" };
+    }
+  } else {
+    return { code: "error", message: "Failed to generate a presigned URL" };
+  }
+};
+
+
 // Function to generate presigned PUT URL
 const generatePresignedPutUrl = async ({
   file,
@@ -56,30 +84,6 @@ const uploadFileUsingPresignedUrl = async (url: string, file: File) => {
   } catch (error: any) {
     console.error("File upload failed:", error.response?.data);
     return false;
-  }
-};
-
-// Function to handle the complete process
-const requestPresignedUrlAndUploadFile = async ({
-  file,
-  currentPath,
-  userName,
-}: {
-  file: File;
-  currentPath: string;
-  userName?: string;
-}): Promise<APIRequestResponse> => {
-  const url = await generatePresignedPutUrl({ file, currentPath, userName });
-
-  if (url) {
-    const success = await uploadFileUsingPresignedUrl(url, file);
-    if (success) {
-      return { code: "success", message: "File uploaded successfully" };
-    } else {
-      return { code: "error", message: "File upload failed" };
-    }
-  } else {
-    return { code: "error", message: "Failed to generate a presigned URL" };
   }
 };
 
