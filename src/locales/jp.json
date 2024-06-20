@@ -246,6 +246,7 @@
     "print": "印刷",
     "confirmImportMsg": "{{fileName}} をインポートしてもよろしいですか？",
     "confirmUploadFileMsg": "「{{fileName}}」ファイルをアップロードしてもよろしいですか？",
+    "sizeLimit": "ファイルサイズは4.5MBを超えてはなりません",
     "select": "選択",
     "map": {
       "direction": {

@@ -36,13 +36,16 @@ const LicenseFileMenu: React.FC<LicenseFileMenuProps> = ({
     }
   };
 
-  //   console.log(initialFileUrl)
-
   const handleFileInputChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const selectedFile = event.target.files?.[0];
-    if (selectedFile && onFileUpload) {
+    if (selectedFile) {
+      if (selectedFile.size > 4.5 * 1024 * 1024) {
+        // 4.5 MB in bytes
+        alert(t("common.sizeLimit"));
+        return;
+      }
       onFileUpload(selectedFile);
       setFileLabel(selectedFile.name); // Set button label to file name
     }
@@ -78,15 +81,9 @@ const LicenseFileMenu: React.FC<LicenseFileMenuProps> = ({
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        {/* <MenuItem>
-            <Typography variant="h6">{label}</Typography>
-            <Typography variant="body1">Value: {value}</Typography>
-          </MenuItem> */}
         <MenuItem
-          // button
           onClick={() => {
             window.open(initialFileUrl as string, "_blank");
-
             handleClose();
           }}
           disabled={!initialFileUrl}
