@@ -71,6 +71,8 @@ const StaffDialog = ({
   const { t, i18n } = useTranslation();
   const currentLanguage = i18n.language;
 
+  // console.log("staff", staff);
+
   const { data: prefectures } = usePrefectures();
   const { data: municipalities } = useMunicipalities();
   const { data: postalCodes } = usePostalCodes();

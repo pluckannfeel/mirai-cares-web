@@ -247,6 +247,7 @@
     "print": "Print",
     "confirmImportMsg": "Do you want to import {{fileName}}?",
     "confirmUploadFileMsg": "Do you want to upload {{fileName}}?",
+    "sizeLimit": "File size limit is 4.5MB",
     "select": "Select File",
     "map": {
       "direction": {
