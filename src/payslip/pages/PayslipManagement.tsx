@@ -525,7 +525,7 @@ const PayslipManagement = () => {
                         variant="contained"
                         onClick={handleFilterPayslips}
                       >
-                        {t("payslip.actions.filter")}
+                        {t("database.action.add")}
                       </Button>
                     </Grid>
                   </>

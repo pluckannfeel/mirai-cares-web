@@ -66,8 +66,11 @@ const StaffTab = () => {
 
   //download csv
   const downloadCsv = async () => {
+    
     try {
-      const response = await fetch(`${baseUrl}staff/download`);
+      
+      const response = await fetch(`${baseUrl}/staff/download`);
+      console.log("download csv");
       const blob = await response.blob();
 
       // Create a hidden <a> element
