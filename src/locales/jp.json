@@ -1316,7 +1316,8 @@
       "generateSuccess": "書類が作成されました！"
     },
     "errors": {
-      "documentEmptyDetails": "選択したスタッフまたは患者に関する詳細が不足しています。確認してください。"
+      "documentEmptyDetails": "選択したスタッフまたは患者に関する詳細が不足しています。確認してください。",
+      "noUserConsentURL": "ユーザー同意URLがありません。"
     },
     "form": {
       "organization_code": "組織コード",
@@ -1374,6 +1375,11 @@
         },
         "date_entry": {
           "label": "日記入"
+        },
+        "docusign": {
+          "label": "DocuSign",
+          "requestSignature": "DocuSignの署名をリクエストする",
+          "userConsent": "ユーザー同意"
         }
       },
       "actions": {

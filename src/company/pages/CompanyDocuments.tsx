@@ -12,6 +12,9 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  Switch,
+  FormControlLabel,
+  FormGroup,
 } from "@mui/material";
 import { LoadingButton, DatePicker } from "@mui/lab";
 import { useFormik } from "formik";
@@ -29,6 +32,7 @@ import { documents } from "../helper/helper";
 
 import { useCompanyGenerateDocument } from "../hooks/useCompanyGenerateDocument";
 import { useInstitutionsSelect } from "../../medical_institution/hooks/useInstitutionSelection";
+import { axiosInstance, baseUrl } from "../../api/server";
 
 const CompanyDocuments = () => {
   const snackbar = useSnackbar();
@@ -40,6 +44,14 @@ const CompanyDocuments = () => {
   const { data: institutionSelect } = useInstitutionsSelect();
 
   const { isGenerating, generateDocument } = useCompanyGenerateDocument();
+
+  const [docusignESignature, setDocusignESignature] = useState<boolean>(false);
+
+  const handleDocusignESignatureChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setDocusignESignature(event.target.checked);
+  };
 
   const [allowInput, setAllowInput] = useState<{
     staff: boolean;
@@ -111,6 +123,17 @@ const CompanyDocuments = () => {
       .catch(() => {
         snackbar.error(t("company.errors.documentEmptyDetails"));
       });
+  };
+
+  const accessDocusignRequestUserConsent = async () => {
+    const { data } = await axiosInstance.get(`/docusign/user_consent`);
+
+    // check if data has cosent_url 
+    if (data && data.consent_url) {
+      window.open(data.consent_url, "_blank");
+    }else{
+      snackbar.error(t("company.errors.noUserConsentURL"));
+    }
   };
 
   //   const handleSubmit = (values: Partial<GenerateCompanyDocument>) => {};
@@ -302,6 +325,7 @@ const CompanyDocuments = () => {
               onChange={(date: Date | null) =>
                 formik.setFieldValue("date_created", date)
               }
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               renderInput={(params: any) => (
                 <TextField
                   {...params}
@@ -313,6 +337,32 @@ const CompanyDocuments = () => {
                 />
               )}
             />
+
+            {/*  use Docusign E-signature */}
+            {/* <FormControlLabel
+              sx={{ marginTop: "10px" }}
+              control={
+                <Switch
+                  checked={docusignESignature}
+                  onChange={handleDocusignESignatureChange}
+                />
+              }
+              label={t("company.document.form.docusign.requestSignature")}
+            /> */}
+
+            {/* {/ if docusign is checked  */}
+
+            {/* {docusignESignature && (
+              <FormGroup sx={{ margin: "10px" }}>
+                <Button
+                  onClick={accessDocusignRequestUserConsent}
+                  size="medium"
+                  variant="contained"
+                >
+                  {t("company.document.form.docusign.userConsent")}
+                </Button>
+              </FormGroup>
+            )} */}
 
             {/* <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>

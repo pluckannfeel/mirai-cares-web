@@ -1310,7 +1310,8 @@
       "generateSuccess": "Document has been generated!"
     },
     "errors": {
-      "documentEmptyDetails": "There are missing details on the staff or patient you selected, please check. "
+      "documentEmptyDetails": "There are missing details on the staff or patient you selected, please check. ",
+      "noUserConsentURL": "No User Consent URL found. Please contact administrator."
     },
     "menu": {
       "information": "Information",
@@ -1370,6 +1371,11 @@
         },
         "date_entry": {
           "label": "Date Entry"
+        },
+        "docusign": {
+          "label": "DocuSign",
+          "requestSignature": "Request Signature",
+          "userConsent": "User Consent"
         }
       },
       "actions": {
