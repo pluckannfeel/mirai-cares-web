@@ -1379,7 +1379,10 @@
         "docusign": {
           "label": "DocuSign",
           "requestSignature": "DocuSignの署名をリクエストする",
-          "userConsent": "ユーザー同意"
+          "userConsent": "ユーザー同意",
+          "start_period": "開始期間",
+          "end_period": "終了期間",
+          "sign_date": "署名日"
         }
       },
       "actions": {
