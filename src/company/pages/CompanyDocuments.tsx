@@ -15,8 +15,10 @@ import {
   Switch,
   FormControlLabel,
   FormGroup,
+  Grid,
 } from "@mui/material";
-import { LoadingButton, DatePicker } from "@mui/lab";
+import { LoadingButton } from "@mui/lab";
+import { DatePicker } from "@mui/x-date-pickers";
 import { useFormik } from "formik";
 import { useTranslation } from "react-i18next";
 import * as Yup from "yup";
@@ -33,10 +35,18 @@ import { documents } from "../helper/helper";
 import { useCompanyGenerateDocument } from "../hooks/useCompanyGenerateDocument";
 import { useInstitutionsSelect } from "../../medical_institution/hooks/useInstitutionSelection";
 import { axiosInstance, baseUrl } from "../../api/server";
+import { useLocalStorage } from "../../core/hooks/useLocalStorage";
+import dayjs, { Dayjs } from "dayjs";
+import utc from "dayjs/plugin/utc";
+dayjs.extend(utc);
 
 const CompanyDocuments = () => {
   const snackbar = useSnackbar();
   const { t, i18n } = useTranslation();
+  const [isDocusignUserConsentOK, setIsDocusignUserConsentOK] = useLocalStorage(
+    "docusignUserConsent",
+    false
+  );
 
   // get staff select
   const { data: staffSelect } = useStaffSelect();
@@ -47,16 +57,15 @@ const CompanyDocuments = () => {
 
   const [docusignESignature, setDocusignESignature] = useState<boolean>(false);
 
-  const handleDocusignESignatureChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setDocusignESignature(event.target.checked);
-  };
-
   const [allowInput, setAllowInput] = useState<{
     staff: boolean;
     patient: boolean;
     institution: boolean;
+
+    esignature?: boolean;
+    // start_period?: boolean;
+    // end_period?: boolean;
+    // sign_date?: boolean;
   }>({
     staff: false,
     patient: false,
@@ -72,6 +81,12 @@ const CompanyDocuments = () => {
       patient: "",
       institution: "",
       date_created: new Date(),
+
+      // docusign
+      esignature: docusignESignature,
+      start_period: new Date(),
+      end_period: new Date(),
+      sign_date: new Date(),
     },
     validationSchema: Yup.object({
       //   document_name: Yup.string()
@@ -82,10 +97,14 @@ const CompanyDocuments = () => {
       //   date_created: Yup.string().required(t("common.validations.required")),
     }),
     onSubmit: (values) => {
+      const finalValues = {
+        ...values,
+        esignature: docusignESignature,
+      };
       // console.log(values);
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      generatePdf(values as any);
+      generatePdf(finalValues as any);
     },
   });
 
@@ -112,31 +131,54 @@ const CompanyDocuments = () => {
     //   };
 
     generateDocument(values)
-      .then((url: string) => {
+      .then((data: { url: string; status: string }) => {
         // snackbar.success(
         //   t("staffManagement.notifications.addSuccess", {
         //     employee: `${staff?.japanese_name}`,
         //   })
         // );
-        window.open(url, "_blank");
+
+        if (data && data.url) {
+          window.open(data.url, "_blank");
+        } else {
+          snackbar.success(
+            `
+            署名のために文書が送信されました。DocuSign アカウントにアクセスして文書のステータスを確認してください。
+            `
+          );
+        }
       })
-      .catch(() => {
+      .catch((error) => {
+        console.error("Error generating document:", error);
         snackbar.error(t("company.errors.documentEmptyDetails"));
+        snackbar.error(`Error: ${error}`);
       });
   };
 
   const accessDocusignRequestUserConsent = async () => {
     const { data } = await axiosInstance.get(`/docusign/user_consent`);
 
-    // check if data has cosent_url 
+    // check if data has cosent_url
     if (data && data.consent_url) {
       window.open(data.consent_url, "_blank");
-    }else{
+
+      // set local storage to true
+      setIsDocusignUserConsentOK(true);
+    } else {
       snackbar.error(t("company.errors.noUserConsentURL"));
+
+      // set local storage to false
+      setIsDocusignUserConsentOK(false);
     }
   };
 
   //   const handleSubmit = (values: Partial<GenerateCompanyDocument>) => {};
+
+  const handleDocusignESignatureChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setDocusignESignature(event.target.checked);
+  };
 
   return (
     <React.Fragment>
@@ -183,6 +225,8 @@ const CompanyDocuments = () => {
                       staff: true,
                       patient: false,
                       institution: false,
+
+                      esignature: true,
                     });
                   } else if (e.target.value === "mys_pledge") {
                     setAllowInput({
@@ -317,7 +361,7 @@ const CompanyDocuments = () => {
               )}
             />
 
-            <DatePicker
+            {/* <DatePicker
               label={t("company.document.form.date_entry.label")}
               // inputFormat="yyyy/MM/dd H:mm"
               // className="MuiMobileDatePicker"
@@ -336,24 +380,35 @@ const CompanyDocuments = () => {
                   name="start"
                 />
               )}
-            />
-
-            {/*  use Docusign E-signature */}
-            {/* <FormControlLabel
-              sx={{ marginTop: "10px" }}
-              control={
-                <Switch
-                  checked={docusignESignature}
-                  onChange={handleDocusignESignatureChange}
-                />
-              }
-              label={t("company.document.form.docusign.requestSignature")}
             /> */}
 
-            {/* {/ if docusign is checked  */}
+            {/*  use Docusign E-signature */}
+            {allowInput.esignature && (
+              <FormControlLabel
+                sx={{ marginTop: "10px" }}
+                control={
+                  <Switch
+                    checked={docusignESignature}
+                    onChange={handleDocusignESignatureChange}
+                  />
+                }
+                label={t("company.document.form.docusign.requestSignature")}
+              />
+            )}
 
-            {/* {docusignESignature && (
+            {docusignESignature && !isDocusignUserConsentOK && (
               <FormGroup sx={{ margin: "10px" }}>
+                <FormHelperText
+                  sx={{
+                    color: "red",
+                    marginBottom: "10px",
+                    fontSize: "15px",
+                  }}
+                >
+                  {
+                    "署名する前に、DocuSign からのユーザー アカウントの同意が必要です"
+                  }
+                </FormHelperText>
                 <Button
                   onClick={accessDocusignRequestUserConsent}
                   size="medium"
@@ -362,14 +417,62 @@ const CompanyDocuments = () => {
                   {t("company.document.form.docusign.userConsent")}
                 </Button>
               </FormGroup>
-            )} */}
+            )}
 
-            {/* <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-              </Grid>
-            </Grid> */}
+            {allowInput.esignature && (
+              <>
+                <DatePicker
+                  slotProps={{
+                    textField: {
+                      margin: "normal",
+                      size: "small",
+                      fullWidth: true,
+                    },
+                  }}
+                  format="YYYY/MM/DD"
+                  label={t("company.document.form.docusign.start_period")}
+                  value={dayjs.utc(formik.values.start_period)}
+                  onChange={(date: Dayjs | null) => {
+                    formik.setFieldValue("start_period", date);
+                    //   formik.setFieldValue("age", calculateAge(date!));
+                  }}
+                />
+
+                <DatePicker
+                  slotProps={{
+                    textField: {
+                      margin: "normal",
+                      size: "small",
+                      fullWidth: true,
+                    },
+                  }}
+                  format="YYYY/MM/DD"
+                  label={t("company.document.form.docusign.end_period")}
+                  value={dayjs.utc(formik.values.end_period)}
+                  onChange={(date: Dayjs | null) => {
+                    formik.setFieldValue("end_period", date);
+                    //   formik.setFieldValue("age", calculateAge(date!));
+                  }}
+                />
+
+                <DatePicker
+                  slotProps={{
+                    textField: {
+                      margin: "normal",
+                      size: "small",
+                      fullWidth: true,
+                    },
+                  }}
+                  format="YYYY/MM/DD"
+                  label={t("company.document.form.docusign.sign_date")}
+                  value={dayjs.utc(formik.values.sign_date)}
+                  onChange={(date: Dayjs | null) => {
+                    formik.setFieldValue("sign_date", date);
+                    //   formik.setFieldValue("age", calculateAge(date!));
+                  }}
+                />
+              </>
+            )}
           </CardContent>
           <CardActions>
             <Button onClick={() => formik.resetForm()}>

@@ -8,4 +8,9 @@ export interface GenerateCompanyDocument {
   patient: PatientSelect;
   institution: MedicalInstitutionSelect;
   date_created: Date;
+
+  esignature: boolean;
+  start_period?: Date;
+  end_period?: Date;
+  sign_date?: Date;
 }
