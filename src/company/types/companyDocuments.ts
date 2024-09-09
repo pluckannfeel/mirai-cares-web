@@ -13,4 +13,12 @@ export interface GenerateCompanyDocument {
   start_period?: Date;
   end_period?: Date;
   sign_date?: Date;
+
+  job_details?: string;
+  place_of_work?: string;
+  hourly_wage?: number;
+  other_allowance?: boolean;
+  bonus?: boolean;
+  social_insurance?: boolean;
+  employment_insurance?: boolean;
 }

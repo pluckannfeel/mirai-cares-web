@@ -16,6 +16,8 @@ import {
   FormControlLabel,
   FormGroup,
   Grid,
+  Checkbox,
+  InputAdornment,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { DatePicker } from "@mui/x-date-pickers";
@@ -30,7 +32,7 @@ import { GenerateCompanyDocument } from "../types/companyDocuments";
 
 import { usePatientSelect } from "../../patients/hooks/usePatientSelection";
 
-import { documents } from "../helper/helper";
+import { documents, workPlaces, workTypes } from "../helper/helper";
 
 import { useCompanyGenerateDocument } from "../hooks/useCompanyGenerateDocument";
 import { useInstitutionsSelect } from "../../medical_institution/hooks/useInstitutionSelection";
@@ -87,6 +89,14 @@ const CompanyDocuments = () => {
       start_period: new Date(),
       end_period: new Date(),
       sign_date: new Date(),
+
+      job_details: "",
+      place_of_work: "",
+      hourly_wage: 1200,
+      other_allowance: true,
+      bonus: false,
+      social_insurance: true,
+      employment_insurance: true,
     },
     validationSchema: Yup.object({
       //   document_name: Yup.string()
@@ -186,21 +196,18 @@ const CompanyDocuments = () => {
         <Card>
           <CardHeader title={t("company.document.generate_document.label")} />
           <CardContent>
-            <FormControl
-              // sx={{ m: 1, minWidth: 120 }}
-              fullWidth
-              //   size="small"
-              // component="fieldset"
-              margin="dense"
-            >
-              <InputLabel id="document_name">
+            <FormControl fullWidth margin="dense">
+              <InputLabel
+                id="document_name"
+                sx={{
+                  fontSize: "1.1rem",
+                }}
+              >
                 {t("company.document.form.document_name.label")}
               </InputLabel>
               <Select
                 fullWidth
                 autoComplete="document_name"
-                // // autofocus
-                // size="small"
                 name="document_name"
                 // margin='dense'
                 id="document_name"
@@ -284,6 +291,9 @@ const CompanyDocuments = () => {
                 <TextField
                   {...params}
                   margin="normal"
+                  InputLabelProps={{
+                    sx: { fontSize: "1.1rem" },
+                  }}
                   label={t("company.document.form.staff.label")}
                   // InputProps={{
                   //   ...params.InputProps,
@@ -382,20 +392,246 @@ const CompanyDocuments = () => {
               )}
             /> */}
 
-            {/*  use Docusign E-signature */}
-            {allowInput.esignature && (
-              <FormControlLabel
-                sx={{ marginTop: "10px" }}
-                control={
-                  <Switch
-                    checked={docusignESignature}
-                    onChange={handleDocusignESignatureChange}
-                  />
-                }
-                label={t("company.document.form.docusign.requestSignature")}
-              />
-            )}
+            {formik.values.document_name === "mys_contract" && (
+              <>
+                <FormControl fullWidth margin="dense">
+                  <InputLabel
+                    id="job_details"
+                    size="small"
+                    sx={{
+                      fontSize: "1.1rem",
+                    }}
+                  >
+                    {t("company.document.form.docusign.job_details")}
+                  </InputLabel>
+                  <Select
+                    fullWidth
+                    autoComplete="job_details"
+                    size="small"
+                    name="job_details"
+                    // margin='dense'
+                    id="job_details"
+                    label={t("company.document.form.docusign.job_details")}
+                    labelId="job_details"
+                    disabled={isGenerating}
+                    value={formik.values.job_details}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      formik.setFieldValue("job_details", value);
+                    }}
+                    error={
+                      formik.touched.job_details &&
+                      Boolean(formik.errors.job_details)
+                    }
+                  >
+                    {workTypes.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {t(option.label)}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                  <FormHelperText>
+                    {formik.touched.job_details && formik.errors.job_details}
+                  </FormHelperText>
+                </FormControl>
 
+                <FormControl fullWidth margin="dense">
+                  <InputLabel
+                    id="place_of_work"
+                    size="small"
+                    sx={{
+                      fontSize: "1.1rem",
+                    }}
+                  >
+                    {t("company.document.form.docusign.place_of_work")}
+                  </InputLabel>
+                  <Select
+                    fullWidth
+                    autoComplete="place_of_work"
+                    size="small"
+                    name="place_of_work"
+                    // margin='dense'
+                    id="place_of_work"
+                    label={t("company.document.form.docusign.place_of_work")}
+                    labelId="place_of_work"
+                    disabled={isGenerating}
+                    value={formik.values.place_of_work}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      formik.setFieldValue("place_of_work", value);
+                    }}
+                    error={
+                      formik.touched.place_of_work &&
+                      Boolean(formik.errors.place_of_work)
+                    }
+                  >
+                    {workPlaces.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {t(option.label)}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                  <FormHelperText>
+                    {formik.touched.place_of_work &&
+                      formik.errors.place_of_work}
+                  </FormHelperText>
+                </FormControl>
+
+                {/* hourly wage */}
+                <TextField
+                  fullWidth
+                  InputProps={{
+                    startAdornment: <InputAdornment position="start">¥</InputAdornment>,
+                  }}
+                  margin="dense"
+                  label={t("company.document.form.docusign.hourly_wage")}
+                  type="number"
+                  value={formik.values.hourly_wage}
+                  onChange={(e) => {
+                    formik.setFieldValue("hourly_wage", e.target.value);
+                  }}
+                />
+
+                <DatePicker
+                  slotProps={{
+                    textField: {
+                      margin: "normal",
+                      size: "small",
+                      fullWidth: true,
+                      InputLabelProps: {
+                        sx: { fontSize: "1.1rem" },
+                      },
+                    },
+                  }}
+                  format="YYYY/MM/DD"
+                  label={t("company.document.form.docusign.start_period")}
+                  value={dayjs.utc(formik.values.start_period)}
+                  onChange={(date: Dayjs | null) => {
+                    formik.setFieldValue("start_period", date);
+                    //   formik.setFieldValue("age", calculateAge(date!));
+                  }}
+                />
+
+                <DatePicker
+                  slotProps={{
+                    textField: {
+                      margin: "normal",
+                      size: "small",
+                      fullWidth: true,
+                      InputLabelProps: {
+                        sx: { fontSize: "1.1rem" },
+                      },
+                    },
+                  }}
+                  format="YYYY/MM/DD"
+                  label={t("company.document.form.docusign.end_period")}
+                  value={dayjs.utc(formik.values.end_period)}
+                  onChange={(date: Dayjs | null) => {
+                    formik.setFieldValue("end_period", date);
+                    //   formik.setFieldValue("age", calculateAge(date!));
+                  }}
+                />
+
+                <FormGroup>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        value={formik.values.other_allowance}
+                        checked={formik.values.other_allowance}
+                        onChange={(e) => {
+                          formik.setFieldValue(
+                            "other_allowance",
+                            e.target.checked
+                          );
+                        }}
+                      />
+                    }
+                    label={t("company.document.form.docusign.other_allowance")}
+                  />
+
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        value={formik.values.bonus}
+                        checked={formik.values.bonus}
+                        onChange={(e) => {
+                          formik.setFieldValue("bonus", e.target.checked);
+                        }}
+                      />
+                    }
+                    label={t("company.document.form.docusign.bonus")}
+                  />
+
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        value={formik.values.social_insurance}
+                        checked={formik.values.social_insurance}
+                        onChange={(e) => {
+                          formik.setFieldValue(
+                            "social_insurance",
+                            e.target.checked
+                          );
+                        }}
+                      />
+                    }
+                    label={t("company.document.form.docusign.social_insurance")}
+                  />
+
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        value={formik.values.employment_insurance}
+                        checked={formik.values.employment_insurance}
+                        onChange={(e) => {
+                          formik.setFieldValue(
+                            "employment_insurance",
+                            e.target.checked
+                          );
+                        }}
+                      />
+                    }
+                    label={t(
+                      "company.document.form.docusign.employment_insurance"
+                    )}
+                  />
+                </FormGroup>
+
+                <DatePicker
+                  slotProps={{
+                    textField: {
+                      margin: "normal",
+                      size: "small",
+                      fullWidth: true,
+                      InputLabelProps: {
+                        sx: { fontSize: "1.1rem" },
+                      },
+                    },
+                  }}
+                  format="YYYY/MM/DD"
+                  label={t("company.document.form.docusign.sign_date")}
+                  value={dayjs.utc(formik.values.sign_date)}
+                  onChange={(date: Dayjs | null) => {
+                    formik.setFieldValue("sign_date", date);
+                    //   formik.setFieldValue("age", calculateAge(date!));
+                  }}
+                />
+
+                {/*  use Docusign E-signature */}
+                {allowInput.esignature && (
+                  <FormControlLabel
+                    sx={{ marginTop: "10px" }}
+                    control={
+                      <Switch
+                        checked={docusignESignature}
+                        onChange={handleDocusignESignatureChange}
+                      />
+                    }
+                    label={t("company.document.form.docusign.requestSignature")}
+                  />
+                )}
+              </>
+            )}
             {docusignESignature && !isDocusignUserConsentOK && (
               <FormGroup sx={{ margin: "10px" }}>
                 <FormHelperText
@@ -417,61 +653,6 @@ const CompanyDocuments = () => {
                   {t("company.document.form.docusign.userConsent")}
                 </Button>
               </FormGroup>
-            )}
-
-            {allowInput.esignature && (
-              <>
-                <DatePicker
-                  slotProps={{
-                    textField: {
-                      margin: "normal",
-                      size: "small",
-                      fullWidth: true,
-                    },
-                  }}
-                  format="YYYY/MM/DD"
-                  label={t("company.document.form.docusign.start_period")}
-                  value={dayjs.utc(formik.values.start_period)}
-                  onChange={(date: Dayjs | null) => {
-                    formik.setFieldValue("start_period", date);
-                    //   formik.setFieldValue("age", calculateAge(date!));
-                  }}
-                />
-
-                <DatePicker
-                  slotProps={{
-                    textField: {
-                      margin: "normal",
-                      size: "small",
-                      fullWidth: true,
-                    },
-                  }}
-                  format="YYYY/MM/DD"
-                  label={t("company.document.form.docusign.end_period")}
-                  value={dayjs.utc(formik.values.end_period)}
-                  onChange={(date: Dayjs | null) => {
-                    formik.setFieldValue("end_period", date);
-                    //   formik.setFieldValue("age", calculateAge(date!));
-                  }}
-                />
-
-                <DatePicker
-                  slotProps={{
-                    textField: {
-                      margin: "normal",
-                      size: "small",
-                      fullWidth: true,
-                    },
-                  }}
-                  format="YYYY/MM/DD"
-                  label={t("company.document.form.docusign.sign_date")}
-                  value={dayjs.utc(formik.values.sign_date)}
-                  onChange={(date: Dayjs | null) => {
-                    formik.setFieldValue("sign_date", date);
-                    //   formik.setFieldValue("age", calculateAge(date!));
-                  }}
-                />
-              </>
             )}
           </CardContent>
           <CardActions>
