@@ -1351,7 +1351,16 @@
       "options": {
         "sputum_training": "OJT for Sputum Analysis.pdf",
         "mys_contract": "MYS_Contract.pdf",
-        "mys_pledge": "MYS_Pledge"
+        "mys_pledge": "MYS_Pledge",
+        "job1": "Business related to the management and management of home-to-home nursing care services",
+        "job2": "Business Pertaining to Management and Management of Human Resources Business",
+        "job3": "Development and Guidance of Interpreters and Long-Term Care Helper",
+        "job4": "Care Helper",
+        "job5": "Development and guidance of service provision managers and nursing care helpers",
+        "workPlace1": "本社オフィス",
+        "workPlace2": "本社オフィス及び利用者様宅",
+        "workPlace3": "利用者様宅",
+        "workPlace4": "本社オフィス及び自宅"
       },
       "document_select": {
         "label": "Document Select"
@@ -1375,7 +1384,17 @@
         "docusign": {
           "label": "DocuSign",
           "requestSignature": "Request Signature",
-          "userConsent": "User Consent"
+          "userConsent": "User Consent",
+          "start_period": "Start Period",
+          "end_period": "End Period",
+          "sign_date": "Sign Date",
+          "job_details": "Job Details",
+          "place_of_work": "Place of Work",
+          "hourly_wage": "Hourly Wage",
+          "other_allowance": "Other Allowance",
+          "bonus": "Bonus",
+          "social_insurance": "Social Insurance",
+          "employment_insurance": "Employment Insurance"
         }
       },
       "actions": {

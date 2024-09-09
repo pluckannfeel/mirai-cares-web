@@ -1,6 +1,6 @@
 import { Box, BoxProps } from "@mui/material";
 // import logoUrl from "../assets/logo.svg";
-import LogoSvg from "../assets/logo.svg?react";
+import LogoSvg from "../assets/new_logo.svg?react";
 
 type LogoProps = {
   colored?: boolean;
@@ -14,7 +14,7 @@ const Logo = ({
 }: LogoProps) => {
   return (
     <Box {...boxProps}>
-      <LogoSvg height={75} width={386} />
+      <LogoSvg height={150} width={400} />
       {/* <img height={75} width={386} src={logoUrl} alt="logo" /> */}
     </Box>
   );

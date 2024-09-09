@@ -1352,7 +1352,17 @@
       "options": {
         "sputum_training": "喀痰吸引の実地研修OJT.pdf",
         "mys_contract": "労働条件通知書.pdf",
-        "mys_pledge": "誓約書.pdf"
+        "mys_pledge": "誓約書.pdf",
+        "home_care_visiting": "",
+        "job1": "訪問介護事業の管理及び管理業務に関わる業務",
+        "job2": "人材事業の管理及び管理業務に係る業務",
+        "job3": "通訳及び介護ヘルパーの育成・指導",
+        "job4": "介護ヘルパー",
+        "job5": "サービス提供責任者及び介護ヘルパーの育成・指導",
+        "workPlace1": "本社オフィス",
+        "workPlace2": "本社オフィス及び利用者様宅",
+        "workPlace3": "利用者様宅",
+        "workPlace4": "本社オフィス及び自宅"
       },
       "document_select": {
         "label": "書類を選択する"
@@ -1382,7 +1392,14 @@
           "userConsent": "ユーザー同意",
           "start_period": "開始期間",
           "end_period": "終了期間",
-          "sign_date": "署名日"
+          "sign_date": "署名日",
+          "job_details": "仕事の内容",
+          "place_of_work": "就業場所",
+          "hourly_wage": "時給",
+          "other_allowance": "諸⼿当の有無 (通勤)",
+          "bonus": "賞与の有無",
+          "social_insurance": "社会保険の有無",
+          "employment_insurance": "雇用保険の有無"
         }
       },
       "actions": {

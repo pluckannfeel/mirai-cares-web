@@ -227,7 +227,7 @@ const AdminDrawer = ({
 
   const drawer = (
     <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100%" }}>
-      <Logo sx={{ display: "flex", p: 4 }} />
+      <Logo sx={{ display: "flex", pt: 1 }} />
       <List component="nav" sx={{ px: 2 }}>
         {filteredMenuItems.map((item) => (
           <MenuItemComponent item={item} key={item.key} />
