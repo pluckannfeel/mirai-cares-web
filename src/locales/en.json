@@ -1349,14 +1349,17 @@
     },
     "document": {
       "options": {
-        "sputum_training": "OJT for Sputum Analysis.pdf",
+        "sputum_training": "OJT for Sputum Analysis",
         "mys_contract": "MYS_Contract.pdf",
         "mys_pledge": "MYS_Pledge",
+        "patient_contract": "Severe Home Care Service Contract",
+        "important_information_manual": "Important Information Manual",
         "job1": "Business related to the management and management of home-to-home nursing care services",
         "job2": "Business Pertaining to Management and Management of Human Resources Business",
         "job3": "Development and Guidance of Interpreters and Long-Term Care Helper",
         "job4": "Care Helper",
         "job5": "Development and guidance of service provision managers and nursing care helpers",
+        "job6": "System Development and Operation",
         "workPlace1": "本社オフィス",
         "workPlace2": "本社オフィス及び利用者様宅",
         "workPlace3": "利用者様宅",
@@ -1371,6 +1374,18 @@
       "form": {
         "document_name": {
           "label": "Document Name"
+        },
+        "date_created": {
+          "label": "Date Created"
+        },
+        "expiration_date": {
+          "label": "Expiration Date"
+        },
+        "person_in_charge": {
+          "label": "Person In Charge Name"
+        },
+        "attach_stamp": {
+          "label": "Attach MYS Seal Stamp?"
         },
         "staff": {
           "label": "Select Staff"

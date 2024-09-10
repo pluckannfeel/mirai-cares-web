@@ -83,6 +83,7 @@ const CompanyDocuments = () => {
       patient: "",
       institution: "",
       date_created: new Date(),
+      attach_stamp: false,
 
       // docusign
       esignature: docusignESignature,
@@ -97,6 +98,12 @@ const CompanyDocuments = () => {
       bonus: false,
       social_insurance: true,
       employment_insurance: true,
+
+      // patient
+      expiration_date: "受給者証の有効期限",
+
+      // information manual
+      person_in_charge: "笠原 有貴",
     },
     validationSchema: Yup.object({
       //   document_name: Yup.string()
@@ -119,27 +126,6 @@ const CompanyDocuments = () => {
   });
 
   const generatePdf = async (values: GenerateCompanyDocument) => {
-    //     try {
-    //       const blob = await generateDocument(values);
-    //       //   const response = await fetch(`${baseUrl}companies/generate_document`);
-    //       //   console.log(response)
-    //       //   const blob = await response.blob();
-    //       // Create a hidden <a> element
-    //       const link = document.createElement("a");
-    //       link.style.display = "none";
-    //       document.body.appendChild(link);
-    //       // Set the <a> element's attributes
-    //       link.href = window.URL.createObjectURL(blob);
-    //       link.setAttribute("download", `${blob}.pdf`); // Specify the file name
-    //       // Simulate a click on the <a> element to trigger the download
-    //       link.click();
-    //       // Cleanup by removing the <a> element
-    //       document.body.removeChild(link);
-    //     } catch (error) {
-    //       console.error("Error downloading CSV:", error);
-    //     }
-    //   };
-
     generateDocument(values)
       .then((data: { url: string; status: string }) => {
         // snackbar.success(
@@ -239,6 +225,20 @@ const CompanyDocuments = () => {
                     setAllowInput({
                       staff: true,
                       patient: false,
+                      institution: false,
+                    });
+                  } else if (e.target.value === "patient_contract") {
+                    setAllowInput({
+                      staff: false,
+                      patient: true,
+                      institution: false,
+                    });
+                  } else if (
+                    e.target.value === "patient_important_information_manual"
+                  ) {
+                    setAllowInput({
+                      staff: false,
+                      patient: true,
                       institution: false,
                     });
                   } else {
@@ -371,27 +371,6 @@ const CompanyDocuments = () => {
               )}
             />
 
-            {/* <DatePicker
-              label={t("company.document.form.date_entry.label")}
-              // inputFormat="yyyy/MM/dd H:mm"
-              // className="MuiMobileDatePicker"
-              value={formik.values.date_created}
-              onChange={(date: Date | null) =>
-                formik.setFieldValue("date_created", date)
-              }
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              renderInput={(params: any) => (
-                <TextField
-                  {...params}
-                  id="start"
-                  disabled={isGenerating}
-                  fullWidth
-                  margin="normal"
-                  name="start"
-                />
-              )}
-            /> */}
-
             {formik.values.document_name === "mys_contract" && (
               <>
                 <FormControl fullWidth margin="dense">
@@ -481,7 +460,9 @@ const CompanyDocuments = () => {
                 <TextField
                   fullWidth
                   InputProps={{
-                    startAdornment: <InputAdornment position="start">¥</InputAdornment>,
+                    startAdornment: (
+                      <InputAdornment position="start">¥</InputAdornment>
+                    ),
                   }}
                   margin="dense"
                   label={t("company.document.form.docusign.hourly_wage")}
@@ -653,6 +634,102 @@ const CompanyDocuments = () => {
                   {t("company.document.form.docusign.userConsent")}
                 </Button>
               </FormGroup>
+            )}
+
+            {formik.values.document_name === "patient_contract" && (
+              <>
+                <DatePicker
+                  slotProps={{
+                    textField: {
+                      margin: "normal",
+                      size: "small",
+                      fullWidth: true,
+                      InputLabelProps: {
+                        sx: { fontSize: "1.1rem" },
+                      },
+                    },
+                  }}
+                  format="MM/DD/YYYY"
+                  label={t("company.document.form.date_created.label")}
+                  value={dayjs.utc(formik.values.date_created)}
+                  onChange={(date: Dayjs | null) => {
+                    formik.setFieldValue("date_created", date);
+                  }}
+                />
+
+                {/* Expiration date text */}
+                <TextField
+                  fullWidth
+                  margin="dense"
+                  label={t("company.document.form.expiration_date.label")}
+                  type="text"
+                  value={formik.values.expiration_date}
+                  onChange={(e) => {
+                    formik.setFieldValue("expiration_date", e.target.value);
+                  }}
+                />
+
+                {/* attach stamp */}
+                {/* <FormControlLabel
+                  control={
+                    <Switch
+                      checked={formik.values.attach_stamp}
+                      onChange={(e) => {
+                        formik.setFieldValue("attach_stamp", e.target.checked);
+                      }}
+                    />
+                  }
+                  label={t("company.document.form.attach_stamp.label")}
+                /> */}
+              </>
+            )}
+
+            {formik.values.document_name === "patient_important_information_manual" && (
+              <>
+                <DatePicker
+                  slotProps={{
+                    textField: {
+                      margin: "normal",
+                      size: "small",
+                      fullWidth: true,
+                      InputLabelProps: {
+                        sx: { fontSize: "1.1rem" },
+                      },
+                    },
+                  }}
+                  format="MM/DD/YYYY"
+                  label={t("company.document.form.date_created.label")}
+                  value={dayjs.utc(formik.values.date_created)}
+                  onChange={(date: Dayjs | null) => {
+                    formik.setFieldValue("date_created", date);
+                  }}
+                />
+
+                {/* Expiration date text */}
+                <TextField
+                  fullWidth
+                  margin="dense"
+                  label={t("company.document.form.person_in_charge.label")}
+                  type="text"
+                  value={formik.values.person_in_charge}
+                  onChange={(e) => {
+                    formik.setFieldValue("person_in_charge", e.target.value);
+                  }}
+                />
+
+                {/* attach stamp */}
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={formik.values.attach_stamp}
+                      onChange={(e) => {
+                        formik.setFieldValue("attach_stamp", e.target.checked);
+                      }}
+                    />
+                  }
+                  label={t("company.document.form.attach_stamp.label")}
+                />
+              </>
             )}
           </CardContent>
           <CardActions>
