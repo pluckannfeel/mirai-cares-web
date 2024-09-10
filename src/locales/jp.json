@@ -1353,12 +1353,15 @@
         "sputum_training": "喀痰吸引の実地研修OJT.pdf",
         "mys_contract": "労働条件通知書.pdf",
         "mys_pledge": "誓約書.pdf",
+        "patient_contract": "重度訪問介護サービス利用契約書.docx",
+        "important_information_manual": "重要事項説明書.docx",
         "home_care_visiting": "",
         "job1": "訪問介護事業の管理及び管理業務に関わる業務",
         "job2": "人材事業の管理及び管理業務に係る業務",
         "job3": "通訳及び介護ヘルパーの育成・指導",
         "job4": "介護ヘルパー",
         "job5": "サービス提供責任者及び介護ヘルパーの育成・指導",
+        "job6": "システムの構築及び運用など",
         "workPlace1": "本社オフィス",
         "workPlace2": "本社オフィス及び利用者様宅",
         "workPlace3": "利用者様宅",
@@ -1373,6 +1376,18 @@
       "form": {
         "document_name": {
           "label": "書類名"
+        },
+        "date_created": {
+          "label": "日付"
+        },
+        "expiration_date": {
+          "label": "有効期限"
+        },
+        "person_in_charge": {
+          "label": "説明者の名前"
+        },
+        "attach_stamp": {
+          "label": "MYS印を貼る"
         },
         "staff": {
           "label": "スタッフ"

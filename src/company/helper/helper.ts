@@ -11,6 +11,14 @@ export const documents = [
     label: "company.document.options.mys_pledge",
     value: "mys_pledge",
   },
+  {
+    label: "company.document.options.patient_contract",
+    value: "patient_contract",
+  },
+  {
+    label: "company.document.options.important_information_manual",
+    value: "patient_important_information_manual",
+  },
 ];
 
 export const workTypes = [
@@ -33,6 +41,10 @@ export const workTypes = [
   {
     label: "company.document.options.job5",
     value: "job5",
+  },
+  {
+    label: "company.document.options.job6",
+    value: "job6",
   },
 ];
 

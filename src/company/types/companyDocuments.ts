@@ -9,6 +9,8 @@ export interface GenerateCompanyDocument {
   institution: MedicalInstitutionSelect;
   date_created: Date;
 
+  attach_stamp: boolean;
+
   esignature: boolean;
   start_period?: Date;
   end_period?: Date;
@@ -21,4 +23,8 @@ export interface GenerateCompanyDocument {
   bonus?: boolean;
   social_insurance?: boolean;
   employment_insurance?: boolean;
+
+  // patient
+  expiration_date?: string;
+  person_in_charge?: string;
 }
