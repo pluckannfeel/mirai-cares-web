@@ -670,7 +670,7 @@ const CompanyDocuments = () => {
                 />
 
                 {/* attach stamp */}
-                {/* <FormControlLabel
+                <FormControlLabel
                   control={
                     <Switch
                       checked={formik.values.attach_stamp}
@@ -680,11 +680,12 @@ const CompanyDocuments = () => {
                     />
                   }
                   label={t("company.document.form.attach_stamp.label")}
-                /> */}
+                />
               </>
             )}
 
-            {formik.values.document_name === "patient_important_information_manual" && (
+            {formik.values.document_name ===
+              "patient_important_information_manual" && (
               <>
                 <DatePicker
                   slotProps={{
@@ -718,7 +719,7 @@ const CompanyDocuments = () => {
                 />
 
                 {/* attach stamp */}
-                {/* <FormControlLabel
+                <FormControlLabel
                   control={
                     <Switch
                       checked={formik.values.attach_stamp}
@@ -728,7 +729,7 @@ const CompanyDocuments = () => {
                     />
                   }
                   label={t("company.document.form.attach_stamp.label")}
-                /> */}
+                />
               </>
             )}
           </CardContent>
