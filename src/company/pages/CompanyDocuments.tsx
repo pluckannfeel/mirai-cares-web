@@ -649,7 +649,7 @@ const CompanyDocuments = () => {
                       },
                     },
                   }}
-                  format="MM/DD/YYYY"
+                  format="YYYY/MM/DD"
                   label={t("company.document.form.date_created.label")}
                   value={dayjs.utc(formik.values.date_created)}
                   onChange={(date: Dayjs | null) => {
