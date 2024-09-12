@@ -719,7 +719,7 @@ const CompanyDocuments = () => {
                 />
 
                 {/* attach stamp */}
-                <FormControlLabel
+                {/* <FormControlLabel
                   control={
                     <Switch
                       checked={formik.values.attach_stamp}
@@ -729,7 +729,7 @@ const CompanyDocuments = () => {
                     />
                   }
                   label={t("company.document.form.attach_stamp.label")}
-                />
+                /> */}
               </>
             )}
           </CardContent>
