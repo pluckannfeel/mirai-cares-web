@@ -236,6 +236,7 @@
     "close": "Close",
     "backHome": "Back to Home",
     "cancel": "Cancel",
+    "save": "Save",
     "confirm": "Confirm",
     "confirmation": "Confirmation",
     "delete": "Delete",
@@ -1354,6 +1355,7 @@
         "mys_pledge": "MYS_Pledge",
         "patient_contract": "Severe Home Care Service Contract",
         "important_information_manual": "Important Information Manual",
+        "going_out": "Patient Going Out Template",
         "job1": "Business related to the management and management of home-to-home nursing care services",
         "job2": "Business Pertaining to Management and Management of Human Resources Business",
         "job3": "Development and Guidance of Interpreters and Long-Term Care Helper",
@@ -1410,6 +1412,15 @@
           "bonus": "Bonus",
           "social_insurance": "Social Insurance",
           "employment_insurance": "Employment Insurance"
+        },
+        "going_out": {
+          "label": "Patient Going Out",
+          "selectDays": "Select Days",
+          "selectedDays": "Selected Days",
+          "selectDay": "Select Day",
+          "destination": "Destination",
+          "travelMethod": "Travel Method",
+          "helperId": "Helper"
         }
       },
       "actions": {

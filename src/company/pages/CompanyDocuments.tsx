@@ -15,7 +15,6 @@ import {
   Switch,
   FormControlLabel,
   FormGroup,
-  Grid,
   Checkbox,
   InputAdornment,
 } from "@mui/material";
@@ -25,10 +24,15 @@ import { useFormik } from "formik";
 import { useTranslation } from "react-i18next";
 import * as Yup from "yup";
 
+// icon
+import CloseIcon from "@mui/icons-material/Close";
+
 import { useSnackbar } from "../../core/contexts/SnackbarProvider";
 
 import { useStaffSelect } from "../../staff/hooks/useStaffSelection";
-import { GenerateCompanyDocument } from "../types/companyDocuments";
+import {
+  GenerateCompanyDocument,
+} from "../types/companyDocuments";
 
 import { usePatientSelect } from "../../patients/hooks/usePatientSelection";
 
@@ -104,6 +108,9 @@ const CompanyDocuments = () => {
 
       // information manual
       person_in_charge: "笠原 有貴",
+
+      // going out
+      // going_out: {},
     },
     validationSchema: Yup.object({
       //   document_name: Yup.string()
@@ -118,7 +125,7 @@ const CompanyDocuments = () => {
         ...values,
         esignature: docusignESignature,
       };
-      // console.log(values);
+      console.log(values);
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       generatePdf(finalValues as any);
@@ -236,6 +243,12 @@ const CompanyDocuments = () => {
                   } else if (
                     e.target.value === "patient_important_information_manual"
                   ) {
+                    setAllowInput({
+                      staff: false,
+                      patient: true,
+                      institution: false,
+                    });
+                  } else if (e.target.value === "going_out") {
                     setAllowInput({
                       staff: false,
                       patient: true,

@@ -27,4 +27,20 @@ export interface GenerateCompanyDocument {
   // patient
   expiration_date?: string;
   person_in_charge?: string;
+
+  // // going out
+  // going_out?: DayDetails;
 }
+
+// export type DayDetails = {
+//   [key: number]: {
+//     day: number;
+//     helper_id: string;
+//     details: { destination: string; travel_method: string }[];
+//   };
+// };
+
+// export type GoingOut = {
+//   destination: string;
+//   travel_method: string;
+// };
