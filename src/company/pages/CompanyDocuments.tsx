@@ -497,7 +497,7 @@ const CompanyDocuments = () => {
                       },
                     },
                   }}
-                  format="YYYY/MM/DD"
+                  format="MM/DD/YYYY"
                   label={t("company.document.form.docusign.start_period")}
                   value={dayjs.utc(formik.values.start_period)}
                   onChange={(date: Dayjs | null) => {
@@ -517,7 +517,7 @@ const CompanyDocuments = () => {
                       },
                     },
                   }}
-                  format="YYYY/MM/DD"
+                  format="MM/DD/YYYY"
                   label={t("company.document.form.docusign.end_period")}
                   value={dayjs.utc(formik.values.end_period)}
                   onChange={(date: Dayjs | null) => {
