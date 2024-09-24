@@ -19,6 +19,10 @@ export const documents = [
     label: "company.document.options.important_information_manual",
     value: "patient_important_information_manual",
   },
+  // {
+  //   label: "company.document.options.going_out",
+  //   value: "going_out",
+  // },
 ];
 
 export const workTypes = [
@@ -65,5 +69,4 @@ export const workPlaces = [
     label: "company.document.options.workPlace4",
     value: "本社オフィス及び自宅",
   },
-  
-]
+];
