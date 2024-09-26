@@ -214,7 +214,7 @@ const AdminDrawer = ({
     }
 
     // If role is User or Staff, remove payslip
-    if (userInfo?.role === "User" || userInfo?.role === "Staff") {
+    if (userInfo?.role === "User" || userInfo?.role === "Staff" || userInfo?.role === "Manager") {
       items = items.filter(
         (item) => item.key !== "admin.drawer.menu.salaryManagement"
       );
