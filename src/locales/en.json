@@ -1346,15 +1346,23 @@
       "application_agent_certificate": "Application Agent Certificate",
       "service_type": "Service Type",
       "plan_start_date": "Plan Start Date",
-      "specified_validity_period": "Specified Validity Period"
+      "specified_validity_period": "Specified Validity Period",
+      "witness_name": "氏名",
+      "witness_email": "メールアドレス"
     },
     "document": {
+      "group": {
+        "staff": "Staff",
+        "patient": "Patient",
+        "general": "General"
+      },
       "options": {
-        "sputum_training": "OJT for Sputum Analysis",
-        "mys_contract": "MYS_Contract.pdf",
-        "mys_pledge": "MYS_Pledge",
-        "patient_contract": "Severe Home Care Service Contract",
-        "important_information_manual": "Important Information Manual",
+        "sputum_training": "OJT for Sputum Analysis.pdf",
+        "mys_contract": "MYS_Contract.docx",
+        "ehis_employment_contract": "Employment Contract.docx (Engineer/Spec. in Humanities/Int'l Services)",
+        "mys_pledge": "MYS_Pledge.docx",
+        "patient_contract": "Severe Home Care Service Contract.docx",
+        "important_information_manual": "Important Information Manual.docx",
         "going_out": "Patient Going Out Template",
         "job1": "Business related to the management and management of home-to-home nursing care services",
         "job2": "Business Pertaining to Management and Management of Human Resources Business",
@@ -1365,7 +1373,11 @@
         "workPlace1": "本社オフィス",
         "workPlace2": "本社オフィス及び利用者様宅",
         "workPlace3": "利用者様宅",
-        "workPlace4": "本社オフィス及び自宅"
+        "workPlace4": "本社オフィス及び自宅",
+        "workPlace5": "Group Home/利用者様宅",
+        "company": {
+          "mys": "MAKE YOU SMILE Co., Ltd."
+        }
       },
       "document_select": {
         "label": "Document Select"
@@ -1374,6 +1386,9 @@
         "label": "Generate Document"
       },
       "form": {
+        "affiliated_company": {
+          "label": "Affiliated Company"
+        },
         "document_name": {
           "label": "Document Name"
         },

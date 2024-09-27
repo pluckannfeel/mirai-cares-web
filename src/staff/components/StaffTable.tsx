@@ -379,7 +379,8 @@ const StaffTable = ({
   const { t } = useTranslation();
 
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(staffs.length);
+  // const [rowsPerPage, setRowsPerPage] = useState(staffs.length);
+  const [rowsPerPage, setRowsPerPage] = useState(15);
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
