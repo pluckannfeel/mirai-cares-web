@@ -17,6 +17,8 @@ import {
   FormGroup,
   Checkbox,
   InputAdornment,
+  ListSubheader,
+  Typography,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { DatePicker } from "@mui/x-date-pickers";
@@ -30,13 +32,16 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useSnackbar } from "../../core/contexts/SnackbarProvider";
 
 import { useStaffSelect } from "../../staff/hooks/useStaffSelection";
-import {
-  GenerateCompanyDocument,
-} from "../types/companyDocuments";
+import { GenerateCompanyDocument } from "../types/companyDocuments";
 
 import { usePatientSelect } from "../../patients/hooks/usePatientSelection";
 
-import { documents, workPlaces, workTypes } from "../helper/helper";
+import {
+  affiliatedCompanies,
+  documents,
+  workPlaces,
+  workTypes,
+} from "../helper/helper";
 
 import { useCompanyGenerateDocument } from "../hooks/useCompanyGenerateDocument";
 import { useInstitutionsSelect } from "../../medical_institution/hooks/useInstitutionSelection";
@@ -89,6 +94,10 @@ const CompanyDocuments = () => {
       date_created: new Date(),
       attach_stamp: false,
 
+      // employment contract
+      affiliated_company: "mys",
+      company_stamp: false,
+
       // docusign
       esignature: docusignESignature,
       start_period: new Date(),
@@ -108,6 +117,8 @@ const CompanyDocuments = () => {
 
       // information manual
       person_in_charge: "笠原 有貴",
+      witness_name: "",
+      witness_email: "",
 
       // going out
       // going_out: {},
@@ -125,7 +136,7 @@ const CompanyDocuments = () => {
         ...values,
         esignature: docusignESignature,
       };
-      console.log(values);
+      // console.log(finalValues);
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       generatePdf(finalValues as any);
@@ -181,6 +192,11 @@ const CompanyDocuments = () => {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setDocusignESignature(event.target.checked);
+    
+    // if it is unchecked set company_stamp to false and hide it 
+    if (!event.target.checked) {
+      formik.setFieldValue("company_stamp", false);
+    }
   };
 
   return (
@@ -190,6 +206,118 @@ const CompanyDocuments = () => {
           <CardHeader title={t("company.document.generate_document.label")} />
           <CardContent>
             <FormControl fullWidth margin="dense">
+              <InputLabel
+                id="document_name"
+                sx={{
+                  fontSize: "1.1rem",
+                }}
+              >
+                {t("company.document.form.document_name.label")}
+              </InputLabel>
+              <Select
+                fullWidth
+                autoComplete="document_name"
+                name="document_name"
+                id="document_name"
+                label={t("company.document.form.document_name.label")}
+                labelId="document_name"
+                disabled={isGenerating}
+                value={formik.values.document_name}
+                onChange={(e) => {
+                  formik.handleChange(e);
+
+                  // Logic for allowing input based on selected document
+                  if (e.target.value === "docs_sputum_training") {
+                    setAllowInput({
+                      staff: true,
+                      patient: true,
+                      institution: true,
+                    });
+                  } else if (e.target.value === "ehis_employment_contract") {
+                    setAllowInput({
+                      staff: true,
+                      patient: false,
+                      institution: false,
+                      esignature: true,
+                    });
+                  } else if (e.target.value === "mys_contract") {
+                    setAllowInput({
+                      staff: true,
+                      patient: false,
+                      institution: false,
+                      esignature: true,
+                    });
+                  } else if (e.target.value === "mys_pledge") {
+                    setAllowInput({
+                      staff: true,
+                      patient: false,
+                      institution: false,
+                    });
+                  } else if (e.target.value === "patient_contract") {
+                    setAllowInput({
+                      staff: false,
+                      patient: true,
+                      institution: false,
+                      esignature: true,
+                    });
+                  } else if (
+                    e.target.value === "patient_important_information_manual"
+                  ) {
+                    setAllowInput({
+                      staff: false,
+                      patient: true,
+                      institution: false,
+                    });
+                  } else {
+                    setAllowInput({
+                      staff: false,
+                      patient: false,
+                      institution: false,
+                    });
+                  }
+                }}
+                error={
+                  formik.touched.document_name &&
+                  Boolean(formik.errors.document_name)
+                }
+                MenuProps={{
+                  PaperProps: {
+                    sx: {
+                      maxHeight: 330,
+                    },
+                  },
+                }}
+              >
+                {/* Staff Group */}
+                <ListSubheader sx={{ color: "grey" }}>
+                  {t("company.document.groups.staff")}
+                </ListSubheader>
+                {documents
+                  .filter((doc) => doc.group === "staff")
+                  .map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {t(option.label)}
+                    </MenuItem>
+                  ))}
+
+                {/* Patient Group */}
+                <ListSubheader sx={{ color: "grey" }}>
+                  {t("company.document.groups.patient")}
+                </ListSubheader>
+                {documents
+                  .filter((doc) => doc.group === "patient")
+                  .map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {t(option.label)}
+                    </MenuItem>
+                  ))}
+              </Select>
+              <FormHelperText>
+                {formik.touched.document_name && formik.errors.document_name}
+              </FormHelperText>
+            </FormControl>
+
+            {/* <FormControl fullWidth margin="dense">
               <InputLabel
                 id="document_name"
                 sx={{
@@ -276,7 +404,7 @@ const CompanyDocuments = () => {
               <FormHelperText>
                 {formik.touched.document_name && formik.errors.document_name}
               </FormHelperText>
-            </FormControl>
+            </FormControl> */}
 
             <Autocomplete
               fullWidth
@@ -384,6 +512,91 @@ const CompanyDocuments = () => {
               )}
             />
 
+            {formik.values.document_name === "ehis_employment_contract" && (
+              <>
+                <FormControl fullWidth margin="normal">
+                  <InputLabel
+                    id="job_details"
+                    size="small"
+                    sx={{
+                      fontSize: "1.1rem",
+                    }}
+                  >
+                    {t("company.document.form.affiliated_company.label")}
+                  </InputLabel>
+                  <Select
+                    fullWidth
+                    autoComplete="affiliated_company"
+                    // size="small"
+                    name="affiliated_company"
+                    // margin='dense'
+                    id="affiliated_company"
+                    label={t("company.document.form.affiliated_company.label")}
+                    labelId="affiliated_company"
+                    disabled={isGenerating}
+                    value={formik.values.affiliated_company}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      formik.setFieldValue("affiliated_company", value);
+                    }}
+                    error={
+                      formik.touched.affiliated_company &&
+                      Boolean(formik.errors.affiliated_company)
+                    }
+                  >
+                    {affiliatedCompanies.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {t(option.label)}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                  <FormHelperText>
+                    {formik.touched.affiliated_company &&
+                      formik.errors.affiliated_company}
+                  </FormHelperText>
+                </FormControl>
+
+                <DatePicker
+                  slotProps={{
+                    textField: {
+                      margin: "normal",
+                      size: "small",
+                      fullWidth: true,
+                      InputLabelProps: {
+                        sx: { fontSize: "1.1rem" },
+                      },
+                    },
+                  }}
+                  format="YYYY/MM/DD"
+                  label={t("company.document.form.docusign.sign_date")}
+                  value={dayjs.utc(formik.values.sign_date)}
+                  onChange={(date: Dayjs | null) => {
+                    formik.setFieldValue("sign_date", date);
+                    //   formik.setFieldValue("age", calculateAge(date!));
+                  }}
+                />
+
+                {/* company stamp */}
+                <FormControl margin="dense" fullWidth>
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        checked={formik.values.company_stamp}
+                        disabled={!docusignESignature}
+                        onChange={(e) => {
+                          formik.setFieldValue(
+                            "company_stamp",
+                            e.target.checked
+                          );
+                        }}
+                      />
+                    }
+                    label={t("company.document.form.attach_stamp.label")}
+                  />
+                </FormControl>
+              </>
+            )}
+
             {formik.values.document_name === "mys_contract" && (
               <>
                 <FormControl fullWidth margin="dense">
@@ -477,6 +690,7 @@ const CompanyDocuments = () => {
                       <InputAdornment position="start">¥</InputAdornment>
                     ),
                   }}
+                  size="small"
                   margin="dense"
                   label={t("company.document.form.docusign.hourly_wage")}
                   type="number"
@@ -612,7 +826,7 @@ const CompanyDocuments = () => {
                 />
 
                 {/*  use Docusign E-signature */}
-                {allowInput.esignature && (
+                {/* {allowInput.esignature && (
                   <FormControlLabel
                     sx={{ marginTop: "10px" }}
                     control={
@@ -623,30 +837,8 @@ const CompanyDocuments = () => {
                     }
                     label={t("company.document.form.docusign.requestSignature")}
                   />
-                )}
+                )} */}
               </>
-            )}
-            {docusignESignature && !isDocusignUserConsentOK && (
-              <FormGroup sx={{ margin: "10px" }}>
-                <FormHelperText
-                  sx={{
-                    color: "red",
-                    marginBottom: "10px",
-                    fontSize: "15px",
-                  }}
-                >
-                  {
-                    "署名する前に、DocuSign からのユーザー アカウントの同意が必要です"
-                  }
-                </FormHelperText>
-                <Button
-                  onClick={accessDocusignRequestUserConsent}
-                  size="medium"
-                  variant="contained"
-                >
-                  {t("company.document.form.docusign.userConsent")}
-                </Button>
-              </FormGroup>
             )}
 
             {formik.values.document_name === "patient_contract" && (
@@ -694,6 +886,34 @@ const CompanyDocuments = () => {
                   }
                   label={t("company.document.form.attach_stamp.label")}
                 />
+                {/* 
+                <Typography marginTop={1} variant="h6">
+                  {"代理人または立会人等"}
+                </Typography>
+
+                <TextField
+                  fullWidth
+                  margin="dense"
+                  label={t("company.document.form.docusign.witness_name")}
+                  type="text"
+                  size="small"
+                  value={formik.values.witness_name}
+                  onChange={(e) => {
+                    formik.setFieldValue("witness_name", e.target.value);
+                  }}
+                />
+
+                <TextField
+                  fullWidth
+                  margin="dense"
+                  label={t("company.document.form.docusign.witness_email")}
+                  type="text"
+                  size="small"
+                  value={formik.values.witness_email}
+                  onChange={(e) => {
+                    formik.setFieldValue("witness_email", e.target.value);
+                  }}
+                /> */}
               </>
             )}
 
@@ -744,6 +964,43 @@ const CompanyDocuments = () => {
                   label={t("company.document.form.attach_stamp.label")}
                 /> */}
               </>
+            )}
+
+            {docusignESignature && !isDocusignUserConsentOK && (
+              <FormGroup sx={{ margin: "10px" }}>
+                <FormHelperText
+                  sx={{
+                    color: "red",
+                    marginBottom: "10px",
+                    fontSize: "15px",
+                  }}
+                >
+                  {
+                    "署名する前に、DocuSign からのユーザー アカウントの同意が必要です"
+                  }
+                </FormHelperText>
+                <Button
+                  onClick={accessDocusignRequestUserConsent}
+                  size="medium"
+                  variant="contained"
+                >
+                  {t("company.document.form.docusign.userConsent")}
+                </Button>
+              </FormGroup>
+            )}
+
+            {/*  use Docusign E-signature */}
+            {allowInput.esignature && (
+              <FormControlLabel
+                sx={{ marginTop: "10px" }}
+                control={
+                  <Switch
+                    checked={docusignESignature}
+                    onChange={handleDocusignESignatureChange}
+                  />
+                }
+                label={t("company.document.form.docusign.requestSignature")}
+              />
             )}
           </CardContent>
           <CardActions>

@@ -24,9 +24,15 @@ export interface GenerateCompanyDocument {
   social_insurance?: boolean;
   employment_insurance?: boolean;
 
+  //employment contract
+  affiliated_company?: string//所属機関 
+  company_stamp?: boolean;
+
   // patient
   expiration_date?: string;
   person_in_charge?: string;
+  witness_name?: string;
+  witness_email?: string;
 
   // // going out
   // going_out?: DayDetails;
