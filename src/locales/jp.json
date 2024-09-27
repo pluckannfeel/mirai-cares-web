@@ -1350,9 +1350,15 @@
       "specified_validity_period": "指定の有効期間"
     },
     "document": {
+      "groups": {
+        "staff": "スタッフ",
+        "patient": "利用者",
+        "general": "一般"
+      },
       "options": {
         "sputum_training": "喀痰吸引の実地研修OJT.pdf",
         "mys_contract": "労働条件通知書.docx",
+        "ehis_employment_contract": "雇用契約書.docx (義人黒曜)",
         "mys_pledge": "誓約書.docx",
         "patient_contract": "重度訪問介護サービス利用契約書.docx",
         "important_information_manual": "重要事項説明書.docx",
@@ -1367,7 +1373,11 @@
         "workPlace1": "本社オフィス",
         "workPlace2": "本社オフィス及び利用者様宅",
         "workPlace3": "利用者様宅",
-        "workPlace4": "本社オフィス及び自宅"
+        "workPlace4": "本社オフィス及び自宅",
+        "workPlace5": "Gホーム／カタツムリ（横浜市中区）、利用者さま宅",
+        "company": {
+          "mys": "株式会社MAKE YOU SMILE"
+        }
       },
       "document_select": {
         "label": "書類を選択する"
@@ -1376,6 +1386,9 @@
         "label": "書類を作成する"
       },
       "form": {
+        "affiliated_company": {
+          "label": "所属機関"
+        },
         "document_name": {
           "label": "書類名"
         },
@@ -1416,7 +1429,9 @@
           "other_allowance": "諸⼿当の有無 (通勤)",
           "bonus": "賞与の有無",
           "social_insurance": "社会保険の有無",
-          "employment_insurance": "雇用保険の有無"
+          "employment_insurance": "雇用保険の有無",
+          "witness_name": "氏名",
+          "witness_email": "メールアドレス"
         },
         "going_out": {
           "label": "利用者外出",
