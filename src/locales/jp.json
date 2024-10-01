@@ -13,6 +13,7 @@
         "staffManagement": "スタッフ情報",
         "patientManagement": "利用者DB",
         "medicalInstitutionManagement": "関連業社・医療機関DB",
+        "visitingNursingStationManagement": "訪問看護ステーションDB",
         "staffWorkSchedule": "シフト",
         "leaveRequest": "休暇申請",
         "companyInformation": "会社情報",
@@ -44,7 +45,8 @@
               "staff": "スタッフマスター",
               "user": "ユーザーマスター",
               "patient": "利用者マスター",
-              "medicalInstitution": "関連業者マスター"
+              "medicalInstitution": "関連業者マスター",
+              "visitingNursingStationManagement": "訪問看護ステーションDB"
             }
           }
         }
@@ -1876,6 +1878,106 @@
       },
       "ojt_implementation": {
         "label": "実施機関名"
+      }
+    }
+  },
+  "visitingNursingStation": {
+    "confirmations": {
+      "delete": "この訪問看護ステーションを削除してもよろしいですか？"
+    },
+    "toolbar": {
+      "title": "訪問看護ステーション"
+    },
+    "notifications": {
+      "addSuccess": "{{name}} 追加されました。",
+      "deleteSuccess": "訪問看護ステーションは削除されました。",
+      "updateSuccess": "{{name}} を更新しました!"
+    },
+    "table": {
+      "info": {
+        "noStation": "訪問看護ステーション"
+      },
+      "headers": {
+        "name": "訪問看護ステーション名",
+        "address": "法人住所",
+        "phone": "電話番号",
+        "rep_name": "代表者名",
+        "station_name": "ステーション名",
+        "created_at": "登録日"
+      }
+    },
+    "modal": {
+      "add": {
+        "action": "訪問看護ステーションを追加する",
+        "title": "訪問看護ステーションを追加する"
+      },
+      "edit": {
+        "action": "保存する",
+        "title": "訪問看護ステーションを変更する"
+      }
+    },
+    "form": {
+      "headers": {
+        "corporate_details": "訪問看護法人詳細",
+        "corporate_contact": "訪問看護ステーション連絡先",
+        "station_details": "ステーション詳細",
+        "nic_list": "担当看護師リスト"
+      },
+      "corporate_name": {
+        "label": "訪問看護法人名"
+      },
+      "corporate_address": {
+        "label": "法人住所"
+      },
+      "phone": {
+        "label": "電話番号"
+      },
+      "fax": {
+        "label": "FAX"
+      },
+      "email": {
+        "label": "E-mail"
+      },
+      "rep_name_kanji": {
+        "label": "代表者名"
+      },
+      "rep_name_kana": {
+        "label": "代表者ふりがな"
+      },
+      "administrator_name_kanji": {
+        "label": "管理者名"
+      },
+      "administrator_name_kana": {
+        "label": "管理者ふりがな"
+      },
+      "station_name": {
+        "label": "ステーション名"
+      },
+      "station_address": {
+        "label": "ステーション住所"
+      },
+      "station_establishment_date": {
+        "label": "設立年月日"
+      },
+      "nurses": {
+        "actions": {
+          "add": "看護師追加"
+        },
+        "errors": {
+          "limit": "看護師の追加は最大3人までです。"
+        }
+      },
+      "nurse_name_kanji": {
+        "label": "担当看護師名"
+      },
+      "nurse_name_kana": {
+        "label": "担当看護師ふりがな"
+      },
+      "nurse_birth_date": {
+        "label": "生年月日"
+      },
+      "nurse_age": {
+        "label": "年齢"
       }
     }
   },
