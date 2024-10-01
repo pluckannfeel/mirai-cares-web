@@ -110,7 +110,7 @@ type MedicalInstitutionRowProps = {
   institution: MedicalInstitution;
 };
 
-const PatientRow = ({
+const MedicalInstitutionRow = ({
   index,
   onCheck,
   onDelete,
@@ -358,7 +358,7 @@ const MedicalInstitutionTable = ({
             {institutions
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((institution, index) => (
-                <PatientRow
+                <MedicalInstitutionRow
                   index={index}
                   key={institution.id}
                   onCheck={handleClick}
