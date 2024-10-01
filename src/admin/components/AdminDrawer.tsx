@@ -39,6 +39,7 @@ import {
   SettingsAccessibility as SettingsAccessibilityIcon,
   Diversity2Outlined as Diversity2OutlinedIcon,
   LocalHospital as LocalHospitalIcon,
+  LocalHospitalOutlined as LocalHospitalOutlinedIcon,
   AdminPanelSettings as AdminPanelSettingsIcon,
   Source as SourceIcon,
   // Calculate as CalculateIcon,
@@ -152,6 +153,11 @@ export const menuItems = [
         path: "/admin/medical-institution-management",
       },
       {
+        icon: LocalHospitalOutlinedIcon,
+        key: "admin.drawer.menu.nested.masterDatabase.children.visitingNursingStationManagement",
+        path: "/admin/visiting-nursing-station-management",
+      },
+      {
         icon: AdminPanelSettingsIcon,
         key: "admin.drawer.menu.nested.masterDatabase.children.user",
         path: "/admin/user-management",
@@ -214,7 +220,11 @@ const AdminDrawer = ({
     }
 
     // If role is User or Staff, remove payslip
-    if (userInfo?.role === "User" || userInfo?.role === "Staff" || userInfo?.role === "Manager") {
+    if (
+      userInfo?.role === "User" ||
+      userInfo?.role === "Staff" ||
+      userInfo?.role === "Manager"
+    ) {
       items = items.filter(
         (item) => item.key !== "admin.drawer.menu.salaryManagement"
       );

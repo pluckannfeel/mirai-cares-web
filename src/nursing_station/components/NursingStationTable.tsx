@@ -25,7 +25,9 @@ import { useTranslation } from "react-i18next";
 import Empty from "../../core/components/Empty";
 import * as selectUtils from "../../core/utils/selectUtils";
 
-import { MedicalInstitution } from "../types/MedicalInstitution";
+import { NursingStation } from "../types/NursingStation";
+import { formatDateWithDayjs } from "../../helpers/dayjs";
+import i18n from "../../core/config/i18n";
 
 interface HeadCell {
   id: string;
@@ -35,29 +37,34 @@ interface HeadCell {
 
 const headCells: HeadCell[] = [
   {
-    id: "medical_instiution_name",
+    id: "corporate_name",
     align: "left",
-    label: "medicalInstitutionManagement.table.headers.mi_name",
+    label: "visitingNursingStation.table.headers.name",
   },
   {
-    id: "medical_instiution_address",
+    id: "corporate_address",
     align: "center",
-    label: "medicalInstitutionManagement.table.headers.mi_address",
+    label: "visitingNursingStation.table.headers.address",
   },
   {
-    id: "medical_instiution_physician",
+    id: "corporate_phone",
     align: "center",
-    label: "medicalInstitutionManagement.table.headers.mi_physician",
+    label: "visitingNursingStation.table.headers.phone",
   },
   {
-    id: "medical_instiution_contact",
+    id: "rep_name",
     align: "center",
-    label: "medicalInstitutionManagement.table.headers.mi_contact",
+    label: "visitingNursingStation.table.headers.rep_name",
   },
   {
-    id: "medical_instiution_license_no",
+    id: "station_name",
     align: "center",
-    label: "medicalInstitutionManagement.table.headers.mi_license_no",
+    label: "visitingNursingStation.table.headers.station_name",
+  },
+  {
+    id: "created_at",
+    align: "center",
+    label: "visitingNursingStation.table.headers.created_at",
   },
 ];
 
@@ -100,31 +107,33 @@ function EnhancedTableHead({
   );
 }
 
-type MedicalInstitutionRowProps = {
+type NursingStationRowProps = {
   index: number;
   onCheck: (id: string) => void;
-  onDelete: (institutionIds: string[]) => void;
-  onEdit: (institution: MedicalInstitution) => void;
+  onDelete: (vnsIds: string[]) => void;
+  onEdit: (vns: NursingStation) => void;
   processing: boolean;
   selected: boolean;
-  institution: MedicalInstitution;
+  station: NursingStation;
 };
 
-const MedicalInstitutionRow = ({
+const NursingStationRow = ({
   index,
   onCheck,
   onDelete,
   onEdit,
   processing,
   selected,
-  institution,
-}: MedicalInstitutionRowProps) => {
+  station,
+}: NursingStationRowProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { t } = useTranslation();
   // const currentLanguage = i18n.language;
 
   const labelId = `enhanced-table-checkbox-${index}`;
   const openActions = Boolean(anchorEl);
+
+  const locale = i18n.language === "en" ? "en" : "ja";
 
   const handleOpenActions = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -136,22 +145,20 @@ const MedicalInstitutionRow = ({
 
   const handleDelete = () => {
     handleCloseActions();
-    onDelete([institution.id]);
+    onDelete([station.id]);
   };
 
   const handleEdit = () => {
     handleCloseActions();
-    onEdit(institution);
+    onEdit(station);
   };
-
-  // console.log(institution);
 
   return (
     <TableRow
       // onClick={handleEdit}
       aria-checked={selected}
       tabIndex={-1}
-      key={institution.id}
+      key={station.id}
       selected={selected}
       sx={{ "& td": { bgcolor: "background.paper", border: 0, padding: 1.5 } }}
     >
@@ -165,7 +172,7 @@ const MedicalInstitutionRow = ({
           inputProps={{
             "aria-labelledby": labelId,
           }}
-          onClick={() => onCheck(institution.id!)}
+          onClick={() => onCheck(station.id!)}
         />
       </TableCell>
 
@@ -173,7 +180,7 @@ const MedicalInstitutionRow = ({
         <Box>
           {/* Staff Kanji/Romaji Name and Kana */}
           <Typography component="div" variant="h6">
-            {`${institution.medical_institution_name}`}
+            {`${station.corporate_name}`}
             <br />
 
             {/* {`${institution.name_kana}`} */}
@@ -183,10 +190,11 @@ const MedicalInstitutionRow = ({
       <TableCell align="center">
         <Box>
           <Typography color="textSecondary" variant="h6">
-            〒 {institution.medical_institution_postal_code}
-            <br />
+            {/* 〒 */}
+            {station.corporate_address}
+            {/* <br /> */}
             {/* {t('staffManagement.table.headers.affiliation') + ': '}{' '} */}
-            {`${institution.medical_institution_address1}`}
+            {/* {`${station.corporate_address}`} */}
             {/* <strong>{t("staffManagement.table.headers.postal_code") + ": "}</strong> */}
             {/* {' '} */}
           </Typography>
@@ -196,7 +204,7 @@ const MedicalInstitutionRow = ({
       <TableCell align="center">
         <Box>
           <Typography color="textSecondary" variant="h6">
-            {`${institution.physician_name_kana}`}
+            {`${station.phone}`}
           </Typography>
         </Box>
       </TableCell>
@@ -204,7 +212,10 @@ const MedicalInstitutionRow = ({
       <TableCell align="center">
         <Box>
           <Typography color="textSecondary" variant="h6">
-            {`${institution.medical_institution_phone}`}
+            {`${station.rep_name_kanji}`}
+          </Typography>
+          <Typography color="textSecondary" variant="h6">
+            {`${station.rep_name_kana}`}
           </Typography>
         </Box>
       </TableCell>
@@ -212,7 +223,19 @@ const MedicalInstitutionRow = ({
       <TableCell align="center">
         <Box>
           <Typography color="textSecondary" variant="h6">
-            {`${institution.license_number}`}
+            {`${station.station_name}`}
+          </Typography>
+        </Box>
+      </TableCell>
+
+      <TableCell align="center">
+        <Box>
+          <Typography color="textSecondary" variant="h6">
+            {formatDateWithDayjs(
+              station.created_at as Date,
+              "YYYY MMMM",
+              locale
+            )}
           </Typography>
         </Box>
       </TableCell>
@@ -279,38 +302,33 @@ const MedicalInstitutionRow = ({
   );
 };
 
-type MedicalInstitutionTableProps = {
+type NursingStationTableProps = {
   processing: boolean;
-  onDelete: (institutionIds: string[]) => void;
-  onEdit: (institution: MedicalInstitution) => void;
+  onDelete: (vnsIds: string[]) => void;
+  onEdit: (vns: NursingStation) => void;
   onSelectedChange: (selected: string[]) => void;
   selected: string[];
-  institutions?: MedicalInstitution[];
+  nursingStations: NursingStation[];
 };
 
-const MedicalInstitutionTable = ({
+const NursingStationTable = ({
   onDelete,
   onEdit,
-  //   onView,
   onSelectedChange,
   processing,
   selected,
-  institutions = [],
-}: MedicalInstitutionTableProps) => {
+  nursingStations,
+}: NursingStationTableProps) => {
   const { t } = useTranslation();
 
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(
-    institutions.length ? institutions.length : 5
-  );
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.checked) {
-      const newSelecteds = selectUtils.selectAll(institutions);
-      onSelectedChange(newSelecteds);
-      return;
-    }
-    onSelectedChange([]);
+    const newSelecteds = event.target.checked
+      ? nursingStations.map((n) => n.id!)
+      : [];
+    onSelectedChange(newSelecteds);
   };
 
   const handleClick = (id: string) => {
@@ -331,13 +349,10 @@ const MedicalInstitutionTable = ({
 
   const isSelected = (id: string) => selected.indexOf(id) !== -1;
 
-  if (institutions.length === 0) {
-    return (
-      <Empty
-        title={t("medicalInstitutionManagement.table.info.noInstitution")}
-      />
-    );
+  if (!nursingStations.length) {
+    return <Empty title={t("visitingNursingStation.table.info.noStation")} />;
   }
+
   return (
     <React.Fragment>
       <TableContainer>
@@ -352,31 +367,31 @@ const MedicalInstitutionTable = ({
           <EnhancedTableHead
             numSelected={selected.length}
             onSelectAllClick={handleSelectAllClick}
-            rowCount={institutions.length}
+            rowCount={nursingStations.length}
           />
           <TableBody>
-            {institutions
+            {nursingStations
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((institution, index) => (
-                <MedicalInstitutionRow
+              .map((station, index) => (
+                <NursingStationRow
                   index={index}
-                  key={institution.id}
+                  key={station.id}
                   onCheck={handleClick}
                   onDelete={onDelete}
                   onEdit={onEdit}
                   //   onView={onView}
                   processing={processing}
-                  selected={isSelected(institution.id!)}
-                  institution={institution}
+                  selected={isSelected(station.id!)}
+                  station={station}
                 />
               ))}
           </TableBody>
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[5, 10, 25, institutions.length]}
+        rowsPerPageOptions={[5, 10, 25]}
         component="div"
-        count={institutions.length}
+        count={nursingStations.length}
         rowsPerPage={rowsPerPage}
         labelRowsPerPage={t("common.table.pagination.rowsPerPage")}
         page={page}
@@ -387,4 +402,4 @@ const MedicalInstitutionTable = ({
   );
 };
 
-export default MedicalInstitutionTable;
+export default NursingStationTable;

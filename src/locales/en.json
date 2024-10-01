@@ -13,6 +13,7 @@
         "staffManagement": "Staff Information",
         "patientManagement": "Patient DB",
         "medicalInstitutionManagement": "Medical Institution DB",
+        "visitingNursingStationManagement": "Visiting Nursing Station DB",
         "staffWorkSchedule": "Staff Work Schedule",
         "leaveRequest": "Leave Requests",
         "companyInformation": "Company Information",
@@ -44,7 +45,8 @@
               "staff": "Staff DB",
               "user": "User DB",
               "patient": "Patient DB",
-              "medicalInstitution": "Medical Institution DB"
+              "medicalInstitution": "Medical Institution DB",
+              "visitingNursingStationManagement": "Visiting Nursing Station DB"
             }
           }
         }
@@ -1846,6 +1848,97 @@
       },
       "ojt_implementation": {
         "label": "OJT Implementation Name "
+      }
+    }
+  },
+  "visitingNursingStation": {
+    "confirmations": {
+      "delete": "この訪問看護ステーションを削除してもよろしいですか？"
+    },
+    "toolbar": {
+      "title": "Visiting Nursing Stations"
+    },
+    "notifications": {
+      "addSuccess": "{{name}} was added",
+      "deleteSuccess": "Visiting Nursing Station(s) have been deleted!",
+      "updateSuccess": "{{name}} nursing station was updated."
+    },
+    "table": {
+      "info": {
+        "noStation": "No Data"
+      },
+      "headers": {
+        "name": "Nursing Station Name",
+        "address": "Nursing Station Address",
+        "phone": "Telephone Number",
+        "rep_name": "Representative Name",
+        "station_name": "Station Name",
+        "created_at": "Date Created"
+      }
+    },
+    "modal": {
+      "add": {
+        "action": "Add",
+        "title": "Add Visiting Nursing Station"
+      },
+      "edit": {
+        "action": "Save",
+        "title": "Edit Visiting Nursing Station"
+      }
+    },
+    "form": {
+      "headers": {
+        "corporate_details": "Corporate Details",
+        "corporate_contact": "Corporate Contact",
+        "station_details": "Station Details",
+        "nic_list": "Nurse In Charge List"
+      },
+      "corporate_name": {
+        "label": "Corporate Name"
+      },
+      "corporate_address": {
+        "label": "Corporate Address"
+      },
+      "phone": {
+        "label": "Phone Number"
+      },
+      "fax": {
+        "label": "FAX"
+      },
+      "email": {
+        "label": "E-mail"
+      },
+      "rep_name_kanji": {
+        "label": "Representative Name"
+      },
+      "rep_name_kana": {
+        "label": "Representative Name Furigana"
+      },
+      "administrator_name_kanji": {
+        "label": "Administrator Name"
+      },
+      "administrator_name_kana": {
+        "label": "Administrator Name Furigana"
+      },
+      "nurses": {
+        "actions": {
+          "add": "Add Nurse In Charge"
+        },
+        "errors": {
+          "limit": "You can only add up to 3 nurses."
+        }
+      },
+      "nurse_name_kanji": {
+        "label": "Name"
+      },
+      "nurse_name_kana": {
+        "label": "Name Furigana"
+      },
+      "nurse_birth_date": {
+        "label": "Birth Date"
+      },
+      "nurse_age": {
+        "label": "Age"
       }
     }
   },

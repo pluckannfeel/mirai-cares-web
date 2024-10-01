@@ -83,6 +83,11 @@ const MedicalInsitutionManagement = lazy(
   () => import("./medical_institution/pages/MedicalInstitutionManagement")
 );
 
+//Visiting Nursing Station
+const VisitingNursingStationManagement = lazy(
+  () => import("./nursing_station/pages/NursingStationManagement")
+);
+
 //Salary Calculation
 const SalaryManagement = lazy(() => import("./staff/pages/SalaryCalculation"));
 const TimeCalculationSheetTab = lazy(
@@ -136,6 +141,11 @@ const AppRoutes = () => {
           <Route
             path="medical-institution-management"
             element={<MedicalInsitutionManagement />}
+          />
+
+          <Route
+            path="visiting-nursing-station-management"
+            element={<VisitingNursingStationManagement />}
           />
 
           <Route path="salary-management" element={<SalaryManagement />}>
