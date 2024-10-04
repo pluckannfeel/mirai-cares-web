@@ -53,7 +53,8 @@ export const darkPalette = {
     // main: "#64B5F6",
     // main: "#FCC8D1",
     main : "#F8ECEF",
-    contrastText: palette.pink[900],
+    // contrastText: palette.pink[900],
+    // contrastText: palette.grey[9]
   },
   secondary: {
     main: palette.pink[900],

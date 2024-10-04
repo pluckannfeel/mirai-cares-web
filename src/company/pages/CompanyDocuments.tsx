@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Card,
@@ -19,6 +19,9 @@ import {
   InputAdornment,
   ListSubheader,
   Typography,
+  OutlinedInput,
+  ListItemText,
+  Divider,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { DatePicker } from "@mui/x-date-pickers";
@@ -39,6 +42,9 @@ import { usePatientSelect } from "../../patients/hooks/usePatientSelection";
 import {
   affiliatedCompanies,
   documents,
+  otherConditionsList,
+  qualificationsHeld,
+  qualificationsHeld2,
   workPlaces,
   workTypes,
 } from "../helper/helper";
@@ -49,6 +55,15 @@ import { axiosInstance, baseUrl } from "../../api/server";
 import { useLocalStorage } from "../../core/hooks/useLocalStorage";
 import dayjs, { Dayjs } from "dayjs";
 import utc from "dayjs/plugin/utc";
+import { useNursingStationsSelect } from "../../nursing_station/hooks/useNursingStationsSelect";
+import {
+  NurseInCharge,
+  NursingStation,
+} from "../../nursing_station/types/NursingStation";
+import { useNurseInChargeSelect } from "../../nursing_station/hooks/useNurseInChargeSelect";
+import OnSiteExerciseTrainingChecklist from "../components/OnSiteExerciseTrainingChecklist";
+import BusinessSystemEstablishedChecklist from "../components/BusinessSystemEstablishedChecklist";
+import { Text } from "@react-pdf/renderer";
 dayjs.extend(utc);
 
 const CompanyDocuments = () => {
@@ -64,9 +79,19 @@ const CompanyDocuments = () => {
   const { data: patientSelect } = usePatientSelect();
   const { data: institutionSelect } = useInstitutionsSelect();
 
+  // vns and nic select
+  const { data: vnsSelect } = useNursingStationsSelect();
+
+  // sputum training ishiki 2 OSET checklist (on site exercise and training checklist)
+  const [OSETCheckedItems, setOSETCheckedItems] = useState<number[]>([]);
+  // sputum training ishiki 2 BSE checklist (business system established checklist)
+  const [BSECheckedItems, setBSECheckedItems] = useState<number[]>([]);
+
   const { isGenerating, generateDocument } = useCompanyGenerateDocument();
 
   const [docusignESignature, setDocusignESignature] = useState<boolean>(false);
+
+  const [nurseList, setNurseList] = useState<NurseInCharge[]>([]);
 
   const [allowInput, setAllowInput] = useState<{
     staff: boolean;
@@ -120,6 +145,21 @@ const CompanyDocuments = () => {
       witness_name: "",
       witness_email: "",
 
+      // visiting nursing station
+      visiting_nursing_station: "",
+      nurse_in_charge: null,
+
+      qualifications_held: [] as number[],
+      station_qualifications_held: [] as number[],
+      welfare_experience: "4ヶ月",
+      current_employment_experience: "4ヶ月",
+
+      onsite_exercises_training: [] as number[],
+      business_system_established: [] as number[],
+      main_illness: "ALS ",
+      current_conditions: [] as number[],
+      ojt_instruction_content: [] as number[],
+
       // going out
       // going_out: {},
     },
@@ -142,6 +182,23 @@ const CompanyDocuments = () => {
       generatePdf(finalValues as any);
     },
   });
+
+  useEffect(() => {
+    if (!vnsSelect) {
+      setNurseList([]);
+      return;
+    }
+  }, []);
+
+  useEffect(() => {
+    if (OSETCheckedItems) {
+      formik.setFieldValue("onsite_exercises_training", OSETCheckedItems);
+    }
+
+    if (BSECheckedItems) {
+      formik.setFieldValue("business_system_established", BSECheckedItems);
+    }
+  }, [OSETCheckedItems, BSECheckedItems]);
 
   const generatePdf = async (values: GenerateCompanyDocument) => {
     generateDocument(values)
@@ -192,11 +249,32 @@ const CompanyDocuments = () => {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setDocusignESignature(event.target.checked);
-    
-    // if it is unchecked set company_stamp to false and hide it 
+
+    // if it is unchecked set company_stamp to false and hide it
     if (!event.target.checked) {
       formik.setFieldValue("company_stamp", false);
     }
+  };
+
+  // sputum training document onsite exercise and training checklist
+  const handleOSETCheckListChange = (number: number) => {
+    setOSETCheckedItems((prev) => {
+      const newItems = prev.includes(number)
+        ? prev.filter((item) => item !== number) // Remove the number if it exists
+        : [...prev, number].sort((a, b) => a - b); // Add the number and sort the array
+
+      return newItems;
+    });
+  };
+
+  const handleBSEChecklistChange = (number: number) => {
+    setBSECheckedItems((prev) => {
+      const newItems = prev.includes(number)
+        ? prev.filter((item) => item !== number) // Remove the number if it exists
+        : [...prev, number].sort((a, b) => a - b); // Add the number and sort the array
+
+      return newItems;
+    });
   };
 
   return (
@@ -988,6 +1066,509 @@ const CompanyDocuments = () => {
                 </Button>
               </FormGroup>
             )}
+
+            {/* ==================== SPUTUM TRAINING ====================  */}
+
+            {formik.values.document_name === "docs_sputum_training" && (
+              <>
+                <Autocomplete
+                  fullWidth
+                  freeSolo
+                  id="visiting_nursing_station"
+                  options={vnsSelect || []}
+                  getOptionLabel={(option) => {
+                    if (typeof option === "string") {
+                      return option;
+                    }
+
+                    return option.corporate_name;
+                  }}
+                  value={
+                    formik.values.visiting_nursing_station
+                      ? formik.values.visiting_nursing_station
+                      : null
+                  }
+                  onChange={(_, newValue) => {
+                    // if (!newValue) {
+                    //   setNurseList([]);
+                    //   return;
+                    // }
+
+                    if (newValue && typeof newValue !== "string") {
+                      // Set the selected nursing station to formik
+                      formik.setFieldValue(
+                        "visiting_nursing_station",
+                        newValue
+                      );
+
+                      // Update nurseList with the selected station's nurses
+                      setNurseList(newValue.nurses || []);
+                    } else {
+                      // Clear the nurseList if no valid selection
+                      formik.setFieldValue("visiting_nursing_station", "");
+                      setNurseList([]);
+                    }
+
+                    // always update nurse_in_charge to null when visiting_nursing_station changes
+                    formik.setFieldValue("nurse_in_charge", null);
+                  }}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      margin="normal"
+                      InputLabelProps={{
+                        sx: { fontSize: "1.1rem" },
+                      }}
+                      label={t(
+                        "company.document.form.sputum_training.visiting_nursing_station"
+                      )}
+                    />
+                  )}
+                />
+
+                <Autocomplete
+                  fullWidth
+                  id="nurse_in_charge"
+                  options={nurseList}
+                  getOptionLabel={(option) => option.name_kanji}
+                  value={
+                    formik.values.nurse_in_charge
+                      ? formik.values.nurse_in_charge
+                      : null
+                  }
+                  onChange={(_, newValue) => {
+                    // Check that newValue is of type NurseInCharge or null
+                    if (newValue && typeof newValue !== "string") {
+                      formik.setFieldValue("nurse_in_charge", newValue);
+                    } else {
+                      formik.setFieldValue("nurse_in_charge", null);
+                    }
+                  }}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      margin="normal"
+                      InputLabelProps={{
+                        sx: { fontSize: "1.1rem" },
+                      }}
+                      label={t(
+                        "company.document.form.sputum_training.nurse_in_charge"
+                      )}
+                    />
+                  )}
+                />
+
+                <DatePicker
+                  slotProps={{
+                    textField: {
+                      margin: "normal",
+                      size: "small",
+                      fullWidth: true,
+                      InputLabelProps: {
+                        sx: { fontSize: "1.1rem" },
+                      },
+                    },
+                  }}
+                  format="MM/DD/YYYY"
+                  label={t("company.document.form.date_created.label")}
+                  value={dayjs.utc(formik.values.date_created)}
+                  onChange={(date: Dayjs | null) => {
+                    formik.setFieldValue("date_created", date);
+                  }}
+                />
+
+                {/* ==================== OPTIONAL ====================  */}
+
+                <Typography variant="h5" marginTop={1} fontWeight={"bold"}>
+                  {"(様式1)"}
+                </Typography>
+
+                <FormControl
+                  margin="dense"
+                  size="small"
+                  sx={{
+                    marginTop: "10px",
+                    maxWidth: "50dvw",
+                    width: "100%",
+                  }}
+                >
+                  <InputLabel
+                    id="sputum_training_qualifications_held"
+                    size="small"
+                    sx={{
+                      fontSize: "1.150rem",
+                      fontWeight: "bolder",
+                    }}
+                  >
+                    {"保有資格"} {"(該当の番号)"}
+                  </InputLabel>
+                  <Select
+                    // label={"保有資格"}
+                    labelId="sputum_training_qualifications_held"
+                    id="sputum_training_qualifications_held"
+                    name="qualifications_held"
+                    multiple
+                    value={formik.values.qualifications_held}
+                    onChange={(e) => {
+                      const {
+                        target: { value },
+                      } = e;
+
+                      formik.setFieldValue(
+                        "qualifications_held",
+                        typeof value === "string" ? value.split(",") : value
+                      );
+                    }}
+                    input={<OutlinedInput label="Tag" />}
+                    renderValue={(selected) =>
+                      selected
+                        .map(
+                          (value) =>
+                            qualificationsHeld.find((q) => q.value === value)
+                              ?.label
+                        )
+                        .join(", ")
+                    }
+                  >
+                    {qualificationsHeld.map((qualification) => (
+                      <MenuItem
+                        key={qualification.value}
+                        value={qualification.value}
+                      >
+                        <Checkbox
+                          checked={
+                            formik.values.qualifications_held.indexOf(
+                              qualification.value
+                            ) > -1
+                          }
+                        />
+                        <ListItemText primary={qualification.label} />
+                      </MenuItem>
+                    ))}
+                  </Select>
+                  <FormHelperText>
+                    {formik.touched.qualifications_held &&
+                      formik.errors.qualifications_held}
+                  </FormHelperText>
+                </FormControl>
+
+                <Typography margin={1} variant="h5" fontWeight={"bolder"}>
+                  {"福祉関係 経験年数"}
+                </Typography>
+
+                <TextField
+                  fullWidth
+                  size="small"
+                  margin="dense"
+                  label={"a. 福祉関係勤続年数"}
+                  type="text"
+                  placeholder="例：4ヶ月"
+                  value={formik.values.welfare_experience}
+                  onChange={(e) => {
+                    formik.setFieldValue("welfare_experience", e.target.value);
+                  }}
+                />
+
+                <TextField
+                  fullWidth
+                  size="small"
+                  margin="dense"
+                  label={"b. 現在の勤務先勤続年数"}
+                  type="text"
+                  placeholder="例：4ヶ月"
+                  value={formik.values.current_employment_experience}
+                  onChange={(e) => {
+                    formik.setFieldValue(
+                      "current_employment_experience",
+                      e.target.value
+                    );
+                  }}
+                />
+
+                <Divider sx={{ marginTop: "8px" }}></Divider>
+
+                <Typography
+                  variant="h5"
+                  marginTop={1}
+                  marginBottom={1}
+                  fontWeight={"bold"}
+                >
+                  {"(様式２)	実地研修準備チェック表"}
+                </Typography>
+
+                <OnSiteExerciseTrainingChecklist
+                  checkedItems={OSETCheckedItems}
+                  handleCheckboxChange={handleOSETCheckListChange}
+                />
+
+                <BusinessSystemEstablishedChecklist
+                  checkedItems={BSECheckedItems}
+                  handleCheckboxChange={handleBSEChecklistChange}
+                />
+
+                <Divider sx={{ marginTop: "8px" }}></Divider>
+
+                <Typography
+                  variant="h5"
+                  marginTop={1}
+                  marginBottom={1}
+                  fontWeight={"bold"}
+                >
+                  {
+                    "(様式4)	喀痰吸引等研修（第３号研修）実地研修の実施に係る指示書"
+                  }
+                </Typography>
+
+                <Typography
+                  variant="h6"
+                  marginTop={1}
+                  marginBottom={1}
+                  fontWeight={"bold"}
+                >
+                  {"現在の状況について"}
+                </Typography>
+
+                <TextField
+                  fullWidth
+                  size="small"
+                  margin="dense"
+                  sx={{
+                    fontSize: "1.1rem"
+                  }}
+                  // label={t("company.document.form.main_illness.label")}
+                  label={"主たる傷病名"}
+                  type="text"
+                  placeholder="例：ALS"
+                  value={formik.values.main_illness}
+                  onChange={(e) => {
+                    formik.setFieldValue("main_illness", e.target.value);
+                  }}
+                />
+
+                <FormControl
+                  margin="dense"
+                  sx={{
+                    marginTop: "10px",
+                    maxWidth: "50dvw",
+                    width: "100%",
+                  }}
+                >
+                  <InputLabel
+                    id="sputum_training_current_conditions"
+                    size="small"
+                    sx={{
+                      fontSize: "1.2rem",
+                      fontWeight: "bolder",
+                    }}
+                  >
+                    {"必要な医療的ケア"}
+                  </InputLabel>
+                  <Select
+                    size="small"
+                    labelId="sputum_training_current_conditions"
+                    id="sputum_training_current_conditions"
+                    name="current_conditions"
+                    multiple
+                    value={formik.values.current_conditions}
+                    onChange={(e) => {
+                      const {
+                        target: { value },
+                      } = e;
+
+                      formik.setFieldValue(
+                        "current_conditions",
+                        typeof value === "string" ? value.split(",") : value
+                      );
+                    }}
+                    input={<OutlinedInput label="Tag" />}
+                    renderValue={(selected) =>
+                      selected
+                        .map(
+                          (value) =>
+                            otherConditionsList.find((q) => q.value === value)
+                              ?.label
+                        )
+                        .join(", ")
+                    }
+                  >
+                    {otherConditionsList.map((condition) => (
+                      <MenuItem key={condition.value} value={condition.value}>
+                        <Checkbox
+                          checked={
+                            formik.values.current_conditions.indexOf(
+                              condition.value
+                            ) > -1
+                          }
+                        />
+                        <ListItemText primary={condition.label} />
+                      </MenuItem>
+                    ))}
+                  </Select>
+                  <FormHelperText>
+                    {formik.touched.current_conditions &&
+                      formik.errors.current_conditions}
+                  </FormHelperText>
+                </FormControl>
+
+                <Divider sx={{ marginTop: "8px" }}></Divider>
+
+                <Typography
+                  variant="h5"
+                  marginTop={1}
+                  marginBottom={1}
+                  fontWeight={"bold"}
+                >
+                  {
+                    "(様式5) 第三号（特定の者対象）指導講師調蓍及び 指導講師承諾書"
+                  }
+                </Typography>
+
+                <Typography
+                  variant="h6"
+                  marginTop={1}
+                  marginBottom={1}
+                  fontWeight={"bold"}
+                >
+                  {"保有資格"}
+                </Typography>
+
+                <FormControl
+                  margin="dense"
+                  size="small"
+                  sx={{
+                    marginTop: "10px",
+                    maxWidth: "50dvw",
+                    width: "100%",
+                  }}
+                >
+                  <InputLabel
+                    id="sputum_training_station_qualifications_held"
+                    size="small"
+                    sx={{
+                      fontSize: "1.150rem",
+                      fontWeight: "bolder",
+                    }}
+                  >
+                    {"保有資格"}
+                  </InputLabel>
+                  <Select
+                    // label={"保有資格"}
+                    labelId="sputum_training_station_qualifications_held"
+                    id="sputum_training_station_qualifications_held"
+                    name="station_qualifications_held"
+                    multiple
+                    value={formik.values.station_qualifications_held}
+                    onChange={(e) => {
+                      const {
+                        target: { value },
+                      } = e;
+
+                      formik.setFieldValue(
+                        "station_qualifications_held",
+                        typeof value === "string" ? value.split(",") : value
+                      );
+                    }}
+                    input={<OutlinedInput label="Tag" />}
+                    renderValue={(selected) =>
+                      selected
+                        .map(
+                          (value) =>
+                            qualificationsHeld2.find((q) => q.value === value)
+                              ?.label
+                        )
+                        .join(", ")
+                    }
+                  >
+                    {qualificationsHeld2.map((qualification) => (
+                      <MenuItem
+                        key={qualification.value}
+                        value={qualification.value}
+                      >
+                        <Checkbox
+                          checked={
+                            formik.values.station_qualifications_held.indexOf(
+                              qualification.value
+                            ) > -1
+                          }
+                        />
+                        <ListItemText primary={qualification.label} />
+                      </MenuItem>
+                    ))}
+                  </Select>
+                  <FormHelperText>
+                    {formik.touched.station_qualifications_held &&
+                      formik.errors.station_qualifications_held}
+                  </FormHelperText>
+                </FormControl>
+
+                <FormControl
+                  margin="dense"
+                  sx={{
+                    marginTop: "10px",
+                    maxWidth: "50dvw",
+                    width: "100%",
+                  }}
+                >
+                  <InputLabel
+                    id="sputum_training_current_conditions"
+                    size="small"
+                    sx={{
+                      fontSize: "1.2rem",
+                      fontWeight: "bolder",
+                    }}
+                  >
+                    {"実地研修指導内容"}
+                  </InputLabel>
+                  <Select
+                    size="small"
+                    labelId="sputum_training_ojt_instruction_content"
+                    id="sputum_training_ojt_instruction_content"
+                    name="ojt_instruction_content"
+                    multiple
+                    value={formik.values.ojt_instruction_content}
+                    onChange={(e) => {
+                      const {
+                        target: { value },
+                      } = e;
+
+                      formik.setFieldValue(
+                        "ojt_instruction_content",
+                        typeof value === "string" ? value.split(",") : value
+                      );
+                    }}
+                    input={<OutlinedInput label="Tag" />}
+                    renderValue={(selected) =>
+                      selected
+                        .map(
+                          (value) =>
+                            otherConditionsList.find((q) => q.value === value)
+                              ?.label
+                        )
+                        .join(", ")
+                    }
+                  >
+                    {otherConditionsList.map((condition) => (
+                      <MenuItem key={condition.value} value={condition.value}>
+                        <Checkbox
+                          checked={
+                            formik.values.ojt_instruction_content.indexOf(
+                              condition.value
+                            ) > -1
+                          }
+                        />
+                        <ListItemText primary={condition.label} />
+                      </MenuItem>
+                    ))}
+                  </Select>
+                  <FormHelperText>
+                    {formik.touched.ojt_instruction_content &&
+                      formik.errors.ojt_instruction_content}
+                  </FormHelperText>
+                </FormControl>
+              </>
+            )}
+
+            {/* ==================== SPUTUM TRAINING ====================  */}
 
             {/*  use Docusign E-signature */}
             {allowInput.esignature && (
