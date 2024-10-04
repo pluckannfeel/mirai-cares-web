@@ -1358,7 +1358,7 @@
         "general": "一般"
       },
       "options": {
-        "sputum_training": "喀痰吸引の実地研修OJT.pdf",
+        "sputum_training": "喀痰吸引の実地研修OJT.docx",
         "mys_contract": "労働条件通知書.docx",
         "ehis_employment_contract": "雇用契約書.docx (義人黒曜)",
         "mys_pledge": "誓約書.docx",
@@ -1413,7 +1413,7 @@
           "label": "利用者"
         },
         "institution": {
-          "label": "関連業社・医療機関"
+          "label": "担当医療法人"
         },
         "date_entry": {
           "label": "日記入"
@@ -1443,6 +1443,10 @@
           "destination": "行き先",
           "travelMethod": "移動手段",
           "helperId": "担当ヘルパー"
+        },
+        "sputum_training": {
+          "visiting_nursing_station": "訪問看護ステーション",
+          "nurse_in_charge": "訪問看護ステーション担当者"
         }
       },
       "actions": {
@@ -1926,6 +1930,9 @@
       "corporate_name": {
         "label": "訪問看護法人名"
       },
+      "corporate_postal_code": {
+        "label": "郵便番号"
+      },
       "corporate_address": {
         "label": "法人住所"
       },
@@ -1964,7 +1971,7 @@
           "add": "看護師追加"
         },
         "errors": {
-          "limit": "看護師の追加は最大3人までです。"
+          "limit": "看護師の追加は最大4人までです。"
         }
       },
       "nurse_name_kanji": {

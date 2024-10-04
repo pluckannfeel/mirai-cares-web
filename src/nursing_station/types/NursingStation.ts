@@ -2,6 +2,7 @@ export interface NursingStation {
   id: string;
   corporate_name: string;
   corporate_address: string;
+  corporate_postal_code: string;
   phone: string;
   fax: string;
   email_address: string;

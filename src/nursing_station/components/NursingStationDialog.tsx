@@ -67,6 +67,7 @@ const NursingStationDialog: React.FC<NursingStationDialogProps> = ({
     initialValues: {
       corporate_name: nursingStation?.corporate_name || "",
       corporate_address: nursingStation?.corporate_address || "",
+      corporate_postal_code: nursingStation?.corporate_postal_code || "",
       phone: nursingStation?.phone || "",
       fax: nursingStation?.fax || "",
       email_address: nursingStation?.email_address || "",
@@ -111,7 +112,7 @@ const NursingStationDialog: React.FC<NursingStationDialogProps> = ({
   // nurse in charge list event handler functions
   const handleAddNurseInCharge = () => {
     // limite only 3 items
-    if (formik.values.nurses?.length === 3) {
+    if (formik.values.nurses?.length === 4) {
       snackbar.error(t("visitingNursingStation.form.nurses.errors.limit"));
       return;
     }
@@ -191,6 +192,32 @@ const NursingStationDialog: React.FC<NursingStationDialogProps> = ({
                       formik.errors.corporate_name
                     }
                   />
+
+                  <TextField
+                    // size="small"
+                    // margin="none"
+                    // fullWidth
+                    margin="normal"
+                    id="corporate_postal_code"
+                    label={t(
+                      "visitingNursingStation.form.corporate_postal_code.label"
+                    )}
+                    name="corporate_postal_code"
+                    autoComplete="corporate_postal_code"
+                    placeholder="000-0000"
+                    // autofocus
+                    disabled={processing}
+                    value={formik.values.corporate_postal_code}
+                    onChange={formik.handleChange}
+                    error={
+                      formik.touched.corporate_postal_code &&
+                      Boolean(formik.errors.corporate_postal_code)
+                    }
+                    helperText={
+                      formik.touched.corporate_postal_code &&
+                      formik.errors.corporate_postal_code
+                    }
+                    />
 
                   <TextField
                     // size="small"
@@ -339,7 +366,7 @@ const NursingStationDialog: React.FC<NursingStationDialogProps> = ({
 
               <Grid item xs={12} marginTop={1}>
                 <TextField
-                // margin="dense"
+                  // margin="dense"
                   //   margin="none"
                   fullWidth
                   id="administrator_name_kanji"

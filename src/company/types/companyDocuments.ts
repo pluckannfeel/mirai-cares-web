@@ -1,4 +1,8 @@
 import { MedicalInstitution as MedicalInstitutionSelect } from "../../medical_institution/types/MedicalInstitution";
+import {
+  NurseInCharge,
+  NursingStation,
+} from "../../nursing_station/types/NursingStation";
 import { PatientSelect } from "../../patients/types/patient";
 import { StaffScheduleSelect } from "../../shift/types/StaffWorkSchedule";
 
@@ -25,7 +29,7 @@ export interface GenerateCompanyDocument {
   employment_insurance?: boolean;
 
   //employment contract
-  affiliated_company?: string//所属機関 
+  affiliated_company?: string; //所属機関
   company_stamp?: boolean;
 
   // patient
@@ -34,8 +38,23 @@ export interface GenerateCompanyDocument {
   witness_name?: string;
   witness_email?: string;
 
-  // // going out
-  // going_out?: DayDetails;
+  // visiting_nursing_station
+  visiting_nursing_station: NursingStation;
+  nurse_in_charge?: NurseInCharge;
+
+  // sputum training
+  qualifications_held?: number[];
+  welfare_experience?: string;
+  current_employment_experience?: string;
+
+  onsite_exercises_training?: number[];
+  business_system_established?: number[];
+
+  main_illness?: string;
+  current_conditions: number[];
+
+  station_qualifications_held?: number[]; // ishiki 5
+  ojt_instruction_content?: number[];
 }
 
 // export type DayDetails = {
@@ -50,3 +69,14 @@ export interface GenerateCompanyDocument {
 //   destination: string;
 //   travel_method: string;
 // };
+
+// additional fields for sputum training document
+// visiting nursing selection
+// nurse in charge (we also need to create a hook to fetch all nurses with visiting nursing selection)
+// created date (written date)
+// required shapes to fill ff;
+// # 各事業所が体制として整備するもの - checkbox page 2
+// # 現場演習及び実地研修に関して、提出していただく書類 checkbox page 2
+// #  現在の状況について - checkbox page 4
+// # 保有資格 number wrapped in circle page 5
+// # 実地研修指導内容（該当を〇）- circle page 5
