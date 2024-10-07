@@ -33,7 +33,7 @@ const Home = () => {
         <Grid item xs={12} md={7} lg={5}>
           {/* <PersonalTargetsWidget /> */}
           <BirthdayWidget />
-          <MeetingWidgets />
+          {/* <MeetingWidgets /> */}
         </Grid>
       </Grid>
     </React.Fragment>

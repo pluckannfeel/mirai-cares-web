@@ -1,6 +1,7 @@
 // from @mui/material import all required above
 import {
   Avatar,
+  Button,
   Card,
   CardContent,
   CardHeader,
@@ -57,34 +58,49 @@ const UsersWidget = () => {
       <CardContent>
         <List>
           {users &&
-            users.map((user, index) => (
-              <ListItem disableGutters key={user.id}>
-                <ListItemAvatar>
-                  <Avatar>
-                    <PersonIcon />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText
-                  primary={`${user.last_name} ${user.first_name}`}
-                  primaryTypographyProps={{
-                    fontWeight: theme.typography.fontWeightMedium,
-                  }}
-                  secondary={user.role}
-                />
-                <ListItemSecondaryAction>
-                  <IconButton
-                    aria-label="Go to user details"
-                    component={RouterLink}
-                    edge="end"
-                    // to={`/${process.env.PUBLIC_URL}/admin/user-management`}
-                    to={`/admin/user-management`}
-                  >
-                    <ChevronRightIcon />
-                  </IconButton>
-                </ListItemSecondaryAction>
-              </ListItem>
-            ))}
+            users.map((user, index) => {
+              if (index > 2) return null;
+
+              return (
+                <ListItem disableGutters key={user.id}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      <PersonIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={`${user.last_name} ${user.first_name}`}
+                    primaryTypographyProps={{
+                      fontWeight: theme.typography.fontWeightMedium,
+                    }}
+                    secondary={user.role}
+                  />
+                  <ListItemSecondaryAction>
+                    <IconButton
+                      aria-label="Go to user details"
+                      component={RouterLink}
+                      edge="end"
+                      // to={`/${process.env.PUBLIC_URL}/admin/user-management`}
+                      to={`/admin/user-management`}
+                    >
+                      <ChevronRightIcon />
+                    </IconButton>
+                  </ListItemSecondaryAction>
+                </ListItem>
+              );
+            })}
         </List>
+        {/* // View all users */}
+
+        <Button
+          aria-label="Go to user management"
+          component={RouterLink}
+          fullWidth
+          sx={{
+            fontSize: "1.2rem",
+          }}
+          to={`/admin/user-management`}
+        >全員を見る</Button>
       </CardContent>
     </Card>
   );
