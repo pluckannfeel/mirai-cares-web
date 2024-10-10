@@ -221,8 +221,12 @@ const CompanyDocuments = () => {
       })
       .catch((error) => {
         console.error("Error generating document:", error);
-        snackbar.error(t("company.errors.documentEmptyDetails"));
-        snackbar.error(`Error: ${error}`);
+        // snackbar.error(t("company.errors.documentEmptyDetails"));
+        if (error.response.data["detail"]) {
+          snackbar.error(`Error: ${error.response.data["detail"]}`);
+        } else {
+          snackbar.error(t("company.errors.documentEmptyDetails"));
+        }
       });
   };
 
@@ -964,34 +968,38 @@ const CompanyDocuments = () => {
                   }
                   label={t("company.document.form.attach_stamp.label")}
                 />
-                {/* 
+
                 <Typography marginTop={1} variant="h6">
                   {"代理人または立会人等"}
                 </Typography>
 
-                <TextField
-                  fullWidth
-                  margin="dense"
-                  label={t("company.document.form.docusign.witness_name")}
-                  type="text"
-                  size="small"
-                  value={formik.values.witness_name}
-                  onChange={(e) => {
-                    formik.setFieldValue("witness_name", e.target.value);
-                  }}
-                />
+                {docusignESignature && (
+                  <>
+                    <TextField
+                      fullWidth
+                      margin="dense"
+                      label={t("company.document.form.docusign.witness_name")}
+                      type="text"
+                      size="small"
+                      value={formik.values.witness_name}
+                      onChange={(e) => {
+                        formik.setFieldValue("witness_name", e.target.value);
+                      }}
+                    />
 
-                <TextField
-                  fullWidth
-                  margin="dense"
-                  label={t("company.document.form.docusign.witness_email")}
-                  type="text"
-                  size="small"
-                  value={formik.values.witness_email}
-                  onChange={(e) => {
-                    formik.setFieldValue("witness_email", e.target.value);
-                  }}
-                /> */}
+                    <TextField
+                      fullWidth
+                      margin="dense"
+                      label={t("company.document.form.docusign.witness_email")}
+                      type="text"
+                      size="small"
+                      value={formik.values.witness_email}
+                      onChange={(e) => {
+                        formik.setFieldValue("witness_email", e.target.value);
+                      }}
+                    />
+                  </>
+                )}
               </>
             )}
 
@@ -1333,7 +1341,7 @@ const CompanyDocuments = () => {
                   size="small"
                   margin="dense"
                   sx={{
-                    fontSize: "1.1rem"
+                    fontSize: "1.1rem",
                   }}
                   // label={t("company.document.form.main_illness.label")}
                   label={"主たる傷病名"}
