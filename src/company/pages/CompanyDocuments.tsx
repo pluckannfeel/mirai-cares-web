@@ -43,6 +43,7 @@ import {
   affiliatedCompanies,
   documents,
   otherConditionsList,
+  patientSituations,
   qualificationsHeld,
   qualificationsHeld2,
   workPlaces,
@@ -153,6 +154,7 @@ const CompanyDocuments = () => {
       station_qualifications_held: [] as number[],
       welfare_experience: "4ヶ月",
       current_employment_experience: "4ヶ月",
+      patient_situation: "A",
 
       onsite_exercises_training: [] as number[],
       business_system_established: [] as number[],
@@ -1292,6 +1294,51 @@ const CompanyDocuments = () => {
                     );
                   }}
                 />
+
+                {/* 利用者の状態 */}
+                <FormControl fullWidth margin="normal">
+                  <InputLabel
+                    id="patient_situation"
+                    size="small"
+                    sx={{
+                      fontSize: "1.1rem",
+                    }}
+                  >
+                    {/* {t("company.document.form.affiliated_company.label")} */}
+                    {"利用者の状態"}
+                  </InputLabel>
+                  <Select
+                    fullWidth
+                    autoComplete="patient_situation"
+                    // size="small"
+                    name="patient_situation"
+                    // margin='dense'
+                    id="patient_situation"
+                    // label={t("company.document.form.patient_situation.label")}
+                    label={"利用者の状態"}
+                    labelId="patient_situation"
+                    disabled={isGenerating}
+                    value={formik.values.patient_situation}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      formik.setFieldValue("patient_situation", value);
+                    }}
+                    error={
+                      formik.touched.patient_situation &&
+                      Boolean(formik.errors.patient_situation)
+                    }
+                  >
+                    {patientSituations.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {t(option.label)}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                  <FormHelperText>
+                    {formik.touched.patient_situation &&
+                      formik.errors.patient_situation}
+                  </FormHelperText>
+                </FormControl>
 
                 <Divider sx={{ marginTop: "8px" }}></Divider>
 
