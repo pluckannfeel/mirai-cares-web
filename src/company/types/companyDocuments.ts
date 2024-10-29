@@ -45,6 +45,7 @@ export interface GenerateCompanyDocument {
   // sputum training
   qualifications_held?: number[];
   welfare_experience?: string;
+  patient_situation?: string;
   current_employment_experience?: string;
 
   onsite_exercises_training?: number[];
