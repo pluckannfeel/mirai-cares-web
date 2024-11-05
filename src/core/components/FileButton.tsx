@@ -62,11 +62,11 @@ const FileButton: React.FC<FileButtonProps> = ({
         );
 
         // send notifications to all staff which has tokens
-        pushNotification({
-          staff_code: "all",
-          title: t("payslip.push_notifications.newShiftScheduleTitle"),
-          body: t("payslip.push_notifications.newShiftScheduleBody"),
-        } as PushNotification);
+        // pushNotification({
+        //   staff_code: "all",
+        //   title: t("payslip.push_notifications.newShiftScheduleTitle"),
+        //   body: t("payslip.push_notifications.newShiftScheduleBody"),
+        // } as PushNotification);
       })
       .catch((error) => {
         snackbar.error(
@@ -90,7 +90,7 @@ const FileButton: React.FC<FileButtonProps> = ({
         ref={hiddenFileInput}
         onChange={handleChange}
         style={{ display: "none" }}
-        accept=".csv"
+        accept=".csv,.xlsx,.xls"
       />
       <Button onClick={handleClick} {...buttonProps}>
         {buttonProps?.title}

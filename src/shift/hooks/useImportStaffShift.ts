@@ -13,7 +13,7 @@ const importStaffShift = async (csvFile: File): Promise<StaffWorkSchedule> => {
   await new Promise((resolve) => setTimeout(resolve, 2000));
 
   const { data } = await axiosInstance.post(
-    "/shift/import_staff_shift",
+    "/shift/import_colibri_mys_workschedule",
     formData
   );
 

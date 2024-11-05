@@ -74,11 +74,12 @@ const SalaryCalculation = () => {
               ))}
             </Tabs>
           </Box>
-          <QueryWrapper>
-            <Outlet />
-          </QueryWrapper>
         </Grid>
       </Grid>
+
+      <QueryWrapper>
+        <Outlet />
+      </QueryWrapper>
     </React.Fragment>
   );
 };
