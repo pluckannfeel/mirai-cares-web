@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   // Avatar,
   // Box,
@@ -39,9 +40,13 @@ interface HeadCell {
   align: "center" | "left" | "right";
 }
 
-const staffNameColumnWidth = "10%";
-const nationalityColumnWidth = "5%";
-const staffCodeColumnWidth = "5%";
+// const staffNameColumnWidth = "15%";
+// const nationalityColumnWidth = "5%";
+// const staffCodeColumnWidth = "5%";
+
+const staffNameColumnWidth = "10dvw"; // Set fixed width
+const nationalityColumnWidth = "5dvw"; // Set fixed width
+const staffCodeColumnWidth = "100px"; // Set fixed width
 
 const headCells: HeadCell[] = [
   {
@@ -180,19 +185,28 @@ function EnhancedTableHead({
               // Bold font weight for header titles
               backgroundColor: theme.palette.background.paper, // A neutral grey background Dark grey color for text for better contrast
               fontSize: "0.950rem", // Standard font size for headers
-              padding: "8px 12px", // Standard padding, can be adjusted
-              whiteSpace: "nowrap", // Prevent wrapping
+              padding: "8px", // Standard padding, can be adjusted
+              // whiteSpace: "nowrap", // Prevent wrapping
+              whiteSpace: "balance",
               overflow: "hidden", // Hide overflow
               textOverflow: "ellipsis", // Add ellipsis for overflow text
-              ...(headCell.id === "staff_code" && {
-                width: staffCodeColumnWidth,
-              }),
-              ...(headCell.id === "staff_name" && {
-                width: staffNameColumnWidth,
-              }),
-              ...(headCell.id === "nationality" && {
-                width: nationalityColumnWidth,
-              }),
+              // ...(headCell.id === "staff_code" && {
+              //   width: staffCodeColumnWidth,
+              // }),
+              // ...(headCell.id === "staff_name" && {
+              //   width: staffNameColumnWidth,
+              // }),
+              // ...(headCell.id === "nationality" && {
+              //   width: nationalityColumnWidth,
+              // }),
+              width:
+                headCell.id === "staff_code"
+                  ? staffCodeColumnWidth
+                  : headCell.id === "staff_name"
+                  ? staffNameColumnWidth
+                  : headCell.id === "nationality"
+                  ? nationalityColumnWidth
+                  : "auto",
             }}
           >
             {t(headCell.label)}
@@ -349,15 +363,23 @@ const TimeCalculationRow = ({
           paddingY: 0.2,
           borderRight: "1px solid rgba(224, 224, 224, 1)", // Add border line between columns
           // borderRight: 1,
-          ...(key === "staff_code" && {
-            width: staffCodeColumnWidth, // Adjust width as needed
-          }),
-          ...(key === "staff" && {
-            width: staffNameColumnWidth, // Adjust width as needed
-          }),
-          ...(key === "nationality" && {
-            width: nationalityColumnWidth, // Adjust width as needed
-          }),
+          // ...(key === "staff_code" && {
+          //   width: staffCodeColumnWidth, // Adjust width as needed
+          // }),
+          // ...(key === "staff" && {
+          //   width: staffNameColumnWidth, // Adjust width as needed
+          // }),
+          // ...(key === "nationality" && {
+          //   width: nationalityColumnWidth, // Adjust width as needed
+          // }),
+          width:
+            key === "staff_code"
+              ? staffCodeColumnWidth
+              : key === "staff"
+              ? staffNameColumnWidth
+              : key === "nationality"
+              ? nationalityColumnWidth
+              : "auto",
         }}
         key={key}
         align={align}
@@ -493,6 +515,7 @@ const TimeCalculationTable = ({
           aria-labelledby="tableTitle"
           sx={{
             minWidth: 600,
+            // overflowX: "auto"
             // borderCollapse: "separate",
             // borderSpacing: "0 .1rem",
           }}
@@ -504,7 +527,8 @@ const TimeCalculationTable = ({
             timeRecords={timeRecords}
           />
 
-          <TableBody>
+          <TableBody
+          >
             {timeRecords
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((timeRecord, index) => (

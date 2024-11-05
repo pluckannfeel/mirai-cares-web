@@ -117,7 +117,7 @@ const TimeCalculationSheetTab = () => {
 
       // Set the <a> element's attributes
       link.href = window.URL.createObjectURL(blob);
-      link.setAttribute("download", "給料計算.xlsx"); // Specify the file name
+      link.setAttribute("download", "スタッフ時間計算.xlsx"); // Specify the file name
 
       // Simulate a click on the <a> element to trigger the download
       link.click();
