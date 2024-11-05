@@ -95,6 +95,9 @@ const TimeCalculationSheetTab = () => {
       const formData = new FormData();
       formData.append("records", JSON.stringify(staffTimeRecords.records)); // Sending as a JSON string
 
+      // append also the selected year and date
+      formData.append("selected_date", `${filterDate.year}-${filterDate.month}`)
+
       const response = await fetch(
         `${baseUrl}/shift/download_salarycalculation`,
         {
