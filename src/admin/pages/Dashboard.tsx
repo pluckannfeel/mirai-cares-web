@@ -21,6 +21,9 @@ import UsersWidget from "../widgets/UsersWidget";
 import { useRecord } from "../../payslip/hooks/useRecord";
 import { OverallRecord } from "../../payslip/types/record";
 import { useStaffSelect } from "../../staff/hooks/useStaffSelection";
+import TotalServiceWidget from "../widgets/TotalServiceWidget";
+import TotalServiceCategoryWidget from "../widgets/TotalServiceCategoryWidget";
+import TotalPatientServicesWidget from "../widgets/TotalPatientServicesWidget";
 
 // const overviewItems = [
 //   {
@@ -57,6 +60,9 @@ const Dashboard = () => {
   // create an over all loading
   const isLoading = isRecordLoading || isStaffSelectionLoading;
 
+  // define total service time goal
+  const goal = 5000;
+
   // overview data
   const overviewItems = [
     {
@@ -81,14 +87,25 @@ const Dashboard = () => {
     },
   ];
 
+  // Calculate the percentage of total_hours relative to the goal
+  const progressPercentage = Math.min(
+    Math.round((overallRecord.total_hours / goal) * 100),
+    100
+  );
+
   useEffect(() => {
-    if (records) {
+    if (records && initialStaffSelect) {
       setOverallRecord({
-        ...overallRecord,
+        total_employees: initialStaffSelect.length,
         total_hours: records.total_hours,
       });
     }
-  }, [records]);
+  }, [records, initialStaffSelect]);
+
+  // Check loading state
+  if (isLoading) {
+    return <div>Loading...</div>; // Add your loading indicator
+  }
 
   return (
     <React.Fragment>
@@ -98,19 +115,26 @@ const Dashboard = () => {
       <Grid container spacing={2}>
         {overviewItems.map((item, index) => (
           <Grid key={index} item xs={6} md={3}>
-            <OverviewWidget backgroundColor={item.backgroundColor} description={t(item.unit)} title={item.value} />
+            <OverviewWidget
+              backgroundColor={item.backgroundColor}
+              description={t(item.unit)}
+              title={item.value}
+            />
           </Grid>
         ))}
         <Grid item xs={12} md={8}>
-          <ActivityWidget />
+          {/* <ActivityWidget /> */}
+          <TotalServiceWidget />
         </Grid>
         <Grid item xs={12} md={4}>
-          <BudgetWidget />
+          {/* <BudgetWidget /> */}
+          <TotalServiceCategoryWidget />
         </Grid>
-        <Grid item xs={12} md={4}>
-          <SalesHistoryWidget value={567} />
+        <Grid item xs={12} md={9}>
+          {/* <SalesHistoryWidget value={567} /> */}
+          <TotalPatientServicesWidget />
         </Grid>
-        <Grid item xs={12} md={4}>
+        {/* <Grid item xs={12} md={4}>
           <ProgressWidget
             avatar={<SupervisorAccountIcon />}
             mb={2}
@@ -128,26 +152,28 @@ const Dashboard = () => {
             title={t("dashboard.salesProgress.title")}
             value={25}
           />
-        </Grid>
-        <Grid item xs={12} md={4}>
+        </Grid> */}
+        <Grid item xs={12} md={3}>
           <CircleProgressWidget
             height={204}
-            title={t("dashboard.progress.title")}
-            value={75}
+            // title={t("dashboard.progress.title")}
+            title={`合計サービス時間の目標:  
+               ${overallRecord.total_hours} / ${goal}`}
+            value={progressPercentage}
           />
         </Grid>
         <Grid item xs={12} md={4}>
           <UsersWidget />
         </Grid>
         <Grid item xs={12} md={8}>
-          <TeamProgressWidget />
+          {/* <TeamProgressWidget /> */}
         </Grid>
-        <Grid item xs={12} md={4}>
+        {/* <Grid item xs={12} md={4}>
           <SalesByCategoryWidget />
         </Grid>
         <Grid item xs={12} md={8}>
           <SalesByAgeWidget />
-        </Grid>
+        </Grid> */}
       </Grid>
     </React.Fragment>
   );
