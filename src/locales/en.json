@@ -369,7 +369,15 @@
     "visitProgress": {
       "title": "Visits"
     },
-    "title": "Dashboard"
+    "totalService": {
+      "title": "Total Services Per Month (Current Year)"
+    },
+    "totalServiceByType": {
+      "title": "Total Services by Type"
+    },
+    "totalServiceByPatientCurrentMonth": {
+      "title": "Total Services by Patient (Current Month)"
+    }
   },
   "faq": {
     "noAnswerLink": "Can't find it here? Check out our Help Center.",

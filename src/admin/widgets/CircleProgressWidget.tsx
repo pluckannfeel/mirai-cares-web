@@ -21,14 +21,15 @@ const CircleProgressWidget = ({
 
   return (
     <Card>
-      <CardHeader title={title} />
+      <CardHeader title={title} sx={{ color: "#45525C" }} />
       <CardContent>
         <ResponsiveContainer width="99%" height={height}>
           <RadialBarChart
             innerRadius="85%"
             outerRadius="85%"
             barSize={32}
-            data={[{ fill: theme.palette.primary.main, value }]}
+            // data={[{ fill: theme.palette.primary.main, value }]}
+            data={[{ fill: "#5DBCA4", value }]}
             startAngle={90}
             endAngle={-270}
           >
@@ -42,7 +43,8 @@ const CircleProgressWidget = ({
             <RadialBar
               cornerRadius={16}
               label={{
-                fill: theme.palette.text.primary,
+                // fill: theme.palette.text.primary,
+                fill: "#4AB15F",
                 fontSize: theme.typography.h1.fontSize,
                 fontWeight: theme.typography.h1.fontWeight,
                 position: "center",

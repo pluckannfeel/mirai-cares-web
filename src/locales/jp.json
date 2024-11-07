@@ -368,6 +368,15 @@
     "visitProgress": {
       "title": "訪問"
     },
+    "totalService": {
+      "title": "今年の月間サービスの合計"
+    },
+    "totalServiceByType": {
+      "title": "サービスの種類ごとの合計時間"
+    },
+    "totalServiceByPatientCurrentMonth": {
+      "title": "利用者の総サービス時間（今月）"
+    },
     "title": "ダッシュボード"
   },
   "faq": {
