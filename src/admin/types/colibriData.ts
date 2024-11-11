@@ -13,3 +13,11 @@ export type ServicesByPatient = {
   name: string;
   hours: number;
 };
+
+export type MostServicesByStaff = {
+  id: number;
+  color: string;
+  name: string;
+  progress: number;
+  value: number;
+};

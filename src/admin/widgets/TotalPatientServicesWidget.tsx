@@ -22,13 +22,15 @@ import { useState, useEffect } from "react";
 
 type TotalPatientServicesProps = {
   value?: number;
+  selectedDate: string;
 };
 
-const TotalPatientServicesWidget = ({ value }: TotalPatientServicesProps) => {
+const TotalPatientServicesWidget = ({ value, selectedDate }: TotalPatientServicesProps) => {
   const { t } = useTranslation();
   const theme = useTheme();
 
-  const { data: initialData, isLoading } = useTotalServicesByPatient();
+  const { data: initialData, isLoading } =
+    useTotalServicesByPatient(selectedDate);
   const [data, setData] = useState(initialData);
 
   useEffect(() => {
@@ -61,7 +63,7 @@ const TotalPatientServicesWidget = ({ value }: TotalPatientServicesProps) => {
               top: 20,
               right: 30,
               left: 0,
-            //   bottom: 50, // Extra space for longer labels
+              //   bottom: 50, // Extra space for longer labels
             }}
           >
             {/* Add Cartesian Grid with dashed lines */}
