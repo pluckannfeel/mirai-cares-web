@@ -15,31 +15,34 @@ import {
 import { useTranslation } from "react-i18next";
 import { Link as RouterLink } from "react-router-dom";
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis } from "recharts";
+import { useTotalServices } from "../hooks/useTotalServices";
 
-const data = [
-  {
-    name: "Jan",
-    fb: 2.5,
-  },
-  {
-    name: "Feb",
-    fb: 1.4,
-  },
-  {
-    name: "Mar",
-    fb: 6,
-  },
-  {
-    name: "Avr",
-    fb: 4,
-  },
-];
+// const data = [
+//   {
+//     name: "Jan",
+//     fb: 2.5,
+//   },
+//   {
+//     name: "Feb",
+//     fb: 1.4,
+//   },
+//   {
+//     name: "Mar",
+//     fb: 6,
+//   },
+//   {
+//     name: "Avr",
+//     fb: 4,
+//   },
+// ];
 
 const views = "6.967.431";
 
 const ViewsWidget = () => {
   const theme = useTheme();
   const { t } = useTranslation();
+
+  const { data, isLoading } = useTotalServices();
 
   return (
     <Card>
@@ -50,11 +53,12 @@ const ViewsWidget = () => {
           marginBottom={2}
           variant="body2"
         >
-          {t("admin.home.views.unit")}
+          {/* {t("admin.home.views.unit")} */}
+          {t("dashboard.totalService.title")}
         </Typography>
-        <Typography align="center" component="div" variant="h2">
+        {/* <Typography align="center" component="div" variant="h2">
           {views}
-        </Typography>
+        </Typography> */}
         <Box sx={{ height: 224 }}>
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart
@@ -70,7 +74,7 @@ const ViewsWidget = () => {
             >
               <XAxis
                 axisLine={false}
-                dataKey="name"
+                dataKey="month"
                 interval="preserveStartEnd"
                 tick={{ fill: theme.palette.text.secondary, fontSize: 12 }}
                 tickLine={false}
@@ -85,7 +89,7 @@ const ViewsWidget = () => {
               />
               <Area
                 type="monotone"
-                dataKey="fb"
+                dataKey="service_hours"
                 fill={theme.palette.primary.main}
                 fillOpacity={0.3}
                 stroke={theme.palette.primary.main}

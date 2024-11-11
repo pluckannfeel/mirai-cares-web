@@ -361,7 +361,8 @@
         "team": "Team",
         "value": "Value"
       },
-      "title": "Teams Progress"
+      "title": "Teams Progress",
+      "most_services": "Top Service Time by Staff ({{month}})"
     },
     "users": {
       "title": "Recent Users"

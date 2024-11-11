@@ -9,7 +9,7 @@ const fetchProfileInfo = async (email?: string): Promise<ProfileInfo> => {
   const { data } = await axiosInstance.get(
     '/users/?email=' + email
   );
-  console.log(data)
+  // console.log(data)
   return data;
 };
 
