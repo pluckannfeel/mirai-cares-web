@@ -1,9 +1,10 @@
-import { Button, Grid, Menu, MenuItem } from "@mui/material";
+import { Button, Fab, Grid, Menu, MenuItem } from "@mui/material";
 import {
   AttachMoney as AttachMoneyIcon,
   ShoppingBasket as ShoppingBasketIcon,
   SupervisorAccount as SupervisorAccountIcon,
   FilterAlt as FilterAltIcon,
+  Upload as UploadIcon,
 } from "@mui/icons-material";
 import React, {
   useState,
@@ -28,12 +29,19 @@ import { OverallRecord } from "../../payslip/types/record";
 import { useStaffSelect } from "../../staff/hooks/useStaffSelection";
 import dayjs, { Dayjs } from "dayjs";
 import "dayjs/locale/ja"; // Japanese locale
+import { useImportStaffShift } from "../../shift/hooks/useImportStaffShift";
+import FileButton from "../../core/components/FileButton";
+import { useAuth } from "../../auth/contexts/AuthProvider";
 
 const Dashboard = () => {
   const { t, i18n } = useTranslation();
   const [currentMonth, setCurrentMonth] = useState<Dayjs>(dayjs());
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+
+  const { userInfo } = useAuth();
+
+  const { isImporting, importStaffShift } = useImportStaffShift();
 
   // Memoize the months to prevent re-creation on each render
   const months = useMemo(
@@ -47,9 +55,11 @@ const Dashboard = () => {
   );
 
   // Fetch total work hours and staff selection data
-  const { isLoading: isRecordLoading, data: records } = useRecord(
-    currentMonth.format("YYYY-MM-DD")
-  );
+  const {
+    isLoading: isRecordLoading,
+    data: records,
+    refetch: refreshRecords,
+  } = useRecord(currentMonth.format("YYYY-MM-DD"));
   const { isLoading: isStaffSelectionLoading, data: initialStaffSelect } =
     useStaffSelect();
 
@@ -124,6 +134,12 @@ const Dashboard = () => {
     return <div>Loading...</div>; // Add your loading indicator
   }
 
+  const importShiftCSV = async (file: File) => {
+    refreshRecords();
+
+    return await importStaffShift(file);
+  };
+
   return (
     <React.Fragment>
       <AdminAppBar>
@@ -138,6 +154,38 @@ const Dashboard = () => {
           >
             {formattedMonth}
           </Button>
+          {/* <Button
+            variant="text"
+            sx={{
+              color: "#45525C",
+            }}
+            // startIcon={}
+          >
+            <UploadIcon
+              sx={{
+                fontSize: 30,
+              }}
+            />
+          </Button> */}
+          {(userInfo?.role === "Admin" || userInfo?.role === "Manager") && (
+            <FileButton
+              submitHandler={importShiftCSV}
+              loading={isImporting}
+              buttonProps={{
+                sx: {
+                  marginRight: 2,
+                  // padding: 1.2,
+                },
+                variant: "contained",
+                color: "warning",
+                // disabled: view !== "workSchedule",
+                size: "large",
+                title: t("common.import"),
+                endIcon: <UploadIcon />,
+              }}
+            />
+          )}
+
           <Menu
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}

@@ -245,7 +245,7 @@
     "view": "表示",
     "download": "ダウンロード",
     "upload": "アップロード",
-    "import": "CSVインポート",
+    "import": "データ インポート",
     "print": "印刷",
     "confirmImportMsg": "{{fileName}} をインポートしてもよろしいですか？",
     "confirmUploadFileMsg": "「{{fileName}}」ファイルをアップロードしてもよろしいですか？",

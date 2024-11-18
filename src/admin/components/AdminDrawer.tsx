@@ -72,33 +72,33 @@ export const menuItems = [
     key: "admin.drawer.menu.dashboard",
     path: "/admin/dashboard",
   },
-  {
-    icon: EventIcon,
-    key: "admin.drawer.menu.nested.shift.label",
-    // path: "/admin/settings",
-    children: [
-      {
-        icon: EventIcon,
-        key: "admin.drawer.menu.nested.shift.label",
-        path: "/admin/staff-work-schedule",
-      },
-      // {
-      //   icon: AccountBalanceIcon,
-      //   key: "admin.drawer.menu.payslip",
-      //   path: "/admin/staff-payslip",
-      // },
-      {
-        icon: Diversity2OutlinedIcon,
-        key: "admin.drawer.menu.nested.shift.children.dayOff",
-        path: "/admin/day-off",
-      },
-      {
-        icon: SubjectIcon,
-        key: "admin.drawer.menu.nested.shift.children.leaveRequests",
-        path: "/admin/leave-request",
-      },
-    ],
-  },
+  // {
+  //   icon: EventIcon,
+  //   key: "admin.drawer.menu.nested.shift.label",
+  //   // path: "/admin/settings",
+  //   children: [
+  //     {
+  //       icon: EventIcon,
+  //       key: "admin.drawer.menu.nested.shift.label",
+  //       path: "/admin/staff-work-schedule",
+  //     },
+  //     // {
+  //     //   icon: AccountBalanceIcon,
+  //     //   key: "admin.drawer.menu.payslip",
+  //     //   path: "/admin/staff-payslip",
+  //     // },
+  //     {
+  //       icon: Diversity2OutlinedIcon,
+  //       key: "admin.drawer.menu.nested.shift.children.dayOff",
+  //       path: "/admin/day-off",
+  //     },
+  //     {
+  //       icon: SubjectIcon,
+  //       key: "admin.drawer.menu.nested.shift.children.leaveRequests",
+  //       path: "/admin/leave-request",
+  //     },
+  //   ],
+  // },
   {
     icon: AutoStoriesIcon,
     key: "admin.drawer.menu.nested.legalBooks.label",
@@ -163,6 +163,11 @@ export const menuItems = [
         path: "/admin/user-management",
       },
     ],
+  },
+  {
+    icon: EventIcon,
+    key: "admin.drawer.menu.nested.shift.children.leaveRequests",
+    path: "/admin/leave-request",
   },
   {
     icon: SourceIcon,
