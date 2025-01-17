@@ -1,0 +1,19 @@
+/* .tableParent {
+    height: 100%; 
+    overflow: auto; 
+    position: relative;
+  } */
+
+.table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  /* Avoid setting overflow or height directly here */
+}
+
+th,
+td {
+  text-align: left;
+  padding: 8px;
+  border: 1px solid #ddd;
+}

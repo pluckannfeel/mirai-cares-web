@@ -9,6 +9,7 @@ export type Payslip = {
   net_salary?: number;
   total_deduction?: number;
   total_hours?: number;
+  details?: string;
 };
 
 export interface FilterDate {

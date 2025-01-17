@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useStaff } from "../hooks/useStaff";
 import { useAuth } from "../../auth/contexts/AuthProvider";
 import StaffTable from "./StaffTable";
+import VirtualizedStaffTable from "./VirtualizedStaffTable";
 import { Licenses, Staff } from "../types/staff";
 import { Button, DialogProps, Fab } from "@mui/material";
 import { Add as AddIcon } from "@mui/icons-material";
@@ -66,9 +67,7 @@ const StaffTab = () => {
 
   //download csv
   const downloadCsv = async () => {
-    
     try {
-      
       const response = await fetch(`${baseUrl}/staff/download`);
       console.log("download csv");
       const blob = await response.blob();
@@ -253,6 +252,15 @@ const StaffTab = () => {
         selected={selected}
         staffs={data}
       />
+      {/* <VirtualizedStaffTable
+        processing={processing}
+        onDelete={handleOpenConfirmDeleteDialog}
+        onEdit={handleOpenStaffDialog}
+        onGenerateContract={handleGenerateContract}
+        onSelectedChange={handleSelectedChange}
+        selected={selected}
+        staffs={data}
+      /> */}
       <ConfirmDialog
         description={t("staffManagement.confirmations.delete")}
         pending={processing}

@@ -1,6 +1,10 @@
 import React, { createContext, useContext, useMemo, useState } from "react";
 
-import { ThemeProvider as MuiThemeProvider, CssBaseline } from "@mui/material";
+import {
+  ThemeProvider as MuiThemeProvider,
+  CssBaseline,
+  GlobalStyles,
+} from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
@@ -99,6 +103,12 @@ const SettingsProvider = ({ children }: SettingsProviderProps) => {
       }}
     >
       <MuiThemeProvider theme={theme}>
+        <GlobalStyles
+          styles={{
+            "@keyframes mui-auto-fill": { from: { display: "block" } },
+            "@keyframes mui-auto-fill-cancel": { from: { display: "block" } },
+          }}
+        />
         <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={"ja"}>
           <CssBaseline />
           {children}

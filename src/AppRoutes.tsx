@@ -70,6 +70,14 @@ const CompanyManagement = lazy(
   () => import("./company/pages/CompanyManagement")
 );
 
+// Sub Master Database / Company Housing and Parking
+const CompanyHousingManagement = lazy(
+  () => import("./company/pages/CompanyHousingManagement")
+);
+
+// const CompanyParkingManagement = lazy(
+//   () => import("./company/pages/CompanyParkingManagement")
+
 const CompanyInformation = lazy(
   () => import("./company/pages/CompanyInformation")
 );
@@ -137,6 +145,13 @@ const AppRoutes = () => {
           <Route path="leave-request" element={<LeaveRequestManagement />} />
 
           <Route path="patient-management" element={<PatientManagement />} />
+
+          {/* DB */}
+
+          <Route
+            path="company-housing-management"
+            element={<CompanyHousingManagement />}
+          />
 
           <Route
             path="medical-institution-management"

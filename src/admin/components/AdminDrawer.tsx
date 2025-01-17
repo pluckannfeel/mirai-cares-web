@@ -44,6 +44,8 @@ import {
   Source as SourceIcon,
   // Calculate as CalculateIcon,
   Archive as ArchiveIcon,
+  House as HouseIcon,
+  LocalParking as LocalParkingIcon,
 } from "@mui/icons-material";
 
 import { useTranslation } from "react-i18next";
@@ -157,6 +159,16 @@ export const menuItems = [
         key: "admin.drawer.menu.nested.masterDatabase.children.visitingNursingStationManagement",
         path: "/admin/visiting-nursing-station-management",
       },
+      {
+        icon: HouseIcon,
+        key: "admin.drawer.menu.nested.masterDatabase.children.companyHousing",
+        path: "/admin/company-housing-management",
+      },
+      // {
+      //   icon: LocalParkingIcon,
+      //   key: "admin.drawer.menu.nested.masterDatabase.children.companyParking",
+      //   path: "/admin/company-parking-management",
+      // },
       {
         icon: AdminPanelSettingsIcon,
         key: "admin.drawer.menu.nested.masterDatabase.children.user",

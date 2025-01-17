@@ -46,7 +46,7 @@ const Dashboard = () => {
   // Memoize the months to prevent re-creation on each render
   const months = useMemo(
     () =>
-      Array.from({ length: 12 }).map((_, index) =>
+      Array.from({ length: 15 }).map((_, index) =>
         dayjs()
           .month(11 - index)
           .startOf("month")
