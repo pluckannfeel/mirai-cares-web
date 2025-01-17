@@ -46,7 +46,9 @@
               "user": "ユーザーマスター",
               "patient": "利用者マスター",
               "medicalInstitution": "関連業者マスター",
-              "visitingNursingStationManagement": "訪問看護ステーションDB"
+              "visitingNursingStationManagement": "訪問看護ステーションDB",
+              "companyHousing": "社宅マスター",
+              "companyParking": "駐車場マスター"
             }
           }
         }
@@ -423,7 +425,8 @@
     "newComment": "<bold>{{user}}</bold> はあなたのプロフィールに新しいコメントを書きました。",
     "unreadMessages": "未読メッセージが <bold>{{quantity}}</bold>件あります。",
     "leaveRequest": "<bold>{{staff}}</bold> が休暇を申請しました。",
-    "updateLeaveRequest": "<bold>{{user}}</bold> が <bold>{{staff}}</bold> の休暇申請を更新しました。"
+    "updateLeaveRequest": "<bold>{{user}}</bold> が <bold>{{staff}}</bold> の休暇申請を更新しました。",
+    "newPayslip": "<bold>{{user}}</bold> が新しい給与明細をアップロードしました。"
   },
   "profile": {
     "activity": {
@@ -2269,6 +2272,10 @@
       "file_url": {
         "label": "給与明細のファイル",
         "required": "給与明細のファイルをアップロードしてください"
+      },
+      "details": {
+        "label": "備考",
+        "helper": "明細に追加する備考"
       }
     },
     "actions": {
@@ -2524,6 +2531,81 @@
       "empty": "記録なし",
       "totalWorkHours": "就労働時間",
       "totalWorkDays": "出勤日数"
+    }
+  },
+  "companyHousing": {
+    "title": "社宅マスター",
+    "notifications": {
+      "addSuccess": "社宅が追加されました。",
+      "deleteSuccess": "社宅は削除されました。",
+      "updateSuccess": "社宅が更新されました。"
+    },
+    "toolbar": {
+      "title": "社宅マスター"
+    },
+    "table": {
+      "headers": {
+        "actions": "アクション",
+        "property_name": "物件名",
+        "address": "住所",
+        "postal_code": "郵便番号",
+        "room_number": "部屋番号",
+        "house_name": "建物名",
+        "management_company": "管理会社",
+        "management_company_contact": "連絡先",
+        "intermediary": "仲介業者",
+        "person_in_charge": "担当者",
+        "person_in_charge_contact": "担当者連絡先",
+        "electric_company": "電気",
+        "electric_company_contact": "連絡先",
+        "gas_company": "ガス",
+        "gas_company_contact": "連絡先",
+        "water_company": "水道",
+        "water_company_contact": "連絡先",
+        "internet_company": "インターネット",
+        "internet_company_contact": "連絡先",
+        "remarks": "備考"
+      }
+    },
+    "dialog": {
+      "add": {
+        "action": "追加",
+        "title": "社宅を追加する"
+      },
+      "edit": {
+        "action": "保存",
+        "title": "社宅を変更する"
+      }
+    },
+    "form": {
+      "validate": {
+        "required": "必須項目"
+      },
+      "divider": {
+        "property_details": "物件詳細"
+      },
+      "property_name": "物件名",
+      "address": "住所",
+      "postal_code": "郵便番号",
+      "room_number": "部屋番号",
+      "house_name": "建物名",
+      "management_company": "管理会社",
+      "management_company_contact": "連絡先",
+      "intermediary": "仲介業者",
+      "person_in_charge": "担当者",
+      "person_in_charge_contact": "担当者連絡先",
+      "electric_company": "電気",
+      "electric_company_contact": "連絡先",
+      "gas_company": "ガス",
+      "gas_company_contact": "連絡先",
+      "water_company": "水道",
+      "water_company_contact": "連絡先",
+      "internet_company": "インターネット",
+      "internet_company_contact": "連絡先",
+      "remarks": "備考"
+    },
+    "actions": {
+      "filter": "フィルター"
     }
   }
 }

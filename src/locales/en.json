@@ -46,7 +46,9 @@
               "user": "User DB",
               "patient": "Patient DB",
               "medicalInstitution": "Medical Institution DB",
-              "visitingNursingStationManagement": "Visiting Nursing Station DB"
+              "visitingNursingStationManagement": "Visiting Nursing Station DB",
+              "companyHousing": "Company Housing DB",
+              "companyParking": "Company Parking DB"
             }
           }
         }
@@ -423,7 +425,8 @@
     "newComment": "<bold>{{user}}</bold> has written a new comment on your profile",
     "unreadMessages": "You have <bold>{{quantity}}</bold> unread messages",
     "leaveRequest": "<bold>{{staff}}</bold> has requested for a leave",
-    "updateLeaveRequest": "<bold>{{user}}</bold> updated <bold>{{staff}}</bold>'s leave request"
+    "updateLeaveRequest": "<bold>{{user}}</bold> updated <bold>{{staff}}</bold>'s leave request",
+    "newPayslip": "New payslip has been generated for <bold>{{staff}}</bold>"
   },
   "profile": {
     "activity": {
@@ -2236,6 +2239,10 @@
       "file_url": {
         "label": "File Uri",
         "required": "File Uri is required"
+      },
+      "details": {
+        "label": "Details/Remarks",
+        "helper": "Details about the Payslip"
       }
     },
     "actions": {
@@ -2494,6 +2501,81 @@
       "empty": "No records to show",
       "totalWorkHours": "Total Hours",
       "totalWorkDays": "Total Days"
+    }
+  },
+  "companyHousing": {
+    "title": "Company Housing",
+    "notifications": {
+      "addSuccess": "Company Housing has been added!",
+      "deleteSuccess": "Company Housing has been deleted!",
+      "updateSuccess": "Company Housing has been updated!"
+    },
+    "toolbar": {
+      "title": "Company Housing"
+    },
+    "table": {
+      "headers": {
+        "actions": "Actions",
+        "property_name": "Property Name",
+        "address": "Address",
+        "postal_code": "Postal Code",
+        "room_number": "Room No.",
+        "house_name": "House Name",
+        "management_company": "Management Company",
+        "management_company_contact": "Contact",
+        "intermediary": "Intermediary",
+        "person_in_charge": "Person in Charge",
+        "person_in_charge_contact": "Contact",
+        "electric_company": "Electric",
+        "electric_company_contact": "Contact",
+        "gas_company": "Gas",
+        "gas_company_contact": "Contact",
+        "water_company": "Water",
+        "water_company_contact": "Contact",
+        "internet_company": "Internet",
+        "internet_company_contact": "Contact",
+        "remarks": "Remarks"
+      }
+    },
+    "dialog": {
+      "add": {
+        "action": "Add",
+        "title": "Add Company Housing"
+      },
+      "edit": {
+        "action": "Save",
+        "title": "Edit Company Housing"
+      }
+    },
+    "form": {
+      "validate": {
+        "required": "This field is required"
+      },
+      "divider": {
+        "property_details": "Property Details"
+      },
+      "property_name": "Property Name",
+      "address": "Address",
+      "postal_code": "Postal Code",
+      "room_number": "Room No.",
+      "house_name": "House Name",
+      "management_company": "Management Company",
+      "management_company_contact": "Contact",
+      "intermediary": "Intermediary",
+      "person_in_charge": "Person in Charge",
+      "person_in_charge_contact": "Contact",
+      "electric_company": "Electric",
+      "electric_company_contact": "Contact",
+      "gas_company": "Gas",
+      "gas_company_contact": "Contact",
+      "water_company": "Water",
+      "water_company_contact": "Contact",
+      "internet_company": "Internet",
+      "internet_company_contact": "Contact",
+      "remarks": "Remarks"
+    },
+    "actions": {
+      "filter": "フィルター"
     }
   }
 }

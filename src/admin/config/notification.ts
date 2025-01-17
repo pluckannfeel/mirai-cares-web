@@ -3,4 +3,5 @@ export const notificationKeys: { [key: string]: string } = {
   unreadMessages: "notifications.unreadMessages",
   leaveRequest: "notifications.leaveRequest",
   updateLeaveRequest: "notifications.updateLeaveRequest",
+  newPayslip: "notifications.newPayslip",
 };

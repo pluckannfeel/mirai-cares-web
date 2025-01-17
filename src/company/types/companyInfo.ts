@@ -27,3 +27,28 @@ export interface CompanyInfo {
   plan_start_date: string;
   specified_validity_period: string;
 }
+
+export interface CompanyHousing {
+  id: string;
+  company?: string;
+  property_name?: string;
+  address?: string;
+  postal_code?: string;
+  room_number?: string;
+  house_name?: string;
+  management_company?: string;
+  management_company_contact?: string;
+  intermediary?: string;
+  person_in_charge?: string;
+  person_in_charge_contact?: string;
+  electric_company?: string;
+  electric_company_contact?: string;
+  gas_company?: string;
+  gas_company_contact?: string;
+  water_company?: string;
+  water_company_contact?: string;
+  internet_company?: string;
+  internet_company_contact?: string;
+  remarks?: string;
+  created_at?: string;
+}

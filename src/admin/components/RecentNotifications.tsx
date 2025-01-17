@@ -114,6 +114,7 @@ const RecentNotifications = () => {
               sx={{ px: 2 }}
             >
               {data.map((notification) => {
+                console.log(notification);
                 return (
                   // <ListItem
                   //   button
@@ -138,8 +139,8 @@ const RecentNotifications = () => {
                           // defaults="<bold>{{ user }}</bold> did someting <bold>{{ quantity }}</bold> times"
                           defaults={
                             i18n.language === "en"
-                              ? "<bold>{{staff}}</bold> did something"
-                              : "<bold>{{staff}}</bold> did something"
+                              ? "<bold>{{ user }}</bold> did someting <bold>{{ quantity }}</bold> times"
+                              : "<bold>{{ user }}</bold> が何かを<bold>{{ quantity }}</bold>回しました"
                           }
                           i18nKey={notificationKeys[notification.code]}
                           values={{
@@ -177,7 +178,7 @@ const RecentNotifications = () => {
             <Button
               color="secondary"
               fullWidth
-              sx={{ bgcolor: "background.default" }}
+              // sx={{ bgcolor: "background.default" }}
               variant="contained"
             >
               {t("admin.header.notifications.seeAll")}

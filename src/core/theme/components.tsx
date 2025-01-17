@@ -7,6 +7,8 @@ import {
   RemoveCircle,
 } from "@mui/icons-material";
 
+
+
 export const createThemeComponents = (theme: Theme) => ({
   MuiAccordion: {
     styleOverrides: {
@@ -368,6 +370,16 @@ export const createThemeComponents = (theme: Theme) => ({
       },
     },
   },
+  MuiInputLabel: {
+    styleOverrides: {
+      root: {
+        fontSize: "18px", // Set your desired font size
+      },
+      shrink: {
+        fontSize: "18px", // Adjust the size for the shrink state (optional)
+      },
+    },
+  },
   // Overrides for the TextField used by DatePicker
   // MuiTextField: {
   //   styleOverrides: {
@@ -386,4 +398,5 @@ export const createThemeComponents = (theme: Theme) => ({
   //     },
   //   },
   // },
+  
 });

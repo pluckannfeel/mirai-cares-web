@@ -23,11 +23,12 @@ import {
   Person as PersonIcon,
 } from "@mui/icons-material";
 
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Empty from "../../core/components/Empty";
 import * as selectUtils from "../../core/utils/selectUtils";
 import { Staff } from "../types/staff";
+import { stringAvatar } from "../helpers/functions";
 
 interface HeadCell {
   id: string;
@@ -84,39 +85,35 @@ interface EnhancedTableProps {
   rowCount: number;
 }
 
-function EnhancedTableHead({
-  onSelectAllClick,
-  numSelected,
-  rowCount,
-}: EnhancedTableProps) {
-  const { t } = useTranslation();
+const EnhancedTableHead = React.memo(
+  ({ onSelectAllClick, numSelected, rowCount }: EnhancedTableProps) => {
+    const { t } = useTranslation();
 
-  return (
-    <TableHead>
-      <TableRow sx={{ "& th": { border: 0 } }}>
-        <TableCell sx={{ py: 0 }}>
-          <Checkbox
-            color="primary"
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-            inputProps={{
-              "aria-label": "select all employees",
-            }}
-          />
-        </TableCell>
-        {headCells.map((headCell) => (
-          <TableCell key={headCell.id} align={headCell.align} sx={{ py: 0 }}>
-            {t(headCell.label)}
+    return (
+      <TableHead>
+        <TableRow sx={{ "& th": { border: 0 } }}>
+          <TableCell sx={{ py: 0 }}>
+            <Checkbox
+              color="primary"
+              indeterminate={numSelected > 0 && numSelected < rowCount}
+              checked={rowCount > 0 && numSelected === rowCount}
+              onChange={onSelectAllClick}
+              inputProps={{ "aria-label": "select all employees" }}
+            />
           </TableCell>
-        ))}
-        <TableCell align="right" sx={{ py: 0 }}>
-          {t("staffManagement.table.headers.actions")}
-        </TableCell>
-      </TableRow>
-    </TableHead>
-  );
-}
+          {headCells.map((headCell) => (
+            <TableCell key={headCell.id} align={headCell.align} sx={{ py: 0 }}>
+              {t(headCell.label)}
+            </TableCell>
+          ))}
+          <TableCell align="right" sx={{ py: 0 }}>
+            {t("staffManagement.table.headers.actions")}
+          </TableCell>
+        </TableRow>
+      </TableHead>
+    );
+  }
+);
 
 type StaffRowProps = {
   index: number;
@@ -124,236 +121,244 @@ type StaffRowProps = {
   onDelete: (staffIds: string[]) => void;
   onEdit: (staff: Staff) => void;
   onGenerateContract: (staff: Staff) => void;
-  //   onView: (employee: Employee) => void;
   processing: boolean;
   selected: boolean;
   staff: Staff;
 };
 
-const StaffRow = ({
-  index,
-  onCheck,
-  onDelete,
-  onEdit,
-  onGenerateContract,
-  processing,
-  selected,
-  staff,
-}: StaffRowProps) => {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const { t } = useTranslation();
+const StaffRow = React.memo(
+  ({
+    index,
+    onCheck,
+    onDelete,
+    onEdit,
+    onGenerateContract,
+    processing,
+    selected,
+    staff,
+  }: StaffRowProps) => {
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const { t } = useTranslation();
 
-  // console.log(staff)
+    // console.log(staff)
 
-  const labelId = `enhanced-table-checkbox-${index}`;
-  const openActions = Boolean(anchorEl);
+    const labelId = `enhanced-table-checkbox-${index}`;
+    const openActions = Boolean(anchorEl);
 
-  const handleOpenActions = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+    const handleOpenActions = (event: React.MouseEvent<HTMLButtonElement>) => {
+      setAnchorEl(event.currentTarget);
+    };
 
-  const handleCloseActions = () => {
-    setAnchorEl(null);
-  };
+    const handleCloseActions = () => {
+      setAnchorEl(null);
+    };
 
-  const handleDelete = () => {
-    handleCloseActions();
-    onDelete([staff.id!]);
-  };
+    const handleDelete = useCallback(() => {
+      handleCloseActions();
+      onDelete([staff.id!]);
+    }, [onDelete, staff.id]);
 
-  const handleEdit = () => {
-    handleCloseActions();
-    onEdit(staff);
+    const handleEdit = useCallback(() => {
+      handleCloseActions();
+      onEdit(staff);
 
-    // use context to set selected employee
-    // setSelectedEmployee(staff);
-    // const img_url = staff.img_url?.toString();
-  };
+      // use context to set selected employee
+      // setSelectedEmployee(staff);
+      // const img_url = staff.img_url?.toString();
+    }, [onEdit, staff]);
 
-  const handleGenerateContract = () => {
-    handleCloseActions();
-    // onGenerateContract(staff);
-    onGenerateContract(staff);
-  };
+    const handleGenerateContract = useCallback(() => {
+      handleCloseActions();
+      onGenerateContract(staff);
+    }, [onGenerateContract, staff]);
 
-  const rowBackgroundColor =
-    staff.zaishoku_joukyou === "退社済"
-      ? "background.disabled"
-      : "background.paper";
+    const rowBackgroundColor =
+      staff.zaishoku_joukyou === "退社済"
+        ? "background.disabled"
+        : "background.paper";
 
-  return (
-    <TableRow
-      aria-checked={selected}
-      tabIndex={-1}
-      key={staff.id}
-      selected={selected}
-      sx={{ "& td": { bgcolor: rowBackgroundColor, border: 0, padding: 1.5 } }}
-    >
-      <TableCell
-        padding="checkbox"
-        sx={{ borderTopLeftRadius: "1rem", borderBottomLeftRadius: "1rem" }}
+    return (
+      <TableRow
+        aria-checked={selected}
+        tabIndex={-1}
+        key={staff.id}
+        selected={selected}
+        sx={{
+          "& td": { bgcolor: rowBackgroundColor, border: 0, padding: 1.5 },
+        }}
       >
-        <Checkbox
-          color="primary"
-          checked={selected}
-          inputProps={{
-            "aria-labelledby": labelId,
-          }}
-          onClick={() => onCheck(staff.id!)}
-        />
-      </TableCell>
-      <TableCell align="right">
-        <Box alignSelf="center" textAlign="center">
-          {!staff.img_url ? (
-            <Avatar
-              sx={{
-                // mr: 3,
-
-                width: 75,
-                height: 75,
-                backgroundColor: "transparent",
-              }}
-              variant="rounded"
-            >
-              <PersonIcon sx={{ fontSize: 60 }} />
-            </Avatar>
-          ) : (
-            <Avatar
-              sx={{
-                // mr: 3,
-                width: 75,
-                height: 75,
-                backgroundColor: "transparent",
-              }}
-              src={staff.img_url ? staff.img_url.toString() : ""}
-              variant="rounded"
-            />
-          )}
-        </Box>
-      </TableCell>
-      <TableCell align="left">
-        <Box>
-          {/* Staff Kanji/Romaji Name and Kana */}
-          <Typography component="div" variant="h6">
-            {/* <strong>
+        <TableCell
+          padding="checkbox"
+          sx={{ borderTopLeftRadius: "1rem", borderBottomLeftRadius: "1rem" }}
+          id={`table-checkbox-${staff.id}`}
+        >
+          <Checkbox
+            color="primary"
+            id={`checkbox-${staff.id}`} // Added unique id
+            name={`checkbox-${staff.id}`} // Added name attribute
+            checked={selected}
+            inputProps={{
+              "aria-labelledby": `table-checkbox-${staff.id}`, // Reference the new unique ID
+            }}
+            onClick={() => onCheck(staff.id!)}
+          />
+        </TableCell>
+        <TableCell align="right">
+          <Box alignSelf="center" textAlign="center">
+            {!staff.img_url ? (
+              <Avatar
+                // sx={{
+                //   // mr: 3,
+                //   width: 30,
+                //   height: 30,
+                //   backgroundColor: "transparent",
+                // }}
+                variant="rounded"
+                {...stringAvatar(staff.english_name as string)}
+              >
+                {/* <PersonIcon sx={{ fontSize: 60 }} /> */}
+                {`${
+                  staff.english_name?.split(" ")[1]?.charAt(0) || staff.english_name?.split("　")[1]?.charAt(0)
+                } ${staff.english_name?.split(" ")[0].charAt(0)}`}
+              </Avatar>
+            ) : (
+              <Avatar
+                sx={{
+                  // mr: 3,
+                  width: 45,
+                  height: 45,
+                  backgroundColor: "transparent",
+                }}
+                src={staff.img_url ? staff.img_url.toString() : ""}
+                variant="rounded"
+              />
+            )}
+          </Box>
+        </TableCell>
+        <TableCell align="left">
+          <Box>
+            {/* Staff Kanji/Romaji Name and Kana */}
+            <Typography component="div" variant="h6">
+              {/* <strong>
               {t("staffManagement.table.headers.japanese_name") + ": "}
             </strong> */}
-            {`${staff.japanese_name}`}
-            <br />
-            {/* <strong>
+              {`${staff.japanese_name}`}
+              <br />
+              {/* <strong>
               {t("staffManagement.table.headers.english_name") + ": "}
             </strong> */}
-            {`${staff.english_name}`}
-            {/* add space */}
-          </Typography>
-        </Box>
-        {/* </Box> */}
-      </TableCell>
-      {/* Affiliation / Joined Data */}
-      <TableCell align="center">
-        <Box>
-          <Typography color="textSecondary" variant="h6">
-            {/* {t('staffManagement.table.headers.affiliation') + ': '}{' '} */}
-            {staff.staff_code}
-            <br/>
-            {staff.affiliation}
-            {/* {t("staffManagement.table.headers.join_date") + ": "}{" "}
+              {`${staff.english_name}`}
+              {/* add space */}
+            </Typography>
+          </Box>
+          {/* </Box> */}
+        </TableCell>
+        {/* Affiliation / Joined Data */}
+        <TableCell align="center">
+          <Box>
+            <Typography color="textSecondary" variant="h6">
+              {/* {t('staffManagement.table.headers.affiliation') + ': '}{' '} */}
+              {staff.staff_code}
+              <br />
+              {staff.affiliation}
+              {/* {t("staffManagement.table.headers.join_date") + ": "}{" "}
             {staff.join_date} */}
-          </Typography>
-        </Box>
-      </TableCell>
-      {/* Address / Postal Code */}
-      <TableCell align="left">
-        <Box>
-          <Typography color="textSecondary" variant="h6">
-            〒 {staff.postal_code}
-            <br />
-            {/* {t('staffManagement.table.headers.affiliation') + ': '}{' '} */}
-            {`${staff.prefecture}${staff.municipality}${staff.town}${staff.building}`}
-            {/* <strong>{t("staffManagement.table.headers.postal_code") + ": "}</strong> */}
-            {/* {' '} */}
-          </Typography>
-        </Box>
-      </TableCell>
+            </Typography>
+          </Box>
+        </TableCell>
+        {/* Address / Postal Code */}
+        <TableCell align="left">
+          <Box>
+            <Typography color="textSecondary" variant="h6">
+              〒 {staff.postal_code}
+              <br />
+              {/* {t('staffManagement.table.headers.affiliation') + ': '}{' '} */}
+              {`${staff.prefecture}${staff.municipality}${staff.town}${staff.building}`}
+              {/* <strong>{t("staffManagement.table.headers.postal_code") + ": "}</strong> */}
+              {/* {' '} */}
+            </Typography>
+          </Box>
+        </TableCell>
 
-      {/* Email / Phone */}
-      <TableCell align="left">
-        <Box>
-          <Typography color="textSecondary" variant="h6">
-            {/* {t("staffManagement.table.headers.email") + ": "}{" "} */}
-            {staff.phone_number} <br /> {staff.work_email}
-          </Typography>
-        </Box>
-      </TableCell>
+        {/* Email / Phone */}
+        <TableCell align="left">
+          <Box>
+            <Typography color="textSecondary" variant="h6">
+              {/* {t("staffManagement.table.headers.email") + ": "}{" "} */}
+              {staff.phone_number} <br /> {staff.work_email}
+            </Typography>
+          </Box>
+        </TableCell>
 
-      <TableCell align="center">
-        <Box>
-          <Typography color="textSecondary" variant="h6">
-            {/* {t("staffManagement.table.headers.email") + ": "}{" "} */}
-            {staff.zaishoku_joukyou}
-          </Typography>
-        </Box>
-      </TableCell>
+        <TableCell align="center">
+          <Box>
+            <Typography color="textSecondary" variant="h6">
+              {/* {t("staffManagement.table.headers.email") + ": "}{" "} */}
+              {staff.zaishoku_joukyou}
+            </Typography>
+          </Box>
+        </TableCell>
 
-      <TableCell
-        align="right"
-        sx={{ borderTopRightRadius: "1rem", borderBottomRightRadius: "1rem" }}
-      >
-        <IconButton
-          id="staff-row-menu-button"
-          aria-label="staff actions"
-          aria-controls="staff-row-menu"
-          aria-haspopup="true"
-          aria-expanded={openActions ? "true" : "false"}
-          disabled={processing}
-          onClick={handleOpenActions}
+        <TableCell
+          align="right"
+          sx={{ borderTopRightRadius: "1rem", borderBottomRightRadius: "1rem" }}
         >
-          <MoreVertIcon />
-        </IconButton>
-        <Menu
-          id="staff-row-menu"
-          anchorEl={anchorEl}
-          aria-labelledby="employee-row-menu-button"
-          open={openActions}
-          onClose={handleCloseActions}
-          anchorOrigin={{
-            vertical: "top",
-            horizontal: "right",
-          }}
-          transformOrigin={{
-            vertical: "top",
-            horizontal: "right",
-          }}
-        >
-          {/* <MenuItem onClick={handleViewDetails}>
+          <IconButton
+            id="staff-row-menu-button"
+            aria-label="staff actions"
+            aria-controls="staff-row-menu"
+            aria-haspopup="true"
+            aria-expanded={openActions ? "true" : "false"}
+            disabled={processing}
+            onClick={handleOpenActions}
+          >
+            <MoreVertIcon />
+          </IconButton>
+          <Menu
+            id="staff-row-menu"
+            anchorEl={anchorEl}
+            aria-labelledby="employee-row-menu-button"
+            open={openActions}
+            onClose={handleCloseActions}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+          >
+            {/* <MenuItem onClick={handleViewDetails}>
             <ListItemIcon>
               <FeedIcon />
             </ListItemIcon>{' '}
             {t('common.view')}
           </MenuItem> */}
-          <MenuItem onClick={handleEdit}>
-            <ListItemIcon>
-              <EditIcon />
-            </ListItemIcon>{" "}
-            {t("common.view") + " / " + t("common.edit")}
-          </MenuItem>
-          <MenuItem onClick={handleGenerateContract}>
-            <ListItemIcon>
-              <ArticleIcon />
-            </ListItemIcon>{" "}
-            {t("staffManagement.generateContract.title")}
-          </MenuItem>
-          <MenuItem onClick={handleDelete}>
-            <ListItemIcon>
-              <DeleteIcon />
-            </ListItemIcon>{" "}
-            {t("common.delete")}
-          </MenuItem>
-        </Menu>
-      </TableCell>
-    </TableRow>
-  );
-};
+            <MenuItem onClick={handleEdit}>
+              <ListItemIcon>
+                <EditIcon />
+              </ListItemIcon>{" "}
+              {t("common.view") + " / " + t("common.edit")}
+            </MenuItem>
+            <MenuItem onClick={handleGenerateContract}>
+              <ListItemIcon>
+                <ArticleIcon />
+              </ListItemIcon>{" "}
+              {t("staffManagement.generateContract.title")}
+            </MenuItem>
+            <MenuItem onClick={handleDelete}>
+              <ListItemIcon>
+                <DeleteIcon />
+              </ListItemIcon>{" "}
+              {t("common.delete")}
+            </MenuItem>
+          </Menu>
+        </TableCell>
+      </TableRow>
+    );
+  }
+);
 
 type StaffTableProps = {
   processing: boolean;
@@ -379,22 +384,28 @@ const StaffTable = ({
   const { t } = useTranslation();
 
   const [page, setPage] = useState(0);
-  // const [rowsPerPage, setRowsPerPage] = useState(staffs.length);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(staffs.length);
+  // const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.checked) {
-      const newSelecteds = selectUtils.selectAll(staffs);
-      onSelectedChange(newSelecteds);
-      return;
-    }
-    onSelectedChange([]);
-  };
+  const handleSelectAllClick = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (event.target.checked) {
+        const newSelecteds = selectUtils.selectAll(staffs);
+        onSelectedChange(newSelecteds);
+        return;
+      }
+      onSelectedChange([]);
+    },
+    [onSelectedChange, staffs]
+  );
 
-  const handleClick = (id: string) => {
-    const newSelected: string[] = selectUtils.selectOne(selected, id);
-    onSelectedChange(newSelected);
-  };
+  const handleClick = useCallback(
+    (id: string) => {
+      const newSelected: string[] = selectUtils.selectOne(selected, id);
+      onSelectedChange(newSelected);
+    },
+    [selected, onSelectedChange]
+  );
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -419,7 +430,7 @@ const StaffTable = ({
         <Table
           aria-labelledby="tableTitle"
           sx={{
-            minWidth: 600,
+            // minWidth: "300",
             borderCollapse: "separate",
             borderSpacing: "0 1rem",
           }}
@@ -449,7 +460,7 @@ const StaffTable = ({
           </TableBody>
         </Table>
       </TableContainer>
-      <TablePagination
+      {/* <TablePagination
         rowsPerPageOptions={[5, 10, 25, staffs.length]}
         component="div"
         count={staffs.length}
@@ -458,7 +469,7 @@ const StaffTable = ({
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
-      />
+      /> */}
     </React.Fragment>
   );
 };

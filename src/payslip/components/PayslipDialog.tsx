@@ -80,6 +80,7 @@ const PayslipDialog: React.FC<PayslipDialogProps> = ({
         ),
     // release_date: payslip?.release_date ? payslip.release_date : null,
     file_url: payslip?.file_url ? payslip.file_url : null,
+    details: payslip?.details ? payslip.details : "",
     // staff: payslip?.staff ? payslip.staff : {},
   };
 
@@ -149,7 +150,7 @@ const PayslipDialog: React.FC<PayslipDialogProps> = ({
       <form onSubmit={formik.handleSubmit}>
         <DialogContent>
           <Typography>{t("payslip.form.releaseDate.label")}</Typography>
-          <Grid container spacing={2} marginBottom={2}>
+          <Grid container spacing={2}>
             <Grid item xs={4}>
               <FormControl
                 // sx={{ m: 1, minWidth: 120 }}
@@ -250,8 +251,28 @@ const PayslipDialog: React.FC<PayslipDialogProps> = ({
             </Grid>
           </Grid>
 
-          <Typography>{t("payslip.form.staff.label")}</Typography>
-          <Grid container spacing={2} marginTop={0.3} marginBottom={2}>
+          <Typography>{t("payslip.form.details.helper")}</Typography>
+          {/* Details */}
+          <TextField
+            fullWidth
+            margin="dense"
+            size="small"
+            id="details"
+            label={t("payslip.form.details.label")}
+            name="details"
+            autoComplete="details"
+            multiline
+            minRows={2}
+            // autofocus
+            disabled={processing}
+            value={formik.values.details}
+            onChange={formik.handleChange}
+            error={formik.touched.details && Boolean(formik.errors.details)}
+            helperText={formik.touched.details && formik.errors.details}
+          />
+
+          <Typography marginY={1}>{t("payslip.form.staff.label")}</Typography>
+          <Grid container spacing={2}>
             <Grid item xs={8}>
               <Autocomplete
                 // fullWidth
@@ -319,7 +340,7 @@ const PayslipDialog: React.FC<PayslipDialogProps> = ({
             </Grid>
           </Grid>
 
-          <Typography>
+          <Typography marginY={1}>
             {t("payslip.form.dataCalculationAnalysis.label")}
           </Typography>
           <Grid container spacing={2} marginTop={1}>
