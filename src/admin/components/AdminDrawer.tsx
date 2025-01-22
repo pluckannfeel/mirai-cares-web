@@ -164,11 +164,11 @@ export const menuItems = [
         key: "admin.drawer.menu.nested.masterDatabase.children.companyHousing",
         path: "/admin/company-housing-management",
       },
-      // {
-      //   icon: LocalParkingIcon,
-      //   key: "admin.drawer.menu.nested.masterDatabase.children.companyParking",
-      //   path: "/admin/company-parking-management",
-      // },
+      {
+        icon: LocalParkingIcon,
+        key: "admin.drawer.menu.nested.masterDatabase.children.companyParking",
+        path: "/admin/company-parking-management",
+      },
       {
         icon: AdminPanelSettingsIcon,
         key: "admin.drawer.menu.nested.masterDatabase.children.user",

@@ -75,8 +75,9 @@ const CompanyHousingManagement = lazy(
   () => import("./company/pages/CompanyHousingManagement")
 );
 
-// const CompanyParkingManagement = lazy(
-//   () => import("./company/pages/CompanyParkingManagement")
+const CompanyParkingManagement = lazy(
+  () => import("./company/pages/CompanyParkingManagement")
+);
 
 const CompanyInformation = lazy(
   () => import("./company/pages/CompanyInformation")
@@ -151,6 +152,11 @@ const AppRoutes = () => {
           <Route
             path="company-housing-management"
             element={<CompanyHousingManagement />}
+          />
+
+          <Route
+            path="company-parking-management"
+            element={<CompanyParkingManagement />}
           />
 
           <Route

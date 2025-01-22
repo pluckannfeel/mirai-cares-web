@@ -2534,6 +2534,9 @@
     }
   },
   "companyHousing": {
+    "confirmations": {
+      "delete": "この社宅を削除してもよろしいですか？"
+    },
     "title": "社宅マスター",
     "notifications": {
       "addSuccess": "社宅が追加されました。",
@@ -2606,6 +2609,67 @@
     },
     "actions": {
       "filter": "フィルター"
+    }
+  },
+  "companyParking": {
+    "confirmations": {
+      "delete": "この駐車場を削除してもよろしいですか？"
+    },
+    "title": "駐車場",
+    "notifications": {
+      "addSuccess": "駐車場が追加されました。",
+      "deleteSuccess": "駐車場は削除されました。",
+      "updateSuccess": "駐車場が更新されました。"
+    },
+    "toolbar": {
+      "title": "駐車場マスター"
+    },
+    "table": {
+      "headers": {
+        "actions": "アクション",
+        "parking_name": "駐車場名",
+        "parking_number": "番号",
+        "parking_address": "住所",
+        "parking_postal_code": "郵便番号",
+        "management_company": "管理会社",
+        "management_company_contact": "連絡先",
+        "intermediary": "仲介業者",
+        "person_in_charge": "担当者",
+        "person_in_charge_contact": "連絡先",
+        "remarks": "備考"
+      }
+    },
+    "dialog": {
+      "add": {
+        "action": "追加",
+        "title": "駐車場を追加する"
+      },
+      "edit": {
+        "action": "保存",
+        "title": "駐車場を変更する"
+      }
+    },
+    "form": {
+      "validate": {
+        "required": "必須項目"
+      },
+      "divider": {
+        "property_details": "物件詳細"
+      },
+      "actions": "アクション",
+      "parking_name": "駐車場名",
+      "parking_number": "番号",
+      "parking_address": "住所",
+      "parking_postal_code": "郵便番号",
+      "management_company": "管理会社",
+      "management_company_contact": "連絡先",
+      "intermediary": "仲介業者",
+      "person_in_charge": "担当者",
+      "person_in_charge_contact": "連絡先",
+      "remarks": "備考"
+    },
+    "actions": {
+      "filter": "Filter"
     }
   }
 }
