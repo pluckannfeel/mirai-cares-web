@@ -146,7 +146,7 @@ const CompanyHousingManagement = () => {
         // companyHousingList={[] as CompanyHousing[]}
       />
       <ConfirmDialog
-        description={t("userManagement.confirmations.delete")}
+        description={t("companyHousing.confirmations.delete")}
         pending={processing}
         onClose={handleCloseConfirmDeleteDialog}
         onConfirm={handleDeleteCH}
@@ -165,16 +165,7 @@ const CompanyHousingManagement = () => {
         />
       )}
 
-      {/* {openUserDialog && (
-    <UserDialog
-      onAdd={handleAddUser}
-      onClose={handleCloseUserDialog}
-      onUpdate={handleUpdateUser}
-      open={openUserDialog}
-      processing={processing}
-      user={userUpdated}
-    />
-  )} */}
+      
     </React.Fragment>
   );
 };

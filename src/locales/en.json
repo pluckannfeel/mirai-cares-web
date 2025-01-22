@@ -2575,7 +2575,65 @@
       "remarks": "Remarks"
     },
     "actions": {
-      "filter": "フィルター"
+      "filter": "Filter"
+    }
+  },
+  "companyParking": {
+    "title": "Company Parking",
+    "notifications": {
+      "addSuccess": "Company Parking has been added!",
+      "deleteSuccess": "Company Parking has been deleted!",
+      "updateSuccess": "Company Parking has been updated!"
+    },
+    "toolbar": {
+      "title": "Company Parking"
+    },
+    "table": {
+      "headers": {
+        "actions": "Actions",
+        "parking_name": "Parking Name",
+        "parking_number": "Parking Number",
+        "parking_address": "Parking Address",
+        "parking_postal_code": "Postal Code",
+        "management_company": "Management Company",
+        "management_company_contact": "Contact",
+        "intermediary": "Intermediary",
+        "person_in_charge": "Person in Charge",
+        "person_in_charge_contact": "Contact",
+        "remarks": "Remarks"
+      }
+    },
+    "dialog": {
+      "add": {
+        "action": "Add",
+        "title": "Add Company Parking"
+      },
+      "edit": {
+        "action": "Save",
+        "title": "Edit Company Parking"
+      }
+    },
+    "form": {
+      "validate": {
+        "required": "This field is required"
+      },
+      "divider": {
+        "property_details": "Property Details"
+      },
+      "actions": "Actions",
+      "parking_name": "Parking Name",
+      "parking_number": "Parking Number",
+      "parking_address": "Parking Address",
+      "parking_postal_code": "Postal Code",
+      "management_company": "Management Company",
+      "management_company_contact": "Contact",
+      "intermediary": "Intermediary",
+      "person_in_charge": "Person in Charge",
+      "person_in_charge_contact": "Contact",
+      "remarks": "Remarks"
+    },
+    "actions": {
+      "filter": "Filter"
     }
   }
 }

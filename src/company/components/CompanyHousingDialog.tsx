@@ -42,9 +42,9 @@ const CompanyHousingDialog = ({
 }: CompanyHousingDialogProps) => {
   const { t } = useTranslation();
 
-  useEffect(() => {
-    console.log(ch);
-  }, []);
+  // useEffect(() => {
+  //   console.log(ch);
+  // }, []);
 
   const editMode = Boolean(ch && ch.id);
 

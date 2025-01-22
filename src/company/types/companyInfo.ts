@@ -52,3 +52,19 @@ export interface CompanyHousing {
   remarks?: string;
   created_at?: string;
 }
+
+export interface CompanyParking {
+  id: string;
+  company?: string;
+  parking_name?: string;
+  parking_number?: string;
+  parking_address?: string;
+  parking_postal_code?: string;
+  management_company?: string;
+  management_company_contact?: string;
+  intermediary?: string;
+  person_in_charge?: string;
+  person_in_charge_contact?: string;
+  remarks?: string;
+  created_at?: string;
+}
