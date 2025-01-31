@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import {
   Box,
   Button,
+  Chip,
   Dialog,
   DialogActions,
   DialogContent,
@@ -12,11 +13,36 @@ import {
   FormControlLabel,
   Grid,
   IconButton,
+  InputLabel,
+  ListItemText,
+  MenuItem,
+  OutlinedInput,
   Switch,
   TextField,
+  Theme,
   Typography,
 } from "@mui/material";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { Delete as DeleteIcon } from "@mui/icons-material";
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      // maxHeight: ITEM_HEIGHT  * 4.5 + ITEM_PADDING_TOP,
+      // width: 250,
+    },
+  },
+};
+
+function getStyles(name: string, personName: readonly string[], theme: Theme) {
+  return {
+    fontWeight: personName.includes(name)
+      ? theme.typography.fontWeightMedium
+      : theme.typography.fontWeightRegular,
+  };
+}
 
 type LeaveRequestDialogProps = {
   //   onAdd: (event: Partial<LeaveRequest>) => void;
@@ -41,8 +67,27 @@ const LeaveRequestDialog: React.FC<LeaveRequestDialogProps> = ({
 
   const [isApproved, setIsApproved] = useState<boolean>(false);
 
+  // state for days that you will use paid leave 'yuukyuu'
+  // const [selectedIntervalDates, setSelectedIntervalDates] = useState<string[]>(
+  //   []
+  // );
+
+  const [selectedPaidLeaveList, setSelectedPaidLeaveList] = useState<string[]>(
+    request?.paid_leave_dates ? request.paid_leave_dates.split(",") : []
+  );
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setIsApproved(event.target.checked);
+  };
+
+  const handlePaidLeaveListChange = (event: SelectChangeEvent<string[]>) => {
+    const {
+      target: { value },
+    } = event;
+    setSelectedPaidLeaveList(
+      // On autofill we get a stringified value.
+      typeof value === "string" ? value.split(",") : value
+    );
   };
 
   return (
@@ -86,7 +131,7 @@ const LeaveRequestDialog: React.FC<LeaveRequestDialogProps> = ({
           />
 
           <Grid container spacing={1}>
-            <Grid item xs={6}>
+            {/* <Grid item xs={6}>
               <TextField
                 size="small"
                 margin="dense"
@@ -112,7 +157,7 @@ const LeaveRequestDialog: React.FC<LeaveRequestDialogProps> = ({
             </Grid>
             <Grid item xs={6}>
               <TextField
-                size="small"
+                size="small"  
                 margin="dense"
                 fullWidth
                 type="number"
@@ -130,6 +175,50 @@ const LeaveRequestDialog: React.FC<LeaveRequestDialogProps> = ({
                 //   error={formik.touched.staff_code && Boolean(formik.errors.staff_code)}
                 //   helperText={formik.touched.staff_code && formik.errors.staff_code}
               />
+            </Grid> */}
+            <Grid item xs={12}>
+              <FormControl fullWidth size="small" margin="dense">
+                <InputLabel id="paid_leave_dates-label">
+                  {t("leaveRequest.form.paid_leave_dates.label")}
+                </InputLabel>
+                <Select
+                  labelId="paid_leave_dates-label"
+                  id="paid_leave_dates"
+                  IconComponent={() => null}
+                  multiple
+                  size="small"
+                  value={selectedPaidLeaveList}
+                  onChange={handlePaidLeaveListChange}
+                  input={
+                    <OutlinedInput
+                      label={t("leaveRequest.form.paid_leave_dates.label")}
+                    />
+                  } // Move label here
+                  renderValue={(selected) => (
+                    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                      {selected.map((value) => (
+                        <Chip
+                          key={value}
+                          label={value}
+                          sx={{
+                            borderRadius: 0.5,
+                            paddingX: 0.5,
+                            marginY: 0.5,
+                          }}
+                        />
+                      ))}
+                    </Box>
+                  )}
+                  MenuProps={MenuProps}
+                  readOnly
+                >
+                  {selectedPaidLeaveList.map((name) => (
+                    <MenuItem key={name} value={name}>
+                      {name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
             </Grid>
           </Grid>
 

@@ -2198,6 +2198,9 @@
       "details": {
         "label": "詳細",
         "placeholder": "理由を入力してください"
+      },
+      "paid_leave_dates": {
+        "label": "有給を使い日"
       }
     },
     "confirmations": {

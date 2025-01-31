@@ -2165,6 +2165,9 @@
       "details": {
         "label": "Details",
         "placeholder": "Reason etc."
+      },
+      "paid_leave_dates": {
+        "label": "Dates that paid leave will be used"
       }
     },
     "confirmations": {

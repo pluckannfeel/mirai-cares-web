@@ -6,6 +6,7 @@ export interface LeaveRequest {
   end_date: Date;
   number_of_days?: number;
   leave_type: string;
+  paid_leave_dates?: string;
   status?: string;
   details: string;
   created_at: Date;
